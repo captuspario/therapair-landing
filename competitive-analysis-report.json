@@ -1,0 +1,70 @@
+{
+  "timestamp": "2025-10-08T11:31:07.806Z",
+  "competitors": [
+    {
+      "name": "BetterHelp",
+      "url": "https://www.betterhelp.com",
+      "title": "BetterHelp | Professional Therapy With A Licensed Therapist",
+      "hasHeroSection": true,
+      "ctaButtons": 26,
+      "emailInputs": 0,
+      "forms": 0,
+      "mainHeading": "You deserve to be happy.",
+      "primaryCTA": "Skip to Main Content"
+    },
+    {
+      "name": "Psychology Today",
+      "url": "https://www.psychologytoday.com",
+      "title": "Psychology Today Australia: Health, Help, Happiness + Find a Therapist",
+      "hasHeroSection": true,
+      "ctaButtons": 21,
+      "emailInputs": 0,
+      "forms": 4,
+      "mainHeading": "Psychology Today: Health, Help, Happiness + Find a Therapist",
+      "primaryCTA": ""
+    },
+    {
+      "name": "Talkspace",
+      "url": "https://www.talkspace.com",
+      "error": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \"https://www.talkspace.com/\", waiting until \"networkidle\"\u001b[22m\n"
+    },
+    {
+      "name": "MDLIVE",
+      "url": "https://www.mdlive.com/therapy",
+      "title": "Sign In | MDLIVE",
+      "hasHeroSection": true,
+      "ctaButtons": 16,
+      "emailInputs": 0,
+      "forms": 1,
+      "mainHeading": "Sign in to your account",
+      "primaryCTA": ""
+    }
+  ],
+  "therapairAdvantages": [
+    "Inclusive, culturally competent matching",
+    "LGBTQ+ and neurodiversity focused",
+    "Clean, accessible UI design",
+    "Clear value proposition",
+    "Professional therapist profiles",
+    "Multiple conversion points",
+    "Trust indicators and social proof",
+    "Mobile-optimized experience"
+  ],
+  "therapairComparison": {
+    "uniqueValue": "First platform specifically designed for inclusive, culturally competent therapy matching",
+    "designAdvantages": [
+      "Cleaner, more accessible interface",
+      "Clear focus on diversity and inclusion",
+      "Progressive questionnaire design",
+      "Professional therapist showcase",
+      "Trust-building through transparency"
+    ],
+    "conversionOptimizations": [
+      "Multiple email capture points",
+      "Clear value proposition in hero",
+      "Social proof indicators",
+      "Interest-based segmentation",
+      "Mobile-first responsive design"
+    ]
+  }
+}
