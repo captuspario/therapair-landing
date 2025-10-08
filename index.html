@@ -47,17 +47,22 @@
 
     <style>
         :root {
-            --therapair-rosewood: #9a634d;
-            --therapair-alabaster: #faf9f7;
-            --therapair-charcoal: #333333;
-            --therapair-calm-clay: #b88b76;
-            --therapair-terracotta: #a75a3c;
-            --therapair-success: #609169;
+            --therapair-primary: #2563eb;
+            --therapair-primary-hover: #1d4ed8;
+            --therapair-secondary: #06b6d4;
+            --therapair-accent: #8b5cf6;
+            --therapair-background: #fefefe;
+            --therapair-surface: #ffffff;
+            --therapair-charcoal: #1f2937;
+            --therapair-gray: #6b7280;
+            --therapair-success: #10b981;
+            --therapair-gradient-start: #2563eb;
+            --therapair-gradient-end: #06b6d4;
         }
 
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--therapair-alabaster);
+            background-color: var(--therapair-background);
             color: var(--therapair-charcoal);
         }
 
@@ -67,7 +72,7 @@
         }
 
         .hero-gradient {
-            background: linear-gradient(135deg, var(--therapair-alabaster) 0%, rgba(250, 249, 247, 0.95) 40%, rgba(184, 139, 118, 0.1) 100%);
+            background: linear-gradient(135deg, var(--therapair-background) 0%, rgba(37, 99, 235, 0.05) 50%, rgba(6, 182, 212, 0.1) 100%);
         }
 
         .card-hover {
@@ -76,29 +81,30 @@
 
         .card-hover:hover {
             transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(154, 99, 77, 0.1);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
         }
 
         .btn-primary {
-            background-color: var(--therapair-rosewood);
+            background: linear-gradient(135deg, var(--therapair-gradient-start), var(--therapair-gradient-end));
             color: white;
-            padding: 12px 32px;
+            padding: 14px 32px;
             border-radius: 12px;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.2s ease;
             border: none;
             cursor: pointer;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
         }
 
         .btn-primary:hover {
-            background-color: var(--therapair-terracotta);
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
         }
 
         .input-field {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1.5px solid rgba(154, 99, 77, 0.3);
-            padding: 12px 16px;
+            background: var(--therapair-surface);
+            border: 2px solid rgba(37, 99, 235, 0.2);
+            padding: 14px 16px;
             border-radius: 12px;
             font-size: 16px;
             transition: all 0.2s ease;
@@ -106,8 +112,8 @@
 
         .input-field:focus {
             outline: none;
-            border-color: var(--therapair-rosewood);
-            box-shadow: 0 0 0 3px rgba(154, 99, 77, 0.1);
+            border-color: var(--therapair-primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
         /* Best-in-class animations */
@@ -137,24 +143,30 @@
 
         /* Competitive UI enhancements */
         .feature-card {
-            background: white;
+            background: var(--therapair-surface);
             border-radius: 16px;
             padding: 32px;
-            box-shadow: 0 4px 20px rgba(154, 99, 77, 0.08);
-            border: 1px solid rgba(184, 139, 118, 0.1);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.1);
         }
 
-        .therapist-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(154, 99, 77, 0.12);
-            transition: all 0.3s ease;
+        .audience-selector {
+            background: var(--therapair-surface);
+            border: 2px solid rgba(37, 99, 235, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        .therapist-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 16px 48px rgba(154, 99, 77, 0.2);
+        .audience-selector:hover {
+            border-color: var(--therapair-primary);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        .audience-selector.selected {
+            border-color: var(--therapair-primary);
+            background: rgba(37, 99, 235, 0.05);
         }
 
         /* Success message styles */
@@ -195,55 +207,53 @@
         <!-- Hero Content -->
         <div class="relative z-10 max-w-5xl mx-auto text-center animate-fade-in">
             <!-- Badge -->
-            <div class="inline-block px-6 py-3 mb-8 rounded-full bg-white/60 border border-opacity-30" style="border-color: var(--therapair-rosewood);">
-                <p class="text-sm font-medium flex items-center gap-2">
+            <div class="inline-block px-6 py-3 mb-8 rounded-full bg-white/80 border-2" style="border-color: var(--therapair-primary);">
+                <p class="text-sm font-medium flex items-center gap-2" style="color: var(--therapair-primary);">
                     <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: var(--therapair-success);"></span>
-                    AI concierge for mental health
+                    AI-powered therapist matching
                 </p>
             </div>
 
             <!-- Main Heading -->
             <h1 class="mb-8 text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
-                Therapy that <span style="color: var(--therapair-rosewood);">fits</span>.<br>
-                Finally.
+                Match with a therapist who<br>
+                <span style="background: linear-gradient(135deg, var(--therapair-gradient-start), var(--therapair-gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">truly understands you</span>
             </h1>
 
             <!-- Subheading -->
-            <p class="mb-12 text-xl sm:text-2xl max-w-3xl mx-auto opacity-90 leading-relaxed">
-                Answer a few simple questions, and we'll help you find a therapist who <em>really</em> gets you.
+            <p class="mb-12 text-xl sm:text-2xl max-w-4xl mx-auto leading-relaxed" style="color: var(--therapair-gray);">
+                Finding the right therapist shouldn't be overwhelming. Our intelligent matching connects you with professionals who share your values, understand your identity, and have the expertise you need.
             </p>
 
-            <!-- Email Signup Form -->
-            <form id="hero-form" class="max-w-lg mx-auto mb-8">
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <input
-                        type="email"
-                        placeholder="Enter your email address"
-                        class="input-field flex-1 text-lg"
-                        id="hero-email"
-                        required
-                    />
-                    <button
-                        type="submit"
-                        class="btn-primary text-lg px-8"
-                    >
-                        Join Early Access
-                    </button>
-                </div>
-                <div id="hero-success" class="success-message">Thank you! We'll be in touch soon with updates.</div>
-                <div id="hero-error" class="error-message">Please enter a valid email address.</div>
-            </form>
+            <!-- Single CTA Button -->
+            <div class="mb-8">
+                <button
+                    onclick="scrollToMainForm()"
+                    class="btn-primary text-lg px-12 py-4"
+                >
+                    Request Early Access
+                </button>
+            </div>
 
             <!-- Trust indicators -->
-            <p class="text-sm opacity-70 mb-4">
-                🔒 No spam, just updates on our launch
+            <p class="text-sm mb-4" style="color: var(--therapair-gray);">
+                🔒 Your privacy is protected • No spam, ever
             </p>
 
-            <!-- Social proof placeholder -->
-            <div class="flex items-center justify-center gap-8 text-sm opacity-60">
-                <span>💜 LGBTQ+ friendly</span>
-                <span>🧠 Neurodiversity affirming</span>
-                <span>🌍 Culturally competent</span>
+            <!-- Social proof -->
+            <div class="flex items-center justify-center gap-6 text-sm" style="color: var(--therapair-gray);">
+                <span class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full" style="background-color: var(--therapair-accent);"></span>
+                    LGBTQ+ affirming
+                </span>
+                <span class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full" style="background-color: var(--therapair-secondary);"></span>
+                    Neurodiversity friendly
+                </span>
+                <span class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full" style="background-color: var(--therapair-success);"></span>
+                    Culturally responsive
+                </span>
             </div>
         </div>
     </section>
@@ -263,34 +273,34 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Step 1 -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background-color: rgba(154, 99, 77, 0.1);">
-                        <i data-lucide="message-square" class="w-8 h-8" style="color: var(--therapair-rosewood);"></i>
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--therapair-gradient-start), var(--therapair-gradient-end)); opacity: 0.1;">
+                        <i data-lucide="heart" class="w-8 h-8" style="color: var(--therapair-primary);"></i>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-4">Share your story</h3>
-                    <p class="text-lg opacity-80 leading-relaxed">
-                        Tell us about your preferences, identity, and what you're looking for in therapy. Your privacy is our priority.
+                    <h3 class="text-2xl font-semibold mb-4">Tell us what matters</h3>
+                    <p class="text-lg leading-relaxed" style="color: var(--therapair-gray);">
+                        Share your identity, values, and therapy goals through our thoughtful questionnaire. We understand that personal fit is everything.
                     </p>
                 </div>
 
                 <!-- Step 2 -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background-color: rgba(154, 99, 77, 0.1);">
-                        <i data-lucide="users" class="w-8 h-8" style="color: var(--therapair-rosewood);"></i>
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--therapair-secondary), var(--therapair-accent)); opacity: 0.1;">
+                        <i data-lucide="brain" class="w-8 h-8" style="color: var(--therapair-secondary);"></i>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-4">Get matched</h3>
-                    <p class="text-lg opacity-80 leading-relaxed">
-                        Our AI analyzes your needs and matches you with therapists who specialize in your specific requirements.
+                    <h3 class="text-2xl font-semibold mb-4">Get intelligently matched</h3>
+                    <p class="text-lg leading-relaxed" style="color: var(--therapair-gray);">
+                        Our AI considers your unique background, preferences, and needs to find therapists with the right expertise and cultural understanding.
                     </p>
                 </div>
 
                 <!-- Step 3 -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background-color: rgba(154, 99, 77, 0.1);">
-                        <i data-lucide="calendar" class="w-8 h-8" style="color: var(--therapair-rosewood);"></i>
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--therapair-accent), var(--therapair-success)); opacity: 0.1;">
+                        <i data-lucide="sparkles" class="w-8 h-8" style="color: var(--therapair-accent);"></i>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-4">Start healing</h3>
-                    <p class="text-lg opacity-80 leading-relaxed">
-                        Connect with your therapist and begin your journey towards better mental health in a safe, supportive environment.
+                    <h3 class="text-2xl font-semibold mb-4">Begin your journey</h3>
+                    <p class="text-lg leading-relaxed" style="color: var(--therapair-gray);">
+                        Connect with therapists who truly understand your identity and experiences, creating the foundation for meaningful therapeutic growth.
                     </p>
                 </div>
             </div>
@@ -298,13 +308,13 @@
     </section>
 
     <!-- Who It's For Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(184, 139, 118, 0.05) 0%, rgba(250, 249, 247, 1) 100%);">
+    <section class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, var(--therapair-background) 100%);">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl sm:text-5xl font-bold mb-6">
                     Made for everyone
                 </h2>
-                <p class="text-xl opacity-80 max-w-3xl mx-auto">
+                <p class="text-xl max-w-3xl mx-auto" style="color: var(--therapair-gray);">
                     Therapair is designed to serve diverse communities and create inclusive mental health access for all.
                 </p>
             </div>
@@ -313,12 +323,12 @@
                 <!-- Individuals -->
                 <div class="feature-card card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: rgba(154, 99, 77, 0.1);">
-                            <i data-lucide="heart" class="w-6 h-6" style="color: var(--therapair-rosewood);"></i>
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, var(--therapair-gradient-start), var(--therapair-gradient-end)); opacity: 0.1;">
+                            <i data-lucide="heart" class="w-6 h-6" style="color: var(--therapair-primary);"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Individuals</h3>
                     </div>
-                    <p class="opacity-80 leading-relaxed">
+                    <p class="leading-relaxed" style="color: var(--therapair-gray);">
                         LGBTQ+, neurodivergent, and culturally diverse individuals seeking affirming, competent therapy.
                     </p>
                 </div>
@@ -326,12 +336,12 @@
                 <!-- Therapists -->
                 <div class="feature-card card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: rgba(154, 99, 77, 0.1);">
-                            <i data-lucide="stethoscope" class="w-6 h-6" style="color: var(--therapair-rosewood);"></i>
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, var(--therapair-secondary), var(--therapair-accent)); opacity: 0.1;">
+                            <i data-lucide="user-check" class="w-6 h-6" style="color: var(--therapair-secondary);"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Therapists</h3>
                     </div>
-                    <p class="opacity-80 leading-relaxed">
+                    <p class="leading-relaxed" style="color: var(--therapair-gray);">
                         Inclusive practitioners wanting to connect with clients who match their expertise and values.
                     </p>
                 </div>
@@ -339,12 +349,12 @@
                 <!-- Organizations -->
                 <div class="feature-card card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: rgba(154, 99, 77, 0.1);">
-                            <i data-lucide="building-2" class="w-6 h-6" style="color: var(--therapair-rosewood);"></i>
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, var(--therapair-accent), var(--therapair-success)); opacity: 0.1;">
+                            <i data-lucide="building-2" class="w-6 h-6" style="color: var(--therapair-accent);"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Organizations</h3>
                     </div>
-                    <p class="opacity-80 leading-relaxed">
+                    <p class="leading-relaxed" style="color: var(--therapair-gray);">
                         Mental health clinics and organizations seeking better referral processes and client outcomes.
                     </p>
                 </div>
@@ -352,12 +362,12 @@
                 <!-- Supporters -->
                 <div class="feature-card card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: rgba(154, 99, 77, 0.1);">
-                            <i data-lucide="hand-heart" class="w-6 h-6" style="color: var(--therapair-rosewood);"></i>
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, var(--therapair-success), var(--therapair-primary)); opacity: 0.1;">
+                            <i data-lucide="users" class="w-6 h-6" style="color: var(--therapair-success);"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Supporters</h3>
                     </div>
-                    <p class="opacity-80 leading-relaxed">
+                    <p class="leading-relaxed" style="color: var(--therapair-gray);">
                         Advocates and allies supporting inclusive mental healthcare for marginalized communities.
                     </p>
                 </div>
@@ -365,12 +375,12 @@
                 <!-- Investors -->
                 <div class="feature-card card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background-color: rgba(154, 99, 77, 0.1);">
-                            <i data-lucide="trending-up" class="w-6 h-6" style="color: var(--therapair-rosewood);"></i>
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, var(--therapair-primary), var(--therapair-secondary)); opacity: 0.1;">
+                            <i data-lucide="trending-up" class="w-6 h-6" style="color: var(--therapair-primary);"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Investors</h3>
                     </div>
-                    <p class="opacity-80 leading-relaxed">
+                    <p class="leading-relaxed" style="color: var(--therapair-gray);">
                         Forward-thinking investors recognizing the opportunity in inclusive mental health technology.
                     </p>
                 </div>
@@ -378,213 +388,252 @@
         </div>
     </section>
 
-    <!-- Sample Therapist Profiles Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-6xl mx-auto">
+
+    <!-- Main Interest Form Section -->
+    <section id="main-form" class="py-24 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, var(--therapair-background) 100%);">
+        <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl sm:text-5xl font-bold mb-6">
-                    Meet our therapists
+                <h2 class="text-4xl sm:text-5xl font-bold mb-8">
+                    Join the future of therapy matching
                 </h2>
-                <p class="text-xl opacity-80 max-w-3xl mx-auto">
-                    Our network includes diverse, qualified therapists who specialize in inclusive, affirming care.
+                <p class="text-xl max-w-4xl mx-auto leading-relaxed" style="color: var(--therapair-gray);">
+                    Be among the first to experience intelligent, inclusive therapy matching. Your early access will help us create a platform that truly serves diverse communities and revolutionizes how people find the right mental health support.
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Therapist 1 -->
-                <div class="therapist-card">
-                    <div class="aspect-w-3 aspect-h-4 bg-gradient-to-br from-gray-100 to-gray-200">
-                        <div class="flex items-center justify-center">
-                            <i data-lucide="user" class="w-16 h-16 text-gray-400"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-semibold mb-2">Dr. Sarah Chen</h4>
-                        <p class="text-sm opacity-60 mb-3">Licensed Clinical Psychologist</p>
-                        <p class="text-sm mb-4 leading-relaxed">
-                            "Specializing in LGBTQ+ affirming therapy and anxiety management with a focus on cultural identity."
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs rounded-full" style="background-color: rgba(154, 99, 77, 0.1); color: var(--therapair-rosewood);">LGBTQ+ Affirming</span>
-                            <span class="px-3 py-1 text-xs rounded-full" style="background-color: rgba(154, 99, 77, 0.1); color: var(--therapair-rosewood);">Anxiety</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Therapist 2 -->
-                <div class="therapist-card">
-                    <div class="aspect-w-3 aspect-h-4 bg-gradient-to-br from-gray-100 to-gray-200">
-                        <div class="flex items-center justify-center">
-                            <i data-lucide="user" class="w-16 h-16 text-gray-400"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-semibold mb-2">Dr. Marcus Johnson</h4>
-                        <p class="text-sm opacity-60 mb-3">Licensed Marriage & Family Therapist</p>
-                        <p class="text-sm mb-4 leading-relaxed">
-                            "Focused on neurodiversity-affirming therapy and helping couples navigate mental health together."
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs rounded-full" style="background-color: rgba(154, 99, 77, 0.1); color: var(--therapair-rosewood);">Neurodiversity</span>
-                            <span class="px-3 py-1 text-xs rounded-full" style="background-color: rgba(154, 99, 77, 0.1); color: var(--therapair-rosewood);">Couples</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Therapist 3 -->
-                <div class="therapist-card">
-                    <div class="aspect-w-3 aspect-h-4 bg-gradient-to-br from-gray-100 to-gray-200">
-                        <div class="flex items-center justify-center">
-                            <i data-lucide="user" class="w-16 h-16 text-gray-400"></i>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="text-xl font-semibold mb-2">Dr. Aisha Patel</h4>
-                        <p class="text-sm opacity-60 mb-3">Licensed Clinical Social Worker</p>
-                        <p class="text-sm mb-4 leading-relaxed">
-                            "Culturally responsive therapy for trauma healing and building resilience in marginalized communities."
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 text-xs rounded-full" style="background-color: rgba(154, 99, 77, 0.1); color: var(--therapair-rosewood);">Trauma</span>
-                            <span class="px-3 py-1 text-xs rounded-full" style="background-color: rgba(154, 99, 77, 0.1); color: var(--therapair-rosewood);">Cultural</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interest Survey Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(154, 99, 77, 0.05) 0%, rgba(250, 249, 247, 1) 100%);">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl sm:text-5xl font-bold mb-8">
-                Help us build for you
-            </h2>
-            <p class="text-xl opacity-80 mb-12 max-w-2xl mx-auto">
-                Your input shapes our platform. Tell us what matters most to you in finding the right therapist.
-            </p>
-
-            <!-- Interest Survey Form -->
-            <div class="bg-white rounded-2xl p-8 shadow-lg border border-opacity-10" style="border-color: var(--therapair-rosewood);">
-                <h3 class="text-2xl font-semibold mb-6">What's most important to you?</h3>
-
-                <form id="survey-form">
-                    <div class="grid sm:grid-cols-2 gap-4 mb-8">
-                        <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-opacity-50 transition-colors" style="hover:border-color: var(--therapair-rosewood);">
-                            <input type="checkbox" class="mr-3" value="lgbtq" name="interests">
-                            <div class="flex items-center">
-                                <i data-lucide="heart" class="w-5 h-5 mr-3" style="color: var(--therapair-rosewood);"></i>
-                                <span>LGBTQ+ affirming care</span>
+            <!-- Main Form -->
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2" style="border-color: rgba(37, 99, 235, 0.1);">
+                <form id="main-form-element" class="space-y-8">
+                    <!-- Audience Selection -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 text-center">I'm interested as a...</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="audience-selector" data-audience="individual">
+                                <div class="flex items-center mb-3">
+                                    <i data-lucide="heart" class="w-6 h-6 mr-3" style="color: var(--therapair-primary);"></i>
+                                    <h4 class="text-lg font-semibold">Individual seeking therapy</h4>
+                                </div>
+                                <p class="text-sm" style="color: var(--therapair-gray);">Looking for a therapist who understands me</p>
                             </div>
-                        </label>
 
-                        <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-opacity-50 transition-colors" style="hover:border-color: var(--therapair-rosewood);">
-                            <input type="checkbox" class="mr-3" value="neurodiversity" name="interests">
-                            <div class="flex items-center">
-                                <i data-lucide="brain" class="w-5 h-5 mr-3" style="color: var(--therapair-rosewood);"></i>
-                                <span>Neurodiversity support</span>
+                            <div class="audience-selector" data-audience="therapist">
+                                <div class="flex items-center mb-3">
+                                    <i data-lucide="user-check" class="w-6 h-6 mr-3" style="color: var(--therapair-secondary);"></i>
+                                    <h4 class="text-lg font-semibold">Mental health professional</h4>
+                                </div>
+                                <p class="text-sm" style="color: var(--therapair-gray);">Interested in joining our network</p>
                             </div>
-                        </label>
 
-                        <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-opacity-50 transition-colors" style="hover:border-color: var(--therapair-rosewood);">
-                            <input type="checkbox" class="mr-3" value="cultural" name="interests">
-                            <div class="flex items-center">
-                                <i data-lucide="globe" class="w-5 h-5 mr-3" style="color: var(--therapair-rosewood);"></i>
-                                <span>Cultural competency</span>
+                            <div class="audience-selector" data-audience="organization">
+                                <div class="flex items-center mb-3">
+                                    <i data-lucide="building-2" class="w-6 h-6 mr-3" style="color: var(--therapair-accent);"></i>
+                                    <h4 class="text-lg font-semibold">Organization or clinic</h4>
+                                </div>
+                                <p class="text-sm" style="color: var(--therapair-gray);">Exploring partnership opportunities</p>
                             </div>
-                        </label>
 
-                        <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-opacity-50 transition-colors" style="hover:border-color: var(--therapair-rosewood);">
-                            <input type="checkbox" class="mr-3" value="trauma" name="interests">
-                            <div class="flex items-center">
-                                <i data-lucide="shield" class="w-5 h-5 mr-3" style="color: var(--therapair-rosewood);"></i>
-                                <span>Trauma-informed care</span>
+                            <div class="audience-selector" data-audience="other">
+                                <div class="flex items-center mb-3">
+                                    <i data-lucide="users" class="w-6 h-6 mr-3" style="color: var(--therapair-success);"></i>
+                                    <h4 class="text-lg font-semibold">Supporter, investor, or ally</h4>
+                                </div>
+                                <p class="text-sm" style="color: var(--therapair-gray);">Supporting inclusive mental health</p>
                             </div>
-                        </label>
+                        </div>
+                        <input type="hidden" id="selected-audience" name="audience" required>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-                        <input
-                            type="email"
-                            placeholder="Your email for updates"
-                            class="input-field flex-1"
-                            id="survey-email"
-                            required
-                        />
-                        <button
-                            type="submit"
-                            class="btn-primary"
-                        >
-                            Send Feedback
-                        </button>
+                    <!-- Dynamic Form Fields -->
+                    <div id="dynamic-fields" class="hidden space-y-6">
+                        <!-- Individual Fields -->
+                        <div id="individual-fields" class="hidden space-y-6">
+                            <div>
+                                <h4 class="text-xl font-semibold mb-4">What's most important to you in a therapist?</h4>
+                                <div class="grid sm:grid-cols-2 gap-4">
+                                    <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" class="mr-3" value="lgbtq" name="therapy-interests">
+                                        <div class="flex items-center">
+                                            <i data-lucide="heart" class="w-5 h-5 mr-3" style="color: var(--therapair-primary);"></i>
+                                            <span>LGBTQ+ affirming care</span>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" class="mr-3" value="neurodiversity" name="therapy-interests">
+                                        <div class="flex items-center">
+                                            <i data-lucide="brain" class="w-5 h-5 mr-3" style="color: var(--therapair-secondary);"></i>
+                                            <span>Neurodiversity support</span>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" class="mr-3" value="cultural" name="therapy-interests">
+                                        <div class="flex items-center">
+                                            <i data-lucide="globe" class="w-5 h-5 mr-3" style="color: var(--therapair-accent);"></i>
+                                            <span>Cultural competency</span>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" class="mr-3" value="trauma" name="therapy-interests">
+                                        <div class="flex items-center">
+                                            <i data-lucide="shield" class="w-5 h-5 mr-3" style="color: var(--therapair-success);"></i>
+                                            <span>Trauma-informed care</span>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" class="mr-3" value="anxiety" name="therapy-interests">
+                                        <div class="flex items-center">
+                                            <i data-lucide="circle-help" class="w-5 h-5 mr-3" style="color: var(--therapair-primary);"></i>
+                                            <span>Anxiety & depression</span>
+                                        </div>
+                                    </label>
+
+                                    <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
+                                        <input type="checkbox" class="mr-3" value="relationships" name="therapy-interests">
+                                        <div class="flex items-center">
+                                            <i data-lucide="heart-handshake" class="w-5 h-5 mr-3" style="color: var(--therapair-secondary);"></i>
+                                            <span>Relationship issues</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="max-w-lg mx-auto">
+                                <input
+                                    type="email"
+                                    placeholder="Your email address"
+                                    class="input-field w-full text-center"
+                                    name="email"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Professional Fields -->
+                        <div id="professional-fields" class="hidden space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Full Name *</label>
+                                    <input type="text" name="full-name" class="input-field w-full" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Professional Title *</label>
+                                    <input type="text" name="title" class="input-field w-full" placeholder="e.g., Licensed Clinical Psychologist" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Organization/Practice</label>
+                                    <input type="text" name="organization" class="input-field w-full">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Email Address *</label>
+                                    <input type="email" name="email" class="input-field w-full" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Areas of Specialization</label>
+                                <textarea name="specializations" class="input-field w-full h-24" placeholder="Please describe your areas of expertise and any specific populations you serve..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Organization Fields -->
+                        <div id="organization-fields" class="hidden space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Contact Name *</label>
+                                    <input type="text" name="contact-name" class="input-field w-full" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Position/Title *</label>
+                                    <input type="text" name="position" class="input-field w-full" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Organization Name *</label>
+                                    <input type="text" name="organization-name" class="input-field w-full" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Email Address *</label>
+                                    <input type="email" name="email" class="input-field w-full" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Partnership Interest</label>
+                                <textarea name="partnership-interest" class="input-field w-full h-24" placeholder="Tell us about your organization and how you'd like to work with Therapair..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Other Fields -->
+                        <div id="other-fields" class="hidden space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Name</label>
+                                    <input type="text" name="other-name" class="input-field w-full">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Email Address *</label>
+                                    <input type="email" name="email" class="input-field w-full" required>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium mb-2">How would you like to support Therapair?</label>
+                                <textarea name="support-interest" class="input-field w-full h-24" placeholder="Tell us about your interest in supporting inclusive mental health..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center pt-4">
+                            <button
+                                type="submit"
+                                class="btn-primary text-lg px-12 py-4"
+                            >
+                                Request Early Access
+                            </button>
+                        </div>
                     </div>
-                    <div id="survey-success" class="success-message">Thank you for your feedback! This helps us build a better platform.</div>
-                    <div id="survey-error" class="error-message">Please enter a valid email address.</div>
+
+                    <div id="form-success" class="success-message text-center">Thank you! We'll be in touch soon with updates about early access.</div>
+                    <div id="form-error" class="error-message text-center">Please complete all required fields.</div>
                 </form>
             </div>
+
+            <!-- Additional Value Props -->
+            <div class="grid md:grid-cols-3 gap-8 mt-16">
+                <div class="text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--therapair-gradient-start), var(--therapair-gradient-end)); opacity: 0.1;">
+                        <i data-lucide="zap" class="w-8 h-8" style="color: var(--therapair-primary);"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Early Access Benefits</h4>
+                    <p class="text-sm" style="color: var(--therapair-gray);">Be first to experience our platform and help shape its development</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--therapair-secondary), var(--therapair-accent)); opacity: 0.1;">
+                        <i data-lucide="shield-check" class="w-8 h-8" style="color: var(--therapair-secondary);"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Privacy Protected</h4>
+                    <p class="text-sm" style="color: var(--therapair-gray);">Your information is secure and will never be shared without consent</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--therapair-accent), var(--therapair-success)); opacity: 0.1;">
+                        <i data-lucide="heart" class="w-8 h-8" style="color: var(--therapair-accent);"></i>
+                    </div>
+                    <h4 class="text-lg font-semibold mb-2">Inclusive by Design</h4>
+                    <p class="text-sm" style="color: var(--therapair-gray);">Built specifically for diverse communities and marginalized groups</p>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-16 px-4 sm:px-6 lg:px-8 border-t border-opacity-10" style="border-color: var(--therapair-rosewood);">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h3 class="text-3xl font-bold mb-4" style="color: var(--therapair-rosewood);">Therapair</h3>
-                <p class="text-lg opacity-80 max-w-2xl mx-auto">
-                    Making inclusive, culturally competent therapy accessible to everyone who needs it.
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-4 gap-8 mb-12">
-                <div>
-                    <h4 class="font-semibold mb-4">For Individuals</h4>
-                    <ul class="space-y-2 opacity-80">
-                        <li><a href="#" class="hover:opacity-100 transition-opacity">Find a Therapist</a></li>
-                        <li><a href="#" class="hover:opacity-100 transition-opacity">How It Works</a></li>
-                        <li><a href="#" class="hover:opacity-100 transition-opacity">Success Stories</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-semibold mb-4">For Therapists</h4>
-                    <ul class="space-y-2 opacity-80">
-                        <li><a href="#" class="hover:opacity-100 transition-opacity">Join Network</a></li>
-                        <li><a href="#" class="hover:opacity-100 transition-opacity">Resources</a></li>
-                        <li><a href="#" class="hover:opacity-100 transition-opacity">Support</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-semibold mb-4">Company</h4>
-                    <ul class="space-y-2 opacity-80">
-                        <li><a href="#" class="hover:opacity-100 transition-opacity">About Us</a></li>
-                        <li><a href="#" class="hover:opacity-100 transition-opacity">Careers</a></li>
-                        <li><a href="#" class="hover:opacity-100 transition-opacity">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-semibold mb-4">Connect</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="p-2 rounded-full hover:bg-opacity-10 transition-colors" style="hover:background-color: var(--therapair-rosewood);">
-                            <i data-lucide="instagram" class="w-5 h-5"></i>
-                        </a>
-                        <a href="#" class="p-2 rounded-full hover:bg-opacity-10 transition-colors" style="hover:background-color: var(--therapair-rosewood);">
-                            <i data-lucide="linkedin" class="w-5 h-5"></i>
-                        </a>
-                        <a href="#" class="p-2 rounded-full hover:bg-opacity-10 transition-colors" style="hover:background-color: var(--therapair-rosewood);">
-                            <i data-lucide="mail" class="w-5 h-5"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center pt-8 border-t border-opacity-10" style="border-color: var(--therapair-rosewood);">
-                <p class="opacity-60">
-                    © 2024 Therapair. Made with ❤️ for inclusive mental health.
-                </p>
-            </div>
-        </div>
+    <!-- Simple Footer -->
+    <footer class="py-12 text-center border-t border-opacity-10" style="border-color: var(--therapair-primary);">
+        <p style="color: var(--therapair-gray);">
+            © 2024 Therapair. Made with ❤️ for inclusive mental health.
+        </p>
     </footer>
 
     <script>
@@ -619,44 +668,108 @@
             }
         }
 
-        // Email signup handlers
-        document.getElementById('hero-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const email = document.getElementById('hero-email').value.trim();
+        // Scroll to main form function
+        function scrollToMainForm() {
+            document.getElementById('main-form').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
 
-            if (!isValidEmail(email)) {
-                showMessage('hero-error', 'hero-success');
-                return;
-            }
+        // Audience selection handling
+        document.querySelectorAll('.audience-selector').forEach(selector => {
+            selector.addEventListener('click', function() {
+                // Remove selected class from all selectors
+                document.querySelectorAll('.audience-selector').forEach(s => s.classList.remove('selected'));
 
-            // Submit to Mailchimp (placeholder)
-            console.log('Hero email signup:', email);
+                // Add selected class to clicked selector
+                this.classList.add('selected');
 
-            // Show success message
-            document.getElementById('hero-email').value = '';
-            showMessage('hero-success', 'hero-error');
+                // Set hidden input value
+                const audience = this.dataset.audience;
+                document.getElementById('selected-audience').value = audience;
+
+                // Show dynamic fields
+                document.getElementById('dynamic-fields').classList.remove('hidden');
+
+                // Hide all field groups
+                document.getElementById('individual-fields').classList.add('hidden');
+                document.getElementById('professional-fields').classList.add('hidden');
+                document.getElementById('organization-fields').classList.add('hidden');
+                document.getElementById('other-fields').classList.add('hidden');
+
+                // Show appropriate field group
+                if (audience === 'individual') {
+                    document.getElementById('individual-fields').classList.remove('hidden');
+                } else if (audience === 'therapist') {
+                    document.getElementById('professional-fields').classList.remove('hidden');
+                } else if (audience === 'organization') {
+                    document.getElementById('organization-fields').classList.remove('hidden');
+                } else if (audience === 'other') {
+                    document.getElementById('other-fields').classList.remove('hidden');
+                }
+            });
         });
 
-        document.getElementById('survey-form').addEventListener('submit', async function(e) {
+        // Main form submission
+        document.getElementById('main-form-element').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const email = document.getElementById('survey-email').value.trim();
-            const selectedInterests = Array.from(document.querySelectorAll('input[name="interests"]:checked'))
-                .map(cb => cb.value);
 
-            if (!isValidEmail(email)) {
-                showMessage('survey-error', 'survey-success');
+            const formData = new FormData(this);
+            const audience = formData.get('audience');
+
+            if (!audience) {
+                showMessage('form-error', 'form-success');
                 return;
             }
 
-            console.log('Survey submission:', { email, interests: selectedInterests });
+            // Collect form data based on audience
+            const submissionData = {
+                audience: audience,
+                timestamp: new Date().toISOString()
+            };
+
+            if (audience === 'individual') {
+                submissionData.email = formData.get('email');
+                submissionData.therapyInterests = Array.from(document.querySelectorAll('input[name="therapy-interests"]:checked'))
+                    .map(cb => cb.value);
+            } else if (audience === 'therapist') {
+                submissionData.fullName = formData.get('full-name');
+                submissionData.title = formData.get('title');
+                submissionData.organization = formData.get('organization');
+                submissionData.email = formData.get('email');
+                submissionData.specializations = formData.get('specializations');
+            } else if (audience === 'organization') {
+                submissionData.contactName = formData.get('contact-name');
+                submissionData.position = formData.get('position');
+                submissionData.organizationName = formData.get('organization-name');
+                submissionData.email = formData.get('email');
+                submissionData.partnershipInterest = formData.get('partnership-interest');
+            } else if (audience === 'other') {
+                submissionData.name = formData.get('other-name');
+                submissionData.email = formData.get('email');
+                submissionData.supportInterest = formData.get('support-interest');
+            }
+
+            // Validate required fields
+            if (!submissionData.email || !isValidEmail(submissionData.email)) {
+                showMessage('form-error', 'form-success');
+                return;
+            }
+
+            console.log('Form submission:', submissionData);
 
             // Submit to Mailchimp (placeholder)
-            // await submitToMailchimp(email, 'survey', selectedInterests);
+            // await submitToMailchimp(submissionData.email, audience, submissionData);
 
             // Reset form and show success
-            document.getElementById('survey-email').value = '';
-            document.querySelectorAll('input[name="interests"]').forEach(cb => cb.checked = false);
-            showMessage('survey-success', 'survey-error');
+            this.reset();
+            document.querySelectorAll('.audience-selector').forEach(s => s.classList.remove('selected'));
+            document.getElementById('dynamic-fields').classList.add('hidden');
+            showMessage('form-success', 'form-error');
+
+            // Track successful submission
+            trackEvent('early_access_request', 'Form Submission', audience);
         });
 
         function showMessage(showId, hideId) {
@@ -715,13 +828,11 @@
             }
         }
 
-        // Track form submissions
-        document.getElementById('hero-form').addEventListener('submit', () => {
-            trackEvent('hero_email_signup', 'Email Signup');
-        });
-
-        document.getElementById('survey-form').addEventListener('submit', () => {
-            trackEvent('survey_submission', 'Email Signup');
+        // Additional event tracking
+        document.querySelectorAll('.audience-selector').forEach(selector => {
+            selector.addEventListener('click', () => {
+                trackEvent('audience_selected', 'Form Interaction', selector.dataset.audience);
+            });
         });
     </script>
 </body>
