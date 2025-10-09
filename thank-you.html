@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Therapair</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+        
+        // Track thank you page view as conversion
+        gtag('event', 'conversion', {
+            'event_category': 'Form Submission',
+            'event_label': 'Early Access Request Complete'
+        });
+    </script>
+    
+    <style>
+        :root {
+            --therapair-primary: #2563eb;
+            --therapair-secondary: #06b6d4;
+            --therapair-accent: #8b5cf6;
+            --therapair-success: #10b981;
+            --therapair-background: #fefefe;
+            --therapair-charcoal: #1f2937;
+            --therapair-gray: #6b7280;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #fefefe 0%, rgba(37, 99, 235, 0.05) 50%, rgba(6, 182, 212, 0.1) 100%);
+            color: var(--therapair-charcoal);
+        }
+
+        h1, h2, h3 {
+            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+            font-weight: 600;
+        }
+
+        .success-icon {
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--therapair-primary), var(--therapair-secondary));
+            color: white;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--therapair-primary);
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 2px solid var(--therapair-primary);
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: var(--therapair-primary);
+            color: white;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.08);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center px-4 py-12">
+    <div class="max-w-4xl mx-auto text-center">
+        <!-- Success Icon -->
+        <div class="success-icon mb-8">
+            <div class="w-24 h-24 mx-auto rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--therapair-success), #059669);">
+                <i data-lucide="check" class="w-12 h-12 text-white"></i>
+            </div>
+        </div>
+
+        <!-- Main Message -->
+        <div class="fade-in">
+            <h1 class="text-4xl sm:text-5xl font-bold mb-6" style="color: var(--therapair-charcoal);">
+                Thank You! 🎉
+            </h1>
+            
+            <p class="text-xl sm:text-2xl mb-8 leading-relaxed" style="color: var(--therapair-gray);">
+                We've received your interest in Therapair and sent a confirmation to your email.
+            </p>
+
+            <!-- What's Next Section -->
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2 mb-12" style="border-color: rgba(37, 99, 235, 0.1);">
+                <h2 class="text-2xl font-bold mb-6" style="color: var(--therapair-primary);">
+                    What happens next?
+                </h2>
+                
+                <div class="grid md:grid-cols-3 gap-6 text-left">
+                    <div class="info-card">
+                        <div class="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: rgba(37, 99, 235, 0.1);">
+                            <i data-lucide="mail-check" class="w-6 h-6" style="color: var(--therapair-primary);"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Check Your Inbox</h3>
+                        <p class="text-sm" style="color: var(--therapair-gray);">
+                            You'll receive a confirmation email shortly. Check your spam folder if you don't see it.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: rgba(6, 182, 212, 0.1);">
+                            <i data-lucide="users" class="w-6 h-6" style="color: var(--therapair-secondary);"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">We'll Review</h3>
+                        <p class="text-sm" style="color: var(--therapair-gray);">
+                            Our team will review your information within 1-2 business days.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: rgba(139, 92, 246, 0.1);">
+                            <i data-lucide="rocket" class="w-6 h-6" style="color: var(--therapair-accent);"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">Get Early Access</h3>
+                        <p class="text-sm" style="color: var(--therapair-gray);">
+                            You'll be among the first to experience our platform when we launch.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <a href="/" class="btn-primary">
+                    <i data-lucide="home" class="w-5 h-5 inline mr-2"></i>
+                    Return to Home
+                </a>
+                <a href="https://www.linkedin.com/company/therapair" target="_blank" class="btn-secondary">
+                    <i data-lucide="linkedin" class="w-5 h-5 inline mr-2"></i>
+                    Follow Our Journey
+                </a>
+            </div>
+
+            <!-- Social Share Section -->
+            <div class="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 mb-8">
+                <h3 class="text-xl font-semibold mb-4">Help us spread the word!</h3>
+                <p class="mb-6" style="color: var(--therapair-gray);">
+                    Know someone who would benefit from inclusive therapy matching? Share Therapair with your network.
+                </p>
+                <div class="flex gap-4 justify-center">
+                    <a href="https://twitter.com/intent/tweet?text=Just%20signed%20up%20for%20early%20access%20to%20Therapair%20-%20AI-powered%20therapy%20matching%20for%20inclusive%20mental%20health%20care!&url=https://therapair.com.au" target="_blank" class="w-12 h-12 rounded-full bg-white flex items-center justify-center hover:shadow-lg transition-all" style="color: #1DA1F2;">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://therapair.com.au" target="_blank" class="w-12 h-12 rounded-full bg-white flex items-center justify-center hover:shadow-lg transition-all" style="color: #1877F2;">
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://therapair.com.au" target="_blank" class="w-12 h-12 rounded-full bg-white flex items-center justify-center hover:shadow-lg transition-all" style="color: #0A66C2;">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <p class="text-sm" style="color: var(--therapair-gray);">
+                Questions? Contact us at <a href="mailto:contact@therapair.com.au" class="font-medium hover:underline" style="color: var(--therapair-primary);">contact@therapair.com.au</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Auto-close after 30 seconds and redirect to home (optional)
+        // setTimeout(() => {
+        //     window.location.href = '/';
+        // }, 30000);
+    </script>
+</body>
+</html>
+
