@@ -13,6 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+// ============================================
+// HELPER FUNCTION - Define early
+// ============================================
+function sanitize($data) {
+    return htmlspecialchars(strip_tags(trim($data)), ENT_QUOTES, 'UTF-8');
+}
+
 // Use constants from config
 $ADMIN_EMAIL = ADMIN_EMAIL;
 $FROM_EMAIL = FROM_EMAIL;
@@ -272,10 +279,6 @@ function formatUserEmailWithAI($aiContent, $data, $audience) {
 // ============================================
 // HELPER FUNCTIONS
 // ============================================
-
-function sanitize($data) {
-    return htmlspecialchars(strip_tags(trim($data)), ENT_QUOTES, 'UTF-8');
-}
 
 function collectFormData($post, $audience) {
     $data = [
