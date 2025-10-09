@@ -419,6 +419,9 @@
                     <!-- Honeypot for spam protection -->
                     <input type="text" name="_honey" style="display:none">
                     
+                    <!-- Hidden field for therapy interests (will be populated by JavaScript) -->
+                    <input type="hidden" id="therapy-interests-combined" name="Therapy Interests" value="">
+                    
                     <!-- Audience Selection -->
                     <div>
                         <h3 class="text-2xl font-semibold mb-6 text-center">I'm interested as a...</h3>
@@ -466,7 +469,7 @@
                                 <h4 class="text-xl font-semibold mb-4">What's most important to you in a therapist?</h4>
                                 <div class="grid sm:grid-cols-2 gap-4">
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="LGBTQ+ affirming care" name="Therapy Interests">
+                                        <input type="checkbox" class="mr-3 therapy-interest-checkbox" value="LGBTQ+ affirming care">
                                         <div class="flex items-center">
                                             <i data-lucide="heart" class="w-5 h-5 mr-3" style="color: var(--therapair-primary);"></i>
                                             <span>LGBTQ+ affirming care</span>
@@ -474,7 +477,7 @@
                                     </label>
 
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="Neurodiversity support" name="Therapy Interests">
+                                        <input type="checkbox" class="mr-3 therapy-interest-checkbox" value="Neurodiversity support">
                                         <div class="flex items-center">
                                             <i data-lucide="brain" class="w-5 h-5 mr-3" style="color: var(--therapair-secondary);"></i>
                                             <span>Neurodiversity support</span>
@@ -482,7 +485,7 @@
                                     </label>
 
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="Cultural competency" name="Therapy Interests">
+                                        <input type="checkbox" class="mr-3 therapy-interest-checkbox" value="Cultural competency">
                                         <div class="flex items-center">
                                             <i data-lucide="globe" class="w-5 h-5 mr-3" style="color: var(--therapair-accent);"></i>
                                             <span>Cultural competency</span>
@@ -490,7 +493,7 @@
                                     </label>
 
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="Trauma-informed care" name="Therapy Interests">
+                                        <input type="checkbox" class="mr-3 therapy-interest-checkbox" value="Trauma-informed care">
                                         <div class="flex items-center">
                                             <i data-lucide="shield" class="w-5 h-5 mr-3" style="color: var(--therapair-success);"></i>
                                             <span>Trauma-informed care</span>
@@ -498,7 +501,7 @@
                                     </label>
 
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="Anxiety & depression" name="Therapy Interests">
+                                        <input type="checkbox" class="mr-3 therapy-interest-checkbox" value="Anxiety & depression">
                                         <div class="flex items-center">
                                             <i data-lucide="circle-help" class="w-5 h-5 mr-3" style="color: var(--therapair-primary);"></i>
                                             <span>Anxiety & depression</span>
@@ -506,7 +509,7 @@
                                     </label>
 
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="Relationship issues" name="Therapy Interests">
+                                        <input type="checkbox" class="mr-3 therapy-interest-checkbox" value="Relationship issues">
                                         <div class="flex items-center">
                                             <i data-lucide="heart-handshake" class="w-5 h-5 mr-3" style="color: var(--therapair-secondary);"></i>
                                             <span>Relationship issues</span>
@@ -733,6 +736,15 @@
                 document.getElementById('form-error').style.display = 'block';
                 document.getElementById('form-error').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 return false;
+            }
+
+            // Collect all checked therapy interests (for Individual audience type)
+            if (audience === 'individual') {
+                const checkedInterests = Array.from(document.querySelectorAll('.therapy-interest-checkbox:checked'))
+                    .map(checkbox => checkbox.value);
+                
+                // Put them in the hidden field as comma-separated values
+                document.getElementById('therapy-interests-combined').value = checkedInterests.join(', ');
             }
 
             // Track successful submission
