@@ -687,21 +687,36 @@
                 // Show dynamic fields
                 document.getElementById('dynamic-fields').classList.remove('hidden');
 
+                // First, disable ALL required fields in ALL sections
+                document.querySelectorAll('#individual-fields input[required], #individual-fields textarea[required]').forEach(el => el.removeAttribute('required'));
+                document.querySelectorAll('#professional-fields input[required], #professional-fields textarea[required]').forEach(el => el.removeAttribute('required'));
+                document.querySelectorAll('#organization-fields input[required], #organization-fields textarea[required]').forEach(el => el.removeAttribute('required'));
+                document.querySelectorAll('#other-fields input[required], #other-fields textarea[required]').forEach(el => el.removeAttribute('required'));
+
                 // Hide all field groups
                 document.getElementById('individual-fields').classList.add('hidden');
                 document.getElementById('professional-fields').classList.add('hidden');
                 document.getElementById('organization-fields').classList.add('hidden');
                 document.getElementById('other-fields').classList.add('hidden');
 
-                // Show appropriate field group
+                // Show appropriate field group and re-enable required fields
                 if (audience === 'individual') {
                     document.getElementById('individual-fields').classList.remove('hidden');
+                    document.querySelector('#individual-fields input[name="Email"]').setAttribute('required', 'required');
                 } else if (audience === 'therapist') {
                     document.getElementById('professional-fields').classList.remove('hidden');
+                    document.querySelector('#professional-fields input[name="Full Name"]').setAttribute('required', 'required');
+                    document.querySelector('#professional-fields input[name="Professional Title"]').setAttribute('required', 'required');
+                    document.querySelector('#professional-fields input[name="Email"]').setAttribute('required', 'required');
                 } else if (audience === 'organization') {
                     document.getElementById('organization-fields').classList.remove('hidden');
+                    document.querySelector('#organization-fields input[name="Contact Name"]').setAttribute('required', 'required');
+                    document.querySelector('#organization-fields input[name="Position"]').setAttribute('required', 'required');
+                    document.querySelector('#organization-fields input[name="Organization Name"]').setAttribute('required', 'required');
+                    document.querySelector('#organization-fields input[name="Email"]').setAttribute('required', 'required');
                 } else if (audience === 'other') {
                     document.getElementById('other-fields').classList.remove('hidden');
+                    document.querySelector('#other-fields input[name="Email"]').setAttribute('required', 'required');
                 }
 
                 // Hide error message
