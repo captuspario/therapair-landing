@@ -4,8 +4,7 @@
  * Sends emails to admin and AI-generated personalized confirmation to user
  */
 
-// Debug: Log that script was called
-file_put_contents('form_debug.log', date('Y-m-d H:i:s') . " - Form script called\n", FILE_APPEND);
+// Debug logging removed - emails working correctly
 
 // Load configuration
 require_once __DIR__ . '/config.php';
@@ -82,11 +81,10 @@ $adminHeaders = "From: {$FROM_NAME} <{$FROM_EMAIL}>\r\n";
 $adminHeaders .= "Reply-To: {$email}\r\n";
 $adminHeaders .= "MIME-Version: 1.0\r\n";
 $adminHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
+$adminHeaders .= "X-Mailer: Therapair Contact Form\r\n";
+$adminHeaders .= "X-Priority: 3\r\n";
 
 $adminSent = mail($ADMIN_EMAIL, $adminSubject, $adminMessage, $adminHeaders);
-$adminLogMsg = "Admin email sent: " . ($adminSent ? 'SUCCESS' : 'FAILED') . " to {$ADMIN_EMAIL}";
-error_log($adminLogMsg);
-file_put_contents('form_debug.log', $adminLogMsg . "\n", FILE_APPEND);
 
 // ============================================
 // 2. SEND CONFIRMATION EMAIL TO USER (AI-POWERED)
@@ -95,32 +93,17 @@ $userSubject = 'Thank you for your interest in Therapair';
 
 // Generate AI-powered personalized message or fallback to template
 if ($USE_AI_PERSONALIZATION && !empty($OPENAI_API_KEY) && $OPENAI_API_KEY !== 'YOUR_OPENAI_API_KEY_HERE') {
-    $aiLogMsg = "Attempting AI email generation for: {$email}";
-    error_log($aiLogMsg);
-    file_put_contents('form_debug.log', $aiLogMsg . "\n", FILE_APPEND);
     try {
         $personalizedContent = generateAIPersonalizedEmail($formData, $audience, $OPENAI_API_KEY, $AI_MODEL);
         if ($personalizedContent) {
-            $aiSuccessMsg = "AI email generated successfully";
-            error_log($aiSuccessMsg);
-            file_put_contents('form_debug.log', $aiSuccessMsg . "\n", FILE_APPEND);
             $userMessage = formatUserEmailWithAI($personalizedContent, $formData, $audience);
         } else {
-            $aiFallbackMsg = "AI returned null, using fallback template";
-            error_log($aiFallbackMsg);
-            file_put_contents('form_debug.log', $aiFallbackMsg . "\n", FILE_APPEND);
             $userMessage = formatUserEmail($formData, $audience);
         }
     } catch (Exception $e) {
-        $aiErrorMsg = "AI email generation failed: " . $e->getMessage();
-        error_log($aiErrorMsg);
-        file_put_contents('form_debug.log', $aiErrorMsg . "\n", FILE_APPEND);
         $userMessage = formatUserEmail($formData, $audience);
     }
 } else {
-    $staticMsg = "Using static template (AI disabled or no API key)";
-    error_log($staticMsg);
-    file_put_contents('form_debug.log', $staticMsg . "\n", FILE_APPEND);
     $userMessage = formatUserEmail($formData, $audience);
 }
 
@@ -128,11 +111,10 @@ $userHeaders = "From: {$FROM_NAME} <{$FROM_EMAIL}>\r\n";
 $userHeaders .= "Reply-To: {$ADMIN_EMAIL}\r\n";
 $userHeaders .= "MIME-Version: 1.0\r\n";
 $userHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
+$userHeaders .= "X-Mailer: Therapair Automated Response\r\n";
+$userHeaders .= "X-Priority: 3\r\n";
 
 $userSent = mail($email, $userSubject, $userMessage, $userHeaders);
-$userLogMsg = "User email sent: " . ($userSent ? 'SUCCESS' : 'FAILED') . " to {$email}";
-error_log($userLogMsg);
-file_put_contents('form_debug.log', $userLogMsg . "\n", FILE_APPEND);
 
 // ============================================
 // 3. REDIRECT TO THANK YOU PAGE
