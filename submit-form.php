@@ -103,7 +103,7 @@ function generateAIPersonalizedEmail($data, $audience, $apiKey, $model) {
     $context = buildAIContext($data, $audience);
     
     // System prompt for consistent, professional responses (based on email-ai-prompt.md)
-    $systemPrompt = "You are Tino from the Therapair team. Write brief, professional email confirmations to people who expressed interest in Therapair's therapy matching service.
+    $systemPrompt = "You are writing on behalf of the Therapair team. Write brief, professional email confirmations to people who expressed interest in Therapair's therapy matching service.
 
 TONE & STYLE:
 - Professional yet warm
@@ -114,7 +114,7 @@ TONE & STYLE:
 
 STRUCTURE:
 - Paragraph 1: Simple thank you + brief acknowledgment of what they mentioned
-- Paragraph 2: Next steps (you'll follow up within 24 hours)
+- Paragraph 2: Next steps (we'll follow up within 24 hours)
 - Keep it short and professional
 
 WHAT TO AVOID:
@@ -126,7 +126,7 @@ WHAT TO AVOID:
 
 Always sign off as:
 Warm regards,
-Tino
+
 Therapair Team";
 
     $userPrompt = "Write a brief, professional confirmation email for this submission:\n\n{$context}\n\nKeep it simple - just acknowledge what they mentioned and confirm you'll follow up within 24 hours. Be warm but concise. 80-120 words maximum.";

@@ -40,7 +40,7 @@ This file controls how AI generates personalized confirmation emails. Edit this 
 ### **Sign-off:**
 ```
 Warm regards,
-Tino
+
 Therapair Team
 ```
 
@@ -58,7 +58,7 @@ Thank you for your interest in Therapair. I can see LGBTQ+ affirming care and tr
 I'll reach out within 24 hours to discuss next steps.
 
 Warm regards,
-Tino
+
 Therapair Team
 ```
 
@@ -81,7 +81,7 @@ Thank you for your interest in joining the Therapair network. Your background in
 I'll be in touch within 24 hours to discuss how we can work together.
 
 Warm regards,
-Tino
+
 Therapair Team
 ```
 
@@ -104,7 +104,7 @@ Thank you for reaching out on behalf of ABC Clinic. I'd be happy to discuss part
 I'll contact you within 24 hours to set up a time to talk.
 
 Warm regards,
-Tino
+
 Therapair Team
 ```
 
@@ -127,7 +127,7 @@ Thank you for your interest in supporting Therapair. We appreciate your commitme
 I'll reach out within 24 hours to share more about our vision and how you can be involved.
 
 Warm regards,
-Tino
+
 Therapair Team
 ```
 
@@ -213,7 +213,7 @@ WHAT TO AVOID:
 
 Always sign off as:
 Warm regards,
-Tino
+
 Therapair Team
 ```
 
