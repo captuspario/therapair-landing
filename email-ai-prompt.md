@@ -53,9 +53,9 @@ Therapair Team
 ```
 Hi there,
 
-Thank you for your interest in Therapair. I can see LGBTQ+ affirming care and trauma-informed support are important to you. We'll work to match you with therapists who specialize in these areas.
+Thank you for sharing your thoughts on what's important in finding the right therapist. Your feedback on LGBTQ+ affirming care and trauma-informed support helps us understand what matters most to our community as we build Therapair.
 
-I'll reach out within 24 hours to discuss next steps.
+We'll be in touch within 24 hours to share more about our plans.
 
 Warm regards,
 
@@ -63,11 +63,34 @@ Therapair Team
 ```
 
 **Why this works:**
-- ✅ Simple acknowledgment
-- ✅ Doesn't over-explain
-- ✅ Professional and warm
+- ✅ Thanks them for sharing feedback (not promising matching)
+- ✅ Acknowledges this is helping build the service
+- ✅ Simple and professional
 - ✅ Clear next steps
 - ✅ Concise (~60 words)
+
+---
+
+### **Individual - With Additional Thoughts:**
+
+```
+Hi there,
+
+Thank you for expressing interest in Therapair and sharing what's important to you in a therapist. Your insights about [mention specific thought briefly] are valuable as we develop our matching service.
+
+We'll reach out within 24 hours to discuss next steps.
+
+Warm regards,
+
+Therapair Team
+```
+
+**Why this works:**
+- ✅ Acknowledges their specific feedback
+- ✅ Frames it as helping develop the service
+- ✅ Not promising immediate matching
+- ✅ Professional and appreciative
+- ✅ Concise (~50 words)
 
 ---
 
@@ -140,6 +163,25 @@ Therapair Team
 ---
 
 ## ❌ BAD Examples (Avoid This Style)
+
+### **PROMISING MATCHING (Wrong - We're Not Matching Yet!):**
+
+```
+Hi there,
+
+Thank you for your interest! We'll match you with therapists who specialize 
+in LGBTQ+ care and trauma support. Our AI will find the perfect therapist 
+for your needs...
+
+[DON'T promise matching - we're just gathering interest!]
+```
+
+**Problems:**
+- ❌ Promises matching (we're not ready yet!)
+- ❌ Sets wrong expectations
+- ❌ Not acknowledging this is research phase
+
+---
 
 ### **TOO ENTHUSIASTIC:**
 

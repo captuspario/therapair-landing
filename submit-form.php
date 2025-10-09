@@ -122,23 +122,29 @@ function generateAIPersonalizedEmail($data, $audience, $apiKey, $model) {
     $context = buildAIContext($data, $audience);
     
     // System prompt for consistent, professional responses (based on email-ai-prompt.md)
-    $systemPrompt = "You are writing on behalf of the Therapair team. Write brief, professional email confirmations to people who expressed interest in Therapair's therapy matching service.
+    $systemPrompt = "You are writing on behalf of the Therapair team. Write brief, professional confirmation emails to people who expressed EARLY INTEREST in learning about Therapair.
+
+IMPORTANT CONTEXT:
+- This is NOT active matching - they're just expressing interest and sharing opinions
+- They're helping us with early research to build the service
+- We're gathering data about what people think is important
+- No therapy matching happening yet
 
 TONE & STYLE:
 - Professional yet warm
 - Concise and to the point (80-120 words max)
 - Natural, human voice
 - Not overly enthusiastic
-- Don't over-analyze what they shared
+- Don't promise matching or deep analysis
 
 STRUCTURE:
-- Paragraph 1: Simple thank you + brief acknowledgment of what they mentioned
-- Paragraph 2: Next steps (we'll follow up within 24 hours)
+- Paragraph 1: Thank them for sharing their thoughts/interest
+- Paragraph 2: Acknowledge this helps us build the service + we'll follow up within 24 hours
 - Keep it short and professional
 
 WHAT TO AVOID:
-- Excessive exclamation points
-- Over-explaining or going too deep
+- Saying we'll 'match them' (we're not ready yet)
+- Over-explaining or going too deep into their interests
 - Marketing language or overselling
 - Making it obvious it's AI-generated
 - Long, wordy responses
@@ -148,7 +154,7 @@ Warm regards,
 
 Therapair Team";
 
-    $userPrompt = "Write a brief, professional confirmation email for this submission:\n\n{$context}\n\nKeep it simple - just acknowledge what they mentioned and confirm you'll follow up within 24 hours. Be warm but concise. 80-120 words maximum.";
+    $userPrompt = "Write a brief, professional confirmation email for this early interest/research submission:\n\n{$context}\n\nRemember: This is just interest gathering and user research, not active matching. Thank them for sharing their thoughts/feedback. Be warm but concise. 80-120 words maximum.";
     
     // Call OpenAI API
     try {
@@ -168,11 +174,12 @@ function buildAIContext($data, $audience) {
         case 'individual':
             $context .= "Email: {$data['email']}\n";
             if (!empty($data['therapy_interests']) && $data['therapy_interests'] !== 'None selected') {
-                $context .= "Therapy Interests: {$data['therapy_interests']}\n";
-                $context .= "\nThis person is looking for therapy and is particularly interested in: {$data['therapy_interests']}";
-            } else {
-                $context .= "\nThis person is looking for therapy support.";
+                $context .= "What they think is important: {$data['therapy_interests']}\n";
             }
+            if (!empty($data['additional_thoughts'])) {
+                $context .= "Additional thoughts: {$data['additional_thoughts']}\n";
+            }
+            $context .= "\nThis person is expressing early interest in Therapair and sharing what they think is important in a therapist (this is research/feedback, not active matching).";
             break;
             
         case 'therapist':
@@ -320,6 +327,7 @@ function collectFormData($post, $audience) {
     switch ($audience) {
         case 'individual':
             $data['therapy_interests'] = sanitize($post['Therapy_Interests'] ?? 'None selected');
+            $data['additional_thoughts'] = sanitize($post['Additional_Thoughts'] ?? '');
             break;
             
         case 'therapist':
@@ -404,6 +412,14 @@ function formatAdminEmail($data, $audience, $timestamp) {
                     <div class="value">' . nl2br(htmlspecialchars($data['therapy_interests'])) . '</div>
                 </div>
             ';
+            if (!empty($data['additional_thoughts'])) {
+                $html .= '
+                    <div class="field">
+                        <div class="label">💬 What\'s Important to Them:</div>
+                        <div class="value">' . nl2br(htmlspecialchars($data['additional_thoughts'])) . '</div>
+                    </div>
+                ';
+            }
             break;
             
         case 'therapist':
