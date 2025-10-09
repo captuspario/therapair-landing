@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastel Style Icons - Therapair Form</title>
+    <style>
+        :root {
+            --therapair-primary: #8b5a9f;
+            --therapair-secondary: #a77bb8;
+            --therapair-accent: #c5a491;
+            --therapair-sage: #7fa083;
+            --therapair-sage-dark: #5f7c61;
+            --therapair-background: #f8f7f5;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--therapair-background);
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(139, 90, 159, 0.12);
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+
+        .icon-item {
+            text-align: center;
+            padding: 20px;
+            border: 2px solid rgba(139, 90, 159, 0.1);
+            border-radius: 16px;
+            background: linear-gradient(135deg, #fdfcfb 0%, #f9f8f6 100%);
+        }
+
+        .icon-item h4 {
+            margin: 15px 0 8px 0;
+            color: var(--therapair-primary);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .icon-item p {
+            margin: 0;
+            color: var(--therapair-sage-dark);
+            font-size: 13px;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--therapair-primary);
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            color: var(--therapair-primary);
+            margin-bottom: 15px;
+            border-bottom: 3px solid var(--therapair-accent);
+            padding-bottom: 8px;
+        }
+
+        .style-note {
+            background: linear-gradient(135deg, rgba(139, 90, 159, 0.08) 0%, rgba(127, 160, 131, 0.08) 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            color: var(--therapair-sage-dark);
+            border-left: 4px solid var(--therapair-accent);
+        }
+
+        /* Icon container style matching reference */
+        .icon-container {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎨 Pastel Style Icons (Reference Match)</h1>
+
+    <div class="section">
+        <h2>Audience Selection Icons (Solid with Pastel Backgrounds)</h2>
+        <div class="style-note">
+            <strong>Style:</strong> Rounded square backgrounds, thick black outlines (2-3px), filled colors, soft pastels
+        </div>
+
+        <div class="icon-grid">
+            <div class="icon-item">
+                <div class="icon-container" style="background: #F8D7DA;">
+                    <svg width="36" height="36" viewBox="0 0 24 24">
+                        <!-- Smiling person -->
+                        <circle cx="12" cy="8" r="3" fill="#FFB6C1" stroke="#000" stroke-width="2.5"/>
+                        <path d="M12 14c-4 0-7 2-7 5v3h14v-3c0-3-3-5-7-5z" fill="#FFB6C1" stroke="#000" stroke-width="2.5"/>
+                        <!-- Happy face -->
+                        <circle cx="10.5" cy="7.5" r="0.5" fill="#000"/>
+                        <circle cx="13.5" cy="7.5" r="0.5" fill="#000"/>
+                        <path d="M10 9.5c0.5 0.5 1.5 0.5 2 0.5s1.5 0 2-0.5" stroke="#000" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h4>Individual</h4>
+                <p>Happy person seeking therapy</p>
+            </div>
+
+            <div class="icon-item">
+                <div class="icon-container" style="background: #D1ECF1;">
+                    <svg width="36" height="36" viewBox="0 0 24 24">
+                        <!-- Caring hands -->
+                        <path d="M8 6c-2 0-3 1-3 3v6c0 1 1 2 2 2h2l2-2v-6c0-2-1-3-3-3z" fill="#87CEEB" stroke="#000" stroke-width="2.5"/>
+                        <path d="M16 6c2 0 3 1 3 3v6c0 1-1 2-2 2h-2l-2-2v-6c0-2 1-3 3-3z" fill="#87CEEB" stroke="#000" stroke-width="2.5"/>
+                        <!-- Heart in center -->
+                        <path d="M12 10c-1-1-3-1-3 1s2 3 3 4c1-1 3-2 3-4s-2-2-3-1z" fill="#FF69B4" stroke="#000" stroke-width="1.5"/>
+                    </svg>
+                </div>
+                <h4>Therapist</h4>
+                <p>Caring hands holding hearts</p>
+            </div>
+
+            <div class="icon-item">
+                <div class="icon-container" style="background: #F0F0F0;">
+                    <svg width="36" height="36" viewBox="0 0 24 24">
+                        <!-- Building/organization -->
+                        <rect x="6" y="4" width="12" height="16" rx="2" fill="#D3D3D3" stroke="#000" stroke-width="2.5"/>
+                        <rect x="8" y="7" width="2" height="2" fill="#000"/>
+                        <rect x="14" y="7" width="2" height="2" fill="#000"/>
+                        <rect x="8" y="11" width="2" height="2" fill="#000"/>
+                        <rect x="14" y="11" width="2" height="2" fill="#000"/>
+                        <rect x="11" y="15" width="2" height="5" fill="#000"/>
+                    </svg>
+                </div>
+                <h4>Organization</h4>
+                <p>Professional building</p>
+            </div>
+
+            <div class="icon-item">
+                <div class="icon-container" style="background: #E6E6FA;">
+                    <svg width="36" height="36" viewBox="0 0 24 24">
+                        <!-- Star/other -->
+                        <path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z" fill="#DDA0DD" stroke="#000" stroke-width="2.5"/>
+                    </svg>
+                </div>
+                <h4>Other</h4>
+                <p>Something else entirely</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Therapy Interests Icons (Outline with Pastel Backgrounds)</h2>
+        <div class="style-note">
+            <strong>Style:</strong> Same rounded backgrounds, but icons are outline only with thick black strokes
+        </div>
+
+        <div class="icon-grid">
+            <div class="icon-item">
+                <div class="icon-container" style="background: #FFE4E1;">
+                    <svg width="36" height="36" viewBox="0 0 24 24">
+                        <!-- Rainbow -->
+                        <path d="M6 15a6 6 0 0 1 12 0" fill="none" stroke="#FF4500" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M7 15a5 5 0 0 1 10 0" fill="none" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M8 15a4 4 0 0 1 8 0" fill="none" stroke="#32CD32" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M9 15a3 3 0 0 1 6 0" fill="none" stroke="#1E90FF" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M10 15a2 2 0 0 1 4 0" fill="none" stroke="#8A2BE2" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h4>LGBTQ+ Care</h4>
+                <p>Pride rainbow</p>
+            </div>
+
+            <div class="icon-item">
+                <div class="icon-container" style="background: #F0E68C;">
+                    <svg width="36" height="36" viewBox="0 0 24 24">
+                        <!-- Brain with growth -->
+                        <path d="M9 5c-2 0-4 2-4 4v6c0 2 2 4 4 4h6c2 0 4-2 4-4V9c0-2-2-4-4-4z" fill="none" stroke="#000" stroke-width="2.5"/>
+                        <path d="M9 9h6M9 12h6M9 15h4" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Growing sprout -->
+                        <path d="M12 5V2M10 3l2 2 2-2" fill="none" stroke="#32CD32" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h4>Neurodiversity</h4>
+                <p>Growing mind</p>
+            </div>
+
+            <div class="icon-item">
+                <div class="icon-container" style="background: #B0E0E6;">
+                    <svg width="36" height="36" viewBox="0 0 24 24">
+                        <!-- Globe -->
+                        <circle cx="12" cy="12" r="8" fill="none" stroke="#000" stroke-width="2.5"/>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="#000" stroke-width="2.5"/>
+                    </svg>
+                </div>
+                <h4>Cultural Competency</h4>
+                <p>Global understanding</p>
+            </div>
+
+            <div class="icon-item">
+                <div class="icon-container" style="background: #E0E0E0;">
+                    <svg width="36" height="36" viewBox="0 0 24 24">
+                        <!-- Protective hands -->
+                        <path d="M5 8c0-2 2-4 4-4h6c2 0 4 2 4 4v8c0 2-2 4-4 4H9c-2 0-4-2-4-4z" fill="none" stroke="#000" stroke-width="2.5"/>
+                        <path d="M8 8l2 2 4-4" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h4>Trauma Therapy</h4>
+                <p>Safe protection</p>
+            </div>
+
+            <div class="icon-item">
+                <div class="icon-container" style="background: #98FB98;">
+                    <svg width="36" height="36" viewBox="0 0 24 24">
+                        <!-- Calm waves -->
+                        <path d="M3 12c2-2 4 2 6 0s4-2 6 0 4 2 6 0" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M3 15c2-2 4 2 6 0s4-2 6 0 4 2 6 0" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M3 9c2-2 4 2 6 0s4-2 6 0 4 2 6 0" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h4>Anxiety/Depression</h4>
+                <p>Peaceful calm</p>
+            </div>
+
+            <div class="icon-item">
+                <div class="icon-container" style="background: #DDA0DD;">
+                    <svg width="36" height="36" viewBox="0 0 24 24">
+                        <!-- Connected hearts -->
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="none" stroke="#000" stroke-width="2.5"/>
+                        <circle cx="10" cy="10" r="1.5" fill="#FF1493"/>
+                        <circle cx="14" cy="10" r="1.5" fill="#FF1493"/>
+                    </svg>
+                </div>
+                <h4>Relationships</h4>
+                <p>Connected love</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding: 25px; background: linear-gradient(135deg, rgba(139, 90, 159, 0.05) 0%, rgba(127, 160, 131, 0.05) 100%); border-radius: 16px; color: var(--therapair-sage-dark);">
+        <p style="font-size: 16px; margin-bottom: 10px;"><strong>🎨 Style Features:</strong></p>
+        <p style="margin: 0; line-height: 1.6;">• Rounded square backgrounds (16px border-radius)<br>• Soft pastel colors<br>• Thick black outlines (2.5px stroke-width)<br>• Simple, friendly shapes<br>• Solid fills for audiences, outlines for interests</p>
+    </div>
+</body>
+</html>
