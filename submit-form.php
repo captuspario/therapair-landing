@@ -4,6 +4,9 @@
  * Sends emails to admin and AI-generated personalized confirmation to user
  */
 
+// Debug: Log that script was called
+file_put_contents('form_debug.log', date('Y-m-d H:i:s') . " - Form script called\n", FILE_APPEND);
+
 // Load configuration
 require_once __DIR__ . '/config.php';
 
