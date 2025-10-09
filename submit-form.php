@@ -81,6 +81,7 @@ $adminHeaders .= "MIME-Version: 1.0\r\n";
 $adminHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
 
 $adminSent = mail($ADMIN_EMAIL, $adminSubject, $adminMessage, $adminHeaders);
+error_log("Admin email sent: " . ($adminSent ? 'SUCCESS' : 'FAILED') . " to {$ADMIN_EMAIL}");
 
 // ============================================
 // 2. SEND CONFIRMATION EMAIL TO USER (AI-POWERED)
@@ -89,9 +90,22 @@ $userSubject = 'Thank you for your interest in Therapair';
 
 // Generate AI-powered personalized message or fallback to template
 if ($USE_AI_PERSONALIZATION && !empty($OPENAI_API_KEY) && $OPENAI_API_KEY !== 'YOUR_OPENAI_API_KEY_HERE') {
-    $personalizedContent = generateAIPersonalizedEmail($formData, $audience, $OPENAI_API_KEY, $AI_MODEL);
-    $userMessage = formatUserEmailWithAI($personalizedContent, $formData, $audience);
+    error_log("Attempting AI email generation for: {$email}");
+    try {
+        $personalizedContent = generateAIPersonalizedEmail($formData, $audience, $OPENAI_API_KEY, $AI_MODEL);
+        if ($personalizedContent) {
+            error_log("AI email generated successfully");
+            $userMessage = formatUserEmailWithAI($personalizedContent, $formData, $audience);
+        } else {
+            error_log("AI returned null, using fallback template");
+            $userMessage = formatUserEmail($formData, $audience);
+        }
+    } catch (Exception $e) {
+        error_log("AI email generation failed: " . $e->getMessage());
+        $userMessage = formatUserEmail($formData, $audience);
+    }
 } else {
+    error_log("Using static template (AI disabled or no API key)");
     $userMessage = formatUserEmail($formData, $audience);
 }
 
@@ -101,6 +115,7 @@ $userHeaders .= "MIME-Version: 1.0\r\n";
 $userHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
 
 $userSent = mail($email, $userSubject, $userMessage, $userHeaders);
+error_log("User email sent: " . ($userSent ? 'SUCCESS' : 'FAILED') . " to {$email}");
 
 // ============================================
 // 3. REDIRECT TO THANK YOU PAGE
