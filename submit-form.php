@@ -29,15 +29,34 @@ $OPENAI_API_KEY = OPENAI_API_KEY;
 $USE_AI_PERSONALIZATION = USE_AI_PERSONALIZATION;
 $AI_MODEL = AI_MODEL;
 
+// Debug: Log all POST data (remove after testing)
+error_log("Form submission received: " . print_r($_POST, true));
+
 // Get form data
 $audience = isset($_POST['Audience_Type']) ? sanitize($_POST['Audience_Type']) : '';
 $email = isset($_POST['Email']) ? sanitize($_POST['Email']) : '';
 $therapyInterests = isset($_POST['Therapy_Interests']) ? sanitize($_POST['Therapy_Interests']) : '';
 $timestamp = date('Y-m-d H:i:s');
 
+// Debug validation
+error_log("Audience: '{$audience}', Email: '{$email}'");
+
 // Validate required fields
-if (empty($audience) || empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    header('Location: /?error=invalid');
+if (empty($audience)) {
+    error_log("Validation failed: audience is empty");
+    header('Location: /?error=no-audience');
+    exit;
+}
+
+if (empty($email)) {
+    error_log("Validation failed: email is empty");
+    header('Location: /?error=no-email');
+    exit;
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    error_log("Validation failed: invalid email format");
+    header('Location: /?error=invalid-email');
     exit;
 }
 
