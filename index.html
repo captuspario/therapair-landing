@@ -405,7 +405,7 @@
             <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2" style="border-color: rgba(37, 99, 235, 0.1);">
                 <form 
                     id="main-form-element" 
-                    action="/test-form.php" 
+                    action="/submit-form.php" 
                     method="POST" 
                     class="space-y-8"
                 >
@@ -517,6 +517,7 @@
                                     placeholder="Your email address"
                                     class="input-field w-full text-center"
                                     name="Email"
+                                    id="individual-email"
                                     required
                                 />
                             </div>
@@ -527,25 +528,25 @@
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Full Name *</label>
-                                    <input type="text" name="Full_Name" class="input-field w-full" required>
+                                    <input type="text" name="Full_Name" class="input-field w-full" disabled>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Professional Title *</label>
-                                    <input type="text" name="Professional_Title" class="input-field w-full" placeholder="e.g., Licensed Clinical Psychologist" required>
+                                    <input type="text" name="Professional_Title" class="input-field w-full" placeholder="e.g., Licensed Clinical Psychologist" disabled>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Organization/Practice</label>
-                                    <input type="text" name="Organization" class="input-field w-full">
+                                    <input type="text" name="Organization" class="input-field w-full" disabled>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Email Address *</label>
-                                    <input type="email" name="Email" class="input-field w-full" required>
+                                    <input type="email" name="Email" id="therapist-email" class="input-field w-full" disabled>
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium mb-2">Areas of Specialization</label>
-                                <textarea name="Specializations" class="input-field w-full h-24" placeholder="Please describe your areas of expertise and any specific populations you serve..."></textarea>
+                                <textarea name="Specializations" class="input-field w-full h-24" placeholder="Please describe your areas of expertise and any specific populations you serve..." disabled></textarea>
                             </div>
                         </div>
 
@@ -554,25 +555,25 @@
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Contact Name *</label>
-                                    <input type="text" name="Contact_Name" class="input-field w-full" required>
+                                    <input type="text" name="Contact_Name" class="input-field w-full" disabled>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Position/Title *</label>
-                                    <input type="text" name="Position" class="input-field w-full" required>
+                                    <input type="text" name="Position" class="input-field w-full" disabled>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Organization Name *</label>
-                                    <input type="text" name="Organization_Name" class="input-field w-full" required>
+                                    <input type="text" name="Organization_Name" class="input-field w-full" disabled>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Email Address *</label>
-                                    <input type="email" name="Email" class="input-field w-full" required>
+                                    <input type="email" name="Email" id="organization-email" class="input-field w-full" disabled>
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium mb-2">Partnership Interest</label>
-                                <textarea name="Partnership_Interest" class="input-field w-full h-24" placeholder="Tell us about your organization and how you'd like to work with Therapair..."></textarea>
+                                <textarea name="Partnership_Interest" class="input-field w-full h-24" placeholder="Tell us about your organization and how you'd like to work with Therapair..." disabled></textarea>
                             </div>
                         </div>
 
@@ -581,11 +582,11 @@
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Name</label>
-                                    <input type="text" name="Name" class="input-field w-full">
+                                    <input type="text" name="Name" class="input-field w-full" disabled>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Email Address *</label>
-                                    <input type="email" name="Email" class="input-field w-full" required>
+                                    <input type="email" name="Email" id="other-email" class="input-field w-full" disabled>
                                 </div>
                             </div>
 
@@ -674,11 +675,23 @@
                 // Show dynamic fields
                 document.getElementById('dynamic-fields').classList.remove('hidden');
 
-                // First, disable ALL required fields in ALL sections
-                document.querySelectorAll('#individual-fields input[required], #individual-fields textarea[required]').forEach(el => el.removeAttribute('required'));
-                document.querySelectorAll('#professional-fields input[required], #professional-fields textarea[required]').forEach(el => el.removeAttribute('required'));
-                document.querySelectorAll('#organization-fields input[required], #organization-fields textarea[required]').forEach(el => el.removeAttribute('required'));
-                document.querySelectorAll('#other-fields input[required], #other-fields textarea[required]').forEach(el => el.removeAttribute('required'));
+                // Disable ALL fields in ALL sections first
+                document.querySelectorAll('#individual-fields input, #individual-fields textarea').forEach(el => {
+                    el.disabled = true;
+                    el.removeAttribute('required');
+                });
+                document.querySelectorAll('#professional-fields input, #professional-fields textarea').forEach(el => {
+                    el.disabled = true;
+                    el.removeAttribute('required');
+                });
+                document.querySelectorAll('#organization-fields input, #organization-fields textarea').forEach(el => {
+                    el.disabled = true;
+                    el.removeAttribute('required');
+                });
+                document.querySelectorAll('#other-fields input, #other-fields textarea').forEach(el => {
+                    el.disabled = true;
+                    el.removeAttribute('required');
+                });
 
                 // Hide all field groups
                 document.getElementById('individual-fields').classList.add('hidden');
@@ -686,23 +699,27 @@
                 document.getElementById('organization-fields').classList.add('hidden');
                 document.getElementById('other-fields').classList.add('hidden');
 
-                // Show appropriate field group and re-enable required fields
+                // Show appropriate field group and enable its fields
                 if (audience === 'individual') {
                     document.getElementById('individual-fields').classList.remove('hidden');
+                    document.querySelectorAll('#individual-fields input, #individual-fields textarea').forEach(el => el.disabled = false);
                     document.querySelector('#individual-fields input[name="Email"]').setAttribute('required', 'required');
                 } else if (audience === 'therapist') {
                     document.getElementById('professional-fields').classList.remove('hidden');
+                    document.querySelectorAll('#professional-fields input, #professional-fields textarea').forEach(el => el.disabled = false);
                     document.querySelector('#professional-fields input[name="Full_Name"]').setAttribute('required', 'required');
                     document.querySelector('#professional-fields input[name="Professional_Title"]').setAttribute('required', 'required');
                     document.querySelector('#professional-fields input[name="Email"]').setAttribute('required', 'required');
                 } else if (audience === 'organization') {
                     document.getElementById('organization-fields').classList.remove('hidden');
+                    document.querySelectorAll('#organization-fields input, #organization-fields textarea').forEach(el => el.disabled = false);
                     document.querySelector('#organization-fields input[name="Contact_Name"]').setAttribute('required', 'required');
                     document.querySelector('#organization-fields input[name="Position"]').setAttribute('required', 'required');
                     document.querySelector('#organization-fields input[name="Organization_Name"]').setAttribute('required', 'required');
                     document.querySelector('#organization-fields input[name="Email"]').setAttribute('required', 'required');
                 } else if (audience === 'other') {
                     document.getElementById('other-fields').classList.remove('hidden');
+                    document.querySelectorAll('#other-fields input, #other-fields textarea').forEach(el => el.disabled = false);
                     document.querySelector('#other-fields input[name="Email"]').setAttribute('required', 'required');
                 }
 
