@@ -389,7 +389,7 @@
     </section>
 
 
-    <!-- Main Interest Form Section -->
+    <!-- Main Interest Form Section with FormSubmit.co -->
     <section id="main-form" class="py-24 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, var(--therapair-background) 100%);">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
@@ -403,7 +403,22 @@
 
             <!-- Main Form -->
             <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2" style="border-color: rgba(37, 99, 235, 0.1);">
-                <form id="main-form-element" class="space-y-8">
+                <form 
+                    id="main-form-element" 
+                    action="https://formsubmit.co/contact@therapair.com.au" 
+                    method="POST" 
+                    class="space-y-8"
+                >
+                    <!-- FormSubmit.co Configuration Fields -->
+                    <input type="hidden" name="_subject" value="🎯 New Therapair Interest Form">
+                    <input type="hidden" name="_autoresponse" value="Thank you for your interest in Therapair! We've received your submission and will be in touch within 1-2 business days. Your journey to finding the right therapist starts here.">
+                    <input type="hidden" name="_template" value="box">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="https://therapair.com.au/thank-you.html">
+                    
+                    <!-- Honeypot for spam protection -->
+                    <input type="text" name="_honey" style="display:none">
+                    
                     <!-- Audience Selection -->
                     <div>
                         <h3 class="text-2xl font-semibold mb-6 text-center">I'm interested as a...</h3>
@@ -440,7 +455,7 @@
                                 <p class="text-sm" style="color: var(--therapair-gray);">Supporting innovative mental health solutions</p>
                             </div>
                         </div>
-                        <input type="hidden" id="selected-audience" name="audience" required>
+                        <input type="hidden" id="selected-audience" name="Audience Type" required>
                     </div>
 
                     <!-- Dynamic Form Fields -->
@@ -451,7 +466,7 @@
                                 <h4 class="text-xl font-semibold mb-4">What's most important to you in a therapist?</h4>
                                 <div class="grid sm:grid-cols-2 gap-4">
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="lgbtq" name="therapy-interests">
+                                        <input type="checkbox" class="mr-3" value="LGBTQ+ affirming care" name="Therapy Interests">
                                         <div class="flex items-center">
                                             <i data-lucide="heart" class="w-5 h-5 mr-3" style="color: var(--therapair-primary);"></i>
                                             <span>LGBTQ+ affirming care</span>
@@ -459,7 +474,7 @@
                                     </label>
 
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="neurodiversity" name="therapy-interests">
+                                        <input type="checkbox" class="mr-3" value="Neurodiversity support" name="Therapy Interests">
                                         <div class="flex items-center">
                                             <i data-lucide="brain" class="w-5 h-5 mr-3" style="color: var(--therapair-secondary);"></i>
                                             <span>Neurodiversity support</span>
@@ -467,7 +482,7 @@
                                     </label>
 
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="cultural" name="therapy-interests">
+                                        <input type="checkbox" class="mr-3" value="Cultural competency" name="Therapy Interests">
                                         <div class="flex items-center">
                                             <i data-lucide="globe" class="w-5 h-5 mr-3" style="color: var(--therapair-accent);"></i>
                                             <span>Cultural competency</span>
@@ -475,7 +490,7 @@
                                     </label>
 
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="trauma" name="therapy-interests">
+                                        <input type="checkbox" class="mr-3" value="Trauma-informed care" name="Therapy Interests">
                                         <div class="flex items-center">
                                             <i data-lucide="shield" class="w-5 h-5 mr-3" style="color: var(--therapair-success);"></i>
                                             <span>Trauma-informed care</span>
@@ -483,7 +498,7 @@
                                     </label>
 
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="anxiety" name="therapy-interests">
+                                        <input type="checkbox" class="mr-3" value="Anxiety & depression" name="Therapy Interests">
                                         <div class="flex items-center">
                                             <i data-lucide="circle-help" class="w-5 h-5 mr-3" style="color: var(--therapair-primary);"></i>
                                             <span>Anxiety & depression</span>
@@ -491,7 +506,7 @@
                                     </label>
 
                                     <label class="flex items-center p-4 rounded-lg border-2 border-gray-200 cursor-pointer hover:border-primary transition-colors">
-                                        <input type="checkbox" class="mr-3" value="relationships" name="therapy-interests">
+                                        <input type="checkbox" class="mr-3" value="Relationship issues" name="Therapy Interests">
                                         <div class="flex items-center">
                                             <i data-lucide="heart-handshake" class="w-5 h-5 mr-3" style="color: var(--therapair-secondary);"></i>
                                             <span>Relationship issues</span>
@@ -505,7 +520,7 @@
                                     type="email"
                                     placeholder="Your email address"
                                     class="input-field w-full text-center"
-                                    name="email"
+                                    name="Email"
                                     required
                                 />
                             </div>
@@ -516,25 +531,25 @@
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Full Name *</label>
-                                    <input type="text" name="full-name" class="input-field w-full" required>
+                                    <input type="text" name="Full Name" class="input-field w-full" required>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Professional Title *</label>
-                                    <input type="text" name="title" class="input-field w-full" placeholder="e.g., Licensed Clinical Psychologist" required>
+                                    <input type="text" name="Professional Title" class="input-field w-full" placeholder="e.g., Licensed Clinical Psychologist" required>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Organization/Practice</label>
-                                    <input type="text" name="organization" class="input-field w-full">
+                                    <input type="text" name="Organization" class="input-field w-full">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Email Address *</label>
-                                    <input type="email" name="email" class="input-field w-full" required>
+                                    <input type="email" name="Email" class="input-field w-full" required>
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium mb-2">Areas of Specialization</label>
-                                <textarea name="specializations" class="input-field w-full h-24" placeholder="Please describe your areas of expertise and any specific populations you serve..."></textarea>
+                                <textarea name="Specializations" class="input-field w-full h-24" placeholder="Please describe your areas of expertise and any specific populations you serve..."></textarea>
                             </div>
                         </div>
 
@@ -543,25 +558,25 @@
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Contact Name *</label>
-                                    <input type="text" name="contact-name" class="input-field w-full" required>
+                                    <input type="text" name="Contact Name" class="input-field w-full" required>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Position/Title *</label>
-                                    <input type="text" name="position" class="input-field w-full" required>
+                                    <input type="text" name="Position" class="input-field w-full" required>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Organization Name *</label>
-                                    <input type="text" name="organization-name" class="input-field w-full" required>
+                                    <input type="text" name="Organization Name" class="input-field w-full" required>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Email Address *</label>
-                                    <input type="email" name="email" class="input-field w-full" required>
+                                    <input type="email" name="Email" class="input-field w-full" required>
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium mb-2">Partnership Interest</label>
-                                <textarea name="partnership-interest" class="input-field w-full h-24" placeholder="Tell us about your organization and how you'd like to work with Therapair..."></textarea>
+                                <textarea name="Partnership Interest" class="input-field w-full h-24" placeholder="Tell us about your organization and how you'd like to work with Therapair..."></textarea>
                             </div>
                         </div>
 
@@ -570,17 +585,17 @@
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Name</label>
-                                    <input type="text" name="other-name" class="input-field w-full">
+                                    <input type="text" name="Name" class="input-field w-full">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Email Address *</label>
-                                    <input type="email" name="email" class="input-field w-full" required>
+                                    <input type="email" name="Email" class="input-field w-full" required>
                                 </div>
                             </div>
 
                             <div>
                                 <label class="block text-sm font-medium mb-2">How would you like to support Therapair?</label>
-                                <textarea name="support-interest" class="input-field w-full h-24" placeholder="Tell us about your interest in supporting inclusive mental health..."></textarea>
+                                <textarea name="Support Interest" class="input-field w-full h-24" placeholder="Tell us about your interest in supporting inclusive mental health..."></textarea>
                             </div>
                         </div>
 
@@ -595,8 +610,7 @@
                         </div>
                     </div>
 
-                    <div id="form-success" class="success-message text-center">Thank you! We'll be in touch soon with updates about early access.</div>
-                    <div id="form-error" class="error-message text-center">Please complete all required fields.</div>
+                    <div id="form-error" class="error-message text-center">Please select an audience type to continue.</div>
                 </form>
             </div>
 
@@ -640,34 +654,6 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
-        // Mailchimp integration function
-        async function submitToMailchimp(email, source, interests = []) {
-            // TODO: Replace with actual Mailchimp API endpoint
-            const MAILCHIMP_ENDPOINT = 'YOUR_MAILCHIMP_ENDPOINT_HERE';
-
-            try {
-                const response = await fetch(MAILCHIMP_ENDPOINT, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        email_address: email,
-                        status: 'subscribed',
-                        merge_fields: {
-                            SOURCE: source,
-                            INTERESTS: interests.join(', ')
-                        }
-                    })
-                });
-
-                return response.ok;
-            } catch (error) {
-                console.error('Mailchimp submission failed:', error);
-                return false;
-            }
-        }
-
         // Scroll to main form function
         function scrollToMainForm() {
             document.getElementById('main-form').scrollIntoView({
@@ -689,8 +675,23 @@
                 const audience = this.dataset.audience;
                 document.getElementById('selected-audience').value = audience;
 
+                // Update email subject based on audience
+                const subjectMap = {
+                    'individual': '🎯 New Interest: Individual Seeking Therapy',
+                    'therapist': '👨‍⚕️ New Interest: Mental Health Professional',
+                    'organization': '🏢 New Interest: Organization/Clinic',
+                    'other': '💡 New Interest: Supporter/Investor'
+                };
+                document.querySelector('input[name="_subject"]').value = subjectMap[audience];
+
                 // Show dynamic fields
                 document.getElementById('dynamic-fields').classList.remove('hidden');
+
+                // First, disable ALL required fields in ALL sections
+                document.querySelectorAll('#individual-fields input[required], #individual-fields textarea[required]').forEach(el => el.removeAttribute('required'));
+                document.querySelectorAll('#professional-fields input[required], #professional-fields textarea[required]').forEach(el => el.removeAttribute('required'));
+                document.querySelectorAll('#organization-fields input[required], #organization-fields textarea[required]').forEach(el => el.removeAttribute('required'));
+                document.querySelectorAll('#other-fields input[required], #other-fields textarea[required]').forEach(el => el.removeAttribute('required'));
 
                 // Hide all field groups
                 document.getElementById('individual-fields').classList.add('hidden');
@@ -698,92 +699,53 @@
                 document.getElementById('organization-fields').classList.add('hidden');
                 document.getElementById('other-fields').classList.add('hidden');
 
-                // Show appropriate field group
+                // Show appropriate field group and re-enable required fields
                 if (audience === 'individual') {
                     document.getElementById('individual-fields').classList.remove('hidden');
+                    document.querySelector('#individual-fields input[name="Email"]').setAttribute('required', 'required');
                 } else if (audience === 'therapist') {
                     document.getElementById('professional-fields').classList.remove('hidden');
+                    document.querySelector('#professional-fields input[name="Full Name"]').setAttribute('required', 'required');
+                    document.querySelector('#professional-fields input[name="Professional Title"]').setAttribute('required', 'required');
+                    document.querySelector('#professional-fields input[name="Email"]').setAttribute('required', 'required');
                 } else if (audience === 'organization') {
                     document.getElementById('organization-fields').classList.remove('hidden');
+                    document.querySelector('#organization-fields input[name="Contact Name"]').setAttribute('required', 'required');
+                    document.querySelector('#organization-fields input[name="Position"]').setAttribute('required', 'required');
+                    document.querySelector('#organization-fields input[name="Organization Name"]').setAttribute('required', 'required');
+                    document.querySelector('#organization-fields input[name="Email"]').setAttribute('required', 'required');
                 } else if (audience === 'other') {
                     document.getElementById('other-fields').classList.remove('hidden');
+                    document.querySelector('#other-fields input[name="Email"]').setAttribute('required', 'required');
                 }
+
+                // Hide error message
+                document.getElementById('form-error').style.display = 'none';
             });
         });
 
-        // Main form submission
-        document.getElementById('main-form-element').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const formData = new FormData(this);
-            const audience = formData.get('audience');
+        // Form submission validation
+        document.getElementById('main-form-element').addEventListener('submit', function(e) {
+            const audience = document.getElementById('selected-audience').value;
 
             if (!audience) {
-                showMessage('form-error', 'form-success');
-                return;
+                e.preventDefault();
+                document.getElementById('form-error').style.display = 'block';
+                document.getElementById('form-error').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                return false;
             }
-
-            // Collect form data based on audience
-            const submissionData = {
-                audience: audience,
-                timestamp: new Date().toISOString()
-            };
-
-            if (audience === 'individual') {
-                submissionData.email = formData.get('email');
-                submissionData.therapyInterests = Array.from(document.querySelectorAll('input[name="therapy-interests"]:checked'))
-                    .map(cb => cb.value);
-            } else if (audience === 'therapist') {
-                submissionData.fullName = formData.get('full-name');
-                submissionData.title = formData.get('title');
-                submissionData.organization = formData.get('organization');
-                submissionData.email = formData.get('email');
-                submissionData.specializations = formData.get('specializations');
-            } else if (audience === 'organization') {
-                submissionData.contactName = formData.get('contact-name');
-                submissionData.position = formData.get('position');
-                submissionData.organizationName = formData.get('organization-name');
-                submissionData.email = formData.get('email');
-                submissionData.partnershipInterest = formData.get('partnership-interest');
-            } else if (audience === 'other') {
-                submissionData.name = formData.get('other-name');
-                submissionData.email = formData.get('email');
-                submissionData.supportInterest = formData.get('support-interest');
-            }
-
-            // Validate required fields
-            if (!submissionData.email || !isValidEmail(submissionData.email)) {
-                showMessage('form-error', 'form-success');
-                return;
-            }
-
-            console.log('Form submission:', submissionData);
-
-            // Submit to Mailchimp (placeholder)
-            // await submitToMailchimp(submissionData.email, audience, submissionData);
-
-            // Reset form and show success
-            this.reset();
-            document.querySelectorAll('.audience-selector').forEach(s => s.classList.remove('selected'));
-            document.getElementById('dynamic-fields').classList.add('hidden');
-            showMessage('form-success', 'form-error');
 
             // Track successful submission
-            trackEvent('early_access_request', 'Form Submission', audience);
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_submission', {
+                    'event_category': 'Early Access',
+                    'event_label': audience
+                });
+            }
+
+            // Form will submit normally to FormSubmit.co
+            return true;
         });
-
-        function showMessage(showId, hideId) {
-            document.getElementById(showId).style.display = 'block';
-            document.getElementById(hideId).style.display = 'none';
-
-            setTimeout(() => {
-                document.getElementById(showId).style.display = 'none';
-            }, 5000);
-        }
-
-        function isValidEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -818,22 +780,18 @@
             observer.observe(section);
         });
 
-        // Google Analytics event tracking
-        function trackEvent(action, category = 'User Interaction') {
-            if (typeof gtag !== 'undefined') {
-                gtag('event', action, {
-                    'event_category': category,
-                    'event_label': window.location.pathname
-                });
-            }
-        }
-
-        // Additional event tracking
+        // Event tracking
         document.querySelectorAll('.audience-selector').forEach(selector => {
             selector.addEventListener('click', () => {
-                trackEvent('audience_selected', 'Form Interaction', selector.dataset.audience);
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'audience_selected', {
+                        'event_category': 'Form Interaction',
+                        'event_label': selector.dataset.audience
+                    });
+                }
             });
         });
     </script>
 </body>
 </html>
+
