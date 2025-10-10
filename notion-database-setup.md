@@ -29,7 +29,7 @@
 #### **For Individual Audience:**
 | Property Name | Type | Description |
 |---------------|------|-------------|
-| **Therapy Interests** | Multi-select | LGBTQ+ affirming care, Neurodiversity support, Trauma-informed care, ENM-friendly, Veterans support, etc. |
+| **Therapy Interests** | Multi-select | LGBTQ+ affirming care, Neurodiversity support, Cultural competency, Trauma-informed care, Anxiety & depression, Relationship issues |
 | **Additional Thoughts** | Long text | Free-text feedback they provided |
 | **Interest Level** | Select | High, Medium, Low |
 | **Launch Priority** | Select | Early Access, General Launch, Waitlist |
@@ -37,7 +37,6 @@
 #### **For Therapist Audience:**
 | Property Name | Type | Description |
 |---------------|------|-------------|
-| **Full Name** | Title | Their full name |
 | **Professional Title** | Text | Dr., Psychologist, Counselor, etc. |
 | **Organization** | Text | Where they work |
 | **Specializations** | Long text | Their areas of expertise |
@@ -58,8 +57,8 @@
 | Property Name | Type | Description |
 |---------------|------|-------------|
 | **Name** | Text | Supporter name |
-| **Support Type** | Select | Investor, Advisor, Advocate, Volunteer |
 | **Support Interest** | Long text | How they want to help |
+| **Support Type** | Select | Investor, Advisor, Advocate, Volunteer |
 | **Investment Level** | Select | Seed, Series A, Angel, Advisor |
 | **Engagement Level** | Select | High, Medium, Low |
 
@@ -160,9 +159,9 @@ dateBetween(prop("Last Contacted"), now(), "days")
 length(prop("Email Preferences"))
 ```
 
-#### **Formula 4: Full Name Display**
+#### **Formula 4: Display Name**
 ```
-if(prop("Audience Type") == "Therapist", prop("Full Name"), if(prop("Audience Type") == "Organization", prop("Contact Name"), if(prop("Audience Type") == "Supporter", prop("Name"), "Individual")))
+if(prop("Audience Type") == "Organization", prop("Contact Name"), if(prop("Audience Type") == "Supporter", prop("Name"), if(prop("Audience Type") == "Therapist", "Professional", "Individual")))
 ```
 
 ### **Step 8: Add Sample Data**
@@ -171,20 +170,39 @@ if(prop("Audience Type") == "Therapist", prop("Full Name"), if(prop("Audience Ty
 - Name: "Individual Submission"
 - Email: "test@example.com"
 - Audience Type: Individual
-- Therapy Interests: LGBTQ+ affirming care, Trauma-informed care
-- Additional Thoughts: "Looking for someone who understands intersectionality"
+- Therapy Interests: LGBTQ+ affirming care, Trauma-informed care, Cultural competency
+- Additional Thoughts: "Looking for someone who understands intersectionality and cultural differences"
 - Status: New
 - Email Preferences: Product Updates, Launch News, Research & Feedback
 
 #### **Sample Therapist Entry:**
-- Name: "Dr. Sarah Johnson"
+- Name: "Therapist Application"
 - Email: "sarah@therapy.com"
 - Audience Type: Therapist
-- Professional Title: "Clinical Psychologist"
+- Professional Title: "Licensed Clinical Psychologist"
 - Organization: "Private Practice"
-- Specializations: "Trauma therapy, LGBTQ+ affirming care"
+- Specializations: "Trauma therapy, LGBTQ+ affirming care, anxiety disorders"
 - Status: New
 - Verification Status: Pending
+
+#### **Sample Organization Entry:**
+- Name: "Organization Partnership"
+- Email: "partnerships@company.com"
+- Audience Type: Organization
+- Contact Name: "Sarah Johnson"
+- Position: "Mental Health Program Manager"
+- Organization Name: "Community Health Center"
+- Partnership Interest: "We'd like to explore how Therapair can support our diverse client base"
+- Status: New
+- Partnership Type: Collaboration
+
+#### **Sample Supporter Entry:**
+- Name: "John Smith"
+- Email: "john@investor.com"
+- Audience Type: Supporter
+- Support Interest: "I'm passionate about inclusive mental health and would love to support your mission"
+- Status: New
+- Support Type: Investor
 
 ### **Step 9: Create Dashboard Views**
 
