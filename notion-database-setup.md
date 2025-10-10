@@ -26,11 +26,17 @@
 
 ### **Step 3: Add Audience-Specific Properties**
 
+> **Important**: Each audience type has a **different long-text field** for their specific feedback:
+> - **Individual**: `Additional_Thoughts` - What's important in finding the right therapist
+> - **Therapist**: `Specializations` - Areas of expertise and populations served  
+> - **Organization**: `Partnership_Interest` - About their organization and partnership goals
+> - **Supporter**: `Support_Interest` - How they want to support Therapair
+
 #### **For Individual Audience:**
 | Property Name | Type | Description |
 |---------------|------|-------------|
 | **Therapy Interests** | Multi-select | LGBTQ+ affirming care, Neurodiversity support, Cultural competency, Trauma-informed care, Anxiety & depression, Relationship issues |
-| **Additional Thoughts** | Long text | Free-text feedback they provided |
+| **Additional Thoughts** | Long text | What else is important to them in finding the right therapist |
 | **Interest Level** | Select | High, Medium, Low |
 | **Launch Priority** | Select | Early Access, General Launch, Waitlist |
 
@@ -39,7 +45,7 @@
 |---------------|------|-------------|
 | **Professional Title** | Text | Dr., Psychologist, Counselor, etc. |
 | **Organization** | Text | Where they work |
-| **Specializations** | Long text | Their areas of expertise |
+| **Specializations** | Long text | Areas of expertise and specific populations they serve |
 | **Verification Status** | Select | Pending, Verified, Rejected |
 | **Onboarding Stage** | Select | Interest, Application, Interview, Onboarded |
 
@@ -49,7 +55,7 @@
 | **Contact Name** | Text | Person who submitted |
 | **Position** | Text | Their role/title |
 | **Organization Name** | Text | Company/organization |
-| **Partnership Interest** | Long text | What they're interested in |
+| **Partnership Interest** | Long text | About their organization and how they'd like to work with Therapair |
 | **Partnership Type** | Select | Referral, Integration, Collaboration |
 | **Organization Size** | Select | Small, Medium, Large, Enterprise |
 
@@ -57,7 +63,7 @@
 | Property Name | Type | Description |
 |---------------|------|-------------|
 | **Name** | Text | Supporter name |
-| **Support Interest** | Long text | How they want to help |
+| **Support Interest** | Long text | How they would like to support Therapair |
 | **Support Type** | Select | Investor, Advisor, Advocate, Volunteer |
 | **Investment Level** | Select | Seed, Series A, Angel, Advisor |
 | **Engagement Level** | Select | High, Medium, Low |
