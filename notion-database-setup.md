@@ -44,20 +44,20 @@
 | Property Name | Type | Description |
 |---------------|------|-------------|
 | **Professional Title** | Text | Dr., Psychologist, Counselor, etc. |
-| **Organization** | Text | Where they work |
-| **Specializations** | Long text | Areas of expertise and specific populations they serve |
+| **Organisation** | Text | Where they work |
+| **Specialisations** | Long text | Areas of expertise and specific populations they serve |
 | **Verification Status** | Select | Pending, Verified, Rejected |
 | **Onboarding Stage** | Select | Interest, Application, Interview, Onboarded |
 
-#### **For Organization Audience:**
+#### **For Organisation Audience:**
 | Property Name | Type | Description |
 |---------------|------|-------------|
 | **Contact Name** | Text | Person who submitted |
 | **Position** | Text | Their role/title |
-| **Organization Name** | Text | Company/organization |
-| **Partnership Interest** | Long text | About their organization and how they'd like to work with Therapair |
+| **Organisation Name** | Text | Company/organisation |
+| **Partnership Interest** | Long text | About their organisation and how they'd like to work with Therapair |
 | **Partnership Type** | Select | Referral, Integration, Collaboration |
-| **Organization Size** | Select | Small, Medium, Large, Enterprise |
+| **Organisation Size** | Select | Small, Medium, Large, Enterprise |
 
 #### **For Supporter Audience:**
 | Property Name | Type | Description |
@@ -186,18 +186,18 @@ if(prop("Audience Type") == "Organization", prop("Contact Name"), if(prop("Audie
 - Email: "sarah@therapy.com"
 - Audience Type: Therapist
 - Professional Title: "Licensed Clinical Psychologist"
-- Organization: "Private Practice"
-- Specializations: "Trauma therapy, LGBTQ+ affirming care, anxiety disorders"
+- Organisation: "Private Practice"
+- Specialisations: "Trauma therapy, LGBTQ+ affirming care, anxiety disorders"
 - Status: New
 - Verification Status: Pending
 
-#### **Sample Organization Entry:**
-- Name: "Organization Partnership"
+#### **Sample Organisation Entry:**
+- Name: "Organisation Partnership"
 - Email: "partnerships@company.com"
-- Audience Type: Organization
+- Audience Type: Organisation
 - Contact Name: "Sarah Johnson"
-- Position: "Mental Health Program Manager"
-- Organization Name: "Community Health Center"
+- Position: "Mental Health Programme Manager"
+- Organisation Name: "Community Health Centre"
 - Partnership Interest: "We'd like to explore how Therapair can support our diverse client base"
 - Status: New
 - Partnership Type: Collaboration

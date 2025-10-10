@@ -1,7 +1,7 @@
 <?php
 /**
- * Therapair Landing Page - Form Submission Handler with AI-Powered Personalization
- * Sends emails to admin and AI-generated personalized confirmation to user
+ * Therapair Landing Page - Form Submission Handler with AI-Powered Personalisation
+ * Sends emails to admin and AI-generated personalised confirmation to user
  */
 
 // Debug logging removed - emails working correctly
@@ -91,12 +91,12 @@ $adminSent = mail($ADMIN_EMAIL, $adminSubject, $adminMessage, $adminHeaders);
 // ============================================
 $userSubject = 'Thank you for your interest in Therapair';
 
-// Generate AI-powered personalized message or fallback to template
+// Generate AI-powered personalised message or fallback to template
 if ($USE_AI_PERSONALIZATION && !empty($OPENAI_API_KEY) && $OPENAI_API_KEY !== 'YOUR_OPENAI_API_KEY_HERE') {
     try {
-        $personalizedContent = generateAIPersonalizedEmail($formData, $audience, $OPENAI_API_KEY, $AI_MODEL);
-        if ($personalizedContent) {
-            $userMessage = formatUserEmailWithAI($personalizedContent, $formData, $audience);
+        $personalisedContent = generateAIPersonalizedEmail($formData, $audience, $OPENAI_API_KEY, $AI_MODEL);
+        if ($personalisedContent) {
+            $userMessage = formatUserEmailWithAI($personalisedContent, $formData, $audience);
         } else {
             $userMessage = formatUserEmail($formData, $audience);
         }
@@ -512,18 +512,18 @@ function formatAdminEmail($data, $audience, $timestamp) {
 
 function formatUserEmail($data, $audience) {
     $name = '';
-    $personalizedMessage = '';
+    $personalisedMessage = '';
     
-    // Get name and create personalized message based on audience type
+    // Get name and create personalised message based on audience type
     switch ($audience) {
         case 'individual':
             $greeting = "Hi there,";
-            $personalizedMessage = "We're thrilled you're taking this important step toward finding the right therapist. ";
+            $personalisedMessage = "We're thrilled you're taking this important step toward finding the right therapist. ";
             
             if (!empty($data['therapy_interests']) && $data['therapy_interests'] !== 'None selected') {
-                $personalizedMessage .= "We noticed you're particularly interested in <strong>" . htmlspecialchars($data['therapy_interests']) . "</strong>. We'll prioritize connecting you with therapists who specialize in these areas and can provide the affirming, culturally competent care you deserve.";
+                $personalisedMessage .= "We noticed you're particularly interested in <strong>" . htmlspecialchars($data['therapy_interests']) . "</strong>. We'll prioritise connecting you with therapists who specialise in these areas and can provide the affirming, culturally competent care you deserve.";
             } else {
-                $personalizedMessage .= "We'll help you find a therapist who truly understands your unique needs and can provide the affirming, culturally competent care you deserve.";
+                $personalisedMessage .= "We'll help you find a therapist who truly understands your unique needs and can provide the affirming, culturally competent care you deserve.";
             }
             break;
             
@@ -532,28 +532,28 @@ function formatUserEmail($data, $audience) {
             $greeting = $name ? "Hi {$name}," : "Hi there,";
             $title = !empty($data['professional_title']) ? htmlspecialchars($data['professional_title']) : 'mental health professional';
             
-            $personalizedMessage = "Thank you for your interest in joining the Therapair network as a <strong>{$title}</strong>. ";
-            $personalizedMessage .= "We're building a community of inclusive, culturally competent practitioners who are passionate about serving diverse populations. ";
+            $personalisedMessage = "Thank you for your interest in joining the Therapair network as a <strong>{$title}</strong>. ";
+            $personalisedMessage .= "We're building a community of inclusive, culturally competent practitioners who are passionate about serving diverse populations. ";
             
             if (!empty($data['specializations'])) {
-                $personalizedMessage .= "Your expertise in <strong>" . htmlspecialchars(substr($data['specializations'], 0, 100)) . (strlen($data['specializations']) > 100 ? '...' : '') . "</strong> aligns perfectly with our mission.";
+                $personalisedMessage .= "Your expertise in <strong>" . htmlspecialchars(substr($data['specializations'], 0, 100)) . (strlen($data['specializations']) > 100 ? '...' : '') . "</strong> aligns perfectly with our mission.";
             } else {
-                $personalizedMessage .= "We'd love to learn more about your practice and how we can work together to serve our community.";
+                $personalisedMessage .= "We'd love to learn more about your practice and how we can work together to serve our community.";
             }
             break;
             
         case 'organization':
             $name = $data['contact_name'] ?? '';
             $greeting = $name ? "Hi {$name}," : "Hi there,";
-            $orgName = !empty($data['organization_name']) ? htmlspecialchars($data['organization_name']) : 'your organization';
+            $orgName = !empty($data['organization_name']) ? htmlspecialchars($data['organization_name']) : 'your organisation';
             
-            $personalizedMessage = "Thank you for reaching out on behalf of <strong>{$orgName}</strong>. ";
-            $personalizedMessage .= "We're excited about the possibility of partnering with forward-thinking organizations that share our commitment to inclusive mental health care. ";
+            $personalisedMessage = "Thank you for reaching out on behalf of <strong>{$orgName}</strong>. ";
+            $personalisedMessage .= "We're excited about the possibility of partnering with forward-thinking organisations that share our commitment to inclusive mental health care. ";
             
             if (!empty($data['partnership_interest'])) {
-                $personalizedMessage .= "We're particularly interested in exploring how we can collaborate to achieve your goals.";
+                $personalisedMessage .= "We're particularly interested in exploring how we can collaborate to achieve your goals.";
             } else {
-                $personalizedMessage .= "We'd love to discuss how Therapair can support your organization's mental health initiatives.";
+                $personalisedMessage .= "We'd love to discuss how Therapair can support your organisation's mental health initiatives.";
             }
             break;
             
@@ -561,19 +561,19 @@ function formatUserEmail($data, $audience) {
             $name = $data['name'] ?? '';
             $greeting = $name ? "Hi {$name}," : "Hi there,";
             
-            $personalizedMessage = "Thank you for your interest in supporting Therapair! ";
-            $personalizedMessage .= "Advocates and supporters like you are essential to our mission of creating truly inclusive mental health care. ";
+            $personalisedMessage = "Thank you for your interest in supporting Therapair! ";
+            $personalisedMessage .= "Advocates and supporters like you are essential to our mission of creating truly inclusive mental health care. ";
             
             if (!empty($data['support_interest'])) {
-                $personalizedMessage .= "We're inspired by your commitment to this important cause and would love to explore how we can work together.";
+                $personalisedMessage .= "We're inspired by your commitment to this important cause and would love to explore how we can work together.";
             } else {
-                $personalizedMessage .= "We'd love to share more about our vision and explore how you can be part of this journey.";
+                $personalisedMessage .= "We'd love to share more about our vision and explore how you can be part of this journey.";
             }
             break;
             
         default:
             $greeting = "Hi there,";
-            $personalizedMessage = "Thank you for your interest in Therapair! We're excited to connect with you.";
+            $personalisedMessage = "Thank you for your interest in Therapair! We're excited to connect with you.";
     }
     
     $html = '
@@ -599,7 +599,7 @@ function formatUserEmail($data, $audience) {
             <div class="content">
                 <p style="font-size: 16px;"><strong>' . htmlspecialchars($greeting) . '</strong></p>
                 
-                <p style="font-size: 15px; line-height: 1.8;">' . $personalizedMessage . '</p>
+                <p style="font-size: 15px; line-height: 1.8;">' . $personalisedMessage . '</p>
                 
                 <div class="box">
                     <h3 style="margin-top: 0; color: #4F064F; font-size: 18px;">📋 What happens next?</h3>

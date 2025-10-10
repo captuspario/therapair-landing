@@ -1,6 +1,6 @@
 # AI Email Confirmation - Prompt Configuration
 
-This file controls how AI generates personalized confirmation emails. Edit this file to change the tone, style, and content of automated responses.
+This file controls how AI generates personalised confirmation emails. Edit this file to change the tone, style, and content of automated responses.
 
 ---
 
@@ -242,7 +242,7 @@ TONE & STYLE:
 - Concise and to the point (80-120 words max)
 - Natural, human voice
 - Not overly enthusiastic
-- Don't over-analyze what they shared
+- Don't over-analyse what they shared
 
 STRUCTURE:
 - Paragraph 1: Simple thank you + brief acknowledgment of what they mentioned
