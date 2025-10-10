@@ -77,7 +77,7 @@ function buildNotionProperties($data, $audience) {
     ];
 
     $properties['Status'] = [
-        'select' => ['name' => 'New']
+        'status' => ['name' => 'New']
     ];
 
     // Email Preferences (default to all checked)
