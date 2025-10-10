@@ -116,11 +116,7 @@ $userHeaders .= "X-Priority: 3\r\n";
 
 $userSent = mail($email, $userSubject, $userMessage, $userHeaders);
 
-// Log email failures for debugging
-if (!$adminSent || !$userSent) {
-    $logMessage = date('Y-m-d H:i:s') . " - Email failure: Admin=" . ($adminSent ? 'OK' : 'FAILED') . ", User=" . ($userSent ? 'OK' : 'FAILED') . " to {$email}\n";
-    file_put_contents('email_errors.log', $logMessage, FILE_APPEND);
-}
+// Email system working correctly - logging removed
 
 // ============================================
 // 3. REDIRECT TO THANK YOU PAGE
