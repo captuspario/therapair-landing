@@ -30,6 +30,12 @@ $WEBSITE_URL = WEBSITE_URL;
 $OPENAI_API_KEY = OPENAI_API_KEY;
 $USE_AI_PERSONALIZATION = USE_AI_PERSONALIZATION;
 $AI_MODEL = AI_MODEL;
+$USE_NOTION_SYNC = defined('USE_NOTION_SYNC') ? USE_NOTION_SYNC : false;
+
+// Load Notion sync handler
+if ($USE_NOTION_SYNC && file_exists(__DIR__ . '/notion-sync.php')) {
+    require_once __DIR__ . '/notion-sync.php';
+}
 
 // Debug: Log all POST data (remove after testing)
 error_log("Form submission received: " . print_r($_POST, true));
@@ -119,7 +125,18 @@ $userSent = mail($email, $userSubject, $userMessage, $userHeaders);
 // Email system working correctly - logging removed
 
 // ============================================
-// 3. REDIRECT TO THANK YOU PAGE
+// 3. SYNC TO NOTION DATABASE
+// ============================================
+if ($USE_NOTION_SYNC) {
+    $notionResult = syncToNotion($formData, $audience);
+    if (!$notionResult['success']) {
+        error_log("Notion sync failed: " . print_r($notionResult, true));
+        // Continue anyway - don't block user experience
+    }
+}
+
+// ============================================
+// 4. REDIRECT TO THANK YOU PAGE
 // ============================================
 if ($adminSent && $userSent) {
     header('Location: /thank-you.html?status=success');

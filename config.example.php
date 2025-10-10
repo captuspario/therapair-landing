@@ -31,6 +31,18 @@ define('USE_AI_PERSONALIZATION', true);
 define('AI_MODEL', 'gpt-4o-mini');
 
 // ============================================
+// NOTION API CONFIGURATION
+// ============================================
+// Get your integration token from: https://www.notion.so/my-integrations
+define('NOTION_TOKEN', 'ntn_YOUR_NOTION_INTEGRATION_TOKEN_HERE');
+
+// Your Notion database ID (from the database URL)
+define('NOTION_DATABASE_ID', 'YOUR_32_CHARACTER_DATABASE_ID_HERE');
+
+// Enable/disable Notion sync
+define('USE_NOTION_SYNC', true);
+
+// ============================================
 // WEBSITE SETTINGS
 // ============================================
 define('WEBSITE_URL', 'https://therapair.com.au');
