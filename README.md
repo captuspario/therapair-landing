@@ -1,233 +1,437 @@
-# Therapair Landing Page - Marketing & Product Site
+# Therapair Landing Page
 
-## 🎯 **Purpose**
-Marketing website for Therapair's intelligent therapy matching platform, designed to attract diverse audiences including individuals seeking therapy, therapists, organizations, investors, and allies.
+**Intelligent therapy matching starts here.**
 
-## 🎪 **Target Audiences**
-
-### **Primary Users**
-- **Individuals seeking support** - LGBTQ+, neurodivergent, culturally diverse clients
-- **Therapists & counsellors** - Inclusive practitioners wanting to join the network
-- **Mental health organizations** - Clinics seeking better referral processes
-
-### **Business Stakeholders**
-- **Supporters & allies** - Advocates for inclusive mental healthcare
-- **Investors & partners** - Funding opportunities and strategic partnerships
-- **Regulatory bodies** - Professional associations and oversight organizations
-
-## 🏗️ **Site Structure**
-
-```
-therapair-landing-page/
-├── src/                          # Source code
-│   ├── index.html               # Homepage
-│   ├── for-individuals/         # Client-focused pages
-│   ├── for-therapists/          # Practitioner onboarding
-│   ├── for-organizations/       # B2B partnership pages
-│   ├── investors/               # Investment opportunities
-│   └── about/                   # Company and mission
-├── assets/                      # Media and resources
-│   ├── images/                  # Photos, illustrations, logos
-│   ├── videos/                  # Product demos, testimonials
-│   └── downloads/               # PDFs, case studies, whitepapers
-├── docs/                        # Documentation
-└── README.md                    # This file
-```
-
-## 📋 **Content Strategy**
-
-### **Homepage Messaging**
-1. **Hero Section**: "Find Your Perfect Therapist Match"
-   - Inclusive therapy matching for marginalized communities
-   - Visual diversity, cultural competency emphasis
-   - Clear value proposition and call-to-action
-
-2. **How It Works**: 3-Step Process
-   - Smart questionnaire → Intelligent matching → Seamless booking
-   - Interactive demo or widget preview
-   - Trust indicators and success metrics
-
-3. **Target Audience Sections**
-   - Individuals: Safe, affirming therapy matching
-   - Therapists: Join inclusive practitioner network
-   - Organizations: Improve client outcomes and referrals
-
-4. **Social Proof**
-   - User testimonials (with permission/anonymized)
-   - Practitioner endorsements
-   - Organization partnerships
-   - Success metrics and impact data
-
-### **Individual Pages**
-
-#### **For Individuals** (`/for-individuals/`)
-- **Pain Points**: Difficulty finding culturally competent therapists
-- **Solution**: Intelligent matching with inclusive practitioners
-- **Features**: Gender preferences, specialty matching, community alignment
-- **CTA**: Try the matching tool, express interest, subscribe for updates
-
-#### **For Therapists** (`/for-therapists/`)
-- **Benefits**: Connect with clients who fit your expertise
-- **Onboarding**: Professional verification, profile creation
-- **Network**: Join inclusive practitioner community
-- **CTA**: Apply to join, schedule consultation, download partnership info
-
-#### **For Organizations** (`/for-organizations/`)
-- **Value Proposition**: Streamline referrals, improve outcomes
-- **Integration**: API access, white-label solutions
-- **Case Studies**: Success stories from partner organizations
-- **CTA**: Schedule demo, request partnership info, pilot program
-
-#### **Investors** (`/investors/`)
-- **Market Opportunity**: Mental health crisis, diversity gap
-- **Business Model**: SaaS subscription, freemium trial, marketplace
-- **Traction**: User growth, revenue projections, partnerships
-- **CTA**: Download pitch deck, schedule meeting, due diligence access
-
-## 🎨 **Design System**
-
-### **Therapair Brand Identity**
-- **Primary Color**: Rosewood (#9A634D) - Buttons, links, accents
-- **Accent Color**: Calm Clay (#B88B76) - Highlights, icons, dividers
-- **Background**: Alabaster Sand (#FAF9F7) - Page background
-- **Typography**: Work Sans/DM Sans for headings, Inter for body text
-- **Tone**: Calm, authentic, empathic, grounded, human
-- **Imagery**: Real therapist portraits, diverse, inclusive representation
-
-**See**: `./docs/build-instructions.md` and main project `docs/design-system/therapair-brand-system.md` for complete guidelines.
-
-### **User Experience Principles**
-- **Accessibility First**: WCAG AA compliance, inclusive design
-- **Mobile Responsive**: Mobile-first approach for accessibility
-- **Trust & Safety**: Professional credibility, security messaging
-- **Clear Navigation**: Easy path to relevant information
-
-## 🚀 **Development Plan**
-
-### **Phase 1: MVP Landing Page** 📋
-- Homepage with core messaging
-- Basic information architecture
-- Contact forms and email capture
-- Mobile-responsive design
-
-### **Phase 2: Audience-Specific Pages** 📋
-- Dedicated pages for each target audience
-- Interactive demos and widget previews
-- Downloadable resources and case studies
-- Advanced analytics and conversion tracking
-
-### **Phase 3: Interactive Features** 📋
-- Live chat or support integration
-- Interactive product demonstrations
-- User-generated content and testimonials
-- A/B testing for conversion optimization
-
-## 📊 **Marketing Strategy**
-
-### **SEO Keywords**
-- **Primary**: "inclusive therapy", "LGBTQ+ therapist", "neurodivergent therapy"
-- **Secondary**: "therapy matching", "culturally competent therapy", "mental health diversity"
-- **Long-tail**: "find inclusive therapist near me", "therapy for marginalized communities"
-
-### **Content Marketing**
-- **Blog Topics**: Mental health diversity, therapy accessibility, inclusive practices
-- **Resources**: Guides for finding inclusive therapy, therapist directories
-- **Case Studies**: Success stories, impact measurements, organizational partnerships
-
-### **Social Media Strategy**
-- **Platforms**: LinkedIn (B2B), Instagram (individuals), Twitter (advocacy)
-- **Content**: Educational posts, community highlights, platform updates
-- **Engagement**: Mental health awareness campaigns, inclusive therapy advocacy
-
-## 📈 **Success Metrics**
-
-### **Traffic & Engagement**
-- **Unique Visitors**: Monthly growth targets
-- **Time on Site**: Engagement depth measurement
-- **Page Views**: Content consumption patterns
-- **Bounce Rate**: User experience quality indicator
-
-### **Conversion Metrics**
-- **Email Signups**: Interest and newsletter subscriptions
-- **Demo Requests**: Product demonstration bookings
-- **Contact Forms**: Business inquiry conversion
-- **Widget Trials**: Direct product engagement
-
-### **Business Impact**
-- **Lead Generation**: Qualified prospects for each audience
-- **Partnership Inquiries**: Organization and investor interest
-- **Brand Awareness**: Social mentions, media coverage
-- **Market Validation**: User feedback and demand indicators
-
-## 🔧 **Technical Requirements**
-
-### **Performance Standards**
-- **Load Time**: <3 seconds on 3G
-- **Lighthouse Score**: 90+ across all metrics
-- **Mobile Performance**: Optimized for mobile-first experience
-- **SEO Optimization**: Structured data, meta tags, sitemap
-
-### **Integration Capabilities**
-- **Email Marketing**: Mailchimp, ConvertKit, or similar
-- **Analytics**: Google Analytics, conversion tracking
-- **CRM Integration**: HubSpot, Salesforce for lead management
-- **Chat Support**: Intercom, Zendesk for customer support
-
-### **Security & Compliance**
-- **SSL Certificate**: HTTPS enforcement
-- **Privacy Policy**: GDPR compliance, data protection
-- **Cookie Consent**: EU compliance management
-- **Form Security**: Spam protection, validation
-
-## 📋 **Content Requirements**
-
-### **Copywriting Needs**
-- [ ] Hero section messaging and CTAs
-- [ ] Feature descriptions and benefits
-- [ ] Audience-specific value propositions
-- [ ] Testimonials and case studies
-- [ ] FAQ sections and support content
-
-### **Visual Assets**
-- [ ] Brand photography (diverse, authentic)
-- [ ] Product screenshots and demos
-- [ ] Infographics and illustrations
-- [ ] Video testimonials and explainers
-- [ ] Logo variations and brand assets
-
-### **Legal Documents**
-- [ ] Privacy policy and terms of service
-- [ ] Cookie policy and consent management
-- [ ] Accessibility statement
-- [ ] Professional disclaimers
-
-## 🚦 **Launch Strategy**
-
-### **Pre-Launch** (2-4 weeks)
-- Content creation and review
-- Design implementation and testing
-- SEO optimization and analytics setup
-- Legal review and compliance verification
-
-### **Soft Launch** (1-2 weeks)
-- Limited audience release
-- Feedback collection and iteration
-- Performance monitoring and optimization
-- Content refinement based on user behavior
-
-### **Full Launch**
-- Public announcement and PR campaign
-- Social media marketing activation
-- Paid advertising campaigns (if applicable)
-- Ongoing optimization and content updates
-
-## 📞 **Success Support**
-
-- **Content Strategy**: See `./docs/content-strategy.md`
-- **Brand Guidelines**: See `./docs/brand-guidelines.md`
-- **SEO Strategy**: See `./docs/seo-strategy.md`
-- **Analytics Setup**: See `./docs/analytics-guide.md`
+> This is the main landing page and interest capture system for Therapair, an AI-powered platform that matches individuals with therapists who truly understand their identity, values, and needs.
 
 ---
 
-**Driving inclusive therapy access through strategic marketing** 🌈
+## 🌐 Live Site
+
+**URL:** https://therapair.com.au
+
+---
+
+## 📋 What This Is
+
+The Therapair landing page serves as:
+
+1. **Brand Presence** - Professional introduction to Therapair
+2. **Lead Generation** - Capture interest from 4 key audiences:
+   - Individuals seeking therapy
+   - Mental health practitioners
+   - Clinics & organisations
+   - Supporters & investors
+3. **Demo Showcase** - Link to live widget on Unison Mental Health
+4. **Email Automation** - AI-powered personalized confirmation emails
+5. **CRM Integration** - Notion database sync for lead management
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- PHP 7.4+ (for form handling)
+- Hostinger account (or similar PHP hosting)
+- OpenAI API key
+- Notion API integration
+
+### Local Development
+
+```bash
+# Clone the repository
+git clone <repo-url>
+cd therapair-landing-page
+
+# Open in browser (requires local PHP server)
+php -S localhost:8000
+
+# Visit http://localhost:8000
+```
+
+### Configuration
+
+Create `config.php` (ignored by Git):
+
+```php
+<?php
+// OpenAI Configuration
+define('OPENAI_API_KEY', 'sk-...');
+
+// Email Configuration  
+define('ADMIN_EMAIL', 'your-email@domain.com');
+define('FROM_EMAIL', 'hello@therapair.com.au');
+define('FROM_NAME', 'Therapair Team');
+
+// Notion Configuration
+define('NOTION_API_KEY', 'secret_...');
+define('NOTION_DATABASE_ID', 'your-database-id');
+?>
+```
+
+---
+
+## 📁 Project Structure
+
+```
+therapair-landing-page/
+├── index.html                    # Main landing page
+├── thank-you.html               # Post-submission confirmation
+├── submit-form.php              # Form handler + AI email generator
+├── notion-sync.php              # Notion API integration (MOVED to docs/)
+├── config.php                   # Environment variables (gitignored)
+│
+├── images/                      # Assets & screenshots
+│   ├── therapair-quiz-question.png
+│   └── therapair-results-full.png
+│
+└── docs/                        # Documentation hub
+    ├── README.md                # Documentation index
+    ├── EXECUTIVE-SUMMARY.md     # Business strategy & vision
+    │
+    ├── technical/
+    │   ├── ARCHITECTURE.md      # System architecture
+    │   └── email-ai-prompt.md   # AI email prompt template
+    │
+    ├── planning/
+    │   └── PRODUCT-ROADMAP.md   # 5-year product plan
+    │
+    ├── guides/
+    │   └── notion-database-setup.md  # CRM setup instructions
+    │
+    └── archive/                 # Historical docs
+```
+
+---
+
+## 🎯 Key Features
+
+### 1. Dynamic Form System
+- **4 Audience Types** with unique form fields
+- Client-side validation
+- Honeypot spam protection
+- Mobile-responsive design
+
+### 2. AI-Powered Emails
+- GPT-4 generates personalized confirmations
+- Tone: Professional, warm, conversational
+- Australian English localization
+- Fallback templates if API fails
+
+### 3. Notion CRM Integration
+- Automatic lead creation
+- Audience segmentation
+- Email preference management
+- Status tracking
+
+### 4. Visual Demo Section
+- Screenshot previews of quiz + results
+- High-conversion CTA design
+- Links to live demo on partner site
+
+---
+
+## 🛠️ Tech Stack
+
+**Frontend:**
+- HTML5, CSS3 (utility-first approach)
+- Vanilla JavaScript (no frameworks)
+- Lucide icons
+- Google Fonts (Open Sans)
+
+**Backend:**
+- PHP 7.4+ (form handling)
+- OpenAI API (email generation)
+- Notion API (CRM sync)
+- PHP mail() (email delivery)
+
+**Hosting:**
+- Hostinger (shared hosting)
+- Git deployment
+- SSL/HTTPS enabled
+
+---
+
+## 📊 Form Flow
+
+```
+User visits therapair.com.au
+    │
+    ▼
+Selects audience type (Individual/Practitioner/Clinic/Supporter)
+    │
+    ▼
+Form fields dynamically update
+    │
+    ▼
+User fills form + submits
+    │
+    ▼
+POST to submit-form.php
+    │
+    ├──▶ Send admin notification (immediate)
+    │
+    ├──▶ Call OpenAI API (2-5 seconds)
+    │    └──▶ Generate personalized email
+    │
+    ├──▶ Send user confirmation
+    │
+    ├──▶ Sync to Notion (parallel)
+    │    └──▶ Create database entry
+    │
+    └──▶ Redirect to thank-you.html
+```
+
+---
+
+## 🔐 Security & Privacy
+
+### What We Do
+- ✅ Input sanitization (`htmlspecialchars`, `trim`)
+- ✅ Email validation (`FILTER_VALIDATE_EMAIL`)
+- ✅ Honeypot spam protection
+- ✅ HTTPS enforcement
+- ✅ API keys in gitignored `config.php`
+- ✅ No PHI (Protected Health Information) collected
+
+### What We Don't Do
+- ❌ Store payment information
+- ❌ Track users with analytics pixels (yet)
+- ❌ Sell or share user data
+- ❌ Store session recordings
+
+---
+
+## 📧 Email System
+
+### Admin Notifications
+**To:** `tino@unisoncounselling.com`  
+**Format:** Professional HTML with:
+- User details (name, email, phone, location)
+- Audience type
+- Form responses
+- Submission timestamp
+
+### User Confirmations
+**From:** `hello@therapair.com.au` (Therapair Team)  
+**Format:** AI-generated HTML with:
+- Personalized greeting
+- Acknowledgment of their specific interests/concerns
+- Next steps (what to expect)
+- Contact information
+- Unsubscribe link
+
+**AI Prompt:** See [`docs/technical/email-ai-prompt.md`](./docs/technical/email-ai-prompt.md)
+
+---
+
+## 🎨 Design System
+
+### Colors
+```css
+--therapair-primary: #4F064F;    /* Deep purple */
+--therapair-secondary: #9B74B7;  /* Medium purple */
+--therapair-accent: #06B6D4;     /* Cyan */
+--therapair-success: #10B981;    /* Green */
+--therapair-gray: #64748b;       /* Slate gray */
+--therapair-background: #FEFEFF; /* Off-white */
+```
+
+### Typography
+- **Font:** Open Sans (Google Fonts)
+- **Headings:** 600-700 weight
+- **Body:** 400-500 weight
+- **Line Height:** 1.6-1.8
+
+### Spacing
+- **Sections:** `py-20` to `py-24` (80-96px)
+- **Cards:** `p-8` to `p-12` (32-48px)
+- **Elements:** `mb-4` to `mb-6` (16-24px)
+
+---
+
+## 🚢 Deployment
+
+### Automatic (Git Push)
+
+```bash
+git add .
+git commit -m "feat: description"
+git push origin main
+
+# Hostinger auto-deploys from Git
+```
+
+### Manual (FTP/SSH)
+
+If Git deployment fails:
+1. Connect to Hostinger via FTP
+2. Upload changed files to `public_html/`
+3. Verify `config.php` is present (not in Git)
+4. Test form submission
+
+### Deployment Checklist
+- [ ] Test form locally
+- [ ] Commit changes to Git
+- [ ] Push to remote
+- [ ] Verify live site loads
+- [ ] Test form submission on production
+- [ ] Check admin email received
+- [ ] Check user confirmation email received
+- [ ] Verify Notion sync (check database)
+
+---
+
+## 🧪 Testing
+
+### Manual Testing Checklist
+
+**Form Validation:**
+- [ ] Required fields show error if empty
+- [ ] Email validation works
+- [ ] Phone validation (optional field)
+- [ ] Dynamic fields update when audience changes
+- [ ] Honeypot prevents spam bots
+
+**Email Delivery:**
+- [ ] Admin receives notification
+- [ ] User receives confirmation
+- [ ] Emails not in spam (check headers)
+- [ ] AI personalization works (mentions user's concerns)
+- [ ] Fallback template works if OpenAI fails
+
+**Notion Sync:**
+- [ ] New entry created in database
+- [ ] Correct audience type set
+- [ ] All form fields mapped properly
+- [ ] Email preferences recorded
+
+**Mobile Responsiveness:**
+- [ ] Form fields stack on mobile
+- [ ] Buttons are tappable
+- [ ] Text is readable
+- [ ] Images scale properly
+
+---
+
+## 📈 Analytics (Future)
+
+### Planned Metrics
+- Form views
+- Form submissions
+- Completion rate (%)
+- Audience type breakdown
+- Email open rates
+- Email click-through rates
+
+### Implementation (Phase 2)
+- Google Analytics 4
+- Mixpanel for conversion funnels
+- SendGrid for email tracking
+
+---
+
+## 🐛 Known Issues & TODOs
+
+### High Priority
+- [ ] Migrate from PHP mail() to SendGrid (better deliverability)
+- [ ] Add rate limiting (prevent spam)
+- [ ] Implement CSRF tokens
+- [ ] Add Google Analytics
+
+### Medium Priority
+- [ ] A/B test form fields
+- [ ] Add reCAPTCHA v3
+- [ ] Optimize images (WebP format)
+- [ ] Add loading state to submit button
+
+### Low Priority
+- [ ] Add dark mode toggle
+- [ ] Animate on scroll (AOS library)
+- [ ] Add FAQ section
+- [ ] Multi-language support
+
+---
+
+## 📚 Documentation
+
+**Full documentation is available in [`docs/`](./docs/README.md)**
+
+### Key Documents:
+- [Executive Summary](./docs/EXECUTIVE-SUMMARY.md) - Vision, strategy, roadmap
+- [Technical Architecture](./docs/technical/ARCHITECTURE.md) - System design
+- [Product Roadmap](./docs/planning/PRODUCT-ROADMAP.md) - Feature timeline
+- [Notion Setup Guide](./docs/guides/notion-database-setup.md) - CRM configuration
+
+---
+
+## 🤝 Contributing
+
+This is currently a solo project (Tino), but if you're collaborating:
+
+1. Create a feature branch: `git checkout -b feature/your-feature`
+2. Make your changes
+3. Test thoroughly (form submission, emails, Notion sync)
+4. Commit with clear messages: `git commit -m "feat: description"`
+5. Push and create PR: `git push origin feature/your-feature`
+
+### Commit Message Format
+```
+feat: Add new audience type form
+fix: Correct email validation regex
+docs: Update deployment guide
+style: Improve mobile responsiveness
+refactor: Simplify form validation logic
+```
+
+---
+
+## 📞 Support & Contact
+
+**Technical Issues:**
+- Check [`docs/technical/ARCHITECTURE.md`](./docs/technical/ARCHITECTURE.md)
+- Review server logs (Hostinger → File Manager → `error_log`)
+- Email: tino@unisoncounselling.com
+
+**Business Inquiries:**
+- Email: tino@unisoncounselling.com
+- Website: https://therapair.com.au
+
+---
+
+## 📜 License
+
+Proprietary - All Rights Reserved  
+© 2025 Therapair
+
+---
+
+## 🙏 Acknowledgments
+
+- **Unison Mental Health** - First partnership, demo hosting
+- **OpenAI** - GPT-4 API for email generation
+- **Notion** - CRM infrastructure
+- **Hostinger** - Reliable hosting
+
+---
+
+## 🗺️ Roadmap
+
+**Current Phase: MVP (Q4 2025)** ✅
+- [x] Landing page live
+- [x] AI email automation working
+- [x] Notion CRM integrated
+- [x] Demo widget on Unison site
+
+**Next Phase: Validation (Q1-Q2 2026)**
+- [ ] 100+ users tested matching quiz
+- [ ] 3-5 clinic pilot agreements
+- [ ] User research interviews
+- [ ] Match quality tracking
+
+**See full roadmap:** [`docs/planning/PRODUCT-ROADMAP.md`](./docs/planning/PRODUCT-ROADMAP.md)
+
+---
+
+*Built with ❤️ and AI by Tino*  
+*Last Updated: October 10, 2025*
