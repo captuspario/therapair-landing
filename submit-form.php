@@ -138,40 +138,41 @@ function generateAIPersonalizedEmail($data, $audience, $apiKey, $model) {
     $context = buildAIContext($data, $audience);
     
     // System prompt for consistent, professional responses (based on email-ai-prompt.md)
-    $systemPrompt = "You are writing brief, professional email confirmations to people who expressed interest in Therapair's therapy matching service. This is early interest gathering and research - we are NOT actively matching people yet.
+    $systemPrompt = "You are Therapair's confirmation email assistant. Your job is to help us send clear, thoughtful, and human responses when people submit the form on therapair.com.au.
 
-TONE & STYLE:
-- Professional yet warm
-- Concise and to the point (80-120 words max)
-- Natural, human voice
-- Not overly enthusiastic
-- Don't over-analyze what they shared
+Please generate a short, warm, and helpful email (2–3 paragraphs max) based on the audience type and form submission data provided.
 
-STRUCTURE:
-- Paragraph 1: Simple thank you + brief acknowledgment of what they mentioned
-- Paragraph 2: How you'll stay connected (updates, launch news, progress)
-- Keep it short and professional
+Key Requirements:
+- ✅ Thank them for their submission and acknowledge what they shared
+- ✅ Briefly explain what Therapair is (a therapist-matching concierge experience built with real humans and real care)
+- ✅ Let them know we've received their info and what the next steps might be (even if that's 'we'll be in touch soon')
+- ✅ Mention we're in early development / learning phase if relevant
+- ✅ Optional: if project launch timing is shared (e.g. 'beta launch coming soon'), include a friendly update sentence about that
+- ✅ Optional: include a light, friendly reminder that no clinical or sensitive information should be sent via email (for privacy/HIPAA awareness)
+- ✅ If the user is a Supporter or Organisation, include a subtle CTA like 'we'd love to stay in touch as we grow' (but no pressure)
 
-WHAT TO AVOID:
-- Promising immediate responses (no 'within 24 hours')
-- Excessive exclamation points
-- Over-explaining or going too deep
-- Marketing language or overselling
-- Making it obvious it's AI-generated
-- Long, wordy responses
+Style Examples:
+✅ Good:
+- 'Hi Jess, thanks so much for taking the time to share this.'
+- 'We're excited to learn what matters most to you.'
+- 'You're one of the very first people to explore this with us.'
 
-EXPECTATION SETTING:
-- We're building the service based on their feedback
-- We'll keep them updated on progress
-- We'll notify them when we launch
-- This is research/interest gathering, not active matching
+🚫 Avoid:
+- Cold / corporate tone like 'Dear User' or 'Your request has been received'
+- Over-promising outcomes ('We've matched you!') — we're not ready for that yet
+- Sharing detailed next steps that aren't locked in
+
+Delivery Format:
+- Output plain text only (no HTML)
+- Do not include subject line — that's handled separately
+- Avoid emojis (unless explicitly instructed)
 
 Always sign off as:
 Warm regards,
 
 Therapair Team";
 
-    $userPrompt = "Write a brief, professional confirmation email for this early interest/research submission:\n\n{$context}\n\nRemember: This is just interest gathering and user research, not active matching. Thank them for sharing their thoughts/feedback. Set expectation for updates and launch notifications, NOT immediate responses. Be warm but concise. 80-120 words maximum.";
+    $userPrompt = "Write a warm, human confirmation email for this form submission:\n\n{$context}\n\nFocus on being conversational and acknowledging what they shared. Mention we're building a therapist-matching concierge experience with real humans and real care. We're in early development phase. Be encouraging about them being one of the first to explore this with us. Keep it to 2-3 paragraphs max, plain text only.";
     
     // Call OpenAI API
     try {
@@ -518,12 +519,12 @@ function formatUserEmail($data, $audience) {
     switch ($audience) {
         case 'individual':
             $greeting = "Hi there,";
-            $personalisedMessage = "We're thrilled you're taking this important step toward finding the right therapist. ";
+            $personalisedMessage = "Thanks so much for taking the time to share what's important to you. ";
             
             if (!empty($data['therapy_interests']) && $data['therapy_interests'] !== 'None selected') {
-                $personalisedMessage .= "We noticed you're particularly interested in <strong>" . htmlspecialchars($data['therapy_interests']) . "</strong>. We'll prioritise connecting you with therapists who specialise in these areas and can provide the affirming, culturally competent care you deserve.";
+                $personalisedMessage .= "We're excited to learn what matters most to you, especially your interest in <strong>" . htmlspecialchars($data['therapy_interests']) . "</strong>. This helps us build a therapist-matching concierge experience with real humans and real care.";
             } else {
-                $personalisedMessage .= "We'll help you find a therapist who truly understands your unique needs and can provide the affirming, culturally competent care you deserve.";
+                $personalisedMessage .= "We're excited to learn what matters most to you. This helps us build a therapist-matching concierge experience with real humans and real care.";
             }
             break;
             
@@ -532,13 +533,13 @@ function formatUserEmail($data, $audience) {
             $greeting = $name ? "Hi {$name}," : "Hi there,";
             $title = !empty($data['professional_title']) ? htmlspecialchars($data['professional_title']) : 'mental health professional';
             
-            $personalisedMessage = "Thank you for your interest in joining the Therapair network as a <strong>{$title}</strong>. ";
-            $personalisedMessage .= "We're building a community of inclusive, culturally competent practitioners who are passionate about serving diverse populations. ";
+            $personalisedMessage = "Thanks so much for taking the time to share about your practice. ";
+            $personalisedMessage .= "We'd love to learn about your work as a <strong>{$title}</strong> and how we can build a therapist-matching concierge experience together. ";
             
             if (!empty($data['specializations'])) {
-                $personalisedMessage .= "Your expertise in <strong>" . htmlspecialchars(substr($data['specializations'], 0, 100)) . (strlen($data['specializations']) > 100 ? '...' : '') . "</strong> aligns perfectly with our mission.";
+                $personalisedMessage .= "Your expertise in <strong>" . htmlspecialchars(substr($data['specializations'], 0, 100)) . (strlen($data['specializations']) > 100 ? '...' : '') . "</strong> is exactly what we're looking for.";
             } else {
-                $personalisedMessage .= "We'd love to learn more about your practice and how we can work together to serve our community.";
+                $personalisedMessage .= "We're excited to learn more about your practice and explore how we can work together.";
             }
             break;
             
@@ -547,13 +548,13 @@ function formatUserEmail($data, $audience) {
             $greeting = $name ? "Hi {$name}," : "Hi there,";
             $orgName = !empty($data['organization_name']) ? htmlspecialchars($data['organization_name']) : 'your organisation';
             
-            $personalisedMessage = "Thank you for reaching out on behalf of <strong>{$orgName}</strong>. ";
-            $personalisedMessage .= "We're excited about the possibility of partnering with forward-thinking organisations that share our commitment to inclusive mental health care. ";
+            $personalisedMessage = "Thanks so much for reaching out on behalf of <strong>{$orgName}</strong>. ";
+            $personalisedMessage .= "We'd love to stay in touch as we grow and build our therapist-matching concierge experience. ";
             
             if (!empty($data['partnership_interest'])) {
-                $personalisedMessage .= "We're particularly interested in exploring how we can collaborate to achieve your goals.";
+                $personalisedMessage .= "We're excited to explore how we can collaborate and support each other.";
             } else {
-                $personalisedMessage .= "We'd love to discuss how Therapair can support your organisation's mental health initiatives.";
+                $personalisedMessage .= "We'd love to learn more about your organisation and how we can work together.";
             }
             break;
             
@@ -561,11 +562,11 @@ function formatUserEmail($data, $audience) {
             $name = $data['name'] ?? '';
             $greeting = $name ? "Hi {$name}," : "Hi there,";
             
-            $personalisedMessage = "Thank you for your interest in supporting Therapair! ";
-            $personalisedMessage .= "Advocates and supporters like you are essential to our mission of creating truly inclusive mental health care. ";
+            $personalisedMessage = "Thanks so much for your interest in supporting Therapair! ";
+            $personalisedMessage .= "We'd love to stay in touch as we grow and build our therapist-matching concierge experience with real humans and real care. ";
             
             if (!empty($data['support_interest'])) {
-                $personalisedMessage .= "We're inspired by your commitment to this important cause and would love to explore how we can work together.";
+                $personalisedMessage .= "We're excited to explore how we can work together and support each other.";
             } else {
                 $personalisedMessage .= "We'd love to share more about our vision and explore how you can be part of this journey.";
             }
@@ -573,7 +574,7 @@ function formatUserEmail($data, $audience) {
             
         default:
             $greeting = "Hi there,";
-            $personalisedMessage = "Thank you for your interest in Therapair! We're excited to connect with you.";
+            $personalisedMessage = "Thanks so much for your interest in Therapair! We're excited to connect with you and build something meaningful together.";
     }
     
     $html = '
@@ -603,9 +604,9 @@ function formatUserEmail($data, $audience) {
                 
                 <div class="box">
                     <h3 style="margin-top: 0; color: #4F064F; font-size: 18px;">📋 What happens next?</h3>
-                    <p style="margin: 8px 0; font-size: 15px;">✓ We\'ll review your information carefully</p>
-                    <p style="margin: 8px 0; font-size: 15px;">✓ Someone from our team will contact you within <strong>1-2 business days</strong></p>
-                    <p style="margin: 8px 0; font-size: 15px;">✓ We\'ll discuss the best next steps for your specific needs</p>
+                    <p style="margin: 8px 0; font-size: 15px;">✓ You\'re one of the very first people to explore this with us</p>
+                    <p style="margin: 8px 0; font-size: 15px;">✓ We\'ll be in touch soon as we build our therapist-matching concierge experience</p>
+                    <p style="margin: 8px 0; font-size: 15px;">✓ We\'ll keep you updated on our progress and let you know when we\'re ready to launch</p>
                 </div>
                 
                 <p style="font-size: 15px;">If you have any urgent questions, please don\'t hesitate to reply to this email.</p>
