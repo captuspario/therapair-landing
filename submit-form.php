@@ -316,7 +316,8 @@ function formatUserEmailWithAI($aiContent, $data, $audience) {
                 <p style="margin: 5px 0;">AI-powered therapy matching for inclusive mental health care</p>
                 <p style="margin-top: 15px;">
                     📧 <a href="mailto:contact@therapair.com.au">contact@therapair.com.au</a><br>
-                    🌐 <a href="https://therapair.com.au">therapair.com.au</a>
+                    🌐 <a href="https://therapair.com.au">therapair.com.au</a><br>
+                    ⚙️ <a href="https://therapair.com.au/email-preferences.html">Manage Email Preferences</a>
                 </p>
                 <p style="margin-top: 15px; font-size: 11px; color: #9ca3af;">
                     © 2025 Therapair. Made with 💕 for inclusive mental health.
@@ -620,7 +621,8 @@ function formatUserEmail($data, $audience) {
                     <p style="margin: 5px 0;">AI-powered therapy matching for inclusive mental health care</p>
                     <p style="margin-top: 15px;">
                         📧 <a href="mailto:contact@therapair.com.au" style="color: #2563eb; text-decoration: none;">contact@therapair.com.au</a><br>
-                        🌐 <a href="https://therapair.com.au" style="color: #2563eb; text-decoration: none;">therapair.com.au</a>
+                        🌐 <a href="https://therapair.com.au" style="color: #2563eb; text-decoration: none;">therapair.com.au</a><br>
+                        ⚙️ <a href="https://therapair.com.au/email-preferences.html" style="color: #2563eb; text-decoration: none;">Manage Email Preferences</a>
                     </p>
                     <p style="margin-top: 15px; font-size: 11px; color: #9ca3af;">
                         © 2025 Therapair. Made with 💕 for inclusive mental health.
