@@ -128,6 +128,14 @@ function buildNotionProperties($data, $audience) {
             break;
 
         case 'therapist':
+            if (!empty($data['full_name'])) {
+                $properties['Full Name'] = [
+                    'rich_text' => [
+                        ['text' => ['content' => $data['full_name']]]
+                    ]
+                ];
+            }
+
             if (!empty($data['professional_title'])) {
                 $properties['Professional Title'] = [
                     'rich_text' => [
@@ -234,7 +242,9 @@ function generateNameForNotion($data, $audience) {
         case 'individual':
             return 'Individual Submission';
         case 'therapist':
-            return 'Therapist Application';
+            return !empty($data['full_name']) 
+                ? $data['full_name'] 
+                : 'Therapist Application';
         case 'organization':
             return !empty($data['organization_name']) 
                 ? $data['organization_name'] 
