@@ -34,8 +34,8 @@ This file controls how AI generates personalized confirmation emails. Edit this 
 - Light acknowledgment of what they mentioned (don't go deep)
 
 ### **Paragraph 2: Next Steps** (1-2 sentences)
-- When you'll follow up (within 24 hours)
-- What they can expect
+- How you'll stay connected (product updates, launch news)
+- What they can expect (no immediate response promise)
 
 ### **Sign-off:**
 ```
@@ -55,7 +55,7 @@ Hi there,
 
 Thank you for sharing your thoughts on what's important in finding the right therapist. Your feedback on LGBTQ+ affirming care and trauma-informed support helps us understand what matters most to our community as we build Therapair.
 
-We'll be in touch within 24 hours to share more about our plans.
+We'll keep you updated on our progress and notify you when we launch.
 
 Warm regards,
 
@@ -66,7 +66,7 @@ Therapair Team
 - ✅ Thanks them for sharing feedback (not promising matching)
 - ✅ Acknowledges this is helping build the service
 - ✅ Simple and professional
-- ✅ Clear next steps
+- ✅ Sets expectation for updates, not immediate response
 - ✅ Concise (~60 words)
 
 ---
@@ -78,7 +78,7 @@ Hi there,
 
 Thank you for expressing interest in Therapair and sharing what's important to you in a therapist. Your insights about [mention specific thought briefly] are valuable as we develop our matching service.
 
-We'll reach out within 24 hours to discuss next steps.
+We'll keep you updated on our progress and let you know when we're ready to launch.
 
 Warm regards,
 
@@ -89,6 +89,7 @@ Therapair Team
 - ✅ Acknowledges their specific feedback
 - ✅ Frames it as helping develop the service
 - ✅ Not promising immediate matching
+- ✅ Sets expectation for updates and launch notification
 - ✅ Professional and appreciative
 - ✅ Concise (~50 words)
 
@@ -101,7 +102,7 @@ Hi Dr. Smith,
 
 Thank you for your interest in joining the Therapair network. Your background in trauma therapy and work with LGBTQ+ communities aligns well with our mission.
 
-I'll be in touch within 24 hours to discuss how we can work together.
+We'll keep you updated on our progress and reach out when we're ready to onboard therapists.
 
 Warm regards,
 
@@ -112,7 +113,7 @@ Therapair Team
 - ✅ Professional tone
 - ✅ Brief acknowledgment of expertise
 - ✅ No overselling
-- ✅ Clear next step
+- ✅ Sets expectation for updates, not immediate onboarding
 - ✅ Concise (~50 words)
 
 ---
@@ -122,9 +123,9 @@ Therapair Team
 ```
 Hi Sarah,
 
-Thank you for reaching out on behalf of ABC Clinic. I'd be happy to discuss partnership opportunities and how Therapair can support your organization's goals.
+Thank you for reaching out on behalf of ABC Clinic. We'd be happy to discuss partnership opportunities and how Therapair can support your organization's goals.
 
-I'll contact you within 24 hours to set up a time to talk.
+We'll keep you updated on our progress and reach out when we're ready to explore partnerships.
 
 Warm regards,
 
@@ -135,7 +136,7 @@ Therapair Team
 - ✅ Business-appropriate
 - ✅ Simple and direct
 - ✅ No fluff
-- ✅ Action-oriented
+- ✅ Sets expectation for future partnership discussions
 - ✅ Concise (~45 words)
 
 ---
@@ -147,7 +148,7 @@ Hi there,
 
 Thank you for your interest in supporting Therapair. We appreciate your commitment to inclusive mental health care.
 
-I'll reach out within 24 hours to share more about our vision and how you can be involved.
+We'll keep you updated on our progress and share opportunities to get involved as we grow.
 
 Warm regards,
 
@@ -158,6 +159,7 @@ Therapair Team
 - ✅ Appreciative but not gushing
 - ✅ Simple and clear
 - ✅ Professional
+- ✅ Sets expectation for future involvement opportunities
 - ✅ Concise (~40 words)
 
 ---
@@ -231,8 +233,9 @@ Therapair
 **Current Active Prompt:**
 
 ```
-You are Tino from the Therapair team. Write brief, professional email confirmations 
-to people who expressed interest in Therapair's therapy matching service.
+You are writing brief, professional email confirmations to people who expressed interest 
+in Therapair's therapy matching service. This is early interest gathering and research - 
+we are NOT actively matching people yet.
 
 TONE & STYLE:
 - Professional yet warm
@@ -243,15 +246,22 @@ TONE & STYLE:
 
 STRUCTURE:
 - Paragraph 1: Simple thank you + brief acknowledgment of what they mentioned
-- Paragraph 2: Next steps (you'll follow up within 24 hours)
+- Paragraph 2: How you'll stay connected (updates, launch news, progress)
 - Keep it short and professional
 
 WHAT TO AVOID:
+- Promising immediate responses (no "within 24 hours")
 - Excessive exclamation points
 - Over-explaining or going too deep
 - Marketing language or overselling
 - Making it obvious it's AI-generated
 - Long, wordy responses
+
+EXPECTATION SETTING:
+- We're building the service based on their feedback
+- We'll keep them updated on progress
+- We'll notify them when we launch
+- This is research/interest gathering, not active matching
 
 Always sign off as:
 Warm regards,
@@ -368,8 +378,8 @@ The AI has access to these data points:
 **Target word count:** 80-120 words  
 **Paragraphs:** 2-3 max  
 **Tone:** Professional + warm  
-**Key phrase:** "I'll reach out within 24 hours"  
-**Sign-off:** "Warm regards, Tino, Therapair Team"  
+**Key phrase:** "We'll keep you updated on our progress"  
+**Sign-off:** "Warm regards, Therapair Team"  
 
 ---
 
