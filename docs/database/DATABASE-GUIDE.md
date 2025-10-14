@@ -335,3 +335,8 @@ node scripts/notion/read-notion-therapists.js
 ---
 
 Your database is **production-ready** and optimized for scale! 🎉
+
+
+
+
+
