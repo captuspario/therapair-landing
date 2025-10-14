@@ -1,0 +1,490 @@
+════════════════════════════════════════════════════════════
+  Victorian Therapists Database - Advanced Cleanup
+════════════════════════════════════════════════════════════
+
+🔍 Fetching all entries...
+
+📄 Page 1: 100 entries (total: 100)
+📄 Page 2: 100 entries (total: 200)
+📄 Page 3: 2 entries (total: 202)
+
+✅ Total: 202 therapists
+
+────────────────────────────────────────────────────────────
+
+🧹 Processing entries...
+
+1/202. 
+   ⏭  No changes needed
+2/202. 
+   ⏭  No changes needed
+3/202. 
+   📱 Mobile (added 0): 0412 930 789
+   ✅ Updated
+4/202. 
+   ⏭  No changes needed
+5/202. 
+   ⏭  No changes needed
+6/202. 
+   ⏭  No changes needed
+7/202. 
+   ☎️  Landline: (03) 7003 2602
+   ✅ Updated
+8/202. 
+   🧹 Cleared language: 'None'
+   ✅ Updated
+9/202. 
+   ⏭  No changes needed
+10/202. 
+   ⏭  No changes needed
+11/202. 
+   ⏭  No changes needed
+12/202. 
+   ⏭  No changes needed
+13/202. 
+   ⏭  No changes needed
+14/202. 
+   📱 Mobile (added 0): 0468 863 690
+   ✅ Updated
+15/202. 
+   ⏭  No changes needed
+16/202. 
+   ⏭  No changes needed
+17/202. 
+   ⏭  No changes needed
+18/202. 
+   ⏭  No changes needed
+19/202. 
+   ⏭  No changes needed
+20/202. 
+   ⏭  No changes needed
+21/202. 
+   ⏭  No changes needed
+22/202. 
+   ⏭  No changes needed
+23/202. 
+   ⏭  No changes needed
+24/202. 
+   ⏭  No changes needed
+25/202. 
+   ⏭  No changes needed
+26/202. 
+   ⏭  No changes needed
+27/202. 
+   📱 Mobile: 0435 727 197
+   ✅ Updated
+28/202. 
+   ⏭  No changes needed
+29/202. 
+   ⏭  No changes needed
+30/202. 
+   ⏭  No changes needed
+31/202. 
+   ⏭  No changes needed
+32/202. 
+   ⏭  No changes needed
+33/202. 
+   ⏭  No changes needed
+34/202. 
+   ❌ NO EMAIL - Will be excluded
+35/202. 
+   🧹 Cleared language: 'N/A'
+   📱 Mobile: 0460 631 080
+   ✅ Updated
+36/202. 
+   ⏭  No changes needed
+37/202. 
+   ⏭  No changes needed
+38/202. 
+   📱 Mobile: 0455 331 900
+   ✅ Updated
+39/202. 
+   ⏭  No changes needed
+40/202. 
+   📱 Mobile: 0481 575 538
+   ✅ Updated
+41/202. 
+   ⏭  No changes needed
+42/202. 
+   ☎️  Landline: (03) 9088 1990
+   ✅ Updated
+43/202. 
+   📱 Mobile (added 0): 0456 847 637
+   ✅ Updated
+44/202. 
+   ⏭  No changes needed
+45/202. 
+   ⏭  No changes needed
+46/202. 
+   ⏭  No changes needed
+47/202. 
+   🧹 Cleared language: 'None'
+   📱 Mobile: 0494 170 508
+   ✅ Updated
+48/202. 
+   ⏭  No changes needed
+49/202. 
+   ⏭  No changes needed
+50/202. 
+   ⏭  No changes needed
+51/202. 
+   ⏭  No changes needed
+52/202. 
+   ⏭  No changes needed
+53/202. 
+   ⏭  No changes needed
+54/202. 
+   ⏭  No changes needed
+55/202. 
+   ⏭  No changes needed
+56/202. 
+   ⏭  No changes needed
+57/202. 
+   ⏭  No changes needed
+58/202. 
+   ⏭  No changes needed
+59/202. 
+   ⏭  No changes needed
+60/202. 
+   ⏭  No changes needed
+61/202. 
+   ❌ NO EMAIL - Will be excluded
+62/202. 
+   ⏭  No changes needed
+63/202. 
+   ⏭  No changes needed
+64/202. 
+   ⏭  No changes needed
+65/202. 
+   ⏭  No changes needed
+66/202. 
+   ⏭  No changes needed
+67/202. 
+   ⏭  No changes needed
+68/202. 
+   ⏭  No changes needed
+69/202. 
+   ⏭  No changes needed
+70/202. 
+   ⏭  No changes needed
+71/202. 
+   ⏭  No changes needed
+72/202. 
+   ⏭  No changes needed
+73/202. 
+   ⏭  No changes needed
+74/202. 
+   ⏭  No changes needed
+75/202. 
+   ❌ NO EMAIL - Will be excluded
+76/202. 
+   ⏭  No changes needed
+77/202. 
+   ⏭  No changes needed
+78/202. 
+   ⏭  No changes needed
+79/202. 
+   ⏭  No changes needed
+80/202. 
+   ☎️  Landline (generic): (13) 0061 7685
+   ✅ Updated
+81/202. 
+   ⏭  No changes needed
+82/202. 
+   ⏭  No changes needed
+83/202. 
+   ⏭  No changes needed
+84/202. 
+   ⏭  No changes needed
+85/202. 
+   ⏭  No changes needed
+86/202. 
+   🧹 Cleared language: 'none'
+   ✅ Updated
+87/202. 
+   ⏭  No changes needed
+88/202. 
+   📱 Mobile: 0407 336 317
+   ✅ Updated
+89/202. 
+   ⏭  No changes needed
+90/202. 
+   ⏭  No changes needed
+91/202. 
+   ⏭  No changes needed
+92/202. 
+   ⏭  No changes needed
+93/202. 
+   ⏭  No changes needed
+94/202. 
+   📱 Mobile: 0426 847 891
+   ✅ Updated
+95/202. 
+   ⏭  No changes needed
+96/202. 
+   ⏭  No changes needed
+97/202. 
+   ☎️  Landline: (03) 9820 1848
+   ✅ Updated
+98/202. 
+   🧹 Cleared language: 'none'
+   📱 Mobile: 0407 330 384
+   ✅ Updated
+99/202. 
+   ⏭  No changes needed
+100/202. 
+   📱 Mobile (added 0): 0425 726 259
+   ✅ Updated
+101/202. 
+   ⏭  No changes needed
+102/202. 
+   🧹 Cleared language: 'None'
+   ✅ Updated
+103/202. 
+   ⏭  No changes needed
+104/202. 
+   🧹 Cleared language: 'n/a'
+   ✅ Updated
+105/202. 
+   ☎️  Melbourne (added 03): (03) 9087 8379
+   ✅ Updated
+106/202. 
+   ⏭  No changes needed
+107/202. 
+   📱 Mobile (added 0): 0417 161 098
+   ✅ Updated
+108/202. 
+   ⏭  No changes needed
+109/202. 
+   ⏭  No changes needed
+110/202. 
+   ⏭  No changes needed
+111/202. 
+   ⏭  No changes needed
+112/202. 
+   ⏭  No changes needed
+113/202. 
+   ⏭  No changes needed
+114/202. 
+   ⏭  No changes needed
+115/202. 
+   📱 Mobile (added 0): 0424 505 229
+   ✅ Updated
+116/202. 
+   ⏭  No changes needed
+117/202. 
+   ⏭  No changes needed
+118/202. 
+   ❌ NO EMAIL - Will be excluded
+119/202. 
+   📱 Mobile: 0411 512 925
+   ✅ Updated
+120/202. 
+   ⏭  No changes needed
+121/202. 
+   📱 Mobile: 0406 827 772
+   ✅ Updated
+122/202. 
+   ⏭  No changes needed
+123/202. 
+   ⏭  No changes needed
+124/202. 
+   📱 Mobile (added 0): 0412 068 041
+   ✅ Updated
+125/202. 
+   ⏭  No changes needed
+126/202. 
+   ⏭  No changes needed
+127/202. 
+   ⏭  No changes needed
+128/202. 
+   📱 Mobile: 0444 597 444
+   ✅ Updated
+129/202. 
+   ⏭  No changes needed
+130/202. 
+   ⏭  No changes needed
+131/202. 
+   ⏭  No changes needed
+132/202. 
+   ⏭  No changes needed
+133/202. 
+   ⏭  No changes needed
+134/202. 
+   ⏭  No changes needed
+135/202. 
+   ⏭  No changes needed
+136/202. 
+   ⏭  No changes needed
+137/202. 
+   ⏭  No changes needed
+138/202. 
+   🧹 Cleared language: 'N/A'
+   ✅ Updated
+139/202. 
+   ⏭  No changes needed
+140/202. 
+   ⏭  No changes needed
+141/202. 
+   ⏭  No changes needed
+142/202. 
+   📱 Mobile: 0421 824 970
+   ✅ Updated
+143/202. 
+   ⏭  No changes needed
+144/202. 
+   ❌ NO EMAIL - Will be excluded
+145/202. 
+   ⏭  No changes needed
+146/202. 
+   ⏭  No changes needed
+147/202. 
+   🧹 Cleared language: 'English only'
+   ✅ Updated
+148/202. 
+   ⏭  No changes needed
+149/202. 
+   ⏭  No changes needed
+150/202. 
+   ❌ NO EMAIL - Will be excluded
+151/202. 
+   ☎️  Landline: (03) 9689 7901
+   ✅ Updated
+152/202. 
+   ⏭  No changes needed
+153/202. 
+   🧹 Cleared language: 'NA'
+   ✅ Updated
+154/202. 
+   ⏭  No changes needed
+155/202. 
+   ⏭  No changes needed
+156/202. 
+   🧹 Cleared language: 'N/A'
+   📱 Mobile (added 0): 0431 651 700
+   ✅ Updated
+157/202. 
+   ⏭  No changes needed
+158/202. 
+   ⏭  No changes needed
+159/202. 
+   📱 Mobile: 0481 893 361
+   ✅ Updated
+160/202. 
+   🧹 Cleared language: 'N/A'
+   ✅ Updated
+161/202. 
+   ⏭  No changes needed
+162/202. 
+   ⏭  No changes needed
+163/202. 
+   ⏭  No changes needed
+164/202. 
+   ⏭  No changes needed
+165/202. 
+   ⏭  No changes needed
+166/202. 
+   ⏭  No changes needed
+167/202. 
+   ⏭  No changes needed
+168/202. 
+   🧹 Cleared language: 'English'
+   ✅ Updated
+169/202. 
+   ⏭  No changes needed
+170/202. 
+   ⏭  No changes needed
+171/202. 
+   ⏭  No changes needed
+172/202. 
+   ⏭  No changes needed
+173/202. 
+   ⏭  No changes needed
+174/202. 
+   ❌ NO EMAIL - Will be excluded
+175/202. 
+   🧹 Cleared language: 'Only English sorry'
+   ✅ Updated
+176/202. 
+   ⏭  No changes needed
+177/202. 
+   ⏭  No changes needed
+178/202. 
+   ⏭  No changes needed
+179/202. 
+   ⏭  No changes needed
+180/202. 
+   ⏭  No changes needed
+181/202. 
+   🧹 Cleared language: 'English'
+   ✅ Updated
+182/202. 
+   ⏭  No changes needed
+183/202. 
+   ⏭  No changes needed
+184/202. 
+   ⏭  No changes needed
+185/202. 
+   ⏭  No changes needed
+186/202. 
+   📱 Mobile: 0483 889 005
+   ✅ Updated
+187/202. 
+   ⏭  No changes needed
+188/202. 
+   ⏭  No changes needed
+189/202. 
+   🧹 Cleared language: 'None'
+   ✅ Updated
+190/202. 
+   ⏭  No changes needed
+191/202. 
+   🧹 Cleared language: 'none'
+   ✅ Updated
+192/202. 
+   ⏭  No changes needed
+193/202. 
+   ☎️  Landline: (03) 9191 6726
+   ✅ Updated
+194/202. 
+   ❌ NO EMAIL - Will be excluded
+195/202. 
+   ⏭  No changes needed
+196/202. 
+   ⏭  No changes needed
+197/202. 
+   ⏭  No changes needed
+198/202. 
+   ❌ NO EMAIL - Will be excluded
+199/202. 
+   ⏭  No changes needed
+200/202. 
+   ⏭  No changes needed
+201/202. 
+   ⏭  No changes needed
+202/202. 
+   ⏭  No changes needed
+
+════════════════════════════════════════════════════════════
+  ADVANCED CLEANUP COMPLETE!
+════════════════════════════════════════════════════════════
+
+📊 Summary:
+   Total processed: 202
+   ❌ No email (archived): 9
+   🧹 Languages cleared: 17
+   📞 Phone numbers found: 29
+   ✅ Phone numbers formatted: 29
+
+✅ Valid therapists: 193
+
+📋 Changes made:
+   • Cleared language entries like 'English', 'N/A', 'None'
+   • Extracted phone numbers from contact details
+   • Formatted phones consistently:
+     - Mobiles: 04XX XXX XXX
+     - Landlines (VIC): (03) XXXX XXXX
+     - Melbourne: (03) 9XXX XXXX
+   • Archived 9 entries without email
+
+════════════════════════════════════════════════════════════

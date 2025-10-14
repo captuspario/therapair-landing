@@ -1,0 +1,466 @@
+════════════════════════════════════════════════════════════
+  Victorian Therapists Database - Full Cleanup (NEW DB)
+════════════════════════════════════════════════════════════
+
+📋 Step 1: Adding new properties to database...
+
+✅ New properties added successfully!
+
+Added properties:
+   ✓ Last Name
+   ✓ Phone
+   ✓ Social Media
+   ✓ Region
+   ✓ Status
+   ✓ Published
+   ✓ Profile URL
+   ✓ Onboarding Token
+   ✓ Token Expiry
+   ✓ Last Contacted
+   ✓ Admin Notes
+   ✓ Import Date
+
+⏳ Waiting 3 seconds for Notion to process...
+
+🔍 Step 2: Counting all entries...
+
+📄 Page 1: 100 entries (total so far: 100)
+📄 Page 2: 100 entries (total so far: 200)
+📄 Page 3: 2 entries (total so far: 202)
+
+✅ Total therapists found: 202
+
+────────────────────────────────────────────────────────────
+
+🧹 Step 3: Processing all 202 entries...
+
+1/202. Processing: Liam
+   ✅ Updated
+2/202. Processing: Tanja
+   ✅ Updated
+3/202. Processing: Alicia
+   ✅ Updated
+4/202. Processing: Adam
+   ✅ Updated
+5/202. Processing: Emma
+   ✅ Updated
+6/202. Processing: Aaron
+   ✅ Updated
+7/202. Processing: eden
+   ✅ Updated
+8/202. Processing: Phoebe
+   ✅ Updated
+9/202. Processing: Abby
+   ✅ Updated
+10/202. Processing: Mithzay
+   ✅ Updated
+11/202. Processing: Jodie
+   ✅ Updated
+12/202. Processing: Shevaun
+   ✅ Updated
+13/202. Processing: Chantal
+   ✅ Updated
+14/202. Processing: Nick
+   ✅ Updated
+15/202. Processing: Amy
+   ✅ Updated
+16/202. Processing: Ashley
+   ✅ Updated
+17/202. Processing: Marie
+   ✅ Updated
+18/202. Processing: Jacqueline
+   ✅ Updated
+19/202. Processing: Luka
+   ✅ Updated
+20/202. Processing: Juniper
+   ✅ Updated
+21/202. Processing: Freya
+   ✅ Updated
+22/202. Processing: Cindy
+   ✅ Updated
+23/202. Processing: Jayda
+   ✅ Updated
+24/202. Processing: Chenai
+   ✅ Updated
+25/202. Processing: Susi
+   ✅ Updated
+26/202. Processing: Naomi
+   ✅ Updated
+27/202. Processing: Angus
+   ✅ Updated
+28/202. Processing: Peter
+   ✅ Updated
+29/202. Processing: Robert
+   ✅ Updated
+30/202. Processing: Niamh
+   ✅ Updated
+31/202. Processing: Jennifer
+   ✅ Updated
+32/202. Processing: Samuel
+   ✅ Updated
+33/202. Processing: Jenna
+   ✅ Updated
+34/202. Processing: Bodhi
+   ✅ Updated
+35/202. Processing: Jamie
+   ✅ Updated
+36/202. Processing: Michal
+   ✅ Updated
+37/202. Processing: Lei
+   ✅ Updated
+38/202. Processing: Sarah
+   ✅ Updated
+39/202. Processing: Wren
+   ✅ Updated
+40/202. Processing: Andy
+   ✅ Updated
+41/202. Processing: Ishma
+   ✅ Updated
+42/202. Processing: Yuedda
+   ✅ Updated
+43/202. Processing: Leigh
+   ✅ Updated
+44/202. Processing: Lucija
+   ✅ Updated
+45/202. Processing: Mikaela
+   ✅ Updated
+46/202. Processing: Bel
+   ✅ Updated
+47/202. Processing: Sabrina
+   ✅ Updated
+48/202. Processing: Lorene
+   ✅ Updated
+49/202. Processing: Tigist
+   ✅ Updated
+50/202. Processing: Winter
+   ✅ Updated
+51/202. Processing: Georgie
+   ✅ Updated
+52/202. Processing: Tara
+   ✅ Updated
+53/202. Processing: July
+   ✅ Updated
+54/202. Processing: Dettie
+   ✅ Updated
+55/202. Processing: Claudia
+   ✅ Updated
+56/202. Processing: Jessica
+   ✅ Updated
+57/202. Processing: Yuki (Xue)
+   ✅ Updated
+58/202. Processing: Beng
+   ✅ Updated
+59/202. Processing: Elliott
+   ✅ Updated
+60/202. Processing: Melinda
+   ✅ Updated
+61/202. Processing: Charlie
+   ✅ Updated
+62/202. Processing: Niamh
+   ✅ Updated
+63/202. Processing: Matthew
+   ✅ Updated
+64/202. Processing: Georgia
+   ✅ Updated
+65/202. Processing: Kassandra
+   ✅ Updated
+66/202. Processing: Zave
+   ✅ Updated
+67/202. Processing: Ann Marie
+   ✅ Updated
+68/202. Processing: Chris
+   ✅ Updated
+69/202. Processing: Lorraine
+   ✅ Updated
+70/202. Processing: Jonathan
+   ✅ Updated
+71/202. Processing: Lumen
+   ✅ Updated
+72/202. Processing: Marlee
+   ✅ Updated
+73/202. Processing: Rebecca
+   ✅ Updated
+74/202. Processing: Lee
+   ✅ Updated
+75/202. Processing: Michelle
+   ✅ Updated
+76/202. Processing: Natalie
+   ✅ Updated
+77/202. Processing: Caitlin
+   ✅ Updated
+78/202. Processing: Vi-An
+   ✅ Updated
+79/202. Processing: Jess
+   ✅ Updated
+80/202. Processing: Richard
+   ✅ Updated
+81/202. Processing: Marie
+   ✅ Updated
+82/202. Processing: Mel
+   ✅ Updated
+83/202. Processing: Rebecca
+   ✅ Updated
+84/202. Processing: Esther
+   ✅ Updated
+85/202. Processing: Liz
+   ✅ Updated
+86/202. Processing: Don
+   ✅ Updated
+87/202. Processing: Emily
+   ✅ Updated
+88/202. Processing: Tamara
+   ✅ Updated
+89/202. Processing: David
+   ✅ Updated
+90/202. Processing: Kiki
+   ✅ Updated
+91/202. Processing: Kelly Jane
+   ✅ Updated
+92/202. Processing: Stacey
+   ✅ Updated
+93/202. Processing: Owen
+   ✅ Updated
+94/202. Processing: Anine
+   ✅ Updated
+95/202. Processing: Melissa
+   ✅ Updated
+96/202. Processing: Majella
+   ✅ Updated
+97/202. Processing: Ari
+   ✅ Updated
+98/202. Processing: Daniel
+   ✅ Updated
+99/202. Processing: Fintan
+   ✅ Updated
+100/202. Processing: Luke
+   ✅ Updated
+101/202. Processing: Ruairi
+   ✅ Updated
+102/202. Processing: Julia
+   ✅ Updated
+103/202. Processing: Liz
+   ✅ Updated
+104/202. Processing: Fenella
+   ✅ Updated
+105/202. Processing: Adelle
+   ✅ Updated
+106/202. Processing: Amy
+   ✅ Updated
+107/202. Processing: Ruth
+   ✅ Updated
+108/202. Processing: Isabelle
+   ✅ Updated
+109/202. Processing: Sydney
+   ✅ Updated
+110/202. Processing: Jager
+   ✅ Updated
+111/202. Processing: Ganesh
+   ✅ Updated
+112/202. Processing: Tom
+   ✅ Updated
+113/202. Processing: Ru
+   ✅ Updated
+114/202. Processing: Carmen
+   ✅ Updated
+115/202. Processing: Pip
+   ✅ Updated
+116/202. Processing: Jason
+   ✅ Updated
+117/202. Processing: Emmy
+   ✅ Updated
+118/202. Processing: Julian
+   ✅ Updated
+119/202. Processing: Shikha
+   ✅ Updated
+120/202. Processing: Jacques
+   ✅ Updated
+121/202. Processing: Anthony
+   ✅ Updated
+122/202. Processing: Anne
+   ✅ Updated
+123/202. Processing: Jes
+   ✅ Updated
+124/202. Processing: Jazs
+   ✅ Updated
+125/202. Processing: Matthew
+   ✅ Updated
+126/202. Processing: Tammy
+   ✅ Updated
+127/202. Processing: Robyn
+   ✅ Updated
+128/202. Processing: Clare
+   ✅ Updated
+129/202. Processing: Niyati
+   ✅ Updated
+130/202. Processing: Jaya
+   ✅ Updated
+131/202. Processing: Louis
+   ✅ Updated
+132/202. Processing: Emma
+   ✅ Updated
+133/202. Processing: Jodie
+   ✅ Updated
+134/202. Processing: Kathomi
+   ✅ Updated
+135/202. Processing: Gávi
+   ✅ Updated
+136/202. Processing: Ishita
+   ✅ Updated
+137/202. Processing: Ashley
+   ✅ Updated
+138/202. Processing: Lil
+   ✅ Updated
+139/202. Processing: Rebecca
+   ✅ Updated
+140/202. Processing: Ben
+   ✅ Updated
+141/202. Processing: Jhocelyn
+   ✅ Updated
+142/202. Processing: Adam
+   ✅ Updated
+143/202. Processing: Lauren
+   ✅ Updated
+144/202. Processing: Regan
+   ✅ Updated
+145/202. Processing: Andrew
+   ✅ Updated
+146/202. Processing: Isaac
+   ✅ Updated
+147/202. Processing: Melissa
+   ✅ Updated
+148/202. Processing: Vanessa
+   ✅ Updated
+149/202. Processing: Jamie
+   ✅ Updated
+150/202. Processing: Marie
+   ✅ Updated
+151/202. Processing: Anne Louise
+   ✅ Updated
+152/202. Processing: Josh
+   ✅ Updated
+153/202. Processing: Brydan
+   ✅ Updated
+154/202. Processing: Sarah
+   ✅ Updated
+155/202. Processing: Todd
+   ✅ Updated
+156/202. Processing: Jamil
+   ✅ Updated
+157/202. Processing: Robin
+   ✅ Updated
+158/202. Processing: Coby
+   ✅ Updated
+159/202. Processing: Rebekah
+   ✅ Updated
+160/202. Processing: Naina
+   ✅ Updated
+161/202. Processing: Cody
+   ✅ Updated
+162/202. Processing: Lua
+   ✅ Updated
+163/202. Processing: Sally
+   ✅ Updated
+164/202. Processing: Shae Louise
+   ✅ Updated
+165/202. Processing: Brede
+   ✅ Updated
+166/202. Processing: Lauren
+   ✅ Updated
+167/202. Processing: Rebecca
+   ✅ Updated
+168/202. Processing: Lauren
+   ✅ Updated
+169/202. Processing: Sandi
+   ✅ Updated
+170/202. Processing: Lisa
+   ✅ Updated
+171/202. Processing: Rae
+   ✅ Updated
+172/202. Processing: Felix
+   ✅ Updated
+173/202. Processing: Linda
+   ✅ Updated
+174/202. Processing: Jessica
+   ✅ Updated
+175/202. Processing: Shaun
+   ✅ Updated
+176/202. Processing: Julie
+   ✅ Updated
+177/202. Processing: Grace
+   ✅ Updated
+178/202. Processing: Fiona
+   ✅ Updated
+179/202. Processing: Tim
+   ✅ Updated
+180/202. Processing: Lauren
+   ✅ Updated
+181/202. Processing: Deb
+   ✅ Updated
+182/202. Processing: Jacinta
+   ✅ Updated
+183/202. Processing: Geoffrey
+   ✅ Updated
+184/202. Processing: Sarah
+   ✅ Updated
+185/202. Processing: Kah Yan (Jasmine)
+   ✅ Updated
+186/202. Processing: Ruku
+   ✅ Updated
+187/202. Processing: Chloe
+   ✅ Updated
+188/202. Processing: Hiro
+   ✅ Updated
+189/202. Processing: Sabrina
+   ✅ Updated
+190/202. Processing: Drew
+   ✅ Updated
+191/202. Processing: Sarah
+   ✅ Updated
+192/202. Processing: Jordan
+   ✅ Updated
+193/202. Processing: Zac
+   ✅ Updated
+194/202. Processing: Grace
+   ✅ Updated
+195/202. Processing: Kate
+   ✅ Updated
+196/202. Processing: Faustina
+   ✅ Updated
+197/202. Processing: Aneela
+   ✅ Updated
+198/202. Processing: Rosie
+   ✅ Updated
+199/202. Processing: Maxi
+   ✅ Updated
+200/202. Processing: Korey
+   ✅ Updated
+201/202. Processing: Alex
+   ✅ Updated
+202/202. Processing: Megan
+   ✅ Updated
+
+════════════════════════════════════════════════════════════
+  CLEANUP COMPLETE!
+════════════════════════════════════════════════════════════
+
+📊 Summary:
+   Total therapists: 202
+   Successfully processed: 202
+   Failed: 0
+
+✅ All therapists now have:
+   • First Name + Last Name parsed
+   • Profile URL generated
+   • Onboarding Token (32-char secure)
+   • Token Expiry (30 days from today)
+   • Status set to 'Pending Review'
+   • Region standardized
+   • Import Date set to today
+
+📋 Next Steps:
+   1. Review changes in Notion
+   2. Manually reorder columns (see COLUMN-REORDERING-GUIDE.md)
+   3. Set sort to A-Z on Name column
+   4. Ready to send onboarding invitations!
+
+════════════════════════════════════════════════════════════

@@ -110,3 +110,4 @@ function sendPreferenceConfirmation($email, $preferences, $unsubscribed) {
 // Send confirmation email
 sendPreferenceConfirmation($email, $preferences, $unsubscribe);
 ?>
+

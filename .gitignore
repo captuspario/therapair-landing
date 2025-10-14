@@ -67,3 +67,11 @@ jspm_packages/
 test-results/
 playwright-report/
 playwright/.cache/
+
+# Notion scripts with credentials (local only)
+*cleanup*.sh
+extract-contact-details.sh
+optimize-for-scale.sh
+advanced-cleanup.sh
+count-and-cleanup-all.sh
+

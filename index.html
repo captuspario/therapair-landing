@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Therapair - Find Your Perfect Therapist Match</title>
-    <meta name="description" content="AI-powered therapy matching for inclusive, culturally competent mental health care. Connect with therapists who truly understand you.">
+    <meta name="description" content="Smart therapy matching for inclusive, culturally competent mental health care. Connect with therapists who truly understand you.">
     <meta name="keywords" content="therapy, mental health, LGBTQ+ therapy, neurodivergent therapy, inclusive therapy, therapist matching">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://therapair.com.au/">
     <meta property="og:title" content="Therapair - Find Your Perfect Therapist Match">
-    <meta property="og:description" content="AI-powered therapy matching for inclusive, culturally competent mental health care.">
+    <meta property="og:description" content="Smart therapy matching for inclusive, culturally competent mental health care.">
     <meta property="og:image" content="https://therapair.com.au/og-image.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://therapair.com.au/">
     <meta property="twitter:title" content="Therapair - Find Your Perfect Therapist Match">
-    <meta property="twitter:description" content="AI-powered therapy matching for inclusive, culturally competent mental health care.">
+    <meta property="twitter:description" content="Smart therapy matching for inclusive, culturally competent mental health care.">
     <meta property="twitter:image" content="https://therapair.com.au/og-image.jpg">
 
     <!-- Favicon -->
@@ -60,6 +60,10 @@
             --therapair-gradient-end: #06b6d4;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: var(--therapair-background);
@@ -210,7 +214,7 @@
             <div class="inline-block px-6 py-3 mb-8 rounded-full bg-white/80 border-2" style="border-color: var(--therapair-primary);">
                 <p class="text-sm font-medium flex items-center gap-2" style="color: var(--therapair-primary);">
                     <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: var(--therapair-success);"></span>
-                    AI-powered therapist matching
+                    Smart therapist matching
                 </p>
             </div>
 
@@ -227,12 +231,12 @@
 
             <!-- Single CTA Button -->
             <div class="mb-8">
-                <button
-                    onclick="scrollToMainForm()"
-                    class="btn-primary text-lg px-12 py-4"
+                <a
+                    href="#get-started"
+                    class="btn-primary text-lg px-12 py-4 inline-block"
                 >
                     Request Early Access
-                </button>
+                </a>
             </div>
 
             <!-- Trust indicators -->
@@ -259,7 +263,7 @@
     </section>
 
     <!-- How It Works Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8">
+    <section id="how-it-works" class="py-20 px-4 sm:px-6 lg:px-8">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16 animate-slide-up">
                 <h2 class="text-4xl sm:text-5xl font-bold mb-6">
@@ -289,7 +293,7 @@
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">Get intelligently matched</h3>
                     <p class="text-lg leading-relaxed" style="color: var(--therapair-gray);">
-                        Our AI considers your unique background, preferences, and needs to find therapists with the right expertise and cultural understanding.
+                        Our smart matching system considers your unique background, preferences, and needs to find therapists with the right expertise and cultural understanding.
                     </p>
                 </div>
 
@@ -324,7 +328,7 @@
             </div>
 
             <!-- Visual Preview Grid -->
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
                 <!-- Quiz Preview -->
                 <div class="bg-white rounded-2xl p-4 shadow-xl border-2 hover:shadow-2xl transition-all duration-300" style="border-color: rgba(155, 116, 183, 0.2);">
                     <div class="mb-4">
@@ -338,6 +342,7 @@
                             src="images/therapair-quiz-question.png" 
                             alt="Screenshot of Therapair matching quiz showing question interface"
                             class="w-full h-auto"
+                            style="height: 500px; object-fit: cover; object-position: center;"
                             loading="lazy"
                         />
                     </div>
@@ -348,14 +353,34 @@
                     <div class="mb-4">
                         <h3 class="text-xl font-semibold mb-2">Step 2: Get personalised matches</h3>
                         <p class="text-sm" style="color: var(--therapair-gray);">
-                            See therapists who align with your preferences, identity, and therapeutic needs
+                            See 3 therapist matches who align with your preferences, identity, and therapeutic needs
                         </p>
                     </div>
                     <div class="rounded-lg overflow-hidden border-2" style="border-color: rgba(155, 116, 183, 0.1);">
                         <img 
-                            src="images/therapair-results-full.png" 
-                            alt="Screenshot of Therapair results showing matched therapist profiles with specialties"
+                            src="images/therapair-results-3-cards.png" 
+                            alt="Screenshot of Therapair results showing 3 matched therapist profiles with specialties and Book Now buttons"
                             class="w-full h-auto"
+                            style="height: 500px; object-fit: cover; object-position: center;"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+
+                <!-- Booking Form Preview -->
+                <div class="bg-white rounded-2xl p-4 shadow-xl border-2 hover:shadow-2xl transition-all duration-300" style="border-color: rgba(155, 116, 183, 0.2);">
+                    <div class="mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Step 3: Book your session</h3>
+                        <p class="text-sm" style="color: var(--therapair-gray);">
+                            Complete booking form with your preferences and contact information
+                        </p>
+                    </div>
+                    <div class="rounded-lg overflow-hidden border-2" style="border-color: rgba(155, 116, 183, 0.1);">
+                        <img 
+                            src="images/therapair-booking-form.png" 
+                            alt="Screenshot of Therapair booking form showing therapist details and appointment preferences"
+                            class="w-full h-auto"
+                            style="height: 500px; object-fit: cover; object-position: center;"
                             loading="lazy"
                         />
                     </div>
@@ -397,7 +422,7 @@
                     </div>
                     <div class="text-center">
                         <i data-lucide="sparkles" class="w-6 h-6 mx-auto mb-2" style="color: var(--therapair-secondary);"></i>
-                        <p class="text-sm font-medium">AI-Powered</p>
+                        <p class="text-sm font-medium">Smart Matching</p>
                         <p class="text-xs" style="color: var(--therapair-gray);">Intelligent matching</p>
                     </div>
                     <div class="text-center">
@@ -411,7 +436,7 @@
     </section>
 
     <!-- Who It's For Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, var(--therapair-background) 100%);">
+    <section id="who-its-for" class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, var(--therapair-background) 100%);">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl sm:text-5xl font-bold mb-6">
@@ -493,7 +518,7 @@
 
 
     <!-- Main Interest Form Section with FormSubmit.co -->
-    <section id="main-form" class="py-24 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, var(--therapair-background) 100%);">
+    <section id="get-started" class="py-24 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, var(--therapair-background) 100%);">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl sm:text-5xl font-bold mb-8">
@@ -753,11 +778,91 @@
         </div>
     </section>
 
-    <!-- Simple Footer -->
-    <footer class="py-12 text-center border-t border-opacity-10" style="border-color: var(--therapair-primary);">
-        <p style="color: var(--therapair-gray);">
-            © 2025 Therapair. Made with 💕 for inclusive mental health.
-        </p>
+    <!-- Comprehensive Footer (Global Best Practice) -->
+    <footer class="bg-gray-900 text-gray-300 mt-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-5 gap-8 mb-8">
+                
+                <!-- About Column -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Therapair</h3>
+                    <p class="text-sm text-gray-400 mb-4">
+                        Intelligent therapist matching built for diverse communities.
+                    </p>
+                    <p class="text-xs text-gray-500">
+                        Australia
+                    </p>
+                </div>
+
+                <!-- Platform Column -->
+                <div>
+                    <h4 class="text-white font-medium mb-4">Platform</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/#how-it-works" class="hover:text-white transition">How It Works</a></li>
+                        <li><a href="/#who-its-for" class="hover:text-white transition">Who It's For</a></li>
+                        <li><a href="/documentation.html" class="hover:text-white transition">Documentation</a></li>
+                        <li><a href="/#get-started" class="hover:text-white transition">Get Started</a></li>
+                    </ul>
+                </div>
+
+                <!-- For Therapists Column -->
+                <div>
+                    <h4 class="text-white font-medium mb-4">For Therapists</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/legal/therapist-terms.html" class="hover:text-white transition">Therapist Terms</a></li>
+                        <!-- <li><a href="/legal/consent-removal.html" class="hover:text-white transition">Consent & Removal</a></li> -->
+                        <li><a href="mailto:contact@therapair.com.au?subject=Update My Listing" class="hover:text-white transition">Update Listing</a></li>
+                        <li><a href="mailto:contact@therapair.com.au?subject=Remove My Listing" class="hover:text-white transition">Remove Listing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal & Privacy Column -->
+                <div>
+                    <h4 class="text-white font-medium mb-4">Legal & Privacy</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/legal/privacy-policy.html" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="/legal/terms-and-conditions.html" class="hover:text-white transition">Terms & Conditions</a></li>
+                        <!-- <li><a href="/email-preferences.html" class="hover:text-white transition">Email Preferences</a></li> -->
+                        <li><a href="/privacy-request.html" class="hover:text-white transition">Privacy Request</a></li>
+                    </ul>
+                </div>
+
+                <!-- Crisis Support Column -->
+                <div>
+                    <h4 class="text-white font-medium mb-4">Crisis Support</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="https://www.lifeline.org.au/" target="_blank" rel="noopener" class="hover:text-white transition">Lifeline: 13 11 14</a></li>
+                        <li><a href="https://www.beyondblue.org.au/" target="_blank" rel="noopener" class="hover:text-white transition">Beyond Blue: 1300 22 4636</a></li>
+                        <li><a href="https://www.kidshelpline.com.au/" target="_blank" rel="noopener" class="hover:text-white transition">Kids Helpline: 1800 55 1800</a></li>
+                        <li><a href="https://www.1800respect.org.au/" target="_blank" rel="noopener" class="hover:text-white transition">1800RESPECT: 1800 737 732</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Column -->
+                <div>
+                    <h4 class="text-white font-medium mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/documentation.html#about" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="/documentation.html#strategy" class="hover:text-white transition">Strategy & Roadmap</a></li>
+                        <li><a href="mailto:contact@therapair.com.au" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="https://github.com/captuspario/therapair-landing" target="_blank" rel="noopener" class="hover:text-white transition">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-sm text-gray-400">
+                    © 2025 Therapair. Made with 💕 for inclusive mental health.
+                </div>
+                <div class="flex gap-6 text-sm">
+                    <a href="/legal/privacy-policy.html" class="hover:text-white transition">Privacy</a>
+                    <a href="/legal/terms-and-conditions.html" class="hover:text-white transition">Terms</a>
+                    <a href="/documentation.html" class="hover:text-white transition">Docs</a>
+                    <a href="mailto:contact@therapair.com.au" class="hover:text-white transition">Contact</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Request - Therapair</title>
+    <meta name="description" content="Submit a privacy request to Therapair - access, correct, delete, or opt-out of your information.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .form-card { background: white; border-radius: 1rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); }
+        .form-input { border: 2px solid #e5e7eb; border-radius: 0.5rem; padding: 0.75rem 1rem; transition: border-color 0.2s; }
+        .form-input:focus { outline: none; border-color: #2563eb; }
+        .btn-primary { background: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: all 0.2s; }
+        .btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header -->
+    <nav class="bg-white border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <a href="/" class="text-xl font-bold text-blue-600">Therapair</a>
+                <span class="text-gray-400">/</span>
+                <span class="text-gray-600">Privacy Request</span>
+            </div>
+            <a href="/legal/privacy-policy.html" class="text-sm text-gray-600 hover:text-gray-900">← Back to Privacy Policy</a>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Privacy Request Form</h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Submit a request to access, correct, delete, or opt-out of your information. We'll respond within 2 business days.
+            </p>
+        </div>
+
+        <!-- Form -->
+        <div class="form-card p-8">
+            <form action="https://formsubmit.co/contact@therapair.com.au" method="POST" class="space-y-6">
+                
+                <!-- Hidden fields for FormSubmit -->
+                <input type="hidden" name="_subject" value="Privacy Request - Therapair">
+                <input type="hidden" name="_next" value="https://therapair.com.au/thank-you.html">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <!-- Request Type -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Request Type *</label>
+                    <select name="request_type" required class="form-input w-full">
+                        <option value="">Select request type</option>
+                        <option value="access">Access My Information</option>
+                        <option value="correction">Correct My Information</option>
+                        <option value="deletion">Delete My Information</option>
+                        <option value="opt-out">Opt Out of Communications</option>
+                        <option value="complaint">Privacy Complaint</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                        <input type="text" name="full_name" required class="form-input w-full" placeholder="Your full name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                        <input type="email" name="email" required class="form-input w-full" placeholder="your.email@example.com">
+                    </div>
+                </div>
+
+                <!-- Additional Details -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Additional Details</label>
+                    <textarea name="details" rows="4" class="form-input w-full" placeholder="Please provide any additional details about your request..."></textarea>
+                </div>
+
+                <!-- Verification -->
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <h3 class="font-semibold text-blue-900 mb-2">Identity Verification</h3>
+                    <p class="text-sm text-blue-800 mb-3">
+                        To protect your privacy, we may need to verify your identity before processing your request. 
+                        This may include asking for additional information or documentation.
+                    </p>
+                    <label class="flex items-start gap-3">
+                        <input type="checkbox" name="identity_verification" required class="mt-1">
+                        <span class="text-sm text-blue-800">
+                            I understand that identity verification may be required and I consent to providing additional information if needed.
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn-primary">
+                        Submit Privacy Request
+                    </button>
+                    <p class="text-sm text-gray-500 mt-3">
+                        We'll respond within 2 business days. For urgent requests, please contact us directly.
+                    </p>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Information -->
+        <div class="mt-12 grid md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-lg p-6 text-center">
+                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="clock" class="w-6 h-6 text-green-600"></i>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Quick Response</h3>
+                <p class="text-sm text-gray-600">We respond to all privacy requests within 2 business days.</p>
+            </div>
+            
+            <div class="bg-white rounded-lg p-6 text-center">
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="shield-check" class="w-6 h-6 text-blue-600"></i>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Secure Processing</h3>
+                <p class="text-sm text-gray-600">Your request is processed securely and confidentially.</p>
+            </div>
+            
+            <div class="bg-white rounded-lg p-6 text-center">
+                <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="help-circle" class="w-6 h-6 text-purple-600"></i>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Need Help?</h3>
+                <p class="text-sm text-gray-600">Contact us at <a href="mailto:contact@therapair.com.au" class="text-blue-600 hover:underline">contact@therapair.com.au</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+════════════════════════════════════════════════════════════
+  Victorian Therapists Database - Full Cleanup
+════════════════════════════════════════════════════════════
+
+🔍 Counting all entries...
+
+📄 Page 1: 100 entries
+📄 Page 2: 100 entries
+📄 Page 3: 2 entries
+
+✅ Total therapists found: 202
+
+────────────────────────────────────────────────────────────
+
+🧹 Processing all 202 entries...
+
+1/202. Processing: Tamara Caswell
+   ✅ Updated
+2/202. Processing: Tara Broughan
+   ✅ Updated
+3/202. Processing: Anne Robertson
+   ✅ Updated
+4/202. Processing: Niamh Connellan
+   ✅ Updated
+5/202. Processing: Rebecca Kelly
+   ✅ Updated
+6/202. Processing: Lauren Breen
+   ✅ Updated
+7/202. Processing: Michal Klein
+   ✅ Updated
+8/202. Processing: Lumen Gorrie
+   ✅ Updated
+9/202. Processing: Rebecca Taylor-Bowman
+   ✅ Updated
+10/202. Processing: Julia Verso
+   ✅ Updated
+11/202. Processing: Drew Carr
+   ✅ Updated
+12/202. Processing: Charlie Dean
+   ✅ Updated
+13/202. Processing: Alicia Allanson
+   ✅ Updated
+14/202. Processing: Tammy Moran
+   ✅ Updated
+15/202. Processing: Jaya Narayan
+   ✅ Updated
+16/202. Processing: Jacinta Sherlock
+   ✅ Updated
+17/202. Processing: Cody Fisher
+   ✅ Updated
+18/202. Processing: Rae Sabine
+   ✅ Updated
+19/202. Processing: Shaun Williams
+   ✅ Updated
+20/202. Processing: Andrew Macdonald
+   ✅ Updated
+21/202. Processing: Bodhi Weaver
+   ✅ Updated
+22/202. Processing: Tim Fraser
+   ✅ Updated
+23/202. Processing: Lauren Bending
+   ✅ Updated
+24/202. Processing: Rebecca Shepherd
+   ✅ Updated
+25/202. Processing: Sabrina Brient
+   ✅ Updated
+26/202. Processing: Susi Fox
+   ✅ Updated
+27/202. Processing: Jes Anderberg
+   ✅ Updated
+28/202. Processing: Julian Motha
+   ✅ Updated
+29/202. Processing: Chenai Mupotsa-Russell
+   ✅ Updated
+30/202. Processing: Maxi Xie
+   ✅ Updated
+31/202. Processing: Melissa Wyllie
+   ✅ Updated
+32/202. Processing: Melissa Lagozzino
+   ✅ Updated
+33/202. Processing: Ben Callegari
+   ✅ Updated
+34/202. Processing: Phoebe Smithies
+   ✅ Updated
+35/202. Processing: Samuel Hardidge
+   ✅ Updated
+36/202. Processing: Jodie Baker
+   ✅ Updated
+37/202. Processing: Elliott McMahon
+   ✅ Updated
+38/202. Processing: Georgie Buckley
+   ✅ Updated
+39/202. Processing: Jayda Akder
+   ✅ Updated
+40/202. Processing: Megan Wilson
+   ✅ Updated
+41/202. Processing: Clare Billings
+   ✅ Updated
+42/202. Processing: Daniel Fabris
+   ✅ Updated
+43/202. Processing: Josh Nguyen
+   ✅ Updated
+44/202. Processing: Kate Cooke
+   ✅ Updated
+45/202. Processing: Mel Jeffery
+   ✅ Updated
+46/202. Processing: Angus Ferguson
+   ✅ Updated
+47/202. Processing: Zave Nagle
+   ✅ Updated
+48/202. Processing: Fenella Hansen
+   ✅ Updated
+49/202. Processing: Vanessa Bowen
+   ✅ Updated
+50/202. Processing: Jager Corvus
+   ✅ Updated
+51/202. Processing: Emma Wearmouth
+   ✅ Updated
+52/202. Processing: Linda Kirkman
+   ✅ Updated
+53/202. Processing: Marlee Greer
+   ✅ Updated
+54/202. Processing: Marie August
+   ✅ Updated
+55/202. Processing: Fiona Landford
+   ✅ Updated
+56/202. Processing: Ishita Garg
+   ✅ Updated
+57/202. Processing: Bel Fin
+   ✅ Updated
+58/202. Processing: Sally Boothby
+   ✅ Updated
+59/202. Processing: Todd Mills
+   ✅ Updated
+60/202. Processing: Emily Cheesman
+   ✅ Updated
+61/202. Processing: Lil Desille
+   ✅ Updated
+62/202. Processing: Korey Baruta
+   ✅ Updated
+63/202. Processing: Fintan Harte
+   ✅ Updated
+64/202. Processing: Robyn Ming
+   ✅ Updated
+65/202. Processing: Ari Spanos
+   ✅ Updated
+66/202. Processing: Kathomi Gatwiri
+   ✅ Updated
+67/202. Processing: Aaron Howearth
+   ✅ Updated
+68/202. Processing: Winter Nicole
+   ✅ Updated
+69/202. Processing: Peter Eide
+   ✅ Updated
+70/202. Processing: Louis Spence
+   ✅ Updated
+71/202. Processing: Marie Camin
+   ✅ Updated
+72/202. Processing: Robert Wenban
+   ✅ Updated
+73/202. Processing: Sarah Ashton
+   ✅ Updated
+74/202. Processing: Sarah Burrowes
+   ✅ Updated
+75/202. Processing: Kah Yan (Jasmine) Loo
+   ✅ Updated
+76/202. Processing: Yuedda Sio
+   ✅ Updated
+77/202. Processing: Chris Cheers
+   ✅ Updated
+78/202. Processing: Naina Varma
+   ✅ Updated
+79/202. Processing: Don Mackenzie
+   ✅ Updated
+80/202. Processing: Jamie Goodison
+   ✅ Updated
+81/202. Processing: Pip Fell
+   ✅ Updated
+82/202. Processing: Jacques Rizk
+   ✅ Updated
+83/202. Processing: Jessica Elberg
+   ✅ Updated
+84/202. Processing: Liz Gladwin
+   ✅ Updated
+85/202. Processing: Mithzay Pomenta
+   ✅ Updated
+86/202. Processing: Matthew Brown
+   ✅ Updated
+87/202. Processing: Ann Marie Crotty
+   ✅ Updated
+88/202. Processing: Zac Morgan
+   ✅ Updated
+89/202. Processing: Anine Cummins
+   ✅ Updated
+90/202. Processing: Esther Ogilvie
+   ✅ Updated
+91/202. Processing: Anthony Lekkas
+   ✅ Updated
+92/202. Processing: Jennifer Dix
+   ✅ Updated
+93/202. Processing: Rebecca Harris
+   ✅ Updated
+94/202. Processing: Richard Harvey
+   ✅ Updated
+95/202. Processing: Jamie Byrne
+   ✅ Updated
+96/202. Processing: Aneela Panhwar
+   ✅ Updated
+97/202. Processing: Marie Vakakis
+   ✅ Updated
+98/202. Processing: David Demmer
+   ✅ Updated
+99/202. Processing: Jamil Zacharia
+   ✅ Updated
+100/202. Processing: Beng Eu
+   ✅ Updated
+101/202. Processing: Geoffrey Hon
+   ✅ Updated
+102/202. Processing: Gávi Ansara
+   ✅ Updated
+103/202. Processing: Ruku Srivastava
+   ✅ Updated
+104/202. Processing: Tigist Kebede
+   ✅ Updated
+105/202. Processing: Lauren Barrett
+   ✅ Updated
+106/202. Processing: Lauren Bradley
+   ✅ Updated
+107/202. Processing: Isabelle Stoner
+   ✅ Updated
+108/202. Processing: Niamh Long
+   ✅ Updated
+109/202. Processing: Regan Smith
+   ✅ Updated
+110/202. Processing: Leigh Elliott
+   ✅ Updated
+111/202. Processing: Ishma Alvi
+   ✅ Updated
+112/202. Processing: Lucija Peric
+   ✅ Updated
+113/202. Processing: Hiro McLeman
+   ✅ Updated
+114/202. Processing: Abby Draper
+   ✅ Updated
+115/202. Processing: Jodie Allen
+   ✅ Updated
+116/202. Processing: Dettie Onus Browne
+   ✅ Updated
+117/202. Processing: Kelly Jane Kerr
+   ✅ Updated
+118/202. Processing: Michelle Hartnett
+   ✅ Updated
+119/202. Processing: Liam Casey
+   ✅ Updated
+120/202. Processing: Matthew Austin
+   ✅ Updated
+121/202. Processing: Rebekah Pozega
+   ✅ Updated
+122/202. Processing: Shevaun Pope
+   ✅ Updated
+123/202. Processing: Mikaela Smee
+   ✅ Updated
+124/202. Processing: Caitlin O'Farrell
+   ✅ Updated
+125/202. Processing: Deb Anthony
+   ✅ Updated
+126/202. Processing: Sydney Ruiz
+   ✅ Updated
+127/202. Processing: Adam Forman
+   ✅ Updated
+128/202. Processing: Jhocelyn Jobe
+   ✅ Updated
+129/202. Processing: Shikha Gray
+   ✅ Updated
+130/202. Processing: Shae Louise Abel
+   ✅ Updated
+131/202. Processing: Lei Gryffydd
+   ✅ Updated
+132/202. Processing: Georgia Verry
+   ✅ Updated
+133/202. Processing: Tom Scully
+   ✅ Updated
+134/202. Processing: Rosie Downing
+   ✅ Updated
+135/202. Processing: Ashley Dell'Oro
+   ✅ Updated
+136/202. Processing: Adam Dalton
+   ✅ Updated
+137/202. Processing: Ganesh Ilango
+   ✅ Updated
+138/202. Processing: Isaac Lee
+   ✅ Updated
+139/202. Processing: Jonathan Tandos
+   ✅ Updated
+140/202. Processing: July Lies
+   ✅ Updated
+141/202. Processing: Emma Fallon
+   ✅ Updated
+142/202. Processing: Claudia Allison
+   ✅ Updated
+143/202. Processing: Brede Davis
+   ✅ Updated
+144/202. Processing: eden brown
+   ✅ Updated
+145/202. Processing: Tanja Takala
+   ✅ Updated
+146/202. Processing: Jacqueline Roy
+   ✅ Updated
+147/202. Processing: Juniper Muller
+   ✅ Updated
+148/202. Processing: Anne Louise Thorbecke
+   ✅ Updated
+149/202. Processing: Niyati Evers
+   ✅ Updated
+150/202. Processing: Lee Taube
+   ✅ Updated
+151/202. Processing: Ruairi Gallagher
+   ✅ Updated
+152/202. Processing: Ru Connolly
+   ✅ Updated
+153/202. Processing: Luke Collins
+   ✅ Updated
+154/202. Processing: Freya Rose
+   ✅ Updated
+155/202. Processing: Robin Wilkinson
+   ✅ Updated
+156/202. Processing: Jordan Love
+   ✅ Updated
+157/202. Processing: Lisa Torney
+   ✅ Updated
+158/202. Processing: Vi-An Nguyen
+   ✅ Updated
+159/202. Processing: Kassandra Mourikis
+   ✅ Updated
+160/202. Processing: Melinda Austen
+   ✅ Updated
+161/202. Processing: Amy Woods
+   ✅ Updated
+162/202. Processing: Jenna Trostle
+   ✅ Updated
+163/202. Processing: Emmy Fitz-Gerald
+   ✅ Updated
+164/202. Processing: Jason Westwater
+   ✅ Updated
+165/202. Processing: Chantal Blackman
+   ✅ Updated
+166/202. Processing: Natalie Browne
+   ✅ Updated
+167/202. Processing: Kiki Havos
+   ✅ Updated
+168/202. Processing: Jess Westfold
+   ✅ Updated
+169/202. Processing: Sabrina Brient
+   ✅ Updated
+170/202. Processing: Julie Hjorth
+   ✅ Updated
+171/202. Processing: Ashley Macklin
+   ✅ Updated
+172/202. Processing: Jazs Van Gils
+   ✅ Updated
+173/202. Processing: Nick Koyang
+   ✅ Updated
+174/202. Processing: Sarah Leech
+   ✅ Updated
+175/202. Processing: Sarah Schepisi
+   ✅ Updated
+176/202. Processing: Grace Lee
+   ✅ Updated
+177/202. Processing: Yuki (Xue) Mei
+   ✅ Updated
+178/202. Processing: Lorene Slade
+   ✅ Updated
+179/202. Processing: Felix Perigrie
+   ✅ Updated
+180/202. Processing: Alex Sutherland
+   ✅ Updated
+181/202. Processing: Andy Allen
+   ✅ Updated
+182/202. Processing: Adelle Kent
+   ✅ Updated
+183/202. Processing: Amy Neale
+   ✅ Updated
+184/202. Processing: Ruth Katerelos
+   ✅ Updated
+185/202. Processing: Sandi Silva
+   ✅ Updated
+186/202. Processing: Jessica Murphy
+   ✅ Updated
+187/202. Processing: Coby Baker
+   ✅ Updated
+188/202. Processing: Liz Scarfe
+   ✅ Updated
+189/202. Processing: Faustina Delany
+   ✅ Updated
+190/202. Processing: Naomi Overton
+   ✅ Updated
+191/202. Processing: Stacey Micallef
+   ✅ Updated
+192/202. Processing: Carmen Marom
+   ✅ Updated
+193/202. Processing: Grace Blucher
+   ✅ Updated
+194/202. Processing: Majella Jones
+   ✅ Updated
+195/202. Processing: Chloe Dean
+   ✅ Updated
+196/202. Processing: Lorraine Pentello
+   ✅ Updated
+197/202. Processing: Wren Jablonka
+   ✅ Updated
+198/202. Processing: Cindy Hsiao
+   ✅ Updated
+199/202. Processing: Lua Bruckhoff
+   ✅ Updated
+200/202. Processing: Brydan Xavier
+   ✅ Updated
+201/202. Processing: Luka Ritter
+   ✅ Updated
+202/202. Processing: Owen O'Neil
+   ✅ Updated
+
+────────────────────────────────────────────────────────────
+✅ All 202 therapists processed!
+
+Next steps:
+1. Open Notion database
+2. Column ordering: I can't change this via API - you need to drag columns manually
+3. Row sorting: Click 'Name' column → Sort A-Z
+
+════════════════════════════════════════════════════════════
