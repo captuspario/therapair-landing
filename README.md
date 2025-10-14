@@ -1,437 +1,374 @@
 # Therapair Landing Page
 
-**Intelligent therapy matching starts here.**
+> Smart therapy matching for inclusive, culturally competent mental health care
 
-> This is the main landing page and interest capture system for Therapair, an AI-powered platform that matches individuals with therapists who truly understand their identity, values, and needs.
-
----
-
-## 🌐 Live Site
-
-**URL:** https://therapair.com.au
+**Live Site:** https://therapair.com.au  
+**Status:** Production (MVP Phase)  
+**Last Updated:** October 2025
 
 ---
 
-## 📋 What This Is
+## 🎯 **Quick Overview**
 
-The Therapair landing page serves as:
+Therapair is an intelligent therapist matching platform focused on inclusive mental health care for LGBTQ+, neurodivergent, and culturally diverse communities across Australia.
 
-1. **Brand Presence** - Professional introduction to Therapair
-2. **Lead Generation** - Capture interest from 4 key audiences:
-   - Individuals seeking therapy
-   - Mental health practitioners
-   - Clinics & organisations
-   - Supporters & investors
-3. **Demo Showcase** - Link to live widget on Unison Mental Health
-4. **Email Automation** - AI-powered personalized confirmation emails
-5. **CRM Integration** - Notion database sync for lead management
+### **Current Status:**
+- ✅ Landing page live with interactive demo
+- ✅ Legal documentation complete (Privacy, Terms, Therapist Terms)
+- ✅ Victorian Therapists database ready (193 verified therapists)
+- ✅ Onboarding system designed and documented
+- 🔄 MVP phase: Building therapist directory
 
 ---
 
-## 🚀 Quick Start
-
-### Prerequisites
-- PHP 7.4+ (for form handling)
-- Hostinger account (or similar PHP hosting)
-- OpenAI API key
-- Notion API integration
-
-### Local Development
-
-```bash
-# Clone the repository
-git clone <repo-url>
-cd therapair-landing-page
-
-# Open in browser (requires local PHP server)
-php -S localhost:8000
-
-# Visit http://localhost:8000
-```
-
-### Configuration
-
-Create `config.php` (ignored by Git):
-
-```php
-<?php
-// OpenAI Configuration
-define('OPENAI_API_KEY', 'sk-...');
-
-// Email Configuration  
-define('ADMIN_EMAIL', 'your-email@domain.com');
-define('FROM_EMAIL', 'hello@therapair.com.au');
-define('FROM_NAME', 'Therapair Team');
-
-// Notion Configuration
-define('NOTION_API_KEY', 'secret_...');
-define('NOTION_DATABASE_ID', 'your-database-id');
-?>
-```
-
----
-
-## 📁 Project Structure
+## 📁 **Project Structure**
 
 ```
 therapair-landing-page/
-├── index.html                    # Main landing page
-├── thank-you.html               # Post-submission confirmation
-├── submit-form.php              # Form handler + AI email generator
-├── notion-sync.php              # Notion API integration (MOVED to docs/)
-├── config.php                   # Environment variables (gitignored)
+├── index.html                 # Main landing page
+├── documentation.html         # Documentation hub
+├── privacy-request.html       # Privacy request form
+├── thank-you.html            # Form confirmation page
+├── email-preferences.html    # Email preferences
 │
-├── images/                      # Assets & screenshots
-│   ├── therapair-quiz-question.png
-│   └── therapair-results-full.png
+├── /legal                    # Legal documents
+│   ├── privacy-policy.html
+│   ├── terms-and-conditions.html
+│   ├── therapist-terms.html
+│   └── consent-removal.html
 │
-└── docs/                        # Documentation hub
-    ├── README.md                # Documentation index
-    ├── EXECUTIVE-SUMMARY.md     # Business strategy & vision
-    │
-    ├── technical/
-    │   ├── ARCHITECTURE.md      # System architecture
-    │   └── email-ai-prompt.md   # AI email prompt template
-    │
-    ├── planning/
-    │   └── PRODUCT-ROADMAP.md   # 5-year product plan
-    │
-    ├── guides/
-    │   └── notion-database-setup.md  # CRM setup instructions
-    │
-    └── archive/                 # Historical docs
+├── /images                   # All image assets
+│   ├── /journey             # Quiz/results screenshots
+│   ├── /optimized           # Optimized therapist photos
+│   └── /resized             # Resized images
+│
+├── /docs                     # Documentation
+│   ├── /onboarding          # Therapist onboarding guides
+│   ├── /database            # Database setup & management
+│   ├── /deployment          # Deployment guides
+│   └── /archive             # Old versions & completed work
+│
+├── /scripts                  # Automation scripts
+│   ├── /notion              # Database management
+│   ├── /screenshots         # Screenshot generation
+│   └── /deployment          # Deployment scripts
+│
+├── /tests                    # Playwright tests
+│   └── /*.spec.js
+│
+├── package.json              # Dependencies
+├── playwright.config.js      # Test configuration
+└── README.md                 # This file
 ```
 
 ---
 
-## 🎯 Key Features
+## 🚀 **Quick Start**
 
-### 1. Dynamic Form System
-- **4 Audience Types** with unique form fields
-- Client-side validation
-- Honeypot spam protection
-- Mobile-responsive design
-
-### 2. AI-Powered Emails
-- GPT-4 generates personalized confirmations
-- Tone: Professional, warm, conversational
-- Australian English localization
-- Fallback templates if API fails
-
-### 3. Notion CRM Integration
-- Automatic lead creation
-- Audience segmentation
-- Email preference management
-- Status tracking
-
-### 4. Visual Demo Section
-- Screenshot previews of quiz + results
-- High-conversion CTA design
-- Links to live demo on partner site
-
----
-
-## 🛠️ Tech Stack
-
-**Frontend:**
-- HTML5, CSS3 (utility-first approach)
-- Vanilla JavaScript (no frameworks)
-- Lucide icons
-- Google Fonts (Open Sans)
-
-**Backend:**
-- PHP 7.4+ (form handling)
-- OpenAI API (email generation)
-- Notion API (CRM sync)
-- PHP mail() (email delivery)
-
-**Hosting:**
-- Hostinger (shared hosting)
-- Git deployment
-- SSL/HTTPS enabled
-
----
-
-## 📊 Form Flow
-
-```
-User visits therapair.com.au
-    │
-    ▼
-Selects audience type (Individual/Practitioner/Clinic/Supporter)
-    │
-    ▼
-Form fields dynamically update
-    │
-    ▼
-User fills form + submits
-    │
-    ▼
-POST to submit-form.php
-    │
-    ├──▶ Send admin notification (immediate)
-    │
-    ├──▶ Call OpenAI API (2-5 seconds)
-    │    └──▶ Generate personalized email
-    │
-    ├──▶ Send user confirmation
-    │
-    ├──▶ Sync to Notion (parallel)
-    │    └──▶ Create database entry
-    │
-    └──▶ Redirect to thank-you.html
-```
-
----
-
-## 🔐 Security & Privacy
-
-### What We Do
-- ✅ Input sanitization (`htmlspecialchars`, `trim`)
-- ✅ Email validation (`FILTER_VALIDATE_EMAIL`)
-- ✅ Honeypot spam protection
-- ✅ HTTPS enforcement
-- ✅ API keys in gitignored `config.php`
-- ✅ No PHI (Protected Health Information) collected
-
-### What We Don't Do
-- ❌ Store payment information
-- ❌ Track users with analytics pixels (yet)
-- ❌ Sell or share user data
-- ❌ Store session recordings
-
----
-
-## 📧 Email System
-
-### Admin Notifications
-**To:** `tino@unisoncounselling.com`  
-**Format:** Professional HTML with:
-- User details (name, email, phone, location)
-- Audience type
-- Form responses
-- Submission timestamp
-
-### User Confirmations
-**From:** `hello@therapair.com.au` (Therapair Team)  
-**Format:** AI-generated HTML with:
-- Personalized greeting
-- Acknowledgment of their specific interests/concerns
-- Next steps (what to expect)
-- Contact information
-- Unsubscribe link
-
-**AI Prompt:** See [`docs/technical/email-ai-prompt.md`](./docs/technical/email-ai-prompt.md)
-
----
-
-## 🎨 Design System
-
-### Colors
-```css
---therapair-primary: #4F064F;    /* Deep purple */
---therapair-secondary: #9B74B7;  /* Medium purple */
---therapair-accent: #06B6D4;     /* Cyan */
---therapair-success: #10B981;    /* Green */
---therapair-gray: #64748b;       /* Slate gray */
---therapair-background: #FEFEFF; /* Off-white */
-```
-
-### Typography
-- **Font:** Open Sans (Google Fonts)
-- **Headings:** 600-700 weight
-- **Body:** 400-500 weight
-- **Line Height:** 1.6-1.8
-
-### Spacing
-- **Sections:** `py-20` to `py-24` (80-96px)
-- **Cards:** `p-8` to `p-12` (32-48px)
-- **Elements:** `mb-4` to `mb-6` (16-24px)
-
----
-
-## 🚢 Deployment
-
-### Automatic (Git Push)
+### **For Development:**
 
 ```bash
-git add .
-git commit -m "feat: description"
-git push origin main
+# Clone repository
+git clone https://github.com/captuspario/therapair-landing.git
+cd therapair-landing-page
 
-# Hostinger auto-deploys from Git
+# Install dependencies
+npm install
+
+# Run locally
+open index.html
+# or use a local server
+npx serve .
 ```
 
-### Manual (FTP/SSH)
+### **For Deployment:**
 
-If Git deployment fails:
-1. Connect to Hostinger via FTP
-2. Upload changed files to `public_html/`
-3. Verify `config.php` is present (not in Git)
-4. Test form submission
-
-### Deployment Checklist
-- [ ] Test form locally
-- [ ] Commit changes to Git
-- [ ] Push to remote
-- [ ] Verify live site loads
-- [ ] Test form submission on production
-- [ ] Check admin email received
-- [ ] Check user confirmation email received
-- [ ] Verify Notion sync (check database)
-
----
-
-## 🧪 Testing
-
-### Manual Testing Checklist
-
-**Form Validation:**
-- [ ] Required fields show error if empty
-- [ ] Email validation works
-- [ ] Phone validation (optional field)
-- [ ] Dynamic fields update when audience changes
-- [ ] Honeypot prevents spam bots
-
-**Email Delivery:**
-- [ ] Admin receives notification
-- [ ] User receives confirmation
-- [ ] Emails not in spam (check headers)
-- [ ] AI personalization works (mentions user's concerns)
-- [ ] Fallback template works if OpenAI fails
-
-**Notion Sync:**
-- [ ] New entry created in database
-- [ ] Correct audience type set
-- [ ] All form fields mapped properly
-- [ ] Email preferences recorded
-
-**Mobile Responsiveness:**
-- [ ] Form fields stack on mobile
-- [ ] Buttons are tappable
-- [ ] Text is readable
-- [ ] Images scale properly
-
----
-
-## 📈 Analytics (Future)
-
-### Planned Metrics
-- Form views
-- Form submissions
-- Completion rate (%)
-- Audience type breakdown
-- Email open rates
-- Email click-through rates
-
-### Implementation (Phase 2)
-- Google Analytics 4
-- Mixpanel for conversion funnels
-- SendGrid for email tracking
-
----
-
-## 🐛 Known Issues & TODOs
-
-### High Priority
-- [ ] Migrate from PHP mail() to SendGrid (better deliverability)
-- [ ] Add rate limiting (prevent spam)
-- [ ] Implement CSRF tokens
-- [ ] Add Google Analytics
-
-### Medium Priority
-- [ ] A/B test form fields
-- [ ] Add reCAPTCHA v3
-- [ ] Optimize images (WebP format)
-- [ ] Add loading state to submit button
-
-### Low Priority
-- [ ] Add dark mode toggle
-- [ ] Animate on scroll (AOS library)
-- [ ] Add FAQ section
-- [ ] Multi-language support
-
----
-
-## 📚 Documentation
-
-**Full documentation is available in [`docs/`](./docs/README.md)**
-
-### Key Documents:
-- [Executive Summary](./docs/EXECUTIVE-SUMMARY.md) - Vision, strategy, roadmap
-- [Technical Architecture](./docs/technical/ARCHITECTURE.md) - System design
-- [Product Roadmap](./docs/planning/PRODUCT-ROADMAP.md) - Feature timeline
-- [Notion Setup Guide](./docs/guides/notion-database-setup.md) - CRM configuration
-
----
-
-## 🤝 Contributing
-
-This is currently a solo project (Tino), but if you're collaborating:
-
-1. Create a feature branch: `git checkout -b feature/your-feature`
-2. Make your changes
-3. Test thoroughly (form submission, emails, Notion sync)
-4. Commit with clear messages: `git commit -m "feat: description"`
-5. Push and create PR: `git push origin feature/your-feature`
-
-### Commit Message Format
-```
-feat: Add new audience type form
-fix: Correct email validation regex
-docs: Update deployment guide
-style: Improve mobile responsiveness
-refactor: Simplify form validation logic
+```bash
+# Deploy to Hostinger
+./scripts/deployment/deploy-to-hostinger.sh
 ```
 
 ---
 
-## 📞 Support & Contact
+## 📚 **Documentation**
 
-**Technical Issues:**
-- Check [`docs/technical/ARCHITECTURE.md`](./docs/technical/ARCHITECTURE.md)
-- Review server logs (Hostinger → File Manager → `error_log`)
-- Email: tino@unisoncounselling.com
+### **Core Guides:**
 
-**Business Inquiries:**
-- Email: tino@unisoncounselling.com
-- Website: https://therapair.com.au
+| Guide | Location | Purpose |
+|-------|----------|---------|
+| **Database Setup** | `/docs/database/NOTION-SETUP.md` | Set up Notion databases |
+| **Database Management** | `/docs/database/DATABASE-GUIDE.md` | Manage 202 therapists |
+| **Onboarding Journey** | `/docs/onboarding/ONBOARDING-JOURNEY-PLAN.md` | Therapist onboarding flow |
+| **Profile Template** | `/docs/onboarding/NOTION-PROFILE-PAGE-TEMPLATE.md` | One-click profile views |
+| **Deployment** | `/docs/deployment/` | Deploy to production |
 
----
+### **Quick Links:**
 
-## 📜 License
-
-Proprietary - All Rights Reserved  
-© 2025 Therapair
-
----
-
-## 🙏 Acknowledgments
-
-- **Unison Mental Health** - First partnership, demo hosting
-- **OpenAI** - GPT-4 API for email generation
-- **Notion** - CRM infrastructure
-- **Hostinger** - Reliable hosting
+- 📖 [Full Documentation Hub](https://therapair.com.au/documentation.html)
+- 🔒 [Privacy Policy](https://therapair.com.au/legal/privacy-policy.html)
+- 📋 [Therapist Terms](https://therapair.com.au/legal/therapist-terms.html)
+- 🌐 [Live Demo](https://unisonmentalhealth.com/find-a-therapist-who-is-right-for-you/)
 
 ---
 
-## 🗺️ Roadmap
+## 🗄️ **Database Status**
 
-**Current Phase: MVP (Q4 2025)** ✅
-- [x] Landing page live
-- [x] AI email automation working
-- [x] Notion CRM integrated
-- [x] Demo widget on Unison site
+### **Victorian Therapists Database**
 
-**Next Phase: Validation (Q1-Q2 2026)**
-- [ ] 100+ users tested matching quiz
-- [ ] 3-5 clinic pilot agreements
-- [ ] User research interviews
-- [ ] Match quality tracking
+**Platform:** Notion  
+**Database ID:** `28c5c25944da80a48d85fd43119f4ec1`  
+**Total:** 202 therapists  
+**Valid:** 193 (with email addresses)  
+**Status:** Cleaned, optimized, ready for onboarding
 
-**See full roadmap:** [`docs/planning/PRODUCT-ROADMAP.md`](./docs/planning/PRODUCT-ROADMAP.md)
+**Features:**
+- ✅ All names parsed (First + Last)
+- ✅ 202 unique onboarding tokens generated
+- ✅ 202 profile URLs created
+- ✅ 29 phone numbers formatted
+- ✅ 74 social media accounts extracted
+- ✅ Regions standardized
+- ✅ Ready for national expansion
+
+**Next Steps:**
+- Send onboarding invitations
+- Verify therapist profiles
+- Publish to website
 
 ---
 
-*Built with ❤️ and AI by Tino*  
-*Last Updated: October 10, 2025*
+## 🛠️ **Tech Stack**
+
+### **Frontend:**
+- HTML5, CSS3 (Tailwind CSS)
+- Vanilla JavaScript
+- Lucide Icons
+- Google Analytics
+
+### **Backend:**
+- PHP (form handling)
+- NodeMailer (email sending)
+- Notion API (database)
+
+### **Tools:**
+- Playwright (testing & screenshots)
+- Git (version control)
+- Hostinger (hosting)
+
+### **APIs:**
+- Notion API (database management)
+- FormSubmit.co (form fallback)
+- Google Analytics (tracking)
+
+---
+
+## 📧 **Email System**
+
+### **Form Submissions:**
+- Admin notification (contact@therapair.com.au)
+- User confirmation (personalized)
+- Optional: AI-powered personalization via OpenAI
+- Notion sync for tracking
+
+### **Onboarding Invitations:**
+- Personalized with therapist name
+- Secure magic link with token
+- 30-day expiry
+- Tracked in Notion
+
+---
+
+## 🔐 **Security & Privacy**
+
+- ✅ Australian Privacy Act 1988 compliant
+- ✅ HTTPS only
+- ✅ Token-based authentication for therapist onboarding
+- ✅ No passwords stored
+- ✅ IP logging for security
+- ✅ Form validation and sanitization
+- ✅ Notion tokens in .env (not in git)
+
+**Security Note:** All sensitive credentials are in `.env` and `config.php`, which are gitignored.
+
+---
+
+## 🧪 **Testing**
+
+### **Run Playwright Tests:**
+
+```bash
+# All tests
+npx playwright test
+
+# Specific test
+npx playwright test tests/form-icons.spec.js
+
+# With UI
+npx playwright test --ui
+```
+
+### **Screenshot Generation:**
+
+```bash
+# Generate all journey screenshots
+node scripts/screenshots/generate-all-screenshots.js
+
+# Generate specific layouts
+node scripts/screenshots/generate-journey-layout.js
+```
+
+---
+
+## 📦 **Deployment**
+
+### **Deploy to Hostinger:**
+
+```bash
+# Full deployment (pulls from GitHub on server)
+./scripts/deployment/deploy-to-hostinger.sh
+```
+
+### **What Happens:**
+1. Commits pushed to GitHub
+2. SSH to Hostinger server
+3. Pull latest from GitHub
+4. Updates live at therapair.com.au
+
+**Deployment URL:** https://therapair.com.au
+
+---
+
+## 📊 **Current Metrics**
+
+### **Website:**
+- Landing page with interactive demo
+- Comprehensive documentation hub
+- Legal pages (privacy, terms, therapist terms)
+- Crisis support resources (Lifeline, Beyond Blue, etc.)
+- Request early access form
+
+### **Database:**
+- 202 Victorian therapists imported
+- 193 valid (with email for onboarding)
+- 74 social media accounts linked
+- 29 phone numbers available
+- All regions standardized
+
+### **Documentation:**
+- 40+ markdown files
+- Organized in /docs/ folders
+- Complete guides for all processes
+- Archive of completed work
+
+---
+
+## 🗂️ **File Organization**
+
+### **Root Level (Essential Files Only):**
+- `index.html` - Landing page
+- `documentation.html` - Docs hub
+- `privacy-request.html` - Privacy form
+- `thank-you.html` - Confirmation page
+- `email-preferences.html` - Email preferences
+- `README.md` - This file
+- `package.json` - Dependencies
+- `playwright.config.js` - Test config
+
+### **Organized Folders:**
+- `/docs` - All documentation (onboarding, database, deployment, archive)
+- `/legal` - Legal pages
+- `/images` - All images organized by type
+- `/scripts` - All automation scripts
+- `/tests` - Playwright tests
+- `/node_modules` - Dependencies
+
+---
+
+## 🎯 **Next Steps**
+
+### **Immediate (This Week):**
+1. [ ] Create Notion profile page template
+2. [ ] Reorder database columns manually
+3. [ ] Select pilot group (10-20 therapists)
+4. [ ] Send first onboarding invitations
+
+### **Short Term (Next 2-4 Weeks):**
+5. [ ] Build therapist onboarding page (/onboarding/{token})
+6. [ ] Create therapist profile pages
+7. [ ] Verify and publish first batch
+8. [ ] Launch therapist directory
+
+### **Medium Term (2-3 Months):**
+9. [ ] Expand to NSW, QLD
+10. [ ] Build admin dashboard
+11. [ ] Implement real-time matching
+12. [ ] Scale to 500+ therapists
+
+---
+
+## 🤝 **Contributing**
+
+This is a private repository for Therapair development.
+
+### **Development Workflow:**
+1. Create feature branch
+2. Make changes
+3. Test locally
+4. Commit with clear messages
+5. Push to GitHub
+6. Deploy via script
+
+---
+
+## 📞 **Contact**
+
+- **Email:** contact@therapair.com.au
+- **Website:** https://therapair.com.au
+- **GitHub:** https://github.com/captuspario/therapair-landing
+
+---
+
+## 📄 **License**
+
+© 2025 Therapair. All rights reserved.
+
+---
+
+## 🔄 **Changelog**
+
+See git commit history for detailed changes.
+
+### **Recent Major Updates:**
+
+**October 2025:**
+- ✅ Complete file structure reorganization
+- ✅ Victorian Therapists database (202 entries)
+- ✅ Social media extraction (74 accounts)
+- ✅ Phone number formatting (29 numbers)
+- ✅ National scalability optimization
+- ✅ Profile page template system
+- ✅ Comprehensive documentation
+
+**September 2025:**
+- ✅ Legal documentation complete
+- ✅ Documentation hub launched
+- ✅ Crisis support resources added
+- ✅ Privacy request form system
+
+---
+
+## ✅ **Project Status: Production Ready**
+
+- 🟢 Landing page
+- 🟢 Legal documentation
+- 🟢 Form submissions
+- 🟢 Database management
+- 🟡 Therapist onboarding (designed, building)
+- 🟡 Public directory (planned)
+- ⚪ Matching algorithm (future)
+
+**MVP Target:** Launch with 20-50 verified therapists by end of 2025
+
+---
+
+For detailed guides, see `/docs/` folder or visit the [documentation hub](https://therapair.com.au/documentation.html).
