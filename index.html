@@ -161,16 +161,68 @@
             padding: 16px;
             cursor: pointer;
             transition: all 0.2s ease;
+            position: relative;
         }
 
         .audience-selector:hover {
             border-color: var(--therapair-primary);
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
         }
 
         .audience-selector.selected {
             border-color: var(--therapair-primary);
             background: rgba(37, 99, 235, 0.05);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15);
+        }
+
+        .audience-selector:focus {
+            outline: 2px solid var(--therapair-primary);
+            outline-offset: 2px;
+        }
+
+        /* Radio indicator styling */
+        .audience-radio-indicator {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(37, 99, 235, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .audience-selector.selected .audience-radio-indicator {
+            border-color: var(--therapair-primary);
+            background: var(--therapair-primary);
+        }
+
+        .radio-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .audience-selector.selected .radio-dot {
+            opacity: 1;
+        }
+
+        /* Form fieldset styling */
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        legend {
+            padding: 0;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         /* Success message styles */
@@ -241,7 +293,7 @@
 
             <!-- Trust indicators -->
             <p class="text-sm mb-4" style="color: var(--therapair-gray);">
-                🔒 Your privacy is protected • No spam, ever
+                🔒 HIPAA Compliant • Your privacy is protected • No spam, ever
             </p>
 
             <!-- Social proof -->
@@ -516,6 +568,103 @@
         </div>
     </section>
 
+    <!-- Security & Compliance Section -->
+    <section id="security-compliance" class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.03) 0%, rgba(139, 92, 246, 0.03) 100%);">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl sm:text-5xl font-bold mb-6">
+                    Your privacy and security matter
+                </h2>
+                <p class="text-xl max-w-3xl mx-auto leading-relaxed" style="color: var(--therapair-gray);">
+                    We're committed to protecting your sensitive health information with enterprise-grade security and full HIPAA compliance.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- HIPAA Compliance -->
+                <div class="feature-card card-hover text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(6, 182, 212, 0.15));">
+                        <i data-lucide="shield-check" class="w-8 h-8" style="color: var(--therapair-primary);"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">HIPAA Compliant</h3>
+                    <p class="text-lg leading-relaxed" style="color: var(--therapair-gray);">
+                        Full compliance with Health Insurance Portability and Accountability Act (HIPAA) regulations for protected health information.
+                    </p>
+                </div>
+
+                <!-- Data Encryption -->
+                <div class="feature-card card-hover text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));">
+                        <i data-lucide="lock" class="w-8 h-8" style="color: var(--therapair-secondary);"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">End-to-End Encryption</h3>
+                    <p class="text-lg leading-relaxed" style="color: var(--therapair-gray);">
+                        All data is encrypted in transit and at rest using industry-standard AES-256 encryption protocols.
+                    </p>
+                </div>
+
+                <!-- Access Controls -->
+                <div class="feature-card card-hover text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(16, 185, 129, 0.15));">
+                        <i data-lucide="user-check" class="w-8 h-8" style="color: var(--therapair-accent);"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Secure Access</h3>
+                    <p class="text-lg leading-relaxed" style="color: var(--therapair-gray);">
+                        Multi-factor authentication and role-based access controls ensure only authorized personnel can access your data.
+                    </p>
+                </div>
+
+                <!-- Audit Logging -->
+                <div class="feature-card card-hover text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(37, 99, 235, 0.15));">
+                        <i data-lucide="activity" class="w-8 h-8" style="color: var(--therapair-success);"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Audit Logging</h3>
+                    <p class="text-lg leading-relaxed" style="color: var(--therapair-gray);">
+                        Comprehensive audit trails monitor all access to your information for complete transparency and security.
+                    </p>
+                </div>
+
+                <!-- Data Minimization -->
+                <div class="feature-card card-hover text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(6, 182, 212, 0.15));">
+                        <i data-lucide="database" class="w-8 h-8" style="color: var(--therapair-primary);"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Data Minimization</h3>
+                    <p class="text-lg leading-relaxed" style="color: var(--therapair-gray);">
+                        We only collect the information necessary for matching and never share your data without explicit consent.
+                    </p>
+                </div>
+
+                <!-- Business Associate Agreements -->
+                <div class="feature-card card-hover text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));">
+                        <i data-lucide="file-check" class="w-8 h-8" style="color: var(--therapair-secondary);"></i>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4">Secure Partners</h3>
+                    <p class="text-lg leading-relaxed" style="color: var(--therapair-gray);">
+                        All third-party vendors sign Business Associate Agreements ensuring HIPAA compliance throughout our ecosystem.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Compliance Statement -->
+            <div class="mt-16 text-center">
+                <div class="bg-white rounded-2xl p-8 shadow-lg border-2" style="border-color: rgba(37, 99, 235, 0.1);">
+                    <h3 class="text-2xl font-semibold mb-4">Our Commitment to Your Privacy</h3>
+                    <p class="text-lg leading-relaxed mb-6" style="color: var(--therapair-gray);">
+                        Therapair is designed with privacy and security at its core. We understand that seeking mental health support requires trust, and we're committed to maintaining the highest standards of data protection and HIPAA compliance.
+                    </p>
+                    <div class="flex flex-wrap justify-center gap-4 text-sm">
+                        <span class="px-4 py-2 rounded-full bg-blue-50 text-blue-700 font-medium">HIPAA Compliant</span>
+                        <span class="px-4 py-2 rounded-full bg-green-50 text-green-700 font-medium">AES-256 Encryption</span>
+                        <span class="px-4 py-2 rounded-full bg-purple-50 text-purple-700 font-medium">SOC 2 Ready</span>
+                        <span class="px-4 py-2 rounded-full bg-orange-50 text-orange-700 font-medium">GDPR Compliant</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Main Interest Form Section with FormSubmit.co -->
     <section id="get-started" class="py-24 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, var(--therapair-background) 100%);">
@@ -544,48 +693,78 @@
                     <input type="hidden" id="therapy-interests-combined" name="Therapy_Interests" value="">
                     
                     <!-- Audience Selection -->
-                    <div>
-                        <h3 class="text-2xl font-semibold mb-6 text-center">You're one of the first to explore this with us</h3>
+                    <fieldset class="space-y-6">
+                        <legend class="text-2xl font-semibold mb-2 text-center w-full">
+                            Request Early Access
+                        </legend>
+                        <p class="text-center text-base mb-6" style="color: var(--therapair-gray);">
+                            First, tell us who you are so we can personalize your experience
+                        </p>
+                        
                         <div class="grid md:grid-cols-2 gap-4">
-                            <div class="audience-selector" data-audience="individual">
+                            <div class="audience-selector selected" data-audience="individual" role="radio" aria-checked="true" tabindex="0">
                                 <div class="flex items-center mb-3">
+                                    <div class="audience-radio-indicator mr-3">
+                                        <div class="radio-dot"></div>
+                                    </div>
                                     <i data-lucide="heart" class="w-6 h-6 mr-3" style="color: var(--therapair-primary);"></i>
                                     <h4 class="text-lg font-semibold">Individual seeking therapy</h4>
                                 </div>
                                 <p class="text-sm" style="color: var(--therapair-gray);">Help us understand what matters most to you</p>
                             </div>
 
-                            <div class="audience-selector" data-audience="therapist">
+                            <div class="audience-selector" data-audience="therapist" role="radio" aria-checked="false" tabindex="0">
                                 <div class="flex items-center mb-3">
+                                    <div class="audience-radio-indicator mr-3">
+                                        <div class="radio-dot"></div>
+                                    </div>
                                     <i data-lucide="user-check" class="w-6 h-6 mr-3" style="color: var(--therapair-secondary);"></i>
                                     <h4 class="text-lg font-semibold">Mental health professional</h4>
                                 </div>
                                 <p class="text-sm" style="color: var(--therapair-gray);">We'd love to learn about your practice</p>
                             </div>
 
-                            <div class="audience-selector" data-audience="organization">
+                            <div class="audience-selector" data-audience="organization" role="radio" aria-checked="false" tabindex="0">
                                 <div class="flex items-center mb-3">
+                                    <div class="audience-radio-indicator mr-3">
+                                        <div class="radio-dot"></div>
+                                    </div>
                                     <i data-lucide="building-2" class="w-6 h-6 mr-3" style="color: var(--therapair-accent);"></i>
                                     <h4 class="text-lg font-semibold">Organisation or clinic</h4>
                                 </div>
                                 <p class="text-sm" style="color: var(--therapair-gray);">We'd love to stay in touch as we grow</p>
                             </div>
 
-                            <div class="audience-selector" data-audience="other">
+                            <div class="audience-selector" data-audience="other" role="radio" aria-checked="false" tabindex="0">
                                 <div class="flex items-center mb-3">
+                                    <div class="audience-radio-indicator mr-3">
+                                        <div class="radio-dot"></div>
+                                    </div>
                                     <i data-lucide="users" class="w-6 h-6 mr-3" style="color: var(--therapair-success);"></i>
                                     <h4 class="text-lg font-semibold">Supporter or investor</h4>
                                 </div>
                                 <p class="text-sm" style="color: var(--therapair-gray);">We'd love to stay in touch as we grow</p>
                             </div>
                         </div>
-                        <input type="hidden" id="selected-audience" name="Audience_Type" required>
+                        <input type="hidden" id="selected-audience" name="Audience_Type" value="individual" required>
+                    </fieldset>
+
+                    <!-- Visual Divider -->
+                    <div class="relative my-8">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t" style="border-color: rgba(37, 99, 235, 0.1);"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm">
+                            <span class="px-4 bg-white" style="color: var(--therapair-gray);">
+                                <i data-lucide="arrow-down" class="w-4 h-4 inline-block"></i>
+                            </span>
+                        </div>
                     </div>
 
                     <!-- Dynamic Form Fields -->
-                    <div id="dynamic-fields" class="hidden space-y-6">
+                    <div id="dynamic-fields" class="space-y-6">
                         <!-- Individual Fields -->
-                        <div id="individual-fields" class="hidden space-y-6">
+                        <div id="individual-fields" class="space-y-6">
                             <div>
                                 <h4 class="text-xl font-semibold mb-4">What's most important to you in a therapist?</h4>
                                 <div class="grid sm:grid-cols-2 gap-4">
@@ -735,17 +914,24 @@
                         </div>
 
                         <!-- Submit Button -->
-                        <div class="text-center pt-4">
+                        <div class="text-center pt-6 border-t border-gray-200">
                             <button
                                 type="submit"
                                 class="btn-primary text-lg px-12 py-4"
+                                id="submit-button"
                             >
-                                Request Early Access
+                                <span class="flex items-center justify-center gap-2">
+                                    <i data-lucide="send" class="w-5 h-5"></i>
+                                    Submit Request for Early Access
+                                </span>
                             </button>
+                            <p class="text-sm mt-3" style="color: var(--therapair-gray);">
+                                By submitting, you'll be added to our early access waitlist
+                            </p>
                         </div>
                     </div>
 
-                    <div id="form-error" class="error-message text-center">Please select an audience type to continue.</div>
+                    <div id="form-error" class="error-message text-center hidden">Please select an audience type to continue.</div>
                 </form>
             </div>
 
@@ -763,8 +949,8 @@
                     <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));">
                         <i data-lucide="shield-check" class="w-8 h-8" style="color: var(--therapair-secondary);"></i>
                     </div>
-                    <h4 class="text-lg font-semibold mb-2">Privacy Protected</h4>
-                    <p class="text-sm" style="color: var(--therapair-gray);">Your information is secure and will never be shared without consent</p>
+                    <h4 class="text-lg font-semibold mb-2">HIPAA Compliant</h4>
+                    <p class="text-sm" style="color: var(--therapair-gray);">Enterprise-grade security with full HIPAA compliance for your protected health information</p>
                 </div>
 
                 <div class="text-center">
@@ -822,6 +1008,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="/legal/privacy-policy.html" class="hover:text-white transition">Privacy Policy</a></li>
                         <li><a href="/legal/terms-and-conditions.html" class="hover:text-white transition">Terms & Conditions</a></li>
+                        <li><a href="/legal/hipaa-compliance.html" class="hover:text-white transition">HIPAA Compliance</a></li>
                         <!-- <li><a href="/email-preferences.html" class="hover:text-white transition">Email Preferences</a></li> -->
                         <li><a href="/privacy-request.html" class="hover:text-white transition">Privacy Request</a></li>
                     </ul>
@@ -851,15 +1038,26 @@
             </div>
 
             <!-- Bottom Bar -->
-            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="text-sm text-gray-400">
-                    © 2025 Therapair. Made with 💕 for inclusive mental health.
+            <div class="border-t border-gray-800 pt-8">
+                <!-- HIPAA Compliance Statement -->
+                <div class="text-center mb-6">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-900/20 text-blue-300 text-sm font-medium">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        HIPAA Compliant Platform
+                    </div>
                 </div>
-                <div class="flex gap-6 text-sm">
-                    <a href="/legal/privacy-policy.html" class="hover:text-white transition">Privacy</a>
-                    <a href="/legal/terms-and-conditions.html" class="hover:text-white transition">Terms</a>
-                    <a href="/documentation.html" class="hover:text-white transition">Docs</a>
-                    <a href="mailto:contact@therapair.com.au" class="hover:text-white transition">Contact</a>
+                
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-sm text-gray-400">
+                        © 2025 Therapair. Made with 💕 for inclusive mental health.
+                    </div>
+                    <div class="flex gap-6 text-sm">
+                        <a href="/legal/privacy-policy.html" class="hover:text-white transition">Privacy</a>
+                        <a href="/legal/terms-and-conditions.html" class="hover:text-white transition">Terms</a>
+                        <a href="/legal/hipaa-compliance.html" class="hover:text-white transition">HIPAA</a>
+                        <a href="/documentation.html" class="hover:text-white transition">Docs</a>
+                        <a href="mailto:contact@therapair.com.au" class="hover:text-white transition">Contact</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -877,73 +1075,122 @@
             });
         }
 
+        // Function to handle audience selection
+        function selectAudience(audience, element) {
+            // Remove selected class and aria-checked from all selectors
+            document.querySelectorAll('.audience-selector').forEach(s => {
+                s.classList.remove('selected');
+                s.setAttribute('aria-checked', 'false');
+            });
+
+            // Add selected class and aria-checked to selected element
+            if (element) {
+                element.classList.add('selected');
+                element.setAttribute('aria-checked', 'true');
+            }
+
+            // Set hidden input value
+            document.getElementById('selected-audience').value = audience;
+
+            // Show dynamic fields
+            document.getElementById('dynamic-fields').classList.remove('hidden');
+
+            // Disable ALL fields in ALL sections first
+            document.querySelectorAll('#individual-fields input, #individual-fields textarea').forEach(el => {
+                el.disabled = true;
+                el.removeAttribute('required');
+            });
+            document.querySelectorAll('#professional-fields input, #professional-fields textarea').forEach(el => {
+                el.disabled = true;
+                el.removeAttribute('required');
+            });
+            document.querySelectorAll('#organization-fields input, #organization-fields textarea').forEach(el => {
+                el.disabled = true;
+                el.removeAttribute('required');
+            });
+            document.querySelectorAll('#other-fields input, #other-fields textarea').forEach(el => {
+                el.disabled = true;
+                el.removeAttribute('required');
+            });
+
+            // Hide all field groups
+            document.getElementById('individual-fields').classList.add('hidden');
+            document.getElementById('professional-fields').classList.add('hidden');
+            document.getElementById('organization-fields').classList.add('hidden');
+            document.getElementById('other-fields').classList.add('hidden');
+
+            // Show appropriate field group and enable its fields
+            if (audience === 'individual') {
+                document.getElementById('individual-fields').classList.remove('hidden');
+                document.querySelectorAll('#individual-fields input, #individual-fields textarea').forEach(el => el.disabled = false);
+                document.querySelector('#individual-fields input[name="Email"]').setAttribute('required', 'required');
+            } else if (audience === 'therapist') {
+                document.getElementById('professional-fields').classList.remove('hidden');
+                document.querySelectorAll('#professional-fields input, #professional-fields textarea').forEach(el => el.disabled = false);
+                document.querySelector('#professional-fields input[name="Full_Name"]').setAttribute('required', 'required');
+                document.querySelector('#professional-fields input[name="Professional_Title"]').setAttribute('required', 'required');
+                document.querySelector('#professional-fields input[name="Email"]').setAttribute('required', 'required');
+            } else if (audience === 'organization') {
+                document.getElementById('organization-fields').classList.remove('hidden');
+                document.querySelectorAll('#organization-fields input, #organization-fields textarea').forEach(el => el.disabled = false);
+                document.querySelector('#organization-fields input[name="Contact_Name"]').setAttribute('required', 'required');
+                document.querySelector('#organization-fields input[name="Position"]').setAttribute('required', 'required');
+                document.querySelector('#organization-fields input[name="Organization_Name"]').setAttribute('required', 'required');
+                document.querySelector('#organization-fields input[name="Email"]').setAttribute('required', 'required');
+            } else if (audience === 'other') {
+                document.getElementById('other-fields').classList.remove('hidden');
+                document.querySelectorAll('#other-fields input, #other-fields textarea').forEach(el => el.disabled = false);
+                document.querySelector('#other-fields input[name="Email"]').setAttribute('required', 'required');
+            }
+
+            // Hide error message
+            document.getElementById('form-error').classList.add('hidden');
+
+            // Re-create icons after showing fields
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 100);
+
+            // Scroll to form fields smoothly if not initial load
+            if (element) {
+                document.getElementById('dynamic-fields').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        // Initialize with individual selected by default
+        function initializeForm() {
+            const individualSelector = document.querySelector('[data-audience="individual"]');
+            if (individualSelector) {
+                selectAudience('individual', individualSelector);
+            }
+        }
+
         // Audience selection handling
         document.querySelectorAll('.audience-selector').forEach(selector => {
+            // Click handler
             selector.addEventListener('click', function() {
-                // Remove selected class from all selectors
-                document.querySelectorAll('.audience-selector').forEach(s => s.classList.remove('selected'));
-
-                // Add selected class to clicked selector
-                this.classList.add('selected');
-
-                // Set hidden input value
                 const audience = this.dataset.audience;
-                document.getElementById('selected-audience').value = audience;
-
-                // Show dynamic fields
-                document.getElementById('dynamic-fields').classList.remove('hidden');
-
-                // Disable ALL fields in ALL sections first
-                document.querySelectorAll('#individual-fields input, #individual-fields textarea').forEach(el => {
-                    el.disabled = true;
-                    el.removeAttribute('required');
-                });
-                document.querySelectorAll('#professional-fields input, #professional-fields textarea').forEach(el => {
-                    el.disabled = true;
-                    el.removeAttribute('required');
-                });
-                document.querySelectorAll('#organization-fields input, #organization-fields textarea').forEach(el => {
-                    el.disabled = true;
-                    el.removeAttribute('required');
-                });
-                document.querySelectorAll('#other-fields input, #other-fields textarea').forEach(el => {
-                    el.disabled = true;
-                    el.removeAttribute('required');
-                });
-
-                // Hide all field groups
-                document.getElementById('individual-fields').classList.add('hidden');
-                document.getElementById('professional-fields').classList.add('hidden');
-                document.getElementById('organization-fields').classList.add('hidden');
-                document.getElementById('other-fields').classList.add('hidden');
-
-                // Show appropriate field group and enable its fields
-                if (audience === 'individual') {
-                    document.getElementById('individual-fields').classList.remove('hidden');
-                    document.querySelectorAll('#individual-fields input, #individual-fields textarea').forEach(el => el.disabled = false);
-                    document.querySelector('#individual-fields input[name="Email"]').setAttribute('required', 'required');
-                } else if (audience === 'therapist') {
-                    document.getElementById('professional-fields').classList.remove('hidden');
-                    document.querySelectorAll('#professional-fields input, #professional-fields textarea').forEach(el => el.disabled = false);
-                    document.querySelector('#professional-fields input[name="Full_Name"]').setAttribute('required', 'required');
-                    document.querySelector('#professional-fields input[name="Professional_Title"]').setAttribute('required', 'required');
-                    document.querySelector('#professional-fields input[name="Email"]').setAttribute('required', 'required');
-                } else if (audience === 'organization') {
-                    document.getElementById('organization-fields').classList.remove('hidden');
-                    document.querySelectorAll('#organization-fields input, #organization-fields textarea').forEach(el => el.disabled = false);
-                    document.querySelector('#organization-fields input[name="Contact_Name"]').setAttribute('required', 'required');
-                    document.querySelector('#organization-fields input[name="Position"]').setAttribute('required', 'required');
-                    document.querySelector('#organization-fields input[name="Organization_Name"]').setAttribute('required', 'required');
-                    document.querySelector('#organization-fields input[name="Email"]').setAttribute('required', 'required');
-                } else if (audience === 'other') {
-                    document.getElementById('other-fields').classList.remove('hidden');
-                    document.querySelectorAll('#other-fields input, #other-fields textarea').forEach(el => el.disabled = false);
-                    document.querySelector('#other-fields input[name="Email"]').setAttribute('required', 'required');
-                }
-
-                // Hide error message
-                document.getElementById('form-error').style.display = 'none';
+                selectAudience(audience, this);
             });
+
+            // Keyboard handler (Enter and Space)
+            selector.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const audience = this.dataset.audience;
+                    selectAudience(audience, this);
+                }
+            });
+        });
+
+        // Initialize form on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize form with default selection
+            initializeForm();
+            // Re-create icons after form fields are shown
+            setTimeout(() => {
+                lucide.createIcons();
+            }, 200);
         });
 
         // Form submission validation
