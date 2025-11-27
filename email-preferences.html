@@ -9,18 +9,31 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Therapair Brand Colors -->
+    <!-- Therapair Brand Colors & Typography (Updated Design System) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --therapair-primary: #2563eb;
-            --therapair-secondary: #7c3aed;
-            --therapair-accent: #06b6d4;
-            --therapair-gray: #6b7280;
-            --therapair-light-gray: #f3f4f6;
+            --therapair-dark-navy: #0F1E4B;
+            --therapair-mid-blue: #3D578A;
+            --therapair-light-blue: #95B1CD;
+            --therapair-black: #000000;
+            --therapair-warm-beige: #FAF8F5;
+            --therapair-dark-grey: #4A5568;
+            
+            --therapair-primary: var(--therapair-dark-navy);
+            --therapair-secondary: var(--therapair-mid-blue);
+            --therapair-accent: var(--therapair-light-blue);
+            --therapair-gray: var(--therapair-dark-grey);
+            --therapair-light-gray: var(--therapair-warm-beige);
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
+<body class="min-h-screen" style="background-color: var(--therapair-warm-beige);">
     <div class="max-w-2xl mx-auto px-4 py-12">
         <!-- Header -->
         <div class="text-center mb-8">
@@ -41,7 +54,7 @@
                         id="email" 
                         name="email" 
                         required
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#0F1E4B] focus:border-transparent"
                         placeholder="your@email.com"
                     >
                 </div>
@@ -53,31 +66,31 @@
                     </label>
                     <div class="space-y-3">
                         <label class="flex items-center">
-                            <input type="checkbox" name="preferences[]" value="Product Updates" checked class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <input type="checkbox" name="preferences[]" value="Product Updates" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
                             <span class="text-gray-700">Product Updates - New features and improvements</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="preferences[]" value="Launch Announcements" checked class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <input type="checkbox" name="preferences[]" value="Launch Announcements" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
                             <span class="text-gray-700">Launch Announcements - When we officially go live</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="preferences[]" value="Therapist Opportunities" checked class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <input type="checkbox" name="preferences[]" value="Therapist Opportunities" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
                             <span class="text-gray-700">Therapist Opportunities - Join our network</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="preferences[]" value="Partnership News" checked class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <input type="checkbox" name="preferences[]" value="Partnership News" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
                             <span class="text-gray-700">Partnership News - Collaboration opportunities</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="preferences[]" value="Research & Feedback" checked class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <input type="checkbox" name="preferences[]" value="Research & Feedback" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
                             <span class="text-gray-700">Research & Feedback - Help shape our service</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="preferences[]" value="Event Invitations" checked class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <input type="checkbox" name="preferences[]" value="Event Invitations" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
                             <span class="text-gray-700">Event Invitations - Webinars and meetups</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="preferences[]" value="Investment Updates" checked class="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            <input type="checkbox" name="preferences[]" value="Investment Updates" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
                             <span class="text-gray-700">Investment Updates - For supporters and investors</span>
                         </label>
                     </div>
@@ -96,7 +109,7 @@
                 <div class="flex gap-4">
                     <button 
                         type="submit" 
-                        class="flex-1 bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium"
+                        class="flex-1 bg-[#0F1E4B] text-white py-3 px-6 rounded-lg hover:bg-[#2D4770] focus:ring-2 focus:ring-[#0F1E4B] focus:ring-offset-2 transition-colors font-medium"
                     >
                         Update Preferences
                     </button>
@@ -115,7 +128,7 @@
         <div class="mt-8 text-center text-sm text-gray-500">
             <p>You can update your preferences at any time. We respect your privacy and will never share your information.</p>
             <p class="mt-2">
-                <a href="/" class="text-blue-600 hover:text-blue-700">← Back to Therapair</a>
+                <a href="/" class="text-[#0F1E4B] hover:text-[#2D4770]">← Back to Therapair</a>
             </p>
         </div>
     </div>
@@ -131,13 +144,13 @@
                 // Uncheck all preferences
                 checkboxes.forEach(cb => cb.checked = false);
                 submitButton.textContent = 'Unsubscribe';
-                submitButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                submitButton.classList.remove('bg-[#0F1E4B]', 'hover:bg-[#2D4770]');
                 submitButton.classList.add('bg-red-600', 'hover:bg-red-700');
             } else {
                 // Reset button
                 submitButton.textContent = 'Update Preferences';
                 submitButton.classList.remove('bg-red-600', 'hover:bg-red-700');
-                submitButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                submitButton.classList.add('bg-[#0F1E4B]', 'hover:bg-[#2D4770]');
             }
         });
 
@@ -156,7 +169,7 @@
             const submitButton = document.querySelector('button[type="submit"]');
             submitButton.textContent = 'Update Preferences';
             submitButton.classList.remove('bg-red-600', 'hover:bg-red-700');
-            submitButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+            submitButton.classList.add('bg-[#0F1E4B]', 'hover:bg-[#2D4770]');
         });
 
         // Handle preference checkboxes
@@ -169,7 +182,7 @@
                     const submitButton = document.querySelector('button[type="submit"]');
                     submitButton.textContent = 'Update Preferences';
                     submitButton.classList.remove('bg-red-600', 'hover:bg-red-700');
-                    submitButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                    submitButton.classList.add('bg-[#0F1E4B]', 'hover:bg-[#2D4770]');
                 }
             });
         });

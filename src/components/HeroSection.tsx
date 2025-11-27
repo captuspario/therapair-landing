@@ -13,7 +13,7 @@ export function HeroSection() {
           alt="Diverse therapy session"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--therapair-alabaster)]/95 via-[var(--therapair-alabaster)]/90 to-[var(--therapair-calm-clay)]/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FAF8F5]/95 via-[#FAF8F5]/90 to-[#95B1CD]/20"></div>
       </div>
       
       {/* Hero content */}
@@ -22,8 +22,8 @@ export function HeroSection() {
           <TherapairLogo size={32} />
         </div>
 
-        <div className="inline-block px-4 py-2 mb-6 rounded-full bg-[var(--therapair-calm-clay)]/20 border border-[var(--therapair-rosewood)]/30">
-          <p className="text-sm">AI concierge for mental health</p>
+        <div className="inline-block px-4 py-2 mb-6 rounded-full bg-[#95B1CD]/20 border border-[#3D578A]/30">
+          <p className="text-sm" style={{ color: '#4A5568' }}>AI concierge for mental health</p>
         </div>
         
         <h1 className="mb-6 text-4xl sm:text-5xl lg:text-6xl">
@@ -39,10 +39,10 @@ export function HeroSection() {
           <Input
             type="email"
             placeholder="Enter your email"
-            className="flex-1 bg-white/90 border-[var(--therapair-rosewood)]/30 focus:border-[var(--therapair-rosewood)] rounded-xl"
+            className="flex-1 bg-white/90 border-[#3D578A]/30 focus:border-[#0F1E4B] rounded-xl"
           />
           <Button 
-            className="bg-[var(--therapair-rosewood)] hover:bg-[var(--therapair-terracotta)] text-white rounded-xl px-8 transition-colors duration-200"
+            className="bg-[#0F1E4B] hover:bg-[#2D4770] text-white rounded-xl px-8 transition-colors duration-200"
             data-role="early-access-signup"
           >
             Join Early Access
