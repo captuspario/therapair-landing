@@ -1,4 +1,5 @@
 import { Instagram, Linkedin, Mail } from "lucide-react";
+import { TherapairLogo } from "./TherapairLogo";
 
 export function Footer() {
   return (
@@ -7,7 +8,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl mb-2">Therapair</h3>
+            <div className="mb-3">
+              <TherapairLogo size={28} />
+            </div>
             <p className="text-sm opacity-80">
               AI-powered therapist matching for inclusive mental healthcare
             </p>

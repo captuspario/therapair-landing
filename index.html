@@ -25,10 +25,10 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-    <!-- Therapair Brand Colors & Typography -->
+    <!-- Therapair Brand Colors & Typography (Option A: Purple / Open Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -47,17 +47,24 @@
 
     <style>
         :root {
-            --therapair-primary: #2563eb;
-            --therapair-primary-hover: #1d4ed8;
-            --therapair-secondary: #06b6d4;
-            --therapair-accent: #8b5cf6;
-            --therapair-background: #fefefe;
+            /* Option A: Therapair Purple corporate palette */
+            --therapair-purple-base: #9B74B7;
+            --therapair-purple-dark: #4F064F;
+            --therapair-purple-light: #D4B5D8;
+            --therapair-purple-bg: #F8F4FF;
+
+            /* Map existing tokens to new system */
+            --therapair-primary: var(--therapair-purple-base);
+            --therapair-primary-hover: var(--therapair-purple-dark);
+            --therapair-secondary: #3B82F6; /* blue accent */
+            --therapair-accent: #8B5CF6;    /* purple-blue accent */
+            --therapair-background: var(--therapair-purple-bg);
             --therapair-surface: #ffffff;
-            --therapair-charcoal: #1f2937;
-            --therapair-gray: #6b7280;
-            --therapair-success: #10b981;
-            --therapair-gradient-start: #2563eb;
-            --therapair-gradient-end: #06b6d4;
+            --therapair-charcoal: #1E293B;
+            --therapair-gray: #64748B;
+            --therapair-success: #10B981;
+            --therapair-gradient-start: var(--therapair-purple-base);
+            --therapair-gradient-end: var(--therapair-purple-dark);
         }
 
         html {
@@ -65,13 +72,12 @@
         }
         
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
             background-color: var(--therapair-background);
             color: var(--therapair-charcoal);
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
             font-weight: 600;
         }
 
@@ -1283,6 +1289,9 @@
             });
         });
     </script>
+
+    <!-- Therapair Global Feedback Widget -->
+    <script src="/public/therapair-feedback-widget.js"></script>
 </body>
 </html>
 

@@ -1,6 +1,7 @@
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { TherapairLogo } from "./TherapairLogo";
 
 export function HeroSection() {
   return (
@@ -16,7 +17,11 @@ export function HeroSection() {
       </div>
       
       {/* Hero content */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+      <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
+        <div className="flex justify-center">
+          <TherapairLogo size={32} />
+        </div>
+
         <div className="inline-block px-4 py-2 mb-6 rounded-full bg-[var(--therapair-calm-clay)]/20 border border-[var(--therapair-rosewood)]/30">
           <p className="text-sm">AI concierge for mental health</p>
         </div>
