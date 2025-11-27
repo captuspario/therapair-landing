@@ -271,6 +271,26 @@
 
         <!-- Hero Content -->
         <div class="relative z-10 max-w-5xl mx-auto text-center animate-fade-in">
+            <!-- Logo -->
+            <div class="mb-8 flex justify-center">
+                <div class="flex items-center gap-4">
+                    <!-- TheraPair Icon SVG -->
+                    <div style="width: 64px; height: 61px;">
+                        <svg width="64" height="61" viewBox="0 0 409 391" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+                            <rect fill="#0F1E4B" height="184.001" rx="92.0005" transform="rotate(90 294.82 7.31618)" width="383.684" x="294.82" y="7.31618" />
+                            <path d="M204.02 7.31616C148.978 7.31616 110.819 51.8734 110.819 95.6576C110.819 95.6576 110.819 169.816 110.819 197.59C178.251 197.59 204.02 273.909 204.02 273.909C204.02 273.909 225.297 197.59 294.82 197.59C294.82 172.43 295.279 95.6576 295.279 95.6576C295.279 54.8141 259.061 7.31616 204.02 7.31616Z" fill="#3D578A" />
+                            <path d="M202.344 0C147.556 0.173406 103.194 44.6403 103.194 99.4698V197.954H98.9767C44.3133 197.954 0 153.64 0 98.9767C0.000150894 44.3134 44.3134 0.000144158 98.9767 0H202.344Z" fill="#95B1CD" />
+                            <path d="M309.798 0C364.461 0.000154817 408.775 44.3134 408.775 98.9767C408.775 153.64 364.461 197.954 309.798 197.954H302.138V99.4698C302.138 44.6403 257.777 0.173402 202.988 0H309.798Z" fill="#95B1CD" />
+                        </svg>
+                    </div>
+                    <!-- Wordmark -->
+                    <div class="space-y-0.5">
+                        <div style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 40px; color: #000000; line-height: 1.2; letter-spacing: -0.02em;">TheraPair</div>
+                        <div style="font-family: 'Inter', sans-serif; font-weight: 400; font-size: 11px; color: #000000; letter-spacing: 0.15em; text-transform: uppercase;">SMART THERAPY MATCHING</div>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Badge -->
             <div class="inline-block px-6 py-3 mb-8 rounded-full bg-white/80 border-2" style="border-color: var(--therapair-primary);">
                 <p class="text-sm font-medium flex items-center gap-2" style="color: var(--therapair-primary);">
@@ -295,6 +315,7 @@
                 <a
                     href="#get-started"
                     class="btn-primary text-lg px-12 py-4 inline-block"
+                    onclick="event.preventDefault(); document.querySelector('body').classList.add('scroll-allowed'); document.getElementById('get-started').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;"
                 >
                     Request Early Access
                 </a>
@@ -711,18 +732,7 @@
                         </p>
                         
                         <div class="grid md:grid-cols-2 gap-4">
-                            <div class="audience-selector selected" data-audience="individual" role="radio" aria-checked="true" tabindex="0">
-                                <div class="flex items-center mb-3">
-                                    <div class="audience-radio-indicator mr-3">
-                                        <div class="radio-dot"></div>
-                                    </div>
-                                    <i data-lucide="heart" class="w-6 h-6 mr-3" style="color: var(--therapair-primary);"></i>
-                                    <h4 class="text-lg font-semibold">Individual seeking therapy</h4>
-                                </div>
-                                <p class="text-sm" style="color: var(--therapair-gray);">Help us understand what matters most to you</p>
-                            </div>
-
-                            <div class="audience-selector" data-audience="therapist" role="radio" aria-checked="false" tabindex="0">
+                            <div class="audience-selector selected" data-audience="therapist" role="radio" aria-checked="true" tabindex="0">
                                 <div class="flex items-center mb-3">
                                     <div class="audience-radio-indicator mr-3">
                                         <div class="radio-dot"></div>
@@ -744,6 +754,17 @@
                                 <p class="text-sm" style="color: var(--therapair-gray);">We'd love to stay in touch as we grow</p>
                             </div>
 
+                            <div class="audience-selector" data-audience="individual" role="radio" aria-checked="false" tabindex="0">
+                                <div class="flex items-center mb-3">
+                                    <div class="audience-radio-indicator mr-3">
+                                        <div class="radio-dot"></div>
+                                    </div>
+                                    <i data-lucide="heart" class="w-6 h-6 mr-3" style="color: var(--therapair-primary);"></i>
+                                    <h4 class="text-lg font-semibold">Individual seeking therapy</h4>
+                                </div>
+                                <p class="text-sm" style="color: var(--therapair-gray);">Help us understand what matters most to you</p>
+                            </div>
+
                             <div class="audience-selector" data-audience="other" role="radio" aria-checked="false" tabindex="0">
                                 <div class="flex items-center mb-3">
                                     <div class="audience-radio-indicator mr-3">
@@ -755,7 +776,7 @@
                                 <p class="text-sm" style="color: var(--therapair-gray);">We'd love to stay in touch as we grow</p>
                             </div>
                         </div>
-                        <input type="hidden" id="selected-audience" name="Audience_Type" value="individual" required>
+                        <input type="hidden" id="selected-audience" name="Audience_Type" value="therapist" required>
                     </fieldset>
 
                     <!-- Visual Divider -->
@@ -1173,17 +1194,17 @@
                 lucide.createIcons();
             }, 100);
 
-            // Scroll to form fields smoothly if not initial load
-            if (element) {
+            // Scroll to form fields smoothly only on user interaction (not initial load)
+            if (element && !element.classList.contains('initial-load')) {
                 document.getElementById('dynamic-fields').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         }
 
-        // Initialize with individual selected by default
+        // Initialize with therapist (Mental Health Professional) selected by default
         function initializeForm() {
-            const individualSelector = document.querySelector('[data-audience="individual"]');
-            if (individualSelector) {
-                selectAudience('individual', individualSelector);
+            const therapistSelector = document.querySelector('[data-audience="therapist"]');
+            if (therapistSelector) {
+                selectAudience('therapist', therapistSelector);
             }
         }
 
@@ -1205,10 +1226,32 @@
             });
         });
 
+        // Prevent auto-scroll on page load
+        window.addEventListener('load', function() {
+            // Remove hash from URL without scrolling
+            if (window.location.hash) {
+                const hash = window.location.hash;
+                window.history.replaceState(null, null, ' ');
+                // Allow smooth scrolling for future clicks
+                document.querySelector('body').classList.add('scroll-allowed');
+            }
+        });
+
         // Initialize form on page load
         document.addEventListener('DOMContentLoaded', function() {
+            // Mark initial selector to prevent scroll on load
+            const therapistSelector = document.querySelector('[data-audience="therapist"]');
+            if (therapistSelector) {
+                therapistSelector.classList.add('initial-load');
+            }
             // Initialize form with default selection
             initializeForm();
+            // Remove initial-load class after initialization
+            setTimeout(() => {
+                if (therapistSelector) {
+                    therapistSelector.classList.remove('initial-load');
+                }
+            }, 100);
             // Re-create icons after form fields are shown
             setTimeout(() => {
                 lucide.createIcons();
