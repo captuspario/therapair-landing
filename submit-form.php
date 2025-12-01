@@ -23,14 +23,16 @@ function sanitize($data)
     return htmlspecialchars(strip_tags(trim($data)), ENT_QUOTES, 'UTF-8');
 }
 
-// Use constants from config
-$ADMIN_EMAIL = ADMIN_EMAIL;
-$FROM_EMAIL = FROM_EMAIL;
-$FROM_NAME = FROM_NAME;
-$WEBSITE_URL = WEBSITE_URL;
-$OPENAI_API_KEY = OPENAI_API_KEY;
-$USE_AI_PERSONALIZATION = USE_AI_PERSONALIZATION;
-$AI_MODEL = AI_MODEL;
+// Use constants from config with fallbacks
+$ADMIN_EMAIL = defined('ADMIN_EMAIL') ? ADMIN_EMAIL : 'contact@therapair.com.au';
+$FROM_EMAIL = defined('FROM_EMAIL') ? FROM_EMAIL : 'contact@therapair.com.au';
+$FROM_NAME = defined('FROM_NAME') ? FROM_NAME : 'Therapair Team';
+$WEBSITE_URL = defined('WEBSITE_URL') ? WEBSITE_URL : 'https://therapair.com.au';
+$RESEND_API_KEY = defined('RESEND_API_KEY') ? RESEND_API_KEY : '';
+$USE_RESEND = defined('USE_RESEND') ? USE_RESEND : true;
+$OPENAI_API_KEY = defined('OPENAI_API_KEY') ? OPENAI_API_KEY : '';
+$USE_AI_PERSONALIZATION = defined('USE_AI_PERSONALIZATION') ? USE_AI_PERSONALIZATION : false;
+$AI_MODEL = defined('AI_MODEL') ? AI_MODEL : 'gpt-4o-mini';
 $USE_NOTION_SYNC = defined('USE_NOTION_SYNC') ? USE_NOTION_SYNC : false;
 
 // Load Notion sync handler
@@ -91,6 +93,10 @@ $formData = collectFormData($_POST, $audience);
 $adminSubject = getAdminSubject($audience);
 $adminMessage = formatAdminEmail($formData, $audience, $timestamp);
 
+// Determine sender email (use verified Resend domain for immediate delivery)
+$senderEmail = 'onboarding@resend.dev'; // Use Resend's verified domain
+$senderName = $FROM_NAME;
+
 $adminHeaders = "From: {$FROM_NAME} <{$FROM_EMAIL}>\r\n";
 $adminHeaders .= "Reply-To: {$email}\r\n";
 $adminHeaders .= "MIME-Version: 1.0\r\n";
@@ -98,7 +104,20 @@ $adminHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
 $adminHeaders .= "X-Mailer: Therapair Contact Form\r\n";
 $adminHeaders .= "X-Priority: 3\r\n";
 
-$adminSent = mail($ADMIN_EMAIL, $adminSubject, $adminMessage, $adminHeaders);
+// Send admin email via Resend or fallback to mail()
+$adminSent = sendEmailViaResend(
+    $ADMIN_EMAIL,
+    $adminSubject,
+    $adminMessage,
+    $senderEmail,
+    $FROM_NAME,
+    $email // Reply-To
+);
+
+// If Resend failed, try fallback
+if (!$adminSent && !$USE_RESEND) {
+    $adminSent = @mail($ADMIN_EMAIL, $adminSubject, $adminMessage, $adminHeaders);
+}
 
 // ============================================
 // 2. SEND CONFIRMATION EMAIL TO USER (AI-POWERED)
@@ -115,20 +134,33 @@ if ($USE_AI_PERSONALIZATION && !empty($OPENAI_API_KEY) && $OPENAI_API_KEY !== 'Y
             $userMessage = formatUserEmail($formData, $audience);
         }
     } catch (Exception $e) {
+        error_log("AI email generation failed: " . $e->getMessage());
         $userMessage = formatUserEmail($formData, $audience);
     }
 } else {
     $userMessage = formatUserEmail($formData, $audience);
 }
 
-$userHeaders = "From: {$FROM_NAME} <{$FROM_EMAIL}>\r\n";
-$userHeaders .= "Reply-To: {$ADMIN_EMAIL}\r\n";
-$userHeaders .= "MIME-Version: 1.0\r\n";
-$userHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
-$userHeaders .= "X-Mailer: Therapair Automated Response\r\n";
-$userHeaders .= "X-Priority: 3\r\n";
+// Send user email via Resend or fallback to mail()
+$userSent = sendEmailViaResend(
+    $email,
+    $userSubject,
+    $userMessage,
+    $senderEmail,
+    $FROM_NAME,
+    $ADMIN_EMAIL // Reply-To
+);
 
-$userSent = mail($email, $userSubject, $userMessage, $userHeaders);
+// If Resend failed, try fallback
+if (!$userSent && !$USE_RESEND) {
+    $userHeaders = "From: {$FROM_NAME} <{$FROM_EMAIL}>\r\n";
+    $userHeaders .= "Reply-To: {$ADMIN_EMAIL}\r\n";
+    $userHeaders .= "MIME-Version: 1.0\r\n";
+    $userHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $userHeaders .= "X-Mailer: Therapair Automated Response\r\n";
+    $userHeaders .= "X-Priority: 3\r\n";
+    $userSent = @mail($email, $userSubject, $userMessage, $userHeaders);
+}
 
 // Email system working correctly - logging removed
 
@@ -375,6 +407,72 @@ function formatUserEmailWithAI($aiContent, $data, $audience)
 // ============================================
 // HELPER FUNCTIONS
 // ============================================
+
+/**
+ * Send email via Resend API
+ * Returns true on success, false on failure
+ */
+function sendEmailViaResend($to, $subject, $html, $fromEmail, $fromName, $replyTo = '')
+{
+    global $RESEND_API_KEY, $USE_RESEND;
+    
+    // If Resend is disabled or API key is missing, return false
+    if (!$USE_RESEND || empty($RESEND_API_KEY)) {
+        error_log("Resend email skipped: USE_RESEND=" . ($USE_RESEND ? 'true' : 'false') . ", API_KEY=" . (empty($RESEND_API_KEY) ? 'empty' : 'set'));
+        return false;
+    }
+    
+    // Prepare email data for Resend API
+    // Handle sender format (can be string like "Therapair <onboarding@resend.dev>" or just email)
+    $fromAddress = $fromEmail;
+    if (strpos($fromEmail, '<') !== false) {
+        // Already formatted as "Name <email>"
+        $fromAddress = $fromEmail;
+    } else {
+        // Format as "Name <email>"
+        $fromAddress = $fromName . ' <' . $fromEmail . '>';
+    }
+    
+    $emailData = [
+        'from' => $fromAddress,
+        'to' => [$to],
+        'subject' => $subject,
+        'html' => $html
+    ];
+    
+    if (!empty($replyTo)) {
+        $emailData['reply_to'] = $replyTo;
+    }
+    
+    // Send via Resend API
+    $ch = curl_init('https://api.resend.com/emails');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode($emailData),
+        CURLOPT_HTTPHEADER => [
+            'Authorization: Bearer ' . $RESEND_API_KEY,
+            'Content-Type: application/json'
+        ]
+    ]);
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($ch);
+    curl_close($ch);
+    
+    if ($httpCode === 200) {
+        $responseData = json_decode($response, true);
+        if (isset($responseData['id'])) {
+            error_log("Resend email sent successfully. ID: " . $responseData['id']);
+            return true;
+        }
+    }
+    
+    // Log error details
+    error_log("Resend email failed. HTTP Code: {$httpCode}, Error: {$curlError}, Response: " . substr($response, 0, 200));
+    return false;
+}
 
 function collectFormData($post, $audience)
 {
