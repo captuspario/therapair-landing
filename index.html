@@ -747,9 +747,9 @@
                     </div>
 
                     <!-- Dynamic Form Fields -->
-                    <div id="dynamic-fields" class="space-y-6">
+                    <div id="dynamic-fields" class="space-y-6" style="position: relative; min-height: 600px;">
                         <!-- Individual Fields -->
-                        <div id="individual-fields" class="space-y-6">
+                        <div id="individual-fields" class="space-y-6" style="position: absolute; top: 0; left: 0; right: 0; width: 100%; visibility: hidden; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;">
                             <div>
                                 <h4 class="text-xl font-semibold mb-4">What's most important to you in a therapist?</h4>
                                 <div class="grid sm:grid-cols-2 gap-4">
@@ -861,7 +861,7 @@
                         </div>
 
                         <!-- Professional Fields -->
-                        <div id="professional-fields" class="hidden space-y-6">
+                        <div id="professional-fields" class="space-y-6" style="position: absolute; top: 0; left: 0; right: 0; width: 100%; visibility: hidden; opacity: 0; pointer-events: none;">
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Full Name *</label>
@@ -910,7 +910,7 @@
                         </div>
 
                         <!-- Organisation Fields -->
-                        <div id="organization-fields" class="hidden space-y-6">
+                        <div id="organization-fields" class="space-y-6" style="position: absolute; top: 0; left: 0; right: 0; width: 100%; visibility: hidden; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;">
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Contact Name *</label>
@@ -959,7 +959,7 @@
                         </div>
 
                         <!-- Other Fields -->
-                        <div id="other-fields" class="hidden space-y-6">
+                        <div id="other-fields" class="space-y-6" style="position: absolute; top: 0; left: 0; right: 0; width: 100%; visibility: hidden; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;">
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
                                     <label class="block text-sm font-medium mb-2">Name</label>
@@ -998,23 +998,23 @@
                                 </p>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Submit Button -->
-                        <div class="text-center pt-6 border-t border-gray-200">
-                            <button
-                                type="submit"
-                                class="btn-primary text-lg px-12 py-4"
-                                id="submit-button"
-                            >
-                                <span class="flex items-center justify-center gap-2">
-                                    <i data-lucide="send" class="w-5 h-5"></i>
-                                    Submit Request for Early Access
-                                </span>
-                            </button>
-                            <p class="text-sm mt-3" style="color: var(--therapair-gray);">
-                                By submitting, you'll be added to our early access waitlist
-                            </p>
-                        </div>
+                    <!-- Submit Button (Outside absolute container) -->
+                    <div class="text-center pt-6 border-t border-gray-200" style="margin-top: 620px;">
+                        <button
+                            type="submit"
+                            class="btn-primary text-lg px-12 py-4"
+                            id="submit-button"
+                        >
+                            <span class="flex items-center justify-center gap-2">
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                                Submit Request for Early Access
+                            </span>
+                        </button>
+                        <p class="text-sm mt-3" style="color: var(--therapair-gray);">
+                            By submitting, you'll be added to our early access waitlist
+                        </p>
                     </div>
 
                     <div id="form-error" class="error-message text-center hidden">Please select an audience type to continue.</div>
@@ -1198,27 +1198,41 @@
                 el.removeAttribute('required');
             });
 
-            // Hide all field groups
-            document.getElementById('individual-fields').classList.add('hidden');
-            document.getElementById('professional-fields').classList.add('hidden');
-            document.getElementById('organization-fields').classList.add('hidden');
-            document.getElementById('other-fields').classList.add('hidden');
+            // Hide all field groups (using visibility instead of display to maintain layout)
+            document.getElementById('individual-fields').style.visibility = 'hidden';
+            document.getElementById('individual-fields').style.opacity = '0';
+            document.getElementById('individual-fields').style.pointerEvents = 'none';
+            document.getElementById('professional-fields').style.visibility = 'hidden';
+            document.getElementById('professional-fields').style.opacity = '0';
+            document.getElementById('professional-fields').style.pointerEvents = 'none';
+            document.getElementById('organization-fields').style.visibility = 'hidden';
+            document.getElementById('organization-fields').style.opacity = '0';
+            document.getElementById('organization-fields').style.pointerEvents = 'none';
+            document.getElementById('other-fields').style.visibility = 'hidden';
+            document.getElementById('other-fields').style.opacity = '0';
+            document.getElementById('other-fields').style.pointerEvents = 'none';
 
             // Show appropriate field group and enable its fields
             if (audience === 'individual') {
-                document.getElementById('individual-fields').classList.remove('hidden');
+                document.getElementById('individual-fields').style.visibility = 'visible';
+                document.getElementById('individual-fields').style.opacity = '1';
+                document.getElementById('individual-fields').style.pointerEvents = 'auto';
                 document.querySelectorAll('#individual-fields input, #individual-fields textarea').forEach(el => el.disabled = false);
                 document.querySelector('#individual-fields input[name="Email"]').setAttribute('required', 'required');
                 document.querySelector('#individual-fields input[name="Email_Consent"]').setAttribute('required', 'required');
             } else if (audience === 'therapist') {
-                document.getElementById('professional-fields').classList.remove('hidden');
+                document.getElementById('professional-fields').style.visibility = 'visible';
+                document.getElementById('professional-fields').style.opacity = '1';
+                document.getElementById('professional-fields').style.pointerEvents = 'auto';
                 document.querySelectorAll('#professional-fields input, #professional-fields textarea').forEach(el => el.disabled = false);
                 document.querySelector('#professional-fields input[name="Full_Name"]').setAttribute('required', 'required');
                 document.querySelector('#professional-fields input[name="Professional_Title"]').setAttribute('required', 'required');
                 document.querySelector('#professional-fields input[name="Email"]').setAttribute('required', 'required');
                 document.querySelector('#professional-fields input[name="Email_Consent"]').setAttribute('required', 'required');
             } else if (audience === 'organization') {
-                document.getElementById('organization-fields').classList.remove('hidden');
+                document.getElementById('organization-fields').style.visibility = 'visible';
+                document.getElementById('organization-fields').style.opacity = '1';
+                document.getElementById('organization-fields').style.pointerEvents = 'auto';
                 document.querySelectorAll('#organization-fields input, #organization-fields textarea').forEach(el => el.disabled = false);
                 document.querySelector('#organization-fields input[name="Contact_Name"]').setAttribute('required', 'required');
                 document.querySelector('#organization-fields input[name="Position"]').setAttribute('required', 'required');
@@ -1226,7 +1240,9 @@
                 document.querySelector('#organization-fields input[name="Email"]').setAttribute('required', 'required');
                 document.querySelector('#organization-fields input[name="Email_Consent"]').setAttribute('required', 'required');
             } else if (audience === 'other') {
-                document.getElementById('other-fields').classList.remove('hidden');
+                document.getElementById('other-fields').style.visibility = 'visible';
+                document.getElementById('other-fields').style.opacity = '1';
+                document.getElementById('other-fields').style.pointerEvents = 'auto';
                 document.querySelectorAll('#other-fields input, #other-fields textarea').forEach(el => el.disabled = false);
                 document.querySelector('#other-fields input[name="Email"]').setAttribute('required', 'required');
                 document.querySelector('#other-fields input[name="Email_Consent"]').setAttribute('required', 'required');
@@ -1240,10 +1256,7 @@
                 lucide.createIcons();
             }, 100);
 
-            // Scroll to form fields smoothly only on user interaction (not initial load)
-            if (element && !element.classList.contains('initial-load')) {
-                document.getElementById('dynamic-fields').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
+            // Don't scroll - fields are already at the same anchor point
         }
 
         // Initialize with therapist (Mental Health Professional) selected by default
