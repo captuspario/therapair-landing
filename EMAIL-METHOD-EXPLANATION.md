@@ -112,3 +112,5 @@ define('FROM_EMAIL', 'contact@therapair.com.au');
 - **Fallback**: PHP mail() (unreliable, but functional)
 - **Status**: Working, but limited to test email until domain verified
 
+
+

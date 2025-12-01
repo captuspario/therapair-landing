@@ -112,3 +112,5 @@ This will show you:
 
 **Bottom Line:** Emails aren't in Resend dashboard because they're being sent via PHP mail() fallback, not Resend API. Verify your domain in Resend to fix this!
 
+
+

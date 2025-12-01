@@ -1,0 +1,41 @@
+[
+  {
+    "therapist_id": "VIC-TEST-001",
+    "therapist_name": "Sarah Mitchell",
+    "first_name": "Sarah",
+    "practice_name": "Mindful Connections",
+    "email": "sarah.mitchell+test@therapair.com.au",
+    "directory_page_id": null,
+    "therapist_research_id": "test-001",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aGVyYXBpc3RfaWQiOiJWSUMtVEVTVC0wMDEiLCJ0aGVyYXBpc3RfbmFtZSI6IlNhcmFoIE1pdGNoZWxsIiwiZmlyc3RfbmFtZSI6IlNhcmFoIiwicHJhY3RpY2VfbmFtZSI6Ik1pbmRmdWwgQ29ubmVjdGlvbnMiLCJlbWFpbCI6InNhcmFoLm1pdGNoZWxsK3Rlc3RAdGhlcmFwYWlyLmNvbS5hdSIsImRpcmVjdG9yeV9wYWdlX2lkIjpudWxsLCJ0aGVyYXBpc3RfcmVzZWFyY2hfaWQiOiJ0ZXN0LTAwMSIsImV4cCI6MTc2NjAxOTkxOH0.A1FoDQo6worDgsK9RCrCksOKwrvCkMKZR8OawoXDkHt-woF4CcKlw63Cl8OowoczwpQ",
+    "survey_url": "https://therapair.com.au/research/survey/index.html?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aGVyYXBpc3RfaWQiOiJWSUMtVEVTVC0wMDEiLCJ0aGVyYXBpc3RfbmFtZSI6IlNhcmFoIE1pdGNoZWxsIiwiZmlyc3RfbmFtZSI6IlNhcmFoIiwicHJhY3RpY2VfbmFtZSI6Ik1pbmRmdWwgQ29ubmVjdGlvbnMiLCJlbWFpbCI6InNhcmFoLm1pdGNoZWxsK3Rlc3RAdGhlcmFwYWlyLmNvbS5hdSIsImRpcmVjdG9yeV9wYWdlX2lkIjpudWxsLCJ0aGVyYXBpc3RfcmVzZWFyY2hfaWQiOiJ0ZXN0LTAwMSIsImV4cCI6MTc2NjAxOTkxOH0.A1FoDQo6worDgsK9RCrCksOKwrvCkMKZR8OawoXDkHt-woF4CcKlw63Cl8OowoczwpQ",
+    "sandbox_url": "https://therapair.com.au/sandbox/sandbox-demo.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-001",
+    "landing_url": "https://therapair.com.au/?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-001"
+  },
+  {
+    "therapist_id": "VIC-TEST-002",
+    "therapist_name": "James Chen",
+    "first_name": "James",
+    "practice_name": "Harmony Therapy",
+    "email": "james.chen+test@therapair.com.au",
+    "directory_page_id": null,
+    "therapist_research_id": "test-002",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aGVyYXBpc3RfaWQiOiJWSUMtVEVTVC0wMDIiLCJ0aGVyYXBpc3RfbmFtZSI6IkphbWVzIENoZW4iLCJmaXJzdF9uYW1lIjoiSmFtZXMiLCJwcmFjdGljZV9uYW1lIjoiSGFybW9ueSBUaGVyYXB5IiwiZW1haWwiOiJqYW1lcy5jaGVuK3Rlc3RAdGhlcmFwYWlyLmNvbS5hdSIsImRpcmVjdG9yeV9wYWdlX2lkIjpudWxsLCJ0aGVyYXBpc3RfcmVzZWFyY2hfaWQiOiJ0ZXN0LTAwMiIsImV4cCI6MTc2NjAxOTkxOH0.wp84YgJAfsOawow_WsKnXwjCkMO_wpIxwpHChcOlEBlWw7LCiV7CuMOzY8Krw5hw",
+    "survey_url": "https://therapair.com.au/research/survey/index.html?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aGVyYXBpc3RfaWQiOiJWSUMtVEVTVC0wMDIiLCJ0aGVyYXBpc3RfbmFtZSI6IkphbWVzIENoZW4iLCJmaXJzdF9uYW1lIjoiSmFtZXMiLCJwcmFjdGljZV9uYW1lIjoiSGFybW9ueSBUaGVyYXB5IiwiZW1haWwiOiJqYW1lcy5jaGVuK3Rlc3RAdGhlcmFwYWlyLmNvbS5hdSIsImRpcmVjdG9yeV9wYWdlX2lkIjpudWxsLCJ0aGVyYXBpc3RfcmVzZWFyY2hfaWQiOiJ0ZXN0LTAwMiIsImV4cCI6MTc2NjAxOTkxOH0.wp84YgJAfsOawow_WsKnXwjCkMO_wpIxwpHChcOlEBlWw7LCiV7CuMOzY8Krw5hw",
+    "sandbox_url": "https://therapair.com.au/sandbox/sandbox-demo.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-002",
+    "landing_url": "https://therapair.com.au/?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-002"
+  },
+  {
+    "therapist_id": "VIC-TEST-003",
+    "therapist_name": "Emma Thompson",
+    "first_name": "Emma",
+    "practice_name": "Wellness Collective",
+    "email": "emma.thompson+test@therapair.com.au",
+    "directory_page_id": null,
+    "therapist_research_id": "test-003",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aGVyYXBpc3RfaWQiOiJWSUMtVEVTVC0wMDMiLCJ0aGVyYXBpc3RfbmFtZSI6IkVtbWEgVGhvbXBzb24iLCJmaXJzdF9uYW1lIjoiRW1tYSIsInByYWN0aWNlX25hbWUiOiJXZWxsbmVzcyBDb2xsZWN0aXZlIiwiZW1haWwiOiJlbW1hLnRob21wc29uK3Rlc3RAdGhlcmFwYWlyLmNvbS5hdSIsImRpcmVjdG9yeV9wYWdlX2lkIjpudWxsLCJ0aGVyYXBpc3RfcmVzZWFyY2hfaWQiOiJ0ZXN0LTAwMyIsImV4cCI6MTc2NjAxOTkxOH0.w58FZMOewqzChBQHwojDvMKwEcODw5ANwpMRw4NSMw3Dr8O9G0_Cq0TCjsK6wqHDmcOr",
+    "survey_url": "https://therapair.com.au/research/survey/index.html?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aGVyYXBpc3RfaWQiOiJWSUMtVEVTVC0wMDMiLCJ0aGVyYXBpc3RfbmFtZSI6IkVtbWEgVGhvbXBzb24iLCJmaXJzdF9uYW1lIjoiRW1tYSIsInByYWN0aWNlX25hbWUiOiJXZWxsbmVzcyBDb2xsZWN0aXZlIiwiZW1haWwiOiJlbW1hLnRob21wc29uK3Rlc3RAdGhlcmFwYWlyLmNvbS5hdSIsImRpcmVjdG9yeV9wYWdlX2lkIjpudWxsLCJ0aGVyYXBpc3RfcmVzZWFyY2hfaWQiOiJ0ZXN0LTAwMyIsImV4cCI6MTc2NjAxOTkxOH0.w58FZMOewqzChBQHwojDvMKwEcODw5ANwpMRw4NSMw3Dr8O9G0_Cq0TCjsK6wqHDmcOr",
+    "sandbox_url": "https://therapair.com.au/sandbox/sandbox-demo.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-003",
+    "landing_url": "https://therapair.com.au/?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-003"
+  }
+]

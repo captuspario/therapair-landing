@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Thank You - Therapair Research</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary: #06b6d4;
+        --text: #1a2135;
+        --muted: #5b6478;
+        --background: linear-gradient(160deg, #f4f7ff, #eef4ff 48%, #f6f3ff 100%);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        background: var(--background);
+        color: var(--text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .success-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 24px;
+        padding: 80px 48px;
+        max-width: 560px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: clamp(2.25rem, 4vw, 3rem);
+        margin: 0 0 24px 0;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        font-family: 'DM Sans', sans-serif;
+      }
+
+      p {
+        color: var(--muted);
+        margin: 0 0 40px 0;
+        font-size: 1.125rem;
+        line-height: 1.7;
+        max-width: 48ch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .button {
+        display: block;
+        width: 100%;
+        padding: 16px 32px;
+        border-radius: 999px;
+        border: none;
+        font-size: 1.0625rem;
+        font-weight: 600;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        font-family: 'DM Sans', sans-serif;
+        box-sizing: border-box;
+      }
+
+      .button-primary {
+        background: linear-gradient(120deg, var(--primary), var(--secondary));
+        color: #fff;
+        box-shadow: 0 16px 32px rgba(37, 99, 235, 0.25);
+      }
+
+      .button-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 36px rgba(37, 99, 235, 0.3);
+      }
+
+      .link {
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: 500;
+        display: block;
+        padding: 12px 0;
+        transition: all 0.2s ease;
+      }
+
+      .link:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="success-container">
+      <h1>Thank you so much!</h1>
+      <p>
+        Your insights are now logged. We'll keep refining with your feedback and notify you once the user research wraps up.
+      </p>
+      <div class="actions">
+        <a
+          href="/sandbox/sandbox-demo.html"
+          class="button button-primary"
+          id="sandbox-demo-button"
+          >See the sandbox prototype here</a
+        >
+        <a
+          href="/documentation.html"
+          class="link"
+          >Read more about Therapair's documentation</a
+        >
+      </div>
+    </div>
+    <script>
+      // Add UTM parameters to links if present in URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_email'];
+      
+      const sandboxButton = document.getElementById('sandbox-demo-button');
+      if (sandboxButton) {
+        const sandboxUrl = new URL(sandboxButton.href, window.location.origin);
+        utmParams.forEach(param => {
+          const value = urlParams.get(param);
+          if (value) sandboxUrl.searchParams.set(param, value);
+        });
+        // Extract email from utm_email and add as email parameter for tracking
+        const email = urlParams.get('utm_email');
+        if (email) {
+          sandboxUrl.searchParams.set('email', email);
+        }
+        // Preserve session_id if available
+        const sessionId = urlParams.get('session_id');
+        if (sessionId) {
+          sandboxUrl.searchParams.set('session_id', sessionId);
+        }
+        sandboxUrl.searchParams.set('utm_content', 'sandbox_demo');
+        sandboxUrl.searchParams.set('utm_term', 'survey_completion');
+        sandboxButton.href = sandboxUrl.toString();
+      }
+      
+      const docLink = document.querySelector('.link[href="/documentation.html"]');
+      if (docLink) {
+        const docUrl = new URL(docLink.href, window.location.origin);
+        utmParams.forEach(param => {
+          const value = urlParams.get(param);
+          if (value) docUrl.searchParams.set(param, value);
+        });
+        docUrl.searchParams.set('utm_content', 'documentation');
+        docUrl.searchParams.set('utm_term', 'survey_completion');
+        docLink.href = docUrl.toString();
+      }
+    </script>
+    
+    <!-- Therapair Global Feedback Widget -->
+    <script src="/therapair-feedback-widget.js" defer></script>
+  </body>
+</html>
+

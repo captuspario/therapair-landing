@@ -1,0 +1,76 @@
+
+========================================
+Therapist: Sarah Mitchell
+Email: sarah.mitchell+test@therapair.com.au
+Therapist ID: VIC-TEST-001
+========================================
+
+Hi Sarah,
+
+Thank you for your interest in the Therapair research study.
+
+Your personalized survey link:
+https://therapair.com.au/research/survey/index.html?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aGVyYXBpc3RfaWQiOiJWSUMtVEVTVC0wMDEiLCJ0aGVyYXBpc3RfbmFtZSI6IlNhcmFoIE1pdGNoZWxsIiwiZmlyc3RfbmFtZSI6IlNhcmFoIiwicHJhY3RpY2VfbmFtZSI6Ik1pbmRmdWwgQ29ubmVjdGlvbnMiLCJlbWFpbCI6InNhcmFoLm1pdGNoZWxsK3Rlc3RAdGhlcmFwYWlyLmNvbS5hdSIsImRpcmVjdG9yeV9wYWdlX2lkIjpudWxsLCJ0aGVyYXBpc3RfcmVzZWFyY2hfaWQiOiJ0ZXN0LTAwMSIsImV4cCI6MTc2NjAxOTkxOH0.A1FoDQo6worDgsK9RCrCksOKwrvCkMKZR8OawoXDkHt-woF4CcKlw63Cl8OowoczwpQ
+
+Try the sandbox demo:
+https://therapair.com.au/sandbox/sandbox-demo.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-001
+
+Visit the landing page:
+https://therapair.com.au/?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-001
+
+This token is valid for 30 days and is linked to your email address.
+
+Best regards,
+Therapair Team
+
+
+
+========================================
+Therapist: James Chen
+Email: james.chen+test@therapair.com.au
+Therapist ID: VIC-TEST-002
+========================================
+
+Hi James,
+
+Thank you for your interest in the Therapair research study.
+
+Your personalized survey link:
+https://therapair.com.au/research/survey/index.html?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aGVyYXBpc3RfaWQiOiJWSUMtVEVTVC0wMDIiLCJ0aGVyYXBpc3RfbmFtZSI6IkphbWVzIENoZW4iLCJmaXJzdF9uYW1lIjoiSmFtZXMiLCJwcmFjdGljZV9uYW1lIjoiSGFybW9ueSBUaGVyYXB5IiwiZW1haWwiOiJqYW1lcy5jaGVuK3Rlc3RAdGhlcmFwYWlyLmNvbS5hdSIsImRpcmVjdG9yeV9wYWdlX2lkIjpudWxsLCJ0aGVyYXBpc3RfcmVzZWFyY2hfaWQiOiJ0ZXN0LTAwMiIsImV4cCI6MTc2NjAxOTkxOH0.wp84YgJAfsOawow_WsKnXwjCkMO_wpIxwpHChcOlEBlWw7LCiV7CuMOzY8Krw5hw
+
+Try the sandbox demo:
+https://therapair.com.au/sandbox/sandbox-demo.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-002
+
+Visit the landing page:
+https://therapair.com.au/?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-002
+
+This token is valid for 30 days and is linked to your email address.
+
+Best regards,
+Therapair Team
+
+
+
+========================================
+Therapist: Emma Thompson
+Email: emma.thompson+test@therapair.com.au
+Therapist ID: VIC-TEST-003
+========================================
+
+Hi Emma,
+
+Thank you for your interest in the Therapair research study.
+
+Your personalized survey link:
+https://therapair.com.au/research/survey/index.html?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aGVyYXBpc3RfaWQiOiJWSUMtVEVTVC0wMDMiLCJ0aGVyYXBpc3RfbmFtZSI6IkVtbWEgVGhvbXBzb24iLCJmaXJzdF9uYW1lIjoiRW1tYSIsInByYWN0aWNlX25hbWUiOiJXZWxsbmVzcyBDb2xsZWN0aXZlIiwiZW1haWwiOiJlbW1hLnRob21wc29uK3Rlc3RAdGhlcmFwYWlyLmNvbS5hdSIsImRpcmVjdG9yeV9wYWdlX2lkIjpudWxsLCJ0aGVyYXBpc3RfcmVzZWFyY2hfaWQiOiJ0ZXN0LTAwMyIsImV4cCI6MTc2NjAxOTkxOH0.w58FZMOewqzChBQHwojDvMKwEcODw5ANwpMRw4NSMw3Dr8O9G0_Cq0TCjsK6wqHDmcOr
+
+Try the sandbox demo:
+https://therapair.com.au/sandbox/sandbox-demo.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-003
+
+Visit the landing page:
+https://therapair.com.au/?utm_source=email&utm_medium=research&utm_campaign=therapist_research&therapist_id=VIC-TEST-003
+
+This token is valid for 30 days and is linked to your email address.
+
+Best regards,
+Therapair Team

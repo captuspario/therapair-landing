@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Therapair Research Survey</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="./styles.css?v=20251117"
+    />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="survey-layout">
+        <article class="survey-card">
+          <header class="survey-header">
+            <p class="survey-header__eyebrow">Therapair User Research</p>
+            <h1>Help us build a better therapist matching experience</h1>
+            <p class="survey-header__lede">
+              Answer a few quick questions so we can design a matching flow that reflects how you practise and what clients need.
+            </p>
+          </header>
+          <section class="survey-progress">
+            <div class="progress-bar">
+              <div
+                class="progress-bar__fill"
+                style="width: 0%"
+                data-progress-fill
+              ></div>
+            </div>
+            <div
+              class="progress-label"
+              data-progress-label
+            >
+              Step 1 of 19
+            </div>
+          </section>
+
+          <form
+            id="therapist-survey"
+            novalidate
+          >
+            <div
+              class="alert error hidden"
+              data-global-error
+            ></div>
+
+            <fieldset
+              class="survey-step active"
+              data-step="consent"
+            >
+              <span class="step-badge">Consent</span>
+              <h2 class="step-title">Before we begin</h2>
+              <p class="step-description">
+                We’re gathering insights to make sure Therapair respects how you practise. Please
+                review the consent summary below.
+              </p>
+
+              <div class="consent-box">
+                <p class="consent-box__text">
+                  • Therapair will store your responses securely in our Notion research workspace
+                  and only use them for product design and user research.<br />
+                  • We’ll only contact you if you opt in later in this survey.<br />
+                  • You can withdraw consent or request deletion at any time via
+                  <a
+                    href="mailto:contact@therapair.com.au"
+                    class="link"
+                    >contact@therapair.com.au</a
+                  >
+                  or the
+                  <a
+                    href="/privacy-request.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="link"
+                    >privacy request</a
+                  >
+                  form.<br />
+                  • Full policy: <a
+                    href="/legal/privacy-policy.html"
+                    target="_blank"
+                    rel="noopener"
+                    class="link"
+                    >Privacy Policy</a
+                  >.
+                </p>
+
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="consent"
+                    value="granted"
+                    required
+                  />
+                  <span>
+                    I have read and understand the summary above, and I consent to Therapair using
+                    my responses for research.
+                  </span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="profession"
+            >
+              <span class="step-badge">Practice context</span>
+              <h2 class="step-title">What’s your profession?</h2>
+              <div class="option-grid">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="profession"
+                    value="Psychologist"
+                    required
+                  />
+                  <span>Psychologist</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="profession"
+                    value="Counsellor"
+                  />
+                  <span>Counsellor</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="profession"
+                    value="Social Worker"
+                  />
+                  <span>Social worker</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="profession"
+                    value="Psychiatrist"
+                  />
+                  <span>Psychiatrist</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="profession"
+                    value="Psychotherapist"
+                  />
+                  <span>Psychotherapist</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="profession"
+                    value="Art Therapist"
+                  />
+                  <span>Art therapist</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="profession"
+                    value="Other"
+                  />
+                  <span>Other</span>
+                </label>
+              </div>
+              <div
+                class="other-input hidden"
+                data-dependent="profession"
+              >
+                <label for="professionOther">Please tell us your profession</label>
+                <input
+                  type="text"
+                  id="professionOther"
+                  name="profession_other"
+                  autocomplete="off"
+                />
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="experience"
+            >
+              <span class="step-badge">Practice context</span>
+              <h2 class="step-title">How many years have you been practising?</h2>
+              <div class="option-grid">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="years_practice"
+                    value="0-2 years"
+                    required
+                  />
+                  <span>0–2 years</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="years_practice"
+                    value="3-5 years"
+                  />
+                  <span>3–5 years</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="years_practice"
+                    value="6-10 years"
+                  />
+                  <span>6–10 years</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="years_practice"
+                    value="10+ years"
+                  />
+                  <span>10+ years</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="clients"
+            >
+              <span class="step-badge">Practice context</span>
+              <h2 class="step-title">Who do you primarily support?</h2>
+              <p class="step-description">Select all that apply.</p>
+              <div
+                class="option-grid"
+                data-multi
+              >
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="client_types"
+                    value="Adults"
+                    required
+                  />
+                  <span>Adults</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="client_types"
+                    value="Teens"
+                  />
+                  <span>Teens</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="client_types"
+                    value="Children"
+                  />
+                  <span>Children</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="client_types"
+                    value="Couples"
+                  />
+                  <span>Couples</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="client_types"
+                    value="Families"
+                  />
+                  <span>Families</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="client_types"
+                    value="LGBTQ+"
+                  />
+                  <span>LGBTQ+</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="client_types"
+                    value="Neurodivergent"
+                  />
+                  <span>Neurodivergent clients</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="client_types"
+                    value="Trauma-focused"
+                  />
+                  <span>Trauma-focused support</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="client_types"
+                    value="Other"
+                  />
+                  <span>Other</span>
+                </label>
+              </div>
+              <div
+                class="other-input hidden"
+                data-dependent="client_types"
+              >
+                <label for="clientTypesOther">Can you share the other client types?</label>
+                <input
+                  type="text"
+                  id="clientTypesOther"
+                  name="client_types_other"
+                  autocomplete="off"
+                />
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="modalities"
+            >
+              <span class="step-badge">Practice context</span>
+              <h2 class="step-title">Which modalities do you primarily use?</h2>
+              <p class="step-description">Select all that resonate.</p>
+              <div
+                class="option-grid"
+                data-multi
+              >
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="modalities"
+                    value="CBT"
+                    required
+                  />
+                  <span>CBT</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="modalities"
+                    value="DBT"
+                  />
+                  <span>DBT</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="modalities"
+                    value="ACT"
+                  />
+                  <span>ACT</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="modalities"
+                    value="EMDR"
+                  />
+                  <span>EMDR</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="modalities"
+                    value="Somatic"
+                  />
+                  <span>Somatic approaches</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="modalities"
+                    value="Psychodynamic"
+                  />
+                  <span>Psychodynamic therapy</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="modalities"
+                    value="Person-Centred"
+                  />
+                  <span>Person-centred</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="modalities"
+                    value="Relationship Therapy"
+                  />
+                  <span>Relationship therapy</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="modalities"
+                    value="Art Therapy"
+                  />
+                  <span>Art therapy</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="modalities"
+                    value="Other"
+                  />
+                  <span>Other</span>
+                </label>
+              </div>
+              <div
+                class="other-input hidden"
+                data-dependent="modalities"
+              >
+                <label for="modalitiesOther">Let us know which other modalities you use</label>
+                <input
+                  type="text"
+                  id="modalitiesOther"
+                  name="modalities_other"
+                  autocomplete="off"
+                />
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="client-acquisition"
+            >
+              <span class="step-badge">Current matching</span>
+              <h2 class="step-title">How do clients usually find you?</h2>
+              <p class="step-description">Select all that typically apply.</p>
+              <div
+                class="option-grid"
+                data-multi
+              >
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="clients_find_you"
+                    value="Referrals"
+                    required
+                  />
+                  <span>Professional referrals</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="clients_find_you"
+                    value="Directories"
+                  />
+                  <span>Directories (e.g. Psychology Today)</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="clients_find_you"
+                    value="Word of mouth"
+                  />
+                  <span>Word of mouth</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="clients_find_you"
+                    value="Online search"
+                  />
+                  <span>Online search</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="clients_find_you"
+                    value="Social media"
+                  />
+                  <span>Social media</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="clients_find_you"
+                    value="Community organisations"
+                  />
+                  <span>Community organisations</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="clients_find_you"
+                    value="Other"
+                  />
+                  <span>Other</span>
+                </label>
+              </div>
+              <div
+                class="other-input hidden"
+                data-dependent="clients_find_you"
+              >
+                <label for="clientsFindOther">Tell us how else clients find you</label>
+                <input
+                  type="text"
+                  id="clientsFindOther"
+                  name="clients_find_you_other"
+                  autocomplete="off"
+                />
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step is-highlight"
+              data-step="match-factors"
+            >
+              <span class="step-badge">Matching needs</span>
+              <h2 class="step-title">What makes a great practitioner–client match?</h2>
+              <div class="matching-intro">
+                <div class="matching-intro__icon">✨</div>
+                <div class="matching-intro__content">
+                  <h3>Think about the moments clients say, “you just get it.”</h3>
+                  <p>Choose the ingredients that reliably build trust and momentum in your practice. These become the signals we tune for future matching.</p>
+                </div>
+              </div>
+              <div
+                class="matching-grid"
+                data-multi
+              >
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="match_factors"
+                    value="Shared core values"
+                    required
+                  />
+                  <span>Shared core values</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="match_factors"
+                    value="Similar communication style"
+                  />
+                  <span>Similar communication style</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="match_factors"
+                    value="Trust"
+                  />
+                  <span>Ability to build trust quickly</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="match_factors"
+                    value="Life goal alignment"
+                  />
+                  <span>Alignment on goals/outcomes</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="match_factors"
+                    value="Lived experience"
+                  />
+                  <span>Shared lived experiences</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="match_factors"
+                    value="Shared cultural background"
+                  />
+                  <span>Cultural alignment</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="match_factors"
+                    value="Shared experience of a diagnosis"
+                  />
+                  <span>Experience with similar diagnoses</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="match_factors"
+                    value="Other"
+                  />
+                  <span>Other</span>
+                </label>
+              </div>
+              <div
+                class="other-input hidden"
+                data-dependent="match_factors"
+              >
+                <label for="matchFactorsOther">Add anything else that matters</label>
+                <input
+                  type="text"
+                  id="matchFactorsOther"
+                  name="match_factors_other"
+                  autocomplete="off"
+                />
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="biggest-gap"
+            >
+              <span class="step-badge">Matching needs</span>
+              <h2 class="step-title">What’s the biggest gap in current matching systems?</h2>
+              <div class="textarea-card">
+                <label class="textarea-card__label" for="biggestGapTextarea">
+                  Please describe any friction points, missing context, or trust issues you notice.
+                </label>
+                <textarea
+                  id="biggestGapTextarea"
+                  name="biggest_gap"
+                  class="textarea-field"
+                  maxlength="1200"
+                  placeholder="Share the pain points you see in current directories, intake forms, or referral processes."
+                  required
+                ></textarea>
+                <p class="textarea-card__hint">
+                  Therapair uses this to shape matching criteria and product roadmap priorities.
+                </p>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="screening"
+            >
+              <span class="step-badge">Matching needs</span>
+              <h2 class="step-title">Do you currently screen clients for fit before accepting them?</h2>
+              <div class="option-grid">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="screens_clients"
+                    value="Yes"
+                    required
+                  />
+                  <span>Yes</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="screens_clients"
+                    value="No"
+                  />
+                  <span>No</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="sharing"
+            >
+              <span class="step-badge">Matching needs</span>
+              <h2 class="step-title">
+                Would you share your own personality traits, values, or lived experiences to help
+                matching?
+              </h2>
+              <div class="option-grid">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="open_to_sharing"
+                    value="Yes"
+                    required
+                  />
+                  <span>Yes, those details can help clients decide</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="open_to_sharing"
+                    value="Maybe"
+                  />
+                  <span>Maybe, it depends on context</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="open_to_sharing"
+                    value="No"
+                  />
+                  <span>No, I’d keep it professional only</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="questions-matter"
+            >
+              <span class="step-badge">Matching inputs</span>
+              <h2 class="step-title">
+                Which matching questions do you think create the deepest personalisation?
+              </h2>
+              <p class="step-description">Select all that resonate for you and your clients.</p>
+              <div
+                class="option-grid"
+                data-multi
+              >
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="questions_matter"
+                    value="Communication style"
+                    required
+                  />
+                  <span>Communication style preferences</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="questions_matter"
+                    value="Relationship style"
+                  />
+                  <span>Relationship/attachment style</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="questions_matter"
+                    value="Personality traits"
+                  />
+                  <span>Personality traits or values</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="questions_matter"
+                    value="Lived experience"
+                  />
+                  <span>Lived experience alignment</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="questions_matter"
+                    value="Values and beliefs"
+                  />
+                  <span>Values, beliefs, cultural context</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="questions_matter"
+                    value="Therapeutic work style and boundaries"
+                  />
+                  <span>Therapeutic work style + boundaries</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="questions_matter"
+                    value="All of the above"
+                  />
+                  <span>All of the above (holistic view)</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="questions_matter"
+                    value="Other"
+                  />
+                  <span>Other</span>
+                </label>
+              </div>
+              <div
+                class="other-input hidden"
+                data-dependent="questions_matter"
+              >
+                <label for="questionsMatterOther">What else should we ask?</label>
+                <input
+                  type="text"
+                  id="questionsMatterOther"
+                  name="questions_matter_other"
+                  autocomplete="off"
+                />
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="personality-test"
+            >
+              <span class="step-badge">Matching inputs</span>
+              <h2 class="step-title">
+                Would you complete a short personality or values assessment (e.g. Big Five, HEXACO)?
+              </h2>
+              <div class="option-grid">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="personality_test"
+                    value="Yes"
+                    required
+                  />
+                  <span>Yes</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="personality_test"
+                    value="Maybe"
+                  />
+                  <span>Maybe</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="personality_test"
+                    value="No"
+                  />
+                  <span>No</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="personal-boundaries"
+            >
+              <span class="step-badge">Matching inputs</span>
+              <h2 class="step-title">What would you consider too personal to include?</h2>
+              <p class="step-description">Select anything you’d prefer to keep out of matching.</p>
+              <div
+                class="option-grid"
+                data-multi
+              >
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="too_personal"
+                    value="Trauma history"
+                    required
+                  />
+                  <span>Trauma history</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="too_personal"
+                    value="Religious beliefs/background"
+                  />
+                  <span>Religious beliefs/background</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="too_personal"
+                    value="Political views"
+                  />
+                  <span>Political views</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="too_personal"
+                    value="Personal relationships"
+                  />
+                  <span>Personal relationships</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="too_personal"
+                    value="Financial situation"
+                  />
+                  <span>Financial situation</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="too_personal"
+                    value="Cultural background"
+                  />
+                  <span>Cultural background</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="too_personal"
+                    value="None"
+                  />
+                  <span>None of the above</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="checkbox"
+                    name="too_personal"
+                    value="Other"
+                  />
+                  <span>Other</span>
+                </label>
+              </div>
+              <div
+                class="other-input hidden"
+                data-dependent="too_personal"
+              >
+                <label for="tooPersonalOther">Anything else you’d exclude?</label>
+                <input
+                  type="text"
+                  id="tooPersonalOther"
+                  name="too_personal_other"
+                  autocomplete="off"
+                />
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="profile-depth"
+            >
+              <span class="step-badge">Experience design</span>
+              <h2 class="step-title">How detailed should practitioner profiles be?</h2>
+              <p class="step-description">
+                1 = a few essential facts, 10 = a rich profile that helps clients understand you as
+                a practitioner and person.
+              </p>
+              <div class="slider-container">
+                <div class="slider-wrapper">
+                  <input
+                    type="range"
+                    id="profileDetailSlider"
+                    name="profile_detail_level"
+                    min="1"
+                    max="10"
+                    value="5"
+                    step="1"
+                    required
+                    class="detail-slider"
+                  />
+                  <div class="slider-labels">
+                    <span>1</span>
+                    <span>10</span>
+                  </div>
+                </div>
+                <div class="slider-value-display" id="profileDetailDisplay">
+                  <span class="slider-value-number">5</span>
+                  <span class="slider-value-text">— Moderate depth</span>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="onboarding-time"
+            >
+              <span class="step-badge">Experience design</span>
+              <h2 class="step-title">How much time feels reasonable for onboarding?</h2>
+              <div class="option-grid">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="onboarding_time"
+                    value="2-3 min"
+                    required
+                  />
+                  <span>2–3 minutes</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="onboarding_time"
+                    value="5 min"
+                  />
+                  <span>5 minutes</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="onboarding_time"
+                    value="10 min"
+                  />
+                  <span>10 minutes</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="onboarding_time"
+                    value="15 min+"
+                  />
+                  <span>15 minutes or more</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="onboarding_time"
+                    value="As long as it takes to get the best matches with clients"
+                  />
+                  <span>As long as it takes if the match is worth it</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="free-listing"
+            >
+              <span class="step-badge">Future involvement</span>
+              <h2 class="step-title">
+                Would you like a one-year free listing when Therapair launches in VIC?
+              </h2>
+              <div class="option-grid">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="free_listing_interest"
+                    value="Yes"
+                    required
+                  />
+                  <span>Yes, please keep me posted</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="free_listing_interest"
+                    value="Maybe later"
+                  />
+                  <span>Maybe later</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="free_listing_interest"
+                    value="No"
+                  />
+                  <span>No thanks</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="profile-intent"
+            >
+              <span class="step-badge">Future involvement</span>
+              <h2 class="step-title">
+                Can we pre-fill a Therapair profile for you using the public VIC register?
+              </h2>
+              <p class="step-description">
+                We already have your public listing information. You can review and approve before
+                anything goes live.
+              </p>
+              <div class="option-grid">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="profile_intent"
+                    value="Yes"
+                    required
+                  />
+                  <span>Yes, please draft a profile for me</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="profile_intent"
+                    value="Maybe later"
+                  />
+                  <span>Maybe later—keep me in the loop</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="profile_intent"
+                    value="No"
+                  />
+                  <span>No, I’ll let you know if that changes</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="future-contact"
+              data-preview-only="true"
+            >
+              <span class="step-badge">Follow-up</span>
+              <h2 class="step-title">Can we contact you for future research or early access?</h2>
+              <div class="option-grid">
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="future_contact"
+                    value="Yes"
+                    required
+                  />
+                  <span>Yes, please keep me updated</span>
+                </label>
+                <label class="option-card">
+                  <input
+                    type="radio"
+                    name="future_contact"
+                    value="No"
+                  />
+                  <span>No, I’ll reach out if I need to</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="value-pricing"
+            >
+              <span class="step-badge">Value & pricing</span>
+              <h2 class="step-title">
+                Thinking ahead: how should a strong client–therapist match be priced for practitioners?
+              </h2>
+              <p class="step-description">
+                There's no commitment here—we're just exploring what would feel fair and sustainable if Therapair
+                delivers consistently good matches. Use the sliders below to indicate your preferences.
+              </p>
+              
+              <div style="margin-bottom: 40px;">
+                <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; color: var(--text);">
+                  Fee per successful match
+                </h3>
+                <p style="margin: 0 0 20px 0; color: var(--muted); font-size: 0.95rem;">
+                  What would you be willing to pay per successful new client connection?
+                </p>
+                <div class="slider-container">
+                  <div class="slider-wrapper">
+                    <input
+                      type="range"
+                      id="feePerMatchSlider"
+                      name="value_fee_per_match"
+                      min="1"
+                      max="50"
+                      value="10"
+                      step="1"
+                      required
+                      class="detail-slider"
+                    />
+                    <div class="slider-labels">
+                      <span>$1</span>
+                      <span>$50</span>
+                    </div>
+                  </div>
+                  <div class="slider-value-display" id="feePerMatchDisplay">
+                    <span class="slider-value-number">$10</span>
+                    <span class="slider-value-text"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 style="font-size: 1.15rem; font-weight: 600; margin-bottom: 12px; color: var(--text);">
+                  Monthly subscription
+                </h3>
+                <p style="margin: 0 0 20px 0; color: var(--muted); font-size: 0.95rem;">
+                  What monthly subscription amount would feel reasonable for ongoing visibility and matching?
+                </p>
+                <div class="slider-container">
+                  <div class="slider-wrapper">
+                    <input
+                      type="range"
+                      id="monthlySubscriptionSlider"
+                      name="value_monthly_subscription"
+                      min="5"
+                      max="100"
+                      value="25"
+                      step="5"
+                      required
+                      class="detail-slider"
+                    />
+                    <div class="slider-labels">
+                      <span>$5</span>
+                      <span>$100</span>
+                    </div>
+                  </div>
+                  <div class="slider-value-display" id="monthlySubscriptionDisplay">
+                    <span class="slider-value-number">$25</span>
+                    <span class="slider-value-text"></span>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset
+              class="survey-step"
+              data-step="comments"
+            >
+              <span class="step-badge">Final thoughts</span>
+              <h2 class="step-title">Any additional comments, needs, or concerns?</h2>
+              <textarea
+                name="comments"
+                class="textarea-field"
+                maxlength="1500"
+                placeholder="Optional – feel free to tell us about onboarding wishes, trust signals you’d like to see, or anything else."
+              ></textarea>
+            </fieldset>
+          </form>
+
+          <footer class="survey-footer">
+            <button
+              type="button"
+              class="button secondary"
+              data-action="back"
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              class="button primary"
+              data-action="next"
+            >
+              Continue
+            </button>
+          </footer>
+
+          <section
+            class="submission-state"
+            data-submission="pending"
+          >
+            <h2>Submitting your responses</h2>
+            <p>
+              This usually takes a moment. Please don’t close the window. We’ll confirm as soon as
+              your answers are stored.
+            </p>
+            <div class="loading-dots">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </section>
+
+          <section
+            class="submission-state"
+            data-submission="success"
+          >
+            <div class="submission-content">
+              <h2>Thank you so much!</h2>
+              <p>
+                Your insights are now logged. We'll keep refining with your feedback and notify you once the user research wraps up.
+              </p>
+              <div class="submission-actions">
+                <a
+                  href="/sandbox/sandbox-demo.html"
+                  class="button primary"
+                  data-track="sandbox-demo"
+                  id="sandbox-demo-button"
+                  >See the sandbox prototype here</a
+                >
+                <a
+                  href="/documentation.html"
+                  class="submission-link"
+                  data-track="documentation"
+                  >Read more about Therapair's documentation</a
+                >
+              </div>
+            </div>
+          </section>
+
+          <section
+            class="submission-state"
+            data-submission="error"
+          >
+            <h2>We couldn’t save your responses</h2>
+            <p>
+              Something went wrong on our side. Please retry in a moment, and if the problem
+              persists email <a
+                href="mailto:contact@therapair.com.au"
+                class="link"
+                >contact@therapair.com.au</a
+              >.
+            </p>
+            <button
+              type="button"
+              class="button primary"
+              data-action="retry"
+            >
+              Try again
+            </button>
+          </section>
+        </article>
+      </div>
+    </div>
+
+    <script
+      type="module"
+      src="./main.js"
+    ></script>
+    <!-- Therapair feedback widget (same as sandbox) -->
+    <script src="/sandbox/public/unison-style-feedback.js?v=20251126-survey"></script>
+    <script>
+      // Override endpoint for survey page to use survey feedback endpoint
+      (function() {
+        // Wait for the feedback widget to load
+        setTimeout(function() {
+          if (window.sandboxFeedbackSubmit) {
+            // Store original function
+            const originalSubmit = window.sandboxFeedbackSubmit;
+            
+            // Override with survey endpoint
+            window.sandboxFeedbackSubmit = async function(e) {
+              e.preventDefault();
+              const form = e.target;
+              const submitBtn = document.getElementById('sandbox-feedback-submit');
+              const rating = document.getElementById('sandbox-feedback-rating').value;
+              const comment = document.getElementById('sandbox-feedback-comment').value;
+              const tags = JSON.parse(document.getElementById('sandbox-feedback-tags').value || '[]');
+
+              if (!rating) {
+                alert('Please select a rating');
+                return;
+              }
+
+              submitBtn.disabled = true;
+              submitBtn.textContent = 'Sending...';
+
+              try {
+                // Get page context (same as original)
+                const pageContext = window.feedbackPageContext || (function() {
+                  const url = new URL(window.location.href);
+                  const params = url.searchParams;
+                  return {
+                    page_url: window.location.href,
+                    page_title: document.title,
+                    current_step: params.get('step') || null,
+                    total_steps: null, // Could be extracted from survey state
+                    question_id: params.get('question') || null,
+                    question_text: null,
+                    section: 'survey',
+                    scroll_percent: Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100) || 0,
+                    viewport_height: window.innerHeight
+                  };
+                })();
+                
+                // Get therapist email from survey state if available
+                let therapistEmail = null;
+                try {
+                  // Try to get from survey state (if accessible)
+                  if (window.state && window.state.therapist && window.state.therapist.email) {
+                    therapistEmail = window.state.therapist.email;
+                  }
+                } catch(e) {
+                  // Survey state not accessible, continue without email
+                }
+                
+                const payload = {
+                  rating: parseInt(rating),
+                  comment: comment,
+                  tags: tags,
+                  source: 'survey',
+                  page_url: pageContext.page_url,
+                  page_title: pageContext.page_title,
+                  created_at: new Date().toISOString(),
+                  current_step: pageContext.current_step || null,
+                  total_steps: pageContext.total_steps || null,
+                  question_id: pageContext.question_id || null,
+                  question_text: pageContext.question_text || null,
+                  section: pageContext.section || 'survey',
+                  scroll_percent: pageContext.scroll_percent || 0,
+                  viewport_height: pageContext.viewport_height || null,
+                  therapist_email: therapistEmail
+                };
+
+                const response = await fetch('/api/research/feedback.php', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (result.ok) {
+                  submitBtn.textContent = '✓ Sent';
+                  submitBtn.style.background = '#48BB78';
+                  setTimeout(() => {
+                    window.sandboxFeedbackToggle();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Submit';
+                    submitBtn.style.background = '';
+                  }, 1500);
+                } else {
+                  throw new Error(result.error || 'Failed to send feedback');
+                }
+              } catch (error) {
+                console.error('Feedback submission error:', error);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit';
+                alert('Failed to send feedback. Please try again.');
+              }
+            };
+          }
+        }, 500);
+      })();
+    </script>
+    
+    <!-- Therapair Global Feedback Widget -->
+    <script src="/therapair-feedback-widget.js" defer></script>
+  </body>
+</html>
+
