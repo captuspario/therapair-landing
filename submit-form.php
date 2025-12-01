@@ -93,9 +93,9 @@ $formData = collectFormData($_POST, $audience);
 $adminSubject = getAdminSubject($audience);
 $adminMessage = formatAdminEmail($formData, $audience, $timestamp);
 
-// Use same sender format as research campaign (which is working)
-$senderEmail = 'onboarding@resend.dev'; // Use Resend's verified domain
-$senderName = 'Therapair Team'; // Match research campaign naming style
+// Use verified domain email (domain is verified in Resend)
+$senderEmail = 'contact@therapair.com.au'; // Use verified domain email
+$senderName = 'Therapair Team';
 
 $adminHeaders = "From: {$FROM_NAME} <{$FROM_EMAIL}>\r\n";
 $adminHeaders .= "Reply-To: {$email}\r\n";
