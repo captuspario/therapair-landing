@@ -93,9 +93,9 @@ $formData = collectFormData($_POST, $audience);
 $adminSubject = getAdminSubject($audience);
 $adminMessage = formatAdminEmail($formData, $audience, $timestamp);
 
-// Determine sender email (use verified Resend domain for immediate delivery)
+// Use same sender format as research campaign (which is working)
 $senderEmail = 'onboarding@resend.dev'; // Use Resend's verified domain
-$senderName = $FROM_NAME;
+$senderName = 'Therapair Team'; // Match research campaign naming style
 
 $adminHeaders = "From: {$FROM_NAME} <{$FROM_EMAIL}>\r\n";
 $adminHeaders .= "Reply-To: {$email}\r\n";
@@ -434,16 +434,10 @@ function sendEmailViaResend($to, $subject, $html, $fromEmail, $fromName, $replyT
         return false;
     }
     
-    // Prepare email data for Resend API
-    // Handle sender format (can be string like "Therapair <onboarding@resend.dev>" or just email)
-    $fromAddress = $fromEmail;
-    if (strpos($fromEmail, '<') !== false) {
-        // Already formatted as "Name <email>"
-        $fromAddress = $fromEmail;
-    } else {
-        // Format as "Name <email>"
-        $fromAddress = $fromName . ' <' . $fromEmail . '>';
-    }
+    // Use exact same format as research campaign (which is working)
+    // Research campaign uses: 'Therapair Research <onboarding@resend.dev>'
+    // Format: "Name <email@domain.com>"
+    $fromAddress = $fromName . ' <' . $fromEmail . '>';
     
     // Resend API accepts 'to' as string or array - use string for simplicity
     $emailData = [
