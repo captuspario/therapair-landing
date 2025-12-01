@@ -4,18 +4,29 @@
  * Sends form submissions to Notion database
  */
 
-function syncToNotion($formData, $audience) {
+function syncToNotion($formData, $audience, $targetDatabaseId = null) {
     // Load configuration
     if (file_exists(__DIR__ . '/config.php')) {
         require_once __DIR__ . '/config.php';
         $notionToken = defined('NOTION_TOKEN') ? NOTION_TOKEN : '';
-        $notionDatabaseId = defined('NOTION_DATABASE_ID') ? NOTION_DATABASE_ID : '';
+        // Use passed ID or fallback to default constant if defined
+        $notionDatabaseId = $targetDatabaseId ?: (defined('NOTION_DATABASE_ID') ? NOTION_DATABASE_ID : (defined('NOTION_DB_EOI') ? NOTION_DB_EOI : ''));
     } else {
+        error_log("Notion sync: Configuration file not found");
         return ['success' => false, 'error' => 'Configuration file not found'];
     }
 
-    if (empty($notionToken) || empty($notionDatabaseId)) {
-        return ['success' => false, 'error' => 'Notion credentials not configured'];
+    // Enhanced logging
+    error_log("Notion sync: Token=" . (!empty($notionToken) ? 'SET' : 'EMPTY') . ", DB_ID=" . (!empty($notionDatabaseId) ? $notionDatabaseId : 'EMPTY') . ", Audience=" . $audience);
+
+    if (empty($notionToken)) {
+        error_log("Notion sync failed: NOTION_TOKEN is empty");
+        return ['success' => false, 'error' => 'Notion token not configured'];
+    }
+    
+    if (empty($notionDatabaseId)) {
+        error_log("Notion sync failed: Database ID is empty. TargetDB=" . ($targetDatabaseId ?? 'null') . ", NOTION_DATABASE_ID=" . (defined('NOTION_DATABASE_ID') ? NOTION_DATABASE_ID : 'not defined') . ", NOTION_DB_EOI=" . (defined('NOTION_DB_EOI') ? NOTION_DB_EOI : 'not defined'));
+        return ['success' => false, 'error' => 'Notion database ID not configured'];
     }
 
     // Build Notion page properties based on audience type
@@ -40,15 +51,30 @@ function syncToNotion($formData, $audience) {
 
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($ch);
     curl_close($ch);
 
-    if ($httpCode === 200) {
-        return ['success' => true, 'response' => json_decode($response, true)];
+    if ($httpCode === 200 || $httpCode === 201) {
+        $responseData = json_decode($response, true);
+        error_log("Notion sync: Success! HTTP $httpCode, Page ID: " . ($responseData['id'] ?? 'unknown'));
+        return ['success' => true, 'response' => $responseData];
     } else {
+        $responseData = json_decode($response, true);
+        $errorMessage = isset($responseData['message']) ? $responseData['message'] : 'Unknown error';
+        $errorCode = isset($responseData['code']) ? $responseData['code'] : 'unknown';
+        
+        error_log("Notion sync failed: HTTP $httpCode, Code: $errorCode, Message: $errorMessage");
+        error_log("Notion sync response: " . substr($response, 0, 500));
+        if ($curlError) {
+            error_log("Notion sync cURL error: $curlError");
+        }
+        
         return [
             'success' => false,
             'error' => 'Notion API error',
             'http_code' => $httpCode,
+            'error_code' => $errorCode,
+            'error_message' => $errorMessage,
             'response' => $response
         ];
     }

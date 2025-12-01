@@ -181,21 +181,21 @@ if (!$userSent) {
 // 3. SYNC TO NOTION DATABASE
 // ============================================
 if ($USE_NOTION_SYNC) {
-    // Determine target database based on audience type
-    $targetDb = null;
+    // All EOI form submissions go to the EOI database
+    $targetDb = defined('NOTION_DB_EOI') ? NOTION_DB_EOI : null;
 
-    if ($audience === 'individual') {
-        // Individuals answering research questions go to Survey DB
-        $targetDb = defined('NOTION_DB_SURVEY') ? NOTION_DB_SURVEY : (defined('NOTION_DB_EOI') ? NOTION_DB_EOI : null);
+    if (empty($targetDb)) {
+        error_log("Notion sync skipped: NOTION_DB_EOI not defined. Audience: $audience");
     } else {
-        // Therapists, Organizations, etc. go to EOI DB
-        $targetDb = defined('NOTION_DB_EOI') ? NOTION_DB_EOI : null;
-    }
-
-    $notionResult = syncToNotion($formData, $audience, $targetDb);
-    if (!$notionResult['success']) {
-        error_log("Notion sync failed: " . print_r($notionResult, true));
-        // Continue anyway - don't block user experience
+        error_log("Notion sync: Attempting to sync to EOI database ID: $targetDb, Audience: $audience");
+        $notionResult = syncToNotion($formData, $audience, $targetDb);
+        if ($notionResult['success']) {
+            $pageId = isset($notionResult['response']['id']) ? $notionResult['response']['id'] : 'unknown';
+            error_log("Notion sync: Success! Entry created in EOI database. Page ID: $pageId");
+        } else {
+            error_log("Notion sync failed: " . print_r($notionResult, true));
+            // Continue anyway - don't block user experience
+        }
     }
 }
 
