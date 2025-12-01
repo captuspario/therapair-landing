@@ -18,7 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // ============================================
 // HELPER FUNCTION - Define early
 // ============================================
-function sanitize($data) {
+function sanitize($data)
+{
     return htmlspecialchars(strip_tags(trim($data)), ENT_QUOTES, 'UTF-8');
 }
 
@@ -72,6 +73,13 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 if (!empty($_POST['_honey'])) {
     header('Location: /thank-you.html');
     exit; // Silent fail for bots
+}
+
+// Validate email consent (required for GDPR compliance)
+if (empty($_POST['Email_Consent']) || $_POST['Email_Consent'] !== 'yes') {
+    error_log("Validation failed: email consent not provided");
+    header('Location: /?error=consent-required');
+    exit;
 }
 
 // Collect all form data based on audience type
@@ -128,7 +136,18 @@ $userSent = mail($email, $userSubject, $userMessage, $userHeaders);
 // 3. SYNC TO NOTION DATABASE
 // ============================================
 if ($USE_NOTION_SYNC) {
-    $notionResult = syncToNotion($formData, $audience);
+    // Determine target database based on audience type
+    $targetDb = null;
+
+    if ($audience === 'individual') {
+        // Individuals answering research questions go to Survey DB
+        $targetDb = defined('NOTION_DB_SURVEY') ? NOTION_DB_SURVEY : (defined('NOTION_DB_EOI') ? NOTION_DB_EOI : null);
+    } else {
+        // Therapists, Organizations, etc. go to EOI DB
+        $targetDb = defined('NOTION_DB_EOI') ? NOTION_DB_EOI : null;
+    }
+
+    $notionResult = syncToNotion($formData, $audience, $targetDb);
     if (!$notionResult['success']) {
         error_log("Notion sync failed: " . print_r($notionResult, true));
         // Continue anyway - don't block user experience
@@ -150,10 +169,11 @@ exit;
 // AI PERSONALIZATION FUNCTIONS
 // ============================================
 
-function generateAIPersonalizedEmail($data, $audience, $apiKey, $model) {
+function generateAIPersonalizedEmail($data, $audience, $apiKey, $model)
+{
     // Build context for AI
     $context = buildAIContext($data, $audience);
-    
+
     // System prompt for consistent, professional responses (based on email-ai-prompt.md)
     $systemPrompt = "You are Therapair's confirmation email assistant. Your job is to help us send clear, thoughtful, and human responses when people submit the form on therapair.com.au.
 
@@ -190,7 +210,7 @@ Warm regards,
 Therapair Team";
 
     $userPrompt = "Write a warm, human confirmation email for this form submission:\n\n{$context}\n\nFocus on being conversational and acknowledging what they shared. Mention we're building a therapist-matching concierge experience with real humans and real care. We're in early development phase. Be encouraging about them being one of the first to explore this with us. Keep it to 2-3 paragraphs max, plain text only.";
-    
+
     // Call OpenAI API
     try {
         $response = callOpenAI($systemPrompt, $userPrompt, $apiKey, $model);
@@ -202,9 +222,10 @@ Therapair Team";
     }
 }
 
-function buildAIContext($data, $audience) {
+function buildAIContext($data, $audience)
+{
     $context = "Audience Type: " . ucfirst($audience) . "\n";
-    
+
     switch ($audience) {
         case 'individual':
             $context .= "Email: {$data['email']}\n";
@@ -216,7 +237,7 @@ function buildAIContext($data, $audience) {
             }
             $context .= "\nThis person is expressing early interest in Therapair and sharing what they think is important in a therapist (this is research/feedback, not active matching).";
             break;
-            
+
         case 'therapist':
             $context .= "Name: {$data['full_name']}\n";
             $context .= "Title: {$data['professional_title']}\n";
@@ -227,7 +248,7 @@ function buildAIContext($data, $audience) {
             }
             $context .= "\nThis is a mental health professional interested in joining the Therapair network.";
             break;
-            
+
         case 'organization':
             $context .= "Contact Name: {$data['contact_name']}\n";
             $context .= "Position: {$data['position']}\n";
@@ -238,7 +259,7 @@ function buildAIContext($data, $audience) {
             }
             $context .= "\nThis is an organization interested in partnering with Therapair.";
             break;
-            
+
         case 'other':
             if (!empty($data['name'])) {
                 $context .= "Name: {$data['name']}\n";
@@ -250,13 +271,14 @@ function buildAIContext($data, $audience) {
             $context .= "\nThis person wants to support or invest in Therapair.";
             break;
     }
-    
+
     return $context;
 }
 
-function callOpenAI($systemPrompt, $userPrompt, $apiKey, $model) {
+function callOpenAI($systemPrompt, $userPrompt, $apiKey, $model)
+{
     $url = 'https://api.openai.com/v1/chat/completions';
-    
+
     $data = [
         'model' => $model,
         'messages' => [
@@ -266,7 +288,7 @@ function callOpenAI($systemPrompt, $userPrompt, $apiKey, $model) {
         'temperature' => 0.7,
         'max_tokens' => 400
     ];
-    
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
@@ -275,25 +297,26 @@ function callOpenAI($systemPrompt, $userPrompt, $apiKey, $model) {
         'Authorization: Bearer ' . $apiKey,
         'Content-Type: application/json'
     ]);
-    
+
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
-    
+
     if ($httpCode !== 200) {
         throw new Exception("OpenAI API returned status code: {$httpCode}");
     }
-    
+
     $responseData = json_decode($response, true);
-    
+
     if (isset($responseData['choices'][0]['message']['content'])) {
         return $responseData['choices'][0]['message']['content'];
     }
-    
+
     throw new Exception("Invalid OpenAI API response");
 }
 
-function formatUserEmailWithAI($aiContent, $data, $audience) {
+function formatUserEmailWithAI($aiContent, $data, $audience)
+{
     // Extract name for greeting if available
     $name = '';
     if ($audience === 'therapist' && !empty($data['full_name'])) {
@@ -303,7 +326,7 @@ function formatUserEmailWithAI($aiContent, $data, $audience) {
     } elseif ($audience === 'other' && !empty($data['name'])) {
         $name = $data['name'];
     }
-    
+
     // Format AI-generated content in beautiful HTML template
     $html = '
     <!DOCTYPE html>
@@ -345,7 +368,7 @@ function formatUserEmailWithAI($aiContent, $data, $audience) {
     </body>
     </html>
     ';
-    
+
     return $html;
 }
 
@@ -353,54 +376,59 @@ function formatUserEmailWithAI($aiContent, $data, $audience) {
 // HELPER FUNCTIONS
 // ============================================
 
-function collectFormData($post, $audience) {
+function collectFormData($post, $audience)
+{
     $data = [
         'audience' => sanitize($post['Audience_Type'] ?? ''),
         'email' => sanitize($post['Email'] ?? ''),
+        'email_consent' => sanitize($post['Email_Consent'] ?? 'no'),
+        'consent_timestamp' => date('Y-m-d H:i:s'),
         'timestamp' => date('Y-m-d H:i:s')
     ];
-    
+
     switch ($audience) {
         case 'individual':
             $data['therapy_interests'] = sanitize($post['Therapy_Interests'] ?? 'None selected');
             $data['additional_thoughts'] = sanitize($post['Additional_Thoughts'] ?? '');
             break;
-            
+
         case 'therapist':
             $data['full_name'] = sanitize($post['Full_Name'] ?? '');
             $data['professional_title'] = sanitize($post['Professional_Title'] ?? '');
             $data['organization'] = sanitize($post['Organization'] ?? '');
             $data['specializations'] = sanitize($post['Specializations'] ?? '');
             break;
-            
+
         case 'organization':
             $data['contact_name'] = sanitize($post['Contact_Name'] ?? '');
             $data['position'] = sanitize($post['Position'] ?? '');
             $data['organization_name'] = sanitize($post['Organization_Name'] ?? '');
             $data['partnership_interest'] = sanitize($post['Partnership_Interest'] ?? '');
             break;
-            
+
         case 'other':
             $data['name'] = sanitize($post['Name'] ?? '');
             $data['support_interest'] = sanitize($post['Support_Interest'] ?? '');
             break;
     }
-    
+
     return $data;
 }
 
-function getAdminSubject($audience) {
+function getAdminSubject($audience)
+{
     $subjects = [
         'individual' => '🎯 New Interest: Individual Seeking Therapy',
         'therapist' => '👨‍⚕️ New Interest: Mental Health Professional',
         'organization' => '🏢 New Interest: Organization/Clinic',
         'other' => '💡 New Interest: Supporter/Investor'
     ];
-    
+
     return $subjects[$audience] ?? '📋 New Therapair Interest Form';
 }
 
-function formatAdminEmail($data, $audience, $timestamp) {
+function formatAdminEmail($data, $audience, $timestamp)
+{
     $html = '
     <!DOCTYPE html>
     <html>
@@ -437,8 +465,12 @@ function formatAdminEmail($data, $audience, $timestamp) {
                     <div class="label">📧 Email:</div>
                     <div class="value"><a href="mailto:' . htmlspecialchars($data['email']) . '">' . htmlspecialchars($data['email']) . '</a></div>
                 </div>
+                <div class="field">
+                    <div class="label">✅ Email Consent:</div>
+                    <div class="value">' . (isset($data['email_consent']) && $data['email_consent'] === 'yes' ? '✅ Given (' . htmlspecialchars($data['consent_timestamp'] ?? 'N/A') . ')' : '❌ Not given') . '</div>
+                </div>
     ';
-    
+
     // Add audience-specific fields
     switch ($audience) {
         case 'individual':
@@ -457,7 +489,7 @@ function formatAdminEmail($data, $audience, $timestamp) {
                 ';
             }
             break;
-            
+
         case 'therapist':
             $html .= '
                 <div class="field">
@@ -478,7 +510,7 @@ function formatAdminEmail($data, $audience, $timestamp) {
                 </div>
             ';
             break;
-            
+
         case 'organization':
             $html .= '
                 <div class="field">
@@ -499,7 +531,7 @@ function formatAdminEmail($data, $audience, $timestamp) {
                 </div>
             ';
             break;
-            
+
         case 'other':
             $html .= '
                 <div class="field">
@@ -513,7 +545,7 @@ function formatAdminEmail($data, $audience, $timestamp) {
             ';
             break;
     }
-    
+
     $html .= '
                 <div class="footer">
                     <p><strong>⚡ Action Required:</strong> Respond to this inquiry within 1-2 business days.</p>
@@ -524,76 +556,77 @@ function formatAdminEmail($data, $audience, $timestamp) {
     </body>
     </html>
     ';
-    
+
     return $html;
 }
 
-function formatUserEmail($data, $audience) {
+function formatUserEmail($data, $audience)
+{
     $name = '';
     $personalisedMessage = '';
-    
+
     // Get name and create personalised message based on audience type
     switch ($audience) {
         case 'individual':
             $greeting = "Hi there,";
             $personalisedMessage = "Thanks so much for taking the time to share what's important to you. ";
-            
+
             if (!empty($data['therapy_interests']) && $data['therapy_interests'] !== 'None selected') {
                 $personalisedMessage .= "We're excited to learn what matters most to you, especially your interest in <strong>" . htmlspecialchars($data['therapy_interests']) . "</strong>. This helps us build a therapist-matching concierge experience with real humans and real care.";
             } else {
                 $personalisedMessage .= "We're excited to learn what matters most to you. This helps us build a therapist-matching concierge experience with real humans and real care.";
             }
             break;
-            
+
         case 'therapist':
             $name = $data['full_name'] ?? '';
             $greeting = $name ? "Hi {$name}," : "Hi there,";
             $title = !empty($data['professional_title']) ? htmlspecialchars($data['professional_title']) : 'mental health professional';
-            
+
             $personalisedMessage = "Thanks so much for taking the time to share about your practice. ";
             $personalisedMessage .= "We'd love to learn about your work as a <strong>{$title}</strong> and how we can build a therapist-matching concierge experience together. ";
-            
+
             if (!empty($data['specializations'])) {
                 $personalisedMessage .= "Your expertise in <strong>" . htmlspecialchars(substr($data['specializations'], 0, 100)) . (strlen($data['specializations']) > 100 ? '...' : '') . "</strong> is exactly what we're looking for.";
             } else {
                 $personalisedMessage .= "We're excited to learn more about your practice and explore how we can work together.";
             }
             break;
-            
+
         case 'organization':
             $name = $data['contact_name'] ?? '';
             $greeting = $name ? "Hi {$name}," : "Hi there,";
             $orgName = !empty($data['organization_name']) ? htmlspecialchars($data['organization_name']) : 'your organisation';
-            
+
             $personalisedMessage = "Thanks so much for reaching out on behalf of <strong>{$orgName}</strong>. ";
             $personalisedMessage .= "We'd love to stay in touch as we grow and build our therapist-matching concierge experience. ";
-            
+
             if (!empty($data['partnership_interest'])) {
                 $personalisedMessage .= "We're excited to explore how we can collaborate and support each other.";
             } else {
                 $personalisedMessage .= "We'd love to learn more about your organisation and how we can work together.";
             }
             break;
-            
+
         case 'other':
             $name = $data['name'] ?? '';
             $greeting = $name ? "Hi {$name}," : "Hi there,";
-            
+
             $personalisedMessage = "Thanks so much for your interest in supporting Therapair! ";
             $personalisedMessage .= "We'd love to stay in touch as we grow and build our therapist-matching concierge experience with real humans and real care. ";
-            
+
             if (!empty($data['support_interest'])) {
                 $personalisedMessage .= "We're excited to explore how we can work together and support each other.";
             } else {
                 $personalisedMessage .= "We'd love to share more about our vision and explore how you can be part of this journey.";
             }
             break;
-            
+
         default:
             $greeting = "Hi there,";
             $personalisedMessage = "Thanks so much for your interest in Therapair! We're excited to connect with you and build something meaningful together.";
     }
-    
+
     $html = '
     <!DOCTYPE html>
     <html>
@@ -651,8 +684,7 @@ function formatUserEmail($data, $audience) {
     </body>
     </html>
     ';
-    
+
     return $html;
 }
 ?>
-

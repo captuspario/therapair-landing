@@ -871,6 +871,28 @@
                                     />
                                 </div>
                             </div>
+
+                            <!-- Email Consent Checkbox -->
+                            <div class="max-w-2xl mx-auto pt-4">
+                                <label class="flex items-start gap-3 cursor-pointer group">
+                                    <input
+                                        type="checkbox"
+                                        name="Email_Consent"
+                                        id="email-consent"
+                                        value="yes"
+                                        required
+                                        class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary focus:ring-2 cursor-pointer"
+                                    />
+                                    <span class="text-sm" style="color: var(--therapair-gray);">
+                                        I agree to receive email communications from Therapair about product updates, early access opportunities, and relevant mental health resources. 
+                                        <a href="/legal/privacy-policy.html" target="_blank" class="underline hover:text-primary">View Privacy Policy</a>
+                                    </span>
+                                </label>
+                                <p class="text-xs mt-2 ml-7" style="color: var(--therapair-gray);">
+                                    You can unsubscribe at any time by clicking the link in our emails or visiting 
+                                    <a href="/email-preferences.html" class="underline">your preferences</a>.
+                                </p>
+                            </div>
                         </div>
 
                         <!-- Professional Fields -->
@@ -897,6 +919,28 @@
                             <div>
                                 <label class="block text-sm font-medium mb-2">Areas of Specialisation</label>
                                 <textarea name="Specializations" class="input-field w-full h-24" placeholder="Please describe your areas of expertise and any specific populations you serve..." disabled></textarea>
+                            </div>
+
+                            <!-- Email Consent Checkbox -->
+                            <div class="max-w-2xl mx-auto pt-4">
+                                <label class="flex items-start gap-3 cursor-pointer group">
+                                    <input
+                                        type="checkbox"
+                                        name="Email_Consent"
+                                        id="therapist-email-consent"
+                                        value="yes"
+                                        required
+                                        class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary focus:ring-2 cursor-pointer"
+                                    />
+                                    <span class="text-sm" style="color: var(--therapair-gray);">
+                                        I agree to receive email communications from Therapair about therapist opportunities, platform updates, and relevant professional resources. 
+                                        <a href="/legal/privacy-policy.html" target="_blank" class="underline hover:text-primary">View Privacy Policy</a>
+                                    </span>
+                                </label>
+                                <p class="text-xs mt-2 ml-7" style="color: var(--therapair-gray);">
+                                    You can unsubscribe at any time by clicking the link in our emails or visiting 
+                                    <a href="/email-preferences.html" class="underline">your preferences</a>.
+                                </p>
                             </div>
                         </div>
 
@@ -925,6 +969,28 @@
                                 <label class="block text-sm font-medium mb-2">Partnership Interest</label>
                                 <textarea name="Partnership_Interest" class="input-field w-full h-24" placeholder="Tell us about your organisation and how you'd like to work with Therapair..." disabled></textarea>
                             </div>
+
+                            <!-- Email Consent Checkbox -->
+                            <div class="max-w-2xl mx-auto pt-4">
+                                <label class="flex items-start gap-3 cursor-pointer group">
+                                    <input
+                                        type="checkbox"
+                                        name="Email_Consent"
+                                        id="organization-email-consent"
+                                        value="yes"
+                                        required
+                                        class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary focus:ring-2 cursor-pointer"
+                                    />
+                                    <span class="text-sm" style="color: var(--therapair-gray);">
+                                        I agree to receive email communications from Therapair about partnership opportunities, collaboration updates, and relevant industry resources. 
+                                        <a href="/legal/privacy-policy.html" target="_blank" class="underline hover:text-primary">View Privacy Policy</a>
+                                    </span>
+                                </label>
+                                <p class="text-xs mt-2 ml-7" style="color: var(--therapair-gray);">
+                                    You can unsubscribe at any time by clicking the link in our emails or visiting 
+                                    <a href="/email-preferences.html" class="underline">your preferences</a>.
+                                </p>
+                            </div>
                         </div>
 
                         <!-- Other Fields -->
@@ -943,6 +1009,28 @@
                             <div>
                                 <label class="block text-sm font-medium mb-2">How would you like to support Therapair?</label>
                                 <textarea name="Support_Interest" class="input-field w-full h-24" placeholder="Tell us about your interest in supporting inclusive mental health..."></textarea>
+                            </div>
+
+                            <!-- Email Consent Checkbox -->
+                            <div class="max-w-2xl mx-auto pt-4">
+                                <label class="flex items-start gap-3 cursor-pointer group">
+                                    <input
+                                        type="checkbox"
+                                        name="Email_Consent"
+                                        id="other-email-consent"
+                                        value="yes"
+                                        required
+                                        class="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary focus:ring-2 cursor-pointer"
+                                    />
+                                    <span class="text-sm" style="color: var(--therapair-gray);">
+                                        I agree to receive email communications from Therapair about investment opportunities, platform updates, and relevant news. 
+                                        <a href="/legal/privacy-policy.html" target="_blank" class="underline hover:text-primary">View Privacy Policy</a>
+                                    </span>
+                                </label>
+                                <p class="text-xs mt-2 ml-7" style="color: var(--therapair-gray);">
+                                    You can unsubscribe at any time by clicking the link in our emails or visiting 
+                                    <a href="/email-preferences.html" class="underline">your preferences</a>.
+                                </p>
                             </div>
                         </div>
 
@@ -1128,20 +1216,20 @@
             // Show dynamic fields
             document.getElementById('dynamic-fields').classList.remove('hidden');
 
-            // Disable ALL fields in ALL sections first
-            document.querySelectorAll('#individual-fields input, #individual-fields textarea').forEach(el => {
+            // Disable ALL fields in ALL sections first (including consent checkboxes)
+            document.querySelectorAll('#individual-fields input, #individual-fields textarea, #individual-fields input[type="checkbox"]').forEach(el => {
                 el.disabled = true;
                 el.removeAttribute('required');
             });
-            document.querySelectorAll('#professional-fields input, #professional-fields textarea').forEach(el => {
+            document.querySelectorAll('#professional-fields input, #professional-fields textarea, #professional-fields input[type="checkbox"]').forEach(el => {
                 el.disabled = true;
                 el.removeAttribute('required');
             });
-            document.querySelectorAll('#organization-fields input, #organization-fields textarea').forEach(el => {
+            document.querySelectorAll('#organization-fields input, #organization-fields textarea, #organization-fields input[type="checkbox"]').forEach(el => {
                 el.disabled = true;
                 el.removeAttribute('required');
             });
-            document.querySelectorAll('#other-fields input, #other-fields textarea').forEach(el => {
+            document.querySelectorAll('#other-fields input, #other-fields textarea, #other-fields input[type="checkbox"]').forEach(el => {
                 el.disabled = true;
                 el.removeAttribute('required');
             });
@@ -1157,12 +1245,14 @@
                 document.getElementById('individual-fields').classList.remove('hidden');
                 document.querySelectorAll('#individual-fields input, #individual-fields textarea').forEach(el => el.disabled = false);
                 document.querySelector('#individual-fields input[name="Email"]').setAttribute('required', 'required');
+                document.querySelector('#individual-fields input[name="Email_Consent"]').setAttribute('required', 'required');
             } else if (audience === 'therapist') {
                 document.getElementById('professional-fields').classList.remove('hidden');
                 document.querySelectorAll('#professional-fields input, #professional-fields textarea').forEach(el => el.disabled = false);
                 document.querySelector('#professional-fields input[name="Full_Name"]').setAttribute('required', 'required');
                 document.querySelector('#professional-fields input[name="Professional_Title"]').setAttribute('required', 'required');
                 document.querySelector('#professional-fields input[name="Email"]').setAttribute('required', 'required');
+                document.querySelector('#professional-fields input[name="Email_Consent"]').setAttribute('required', 'required');
             } else if (audience === 'organization') {
                 document.getElementById('organization-fields').classList.remove('hidden');
                 document.querySelectorAll('#organization-fields input, #organization-fields textarea').forEach(el => el.disabled = false);
@@ -1170,10 +1260,12 @@
                 document.querySelector('#organization-fields input[name="Position"]').setAttribute('required', 'required');
                 document.querySelector('#organization-fields input[name="Organization_Name"]').setAttribute('required', 'required');
                 document.querySelector('#organization-fields input[name="Email"]').setAttribute('required', 'required');
+                document.querySelector('#organization-fields input[name="Email_Consent"]').setAttribute('required', 'required');
             } else if (audience === 'other') {
                 document.getElementById('other-fields').classList.remove('hidden');
                 document.querySelectorAll('#other-fields input, #other-fields textarea').forEach(el => el.disabled = false);
                 document.querySelector('#other-fields input[name="Email"]').setAttribute('required', 'required');
+                document.querySelector('#other-fields input[name="Email_Consent"]').setAttribute('required', 'required');
             }
 
             // Hide error message
