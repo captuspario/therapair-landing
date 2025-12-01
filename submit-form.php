@@ -115,8 +115,14 @@ $adminSent = sendEmailViaResend(
 );
 
 // If Resend failed, try fallback
-if (!$adminSent && !$USE_RESEND) {
+if (!$adminSent) {
+    error_log("Resend failed for admin email, trying PHP mail() fallback");
     $adminSent = @mail($ADMIN_EMAIL, $adminSubject, $adminMessage, $adminHeaders);
+    if ($adminSent) {
+        error_log("PHP mail() fallback succeeded for admin email");
+    } else {
+        error_log("PHP mail() fallback also failed for admin email");
+    }
 }
 
 // ============================================
@@ -152,7 +158,8 @@ $userSent = sendEmailViaResend(
 );
 
 // If Resend failed, try fallback
-if (!$userSent && !$USE_RESEND) {
+if (!$userSent) {
+    error_log("Resend failed for user confirmation email, trying PHP mail() fallback");
     $userHeaders = "From: {$FROM_NAME} <{$FROM_EMAIL}>\r\n";
     $userHeaders .= "Reply-To: {$ADMIN_EMAIL}\r\n";
     $userHeaders .= "MIME-Version: 1.0\r\n";
@@ -160,6 +167,11 @@ if (!$userSent && !$USE_RESEND) {
     $userHeaders .= "X-Mailer: Therapair Automated Response\r\n";
     $userHeaders .= "X-Priority: 3\r\n";
     $userSent = @mail($email, $userSubject, $userMessage, $userHeaders);
+    if ($userSent) {
+        error_log("PHP mail() fallback succeeded for user confirmation email");
+    } else {
+        error_log("PHP mail() fallback also failed for user confirmation email");
+    }
 }
 
 // Email system working correctly - logging removed
@@ -433,9 +445,10 @@ function sendEmailViaResend($to, $subject, $html, $fromEmail, $fromName, $replyT
         $fromAddress = $fromName . ' <' . $fromEmail . '>';
     }
     
+    // Resend API accepts 'to' as string or array - use string for simplicity
     $emailData = [
         'from' => $fromAddress,
-        'to' => [$to],
+        'to' => $to,  // Changed from array to string
         'subject' => $subject,
         'html' => $html
     ];
@@ -461,16 +474,28 @@ function sendEmailViaResend($to, $subject, $html, $fromEmail, $fromName, $replyT
     $curlError = curl_error($ch);
     curl_close($ch);
     
-    if ($httpCode === 200) {
+    if ($httpCode === 200 || $httpCode === 201) {
         $responseData = json_decode($response, true);
         if (isset($responseData['id'])) {
-            error_log("Resend email sent successfully. ID: " . $responseData['id']);
+            error_log("✅ Resend email sent successfully. ID: " . $responseData['id'] . " To: {$to}");
             return true;
+        } else {
+            error_log("⚠️ Resend returned {$httpCode} but no message ID. Response: " . substr($response, 0, 500));
         }
     }
     
-    // Log error details
-    error_log("Resend email failed. HTTP Code: {$httpCode}, Error: {$curlError}, Response: " . substr($response, 0, 200));
+    // Log detailed error information
+    $responseData = json_decode($response, true);
+    $errorMessage = '';
+    if (is_array($responseData)) {
+        if (isset($responseData['message'])) {
+            $errorMessage = $responseData['message'];
+        } elseif (isset($responseData['error'])) {
+            $errorMessage = is_array($responseData['error']) ? json_encode($responseData['error']) : $responseData['error'];
+        }
+    }
+    
+    error_log("❌ Resend email failed. HTTP Code: {$httpCode}, cURL Error: {$curlError}, API Error: {$errorMessage}, Response: " . substr($response, 0, 500));
     return false;
 }
 
