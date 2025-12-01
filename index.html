@@ -25,7 +25,7 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-    <!-- Therapair Brand Colors & Typography (Updated Design System: Dark Navy / Inter) -->
+    <!-- Therapair Brand Colors & Typography (Updated Design System: Lighter Blue / Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -47,26 +47,27 @@
 
     <style>
         :root {
-            /* Updated Design System: Dark Navy / Mid Blue / Light Blue palette */
-            --therapair-dark-navy: #0F1E4B;      /* Primary / Icon Core */
-            --therapair-mid-blue: #3D578A;       /* Icon Middle Layer */
-            --therapair-light-blue: #95B1CD;     /* Icon Ears / Accents */
-            --therapair-black: #000000;          /* Wordmark / Headings */
-            --therapair-warm-beige: #FAF8F5;     /* Background */
-            --therapair-dark-grey: #4A5568;      /* Body Text / Secondary */
+            /* Lighter Blue Design System: Bright, Approachable Blue Palette */
+            --therapair-primary-blue: #3b82f6;      /* Primary Blue (blue-500) - Main brand color */
+            --therapair-light-blue: #60a5fa;        /* Light Blue (blue-400) - Accents */
+            --therapair-lighter-blue: #93c5fd;      /* Lighter Blue (blue-300) - Backgrounds */
+            --therapair-primary-hover: #2563eb;     /* Hover state (blue-600) */
+            --therapair-primary-dark: #1d4ed8;      /* Dark state (blue-700) */
+            --therapair-black: #000000;              /* Wordmark / Headings */
+            --therapair-warm-beige: #FAF8F5;        /* Background */
+            --therapair-dark-grey: #4A5568;         /* Body Text / Secondary */
 
-            /* Map existing tokens to new system */
-            --therapair-primary: var(--therapair-dark-navy);
-            --therapair-primary-hover: #2D4770;
-            --therapair-secondary: var(--therapair-mid-blue);
-            --therapair-accent: var(--therapair-light-blue);
+            /* Map existing tokens to lighter blue system */
+            --therapair-primary: var(--therapair-primary-blue);
+            --therapair-secondary: var(--therapair-light-blue);
+            --therapair-accent: var(--therapair-lighter-blue);
             --therapair-background: var(--therapair-warm-beige);
             --therapair-surface: #ffffff;
             --therapair-charcoal: var(--therapair-black);
             --therapair-gray: var(--therapair-dark-grey);
             --therapair-success: #10B981;
-            --therapair-gradient-start: var(--therapair-light-blue);
-            --therapair-gradient-end: var(--therapair-mid-blue);
+            --therapair-gradient-start: var(--therapair-lighter-blue);
+            --therapair-gradient-end: var(--therapair-primary-blue);
         }
 
         html {
@@ -84,7 +85,7 @@
         }
 
         .hero-gradient {
-            background: linear-gradient(135deg, var(--therapair-background) 0%, rgba(149, 177, 205, 0.1) 50%, rgba(61, 87, 138, 0.15) 100%);
+            background: linear-gradient(135deg, var(--therapair-background) 0%, rgba(147, 197, 253, 0.15) 50%, rgba(96, 165, 250, 0.2) 100%);
         }
 
         .card-hover {
@@ -93,7 +94,7 @@
 
         .card-hover:hover {
             transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(15, 30, 75, 0.1);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
         }
 
         .btn-primary {
@@ -105,18 +106,18 @@
             transition: all 0.2s ease;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 14px rgba(15, 30, 75, 0.3);
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(15, 30, 75, 0.4);
-            background: linear-gradient(135deg, var(--therapair-mid-blue), var(--therapair-dark-navy));
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+            background: linear-gradient(135deg, var(--therapair-primary-blue), var(--therapair-primary-hover));
         }
 
         .input-field {
             background: var(--therapair-surface);
-            border: 2px solid rgba(15, 30, 75, 0.2);
+            border: 2px solid rgba(59, 130, 246, 0.2);
             padding: 14px 16px;
             border-radius: 12px;
             font-size: 16px;
@@ -126,7 +127,7 @@
         .input-field:focus {
             outline: none;
             border-color: var(--therapair-primary);
-            box-shadow: 0 0 0 3px rgba(15, 30, 75, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
         /* Best-in-class animations */
@@ -159,13 +160,13 @@
             background: var(--therapair-surface);
             border-radius: 16px;
             padding: 32px;
-            box-shadow: 0 4px 20px rgba(15, 30, 75, 0.08);
-            border: 1px solid rgba(15, 30, 75, 0.1);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.15);
         }
 
         .audience-selector {
             background: var(--therapair-surface);
-            border: 2px solid rgba(15, 30, 75, 0.2);
+            border: 2px solid rgba(59, 130, 246, 0.25);
             border-radius: 12px;
             padding: 16px;
             cursor: pointer;
@@ -175,14 +176,14 @@
 
         .audience-selector:hover {
             border-color: var(--therapair-primary);
-            box-shadow: 0 4px 12px rgba(15, 30, 75, 0.1);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
             transform: translateY(-2px);
         }
 
         .audience-selector.selected {
             border-color: var(--therapair-primary);
-            background: rgba(15, 30, 75, 0.05);
-            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15);
+            background: rgba(59, 130, 246, 0.08);
+            box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
         }
 
         .audience-selector:focus {
@@ -194,7 +195,7 @@
         .audience-radio-indicator {
             width: 20px;
             height: 20px;
-            border: 2px solid rgba(37, 99, 235, 0.3);
+            border: 2px solid rgba(59, 130, 246, 0.4);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -349,7 +350,7 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Step 1 -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(6, 182, 212, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.15));">
                         <i data-lucide="heart" class="w-8 h-8" style="color: var(--therapair-primary);"></i>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">Tell us what matters</h3>
@@ -360,7 +361,7 @@
 
                 <!-- Step 2 -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(147, 197, 253, 0.15));">
                         <i data-lucide="brain" class="w-8 h-8" style="color: var(--therapair-secondary);"></i>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">Get intelligently matched</h3>
@@ -371,7 +372,7 @@
 
                 <!-- Step 3 -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(16, 185, 129, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(147, 197, 253, 0.15), rgba(16, 185, 129, 0.15));">
                         <i data-lucide="sparkles" class="w-8 h-8" style="color: var(--therapair-accent);"></i>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">Begin your journey</h3>
@@ -384,7 +385,7 @@
     </section>
 
     <!-- Live Demo CTA Section -->
-    <section class="py-24 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, #F8F4FF 0%, #E8DEFF 100%);">
+    <section class="py-24 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(147, 197, 253, 0.1) 0%, rgba(96, 165, 250, 0.15) 100%);">
         <div class="max-w-7xl mx-auto">
             <!-- Header -->
             <div class="text-center mb-12">
@@ -508,7 +509,7 @@
     </section>
 
     <!-- Who It's For Section -->
-    <section id="who-its-for" class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, var(--therapair-background) 100%);">
+    <section id="who-its-for" class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, var(--therapair-background) 100%);">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl sm:text-5xl font-bold mb-6">
@@ -523,7 +524,7 @@
                 <!-- Individuals -->
                 <div class="feature-card card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(6, 182, 212, 0.15));">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.15));">
                             <i data-lucide="heart" class="w-6 h-6" style="color: var(--therapair-primary);"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Individuals</h3>
@@ -536,7 +537,7 @@
                 <!-- Therapists -->
                 <div class="feature-card card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(147, 197, 253, 0.15));">
                             <i data-lucide="user-check" class="w-6 h-6" style="color: var(--therapair-secondary);"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Therapists</h3>
@@ -549,7 +550,7 @@
                 <!-- Organisations -->
                 <div class="feature-card card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(16, 185, 129, 0.15));">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, rgba(147, 197, 253, 0.15), rgba(16, 185, 129, 0.15));">
                             <i data-lucide="building-2" class="w-6 h-6" style="color: var(--therapair-accent);"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Organisations</h3>
@@ -562,7 +563,7 @@
                 <!-- Supporters -->
                 <div class="feature-card card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(37, 99, 235, 0.15));">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15));">
                             <i data-lucide="users" class="w-6 h-6" style="color: var(--therapair-success);"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Supporters</h3>
@@ -575,7 +576,7 @@
                 <!-- Investors -->
                 <div class="feature-card card-hover">
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(6, 182, 212, 0.15));">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.15));">
                             <i data-lucide="trending-up" class="w-6 h-6" style="color: var(--therapair-primary);"></i>
                         </div>
                         <h3 class="text-xl font-semibold">Investors</h3>
@@ -589,7 +590,7 @@
     </section>
 
     <!-- Security & Compliance Section -->
-    <section id="security-compliance" class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.03) 0%, rgba(139, 92, 246, 0.03) 100%);">
+    <section id="security-compliance" class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.03) 0%, rgba(147, 197, 253, 0.03) 100%);">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl sm:text-5xl font-bold mb-6">
@@ -603,7 +604,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- HIPAA Compliance -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(6, 182, 212, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.15));">
                         <i data-lucide="shield-check" class="w-8 h-8" style="color: var(--therapair-primary);"></i>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">HIPAA Compliant</h3>
@@ -614,7 +615,7 @@
 
                 <!-- Data Encryption -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(147, 197, 253, 0.15));">
                         <i data-lucide="lock" class="w-8 h-8" style="color: var(--therapair-secondary);"></i>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">End-to-End Encryption</h3>
@@ -625,7 +626,7 @@
 
                 <!-- Access Controls -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(16, 185, 129, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(147, 197, 253, 0.15), rgba(16, 185, 129, 0.15));">
                         <i data-lucide="user-check" class="w-8 h-8" style="color: var(--therapair-accent);"></i>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">Secure Access</h3>
@@ -636,7 +637,7 @@
 
                 <!-- Audit Logging -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(37, 99, 235, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15));">
                         <i data-lucide="activity" class="w-8 h-8" style="color: var(--therapair-success);"></i>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">Audit Logging</h3>
@@ -647,7 +648,7 @@
 
                 <!-- Data Minimization -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(6, 182, 212, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.15));">
                         <i data-lucide="database" class="w-8 h-8" style="color: var(--therapair-primary);"></i>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">Data Minimization</h3>
@@ -658,7 +659,7 @@
 
                 <!-- Business Associate Agreements -->
                 <div class="feature-card card-hover text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(147, 197, 253, 0.15));">
                         <i data-lucide="file-check" class="w-8 h-8" style="color: var(--therapair-secondary);"></i>
                     </div>
                     <h3 class="text-2xl font-semibold mb-4">Secure Partners</h3>
@@ -670,7 +671,7 @@
 
             <!-- Compliance Statement -->
             <div class="mt-16 text-center">
-                <div class="bg-white rounded-2xl p-8 shadow-lg border-2" style="border-color: rgba(37, 99, 235, 0.1);">
+                <div class="bg-white rounded-2xl p-8 shadow-lg border-2" style="border-color: rgba(59, 130, 246, 0.1);">
                     <h3 class="text-2xl font-semibold mb-4">Our Commitment to Your Privacy</h3>
                     <p class="text-lg leading-relaxed mb-6" style="color: var(--therapair-gray);">
                         Therapair is designed with privacy and security at its core. We understand that seeking mental health support requires trust, and we're committed to maintaining the highest standards of data protection and HIPAA compliance.
@@ -687,7 +688,7 @@
     </section>
 
     <!-- Main Interest Form Section with FormSubmit.co -->
-    <section id="get-started" class="py-24 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, var(--therapair-background) 100%);">
+    <section id="get-started" class="py-24 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, var(--therapair-background) 100%);">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16">
                 <h2 class="text-4xl sm:text-5xl font-bold mb-8">
@@ -699,7 +700,7 @@
             </div>
 
             <!-- Main Form -->
-            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2" style="border-color: rgba(37, 99, 235, 0.1);">
+            <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2" style="border-color: rgba(59, 130, 246, 0.1);">
                 <form 
                     id="main-form-element" 
                     action="/submit-form.php" 
@@ -772,7 +773,7 @@
                     <!-- Visual Divider -->
                     <div class="relative my-8">
                         <div class="absolute inset-0 flex items-center">
-                            <div class="w-full border-t" style="border-color: rgba(37, 99, 235, 0.1);"></div>
+                            <div class="w-full border-t" style="border-color: rgba(59, 130, 246, 0.1);"></div>
                         </div>
                         <div class="relative flex justify-center text-sm">
                             <span class="px-4 bg-white" style="color: var(--therapair-gray);">
@@ -1059,7 +1060,7 @@
             <!-- Additional Value Props -->
             <div class="grid md:grid-cols-3 gap-8 mt-16">
                 <div class="text-center">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(6, 182, 212, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.15));">
                         <i data-lucide="zap" class="w-8 h-8" style="color: var(--therapair-primary);"></i>
                     </div>
                     <h4 class="text-lg font-semibold mb-2">Early Access Benefits</h4>
@@ -1067,7 +1068,7 @@
                 </div>
 
                 <div class="text-center">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.15), rgba(147, 197, 253, 0.15));">
                         <i data-lucide="shield-check" class="w-8 h-8" style="color: var(--therapair-secondary);"></i>
                     </div>
                     <h4 class="text-lg font-semibold mb-2">HIPAA Compliant</h4>
@@ -1075,7 +1076,7 @@
                 </div>
 
                 <div class="text-center">
-                    <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(16, 185, 129, 0.15));">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, rgba(147, 197, 253, 0.15), rgba(16, 185, 129, 0.15));">
                         <i data-lucide="heart" class="w-8 h-8" style="color: var(--therapair-accent);"></i>
                     </div>
                     <h4 class="text-lg font-semibold mb-2">Inclusive by Design</h4>
