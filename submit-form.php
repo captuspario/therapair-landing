@@ -8,6 +8,7 @@
 
 // Load configuration
 require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/email-template-base.php';
 
 // Prevent direct access
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -361,59 +362,20 @@ function callOpenAI($systemPrompt, $userPrompt, $apiKey, $model)
 
 function formatUserEmailWithAI($aiContent, $data, $audience)
 {
-    // Extract name for greeting if available
-    $name = '';
-    if ($audience === 'therapist' && !empty($data['full_name'])) {
-        $name = $data['full_name'];
-    } elseif ($audience === 'organization' && !empty($data['contact_name'])) {
-        $name = $data['contact_name'];
-    } elseif ($audience === 'other' && !empty($data['name'])) {
-        $name = $data['name'];
-    }
-
-    // Format AI-generated content in beautiful HTML template
-    $html = '
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <style>
-            body { font-family: Arial, sans-serif; line-height: 1.8; color: #333; margin: 0; padding: 0; }
-            .container { max-width: 600px; margin: 0 auto; padding: 0; background: #f9fafb; }
-            .header { background: linear-gradient(135deg, #2563eb, #06b6d4); color: white; padding: 40px 20px; text-align: center; }
-            .content { background: #ffffff; padding: 40px 30px; border-left: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; }
-            .message { font-size: 15px; line-height: 1.8; color: #374151; white-space: pre-wrap; }
-            .footer { background: #ffffff; padding: 30px 20px; border-top: 2px solid #e5e7eb; border-left: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; color: #6b7280; font-size: 13px; text-align: center; }
-            a { color: #2563eb; text-decoration: none; }
-            a:hover { text-decoration: underline; }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h1 style="margin: 0; font-size: 26px; font-weight: 600;">Thank You for Your Interest! 🎉</h1>
-            </div>
-            <div class="content">
-                <div class="message">' . nl2br(htmlspecialchars($aiContent)) . '</div>
-            </div>
-            <div class="footer">
-                <p style="margin: 5px 0;"><strong>Therapair</strong></p>
-                <p style="margin: 5px 0;">AI-powered therapy matching for inclusive mental health care</p>
-                <p style="margin-top: 15px;">
-                    📧 <a href="mailto:contact@therapair.com.au">contact@therapair.com.au</a><br>
-                    🌐 <a href="https://therapair.com.au">therapair.com.au</a><br>
-                    ⚙️ <a href="https://therapair.com.au/email-preferences.html">Manage Email Preferences</a>
-                </p>
-                <p style="margin-top: 15px; font-size: 11px; color: #9ca3af;">
-                    © 2025 Therapair. Made with 💕 for inclusive mental health.
-                </p>
-            </div>
-        </div>
-    </body>
-    </html>
+    // Design system colors
+    $darkNavy = '#0F1E4B';
+    $midBlue = '#3D578A';
+    $darkGrey = '#4A5568';
+    
+    // Build content HTML
+    $content = '
+        <h1 style="margin: 0 0 24px 0; color: ' . $darkNavy . '; font-size: 28px; font-weight: 600; line-height: 1.3;">
+            Thank You for Your Interest
+        </h1>
+        <div style="font-size: 16px; line-height: 1.8; color: ' . $darkGrey . '; white-space: pre-wrap;">' . nl2br(htmlspecialchars($aiContent)) . '</div>
     ';
-
-    return $html;
+    
+    return getEmailTemplate($content, 'Thank you for your interest in Therapair');
 }
 
 // ============================================
@@ -546,135 +508,205 @@ function getAdminSubject($audience)
 
 function formatAdminEmail($data, $audience, $timestamp)
 {
-    $html = '
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-            .header { background: linear-gradient(135deg, #2563eb, #06b6d4); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
-            .content { background: #f9fafb; padding: 20px; border-radius: 0 0 8px 8px; }
-            .field { margin-bottom: 15px; }
-            .label { font-weight: bold; color: #4F064F; }
-            .value { margin-top: 5px; padding: 10px; background: white; border-radius: 4px; }
-            .footer { margin-top: 20px; padding-top: 20px; border-top: 2px solid #e5e7eb; color: #6b7280; font-size: 12px; }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h2 style="margin: 0;">🎯 New Therapair Interest Form</h2>
+    // Design system colors
+    $darkNavy = '#0F1E4B';
+    $midBlue = '#3D578A';
+    $darkGrey = '#4A5568';
+    $warmBeige = '#FAF8F5';
+    $white = '#FFFFFF';
+    
+    // Build content HTML
+    $content = '
+        <h1 style="margin: 0 0 24px 0; color: ' . $darkNavy . '; font-size: 24px; font-weight: 600; line-height: 1.3;">
+            New Therapair Interest Form Submission
+        </h1>
+        
+        <div style="margin-bottom: 20px;">
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Submitted
+                </div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px;">
+                    ' . htmlspecialchars($timestamp) . '
+                </div>
             </div>
-            <div class="content">
-                <div class="field">
-                    <div class="label">📅 Submitted:</div>
-                    <div class="value">' . htmlspecialchars($timestamp) . '</div>
+            
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Audience Type
                 </div>
-                
-                <div class="field">
-                    <div class="label">👤 Audience Type:</div>
-                    <div class="value">' . htmlspecialchars(ucfirst($audience)) . '</div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px;">
+                    ' . htmlspecialchars(ucfirst($audience)) . '
                 </div>
-                
-                <div class="field">
-                    <div class="label">📧 Email:</div>
-                    <div class="value"><a href="mailto:' . htmlspecialchars($data['email']) . '">' . htmlspecialchars($data['email']) . '</a></div>
+            </div>
+            
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Email
                 </div>
-                <div class="field">
-                    <div class="label">✅ Email Consent:</div>
-                    <div class="value">' . (isset($data['email_consent']) && $data['email_consent'] === 'yes' ? '✅ Given (' . htmlspecialchars($data['consent_timestamp'] ?? 'N/A') . ')' : '❌ Not given') . '</div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; font-size: 15px;">
+                    <a href="mailto:' . htmlspecialchars($data['email']) . '" style="color: ' . $midBlue . '; text-decoration: none;">' . htmlspecialchars($data['email']) . '</a>
                 </div>
+            </div>
+            
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Email Consent
+                </div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px;">
+                    ' . (isset($data['email_consent']) && $data['email_consent'] === 'yes' ? 'Given (' . htmlspecialchars($data['consent_timestamp'] ?? 'N/A') . ')' : 'Not given') . '
+                </div>
+            </div>
     ';
 
     // Add audience-specific fields
     switch ($audience) {
         case 'individual':
-            $html .= '
-                <div class="field">
-                    <div class="label">💭 Therapy Interests:</div>
-                    <div class="value">' . nl2br(htmlspecialchars($data['therapy_interests'])) . '</div>
+            $content .= '
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Therapy Interests
                 </div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px; line-height: 1.6;">
+                    ' . nl2br(htmlspecialchars($data['therapy_interests'])) . '
+                </div>
+            </div>
             ';
             if (!empty($data['additional_thoughts'])) {
-                $html .= '
-                    <div class="field">
-                        <div class="label">💬 What\'s Important to Them:</div>
-                        <div class="value">' . nl2br(htmlspecialchars($data['additional_thoughts'])) . '</div>
+                $content .= '
+                <div style="margin-bottom: 12px;">
+                    <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Additional Thoughts
                     </div>
+                    <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px; line-height: 1.6;">
+                        ' . nl2br(htmlspecialchars($data['additional_thoughts'])) . '
+                    </div>
+                </div>
+                ';
+            }
+            if (!empty($data['name'])) {
+                $content .= '
+                <div style="margin-bottom: 12px;">
+                    <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                        Name
+                    </div>
+                    <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px;">
+                        ' . htmlspecialchars($data['name']) . '
+                    </div>
+                </div>
                 ';
             }
             break;
 
         case 'therapist':
-            $html .= '
-                <div class="field">
-                    <div class="label">👤 Full Name:</div>
-                    <div class="value">' . htmlspecialchars($data['full_name']) . '</div>
+            $content .= '
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Full Name
                 </div>
-                <div class="field">
-                    <div class="label">💼 Professional Title:</div>
-                    <div class="value">' . htmlspecialchars($data['professional_title']) . '</div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px;">
+                    ' . htmlspecialchars($data['full_name'] ?? '') . '
                 </div>
-                <div class="field">
-                    <div class="label">🏢 Organization:</div>
-                    <div class="value">' . htmlspecialchars($data['organization']) . '</div>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Professional Title
                 </div>
-                <div class="field">
-                    <div class="label">🎯 Specializations:</div>
-                    <div class="value">' . nl2br(htmlspecialchars($data['specializations'])) . '</div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px;">
+                    ' . htmlspecialchars($data['professional_title'] ?? '') . '
                 </div>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Organization
+                </div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px;">
+                    ' . htmlspecialchars($data['organization'] ?? '') . '
+                </div>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Specializations
+                </div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px; line-height: 1.6;">
+                    ' . nl2br(htmlspecialchars($data['specializations'] ?? '')) . '
+                </div>
+            </div>
             ';
             break;
 
         case 'organization':
-            $html .= '
-                <div class="field">
-                    <div class="label">👤 Contact Name:</div>
-                    <div class="value">' . htmlspecialchars($data['contact_name']) . '</div>
+            $content .= '
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Contact Name
                 </div>
-                <div class="field">
-                    <div class="label">💼 Position:</div>
-                    <div class="value">' . htmlspecialchars($data['position']) . '</div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px;">
+                    ' . htmlspecialchars($data['contact_name'] ?? '') . '
                 </div>
-                <div class="field">
-                    <div class="label">🏢 Organization Name:</div>
-                    <div class="value">' . htmlspecialchars($data['organization_name']) . '</div>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Position
                 </div>
-                <div class="field">
-                    <div class="label">🤝 Partnership Interest:</div>
-                    <div class="value">' . nl2br(htmlspecialchars($data['partnership_interest'])) . '</div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px;">
+                    ' . htmlspecialchars($data['position'] ?? '') . '
                 </div>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Organization Name
+                </div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px;">
+                    ' . htmlspecialchars($data['organization_name'] ?? '') . '
+                </div>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Partnership Interest
+                </div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px; line-height: 1.6;">
+                    ' . nl2br(htmlspecialchars($data['partnership_interest'] ?? '')) . '
+                </div>
+            </div>
             ';
             break;
 
         case 'other':
-            $html .= '
-                <div class="field">
-                    <div class="label">👤 Name:</div>
-                    <div class="value">' . htmlspecialchars($data['name']) . '</div>
+            $content .= '
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Name
                 </div>
-                <div class="field">
-                    <div class="label">💡 Support Interest:</div>
-                    <div class="value">' . nl2br(htmlspecialchars($data['support_interest'])) . '</div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px;">
+                    ' . htmlspecialchars($data['name'] ?? '') . '
                 </div>
+            </div>
+            <div style="margin-bottom: 12px;">
+                <div style="font-weight: 600; color: ' . $darkNavy . '; font-size: 14px; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Support Interest
+                </div>
+                <div style="padding: 12px; background-color: ' . $warmBeige . '; border-radius: 6px; color: ' . $darkGrey . '; font-size: 15px; line-height: 1.6;">
+                    ' . nl2br(htmlspecialchars($data['support_interest'] ?? '')) . '
+                </div>
+            </div>
             ';
             break;
     }
-
-    $html .= '
-                <div class="footer">
-                    <p><strong>⚡ Action Required:</strong> Respond to this inquiry within 1-2 business days.</p>
-                    <p style="margin-top: 10px;">This email was sent from the Therapair landing page contact form.</p>
-                </div>
-            </div>
+    
+    // Add action required footer
+    $content .= '
+        <div style="margin-top: 32px; padding: 20px; background-color: ' . $darkNavy . '; border-radius: 8px;">
+            <p style="margin: 0; color: ' . $white . '; font-size: 15px; font-weight: 600; line-height: 1.6;">
+                Action Required: Respond to this inquiry within 1-2 business days.
+            </p>
         </div>
-    </body>
-    </html>
+        <p style="margin-top: 20px; color: ' . $darkGrey . '; font-size: 13px; line-height: 1.5;">
+            This email was sent from the Therapair landing page contact form.
+        </p>
     ';
-
-    return $html;
+    
+    return getEmailTemplate($content, 'New form submission from Therapair landing page');
 }
 
 function formatUserEmail($data, $audience)
@@ -744,63 +776,60 @@ function formatUserEmail($data, $audience)
             $personalisedMessage = "Thanks so much for your interest in Therapair! We're excited to connect with you and build something meaningful together.";
     }
 
-    $html = '
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <style>
-            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-            .container { max-width: 600px; margin: 0 auto; padding: 20px; background: #f9fafb; }
-            .header { background: linear-gradient(135deg, #2563eb, #06b6d4); color: white; padding: 30px 20px; border-radius: 8px 8px 0 0; text-align: center; }
-            .content { background: #ffffff; padding: 30px 20px; border: 1px solid #e5e7eb; }
-            .box { background: #f0e7f3; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #9B74B7; }
-            .footer { margin-top: 30px; padding-top: 20px; border-top: 2px solid #e5e7eb; color: #6b7280; font-size: 12px; text-align: center; }
-            .signature { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb; }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="header">
-                <h1 style="margin: 0; font-size: 28px;">Thank You for Your Interest! 🎉</h1>
-            </div>
-            <div class="content">
-                <p style="font-size: 16px;"><strong>' . htmlspecialchars($greeting) . '</strong></p>
-                
-                <p style="font-size: 15px; line-height: 1.8;">' . $personalisedMessage . '</p>
-                
-                <div class="box">
-                    <h3 style="margin-top: 0; color: #4F064F; font-size: 18px;">📋 What happens next?</h3>
-                    <p style="margin: 8px 0; font-size: 15px;">✓ You\'re one of the very first people to explore this with us</p>
-                    <p style="margin: 8px 0; font-size: 15px;">✓ We\'ll be in touch soon as we build our therapist-matching concierge experience</p>
-                    <p style="margin: 8px 0; font-size: 15px;">✓ We\'ll keep you updated on our progress and let you know when we\'re ready to launch</p>
-                </div>
-                
-                <p style="font-size: 15px;">If you have any urgent questions, please don\'t hesitate to reply to this email.</p>
-                
-                <div class="signature">
-                    <p style="margin: 5px 0; font-size: 15px;">Warm regards,</p>
-                    <p style="margin: 5px 0;"><strong style="font-size: 16px;">Tino</strong></p>
-                    <p style="margin: 5px 0; color: #6b7280; font-size: 14px;">Therapair Team</p>
-                </div>
-                
-                <div class="footer">
-                    <p style="margin: 5px 0;"><strong>Therapair</strong></p>
-                    <p style="margin: 5px 0;">AI-powered therapy matching for inclusive mental health care</p>
-                    <p style="margin-top: 15px;">
-                        📧 <a href="mailto:contact@therapair.com.au" style="color: #2563eb; text-decoration: none;">contact@therapair.com.au</a><br>
-                        🌐 <a href="https://therapair.com.au" style="color: #2563eb; text-decoration: none;">therapair.com.au</a><br>
-                        ⚙️ <a href="https://therapair.com.au/email-preferences.html" style="color: #2563eb; text-decoration: none;">Manage Email Preferences</a>
-                    </p>
-                    <p style="margin-top: 15px; font-size: 11px; color: #9ca3af;">
-                        © 2025 Therapair. Made with 💕 for inclusive mental health.
-                    </p>
-                </div>
-            </div>
+    // Design system colors
+    $darkNavy = '#0F1E4B';
+    $midBlue = '#3D578A';
+    $darkGrey = '#4A5568';
+    
+    // Build content HTML
+    $boxStyle = getEmailBoxStyle();
+    
+    $content = '
+        <h1 style="margin: 0 0 24px 0; color: ' . $darkNavy . '; font-size: 28px; font-weight: 600; line-height: 1.3;">
+            Thank You for Your Interest
+        </h1>
+        
+        <p style="font-size: 16px; line-height: 1.8; color: ' . $darkGrey . '; margin: 0 0 20px 0;">
+            <strong>' . htmlspecialchars($greeting) . '</strong>
+        </p>
+        
+        <p style="font-size: 16px; line-height: 1.8; color: ' . $darkGrey . '; margin: 0 0 24px 0;">
+            ' . $personalisedMessage . '
+        </p>
+        
+        <div style="' . $boxStyle . '">
+            <h3 style="margin: 0 0 16px 0; color: ' . $darkNavy . '; font-size: 18px; font-weight: 600;">
+                What happens next?
+            </h3>
+            <p style="margin: 8px 0; font-size: 15px; line-height: 1.6; color: ' . $darkGrey . ';">
+                You\'re one of the very first people to explore this with us
+            </p>
+            <p style="margin: 8px 0; font-size: 15px; line-height: 1.6; color: ' . $darkGrey . ';">
+                We\'ll be in touch soon as we build our therapist-matching concierge experience
+            </p>
+            <p style="margin: 8px 0; font-size: 15px; line-height: 1.6; color: ' . $darkGrey . ';">
+                We\'ll keep you updated on our progress and let you know when we\'re ready to launch
+            </p>
         </div>
-    </body>
-    </html>
+        
+        <p style="font-size: 16px; line-height: 1.8; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
+            If you have any urgent questions, please don\'t hesitate to reply to this email.
+        </p>
+        
+        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(149, 177, 205, 0.3);">
+            <p style="margin: 5px 0; font-size: 16px; line-height: 1.6; color: ' . $darkGrey . ';">
+                Warm regards,
+            </p>
+            <p style="margin: 5px 0; font-size: 16px; font-weight: 600; color: ' . $darkNavy . ';">
+                Tino
+            </p>
+            <p style="margin: 5px 0; font-size: 14px; color: ' . $darkGrey . ';">
+                Therapair Team
+            </p>
+        </div>
     ';
+    
+    $html = getEmailTemplate($content, 'Thank you for your interest in Therapair');
 
     return $html;
 }
