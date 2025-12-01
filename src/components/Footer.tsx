@@ -12,7 +12,7 @@ export function Footer() {
               <TherapairLogo size={28} variant="white" />
             </div>
             <p className="text-sm opacity-80">
-              AI-powered therapist matching for inclusive mental healthcare
+              Therapist matching for inclusive mental healthcare
             </p>
           </div>
           
