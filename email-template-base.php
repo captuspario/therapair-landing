@@ -50,8 +50,8 @@ function getEmailTemplate($content, $preheader = '')
                     
                     <!-- Header with Logo -->
                     <tr>
-                        <td style="padding: 40px 40px 30px 40px; text-align: center; background: linear-gradient(135deg, ' . $warmBeige . ' 0%, rgba(149, 177, 205, 0.1) 100%); border-radius: 12px 12px 0 0;">
-                            <img src="' . $logoUrl . '" alt="Therapair" style="max-width: 180px; height: auto; display: block; margin: 0 auto;" />
+                        <td style="padding: 30px 40px; text-align: left; background-color: ' . $lightBlue . '; border-radius: 12px 12px 0 0;">
+                            <img src="' . $logoUrl . '" alt="Therapair" style="height: 60px; width: auto; display: block;" />
                         </td>
                     </tr>
                     
