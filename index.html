@@ -747,7 +747,7 @@
                     </div>
 
                     <!-- Dynamic Form Fields -->
-                    <div id="dynamic-fields" class="space-y-6" style="position: relative; min-height: 750px;">
+                    <div id="dynamic-fields" class="space-y-6" style="position: relative; min-height: 550px; transition: min-height 0.3s ease;">
                         <!-- Individual Fields -->
                         <div id="individual-fields" class="space-y-6" style="position: absolute; top: 0; left: 0; right: 0; width: 100%; max-width: 100%; box-sizing: border-box; visibility: hidden; opacity: 0; pointer-events: none; transition: opacity 0.2s ease;">
                             <div>
@@ -1212,6 +1212,52 @@
             document.getElementById('other-fields').style.opacity = '0';
             document.getElementById('other-fields').style.pointerEvents = 'none';
 
+            // Function to update container height based on active form
+            function updateContainerHeight() {
+                const container = document.getElementById('dynamic-fields');
+                let activeFields = null;
+                
+                // Find the visible field group
+                const fieldGroups = ['individual-fields', 'professional-fields', 'organization-fields', 'other-fields'];
+                for (const groupId of fieldGroups) {
+                    const group = document.getElementById(groupId);
+                    const computedStyle = window.getComputedStyle(group);
+                    if (computedStyle.visibility === 'visible' && computedStyle.opacity !== '0') {
+                        activeFields = group;
+                        break;
+                    }
+                }
+                
+                if (activeFields) {
+                    // Temporarily remove absolute positioning to measure height
+                    const originalPosition = activeFields.style.position;
+                    const originalVisibility = activeFields.style.visibility;
+                    const originalOpacity = activeFields.style.opacity;
+                    const originalPointerEvents = activeFields.style.pointerEvents;
+                    
+                    // Make it visible and measure
+                    activeFields.style.position = 'static';
+                    activeFields.style.visibility = 'visible';
+                    activeFields.style.opacity = '1';
+                    activeFields.style.pointerEvents = 'auto';
+                    
+                    // Force reflow
+                    void activeFields.offsetHeight;
+                    
+                    // Get the actual height of the content
+                    const height = activeFields.offsetHeight;
+                    
+                    // Restore positioning
+                    activeFields.style.position = originalPosition;
+                    activeFields.style.visibility = originalVisibility;
+                    activeFields.style.opacity = originalOpacity;
+                    activeFields.style.pointerEvents = originalPointerEvents;
+                    
+                    // Update container height with some padding for smooth transition
+                    container.style.minHeight = (height + 60) + 'px';
+                }
+            }
+
             // Show appropriate field group and enable its fields
             if (audience === 'individual') {
                 document.getElementById('individual-fields').style.visibility = 'visible';
@@ -1247,6 +1293,9 @@
                 document.querySelector('#other-fields input[name="Email"]').setAttribute('required', 'required');
                 document.querySelector('#other-fields input[name="Email_Consent"]').setAttribute('required', 'required');
             }
+            
+            // Update container height after showing fields (with a small delay for transition)
+            setTimeout(updateContainerHeight, 300);
 
             // Hide error message
             document.getElementById('form-error').classList.add('hidden');
@@ -1315,6 +1364,42 @@
             setTimeout(() => {
                 lucide.createIcons();
             }, 200);
+            
+            // Update container height on initial load and window resize
+            setTimeout(() => {
+                // Access the updateContainerHeight function from the selectAudience scope
+                const container = document.getElementById('dynamic-fields');
+                const updateHeight = () => {
+                    const fieldGroups = ['individual-fields', 'professional-fields', 'organization-fields', 'other-fields'];
+                    let activeFields = null;
+                    
+                    for (const groupId of fieldGroups) {
+                        const group = document.getElementById(groupId);
+                        const computedStyle = window.getComputedStyle(group);
+                        if (computedStyle.visibility === 'visible' && computedStyle.opacity !== '0') {
+                            activeFields = group;
+                            break;
+                        }
+                    }
+                    
+                    if (activeFields && container) {
+                        const originalPosition = activeFields.style.position;
+                        const originalVisibility = activeFields.style.visibility;
+                        const originalOpacity = activeFields.style.opacity;
+                        activeFields.style.position = 'static';
+                        activeFields.style.visibility = 'visible';
+                        activeFields.style.opacity = '1';
+                        void activeFields.offsetHeight; // Force reflow
+                        const height = activeFields.offsetHeight;
+                        activeFields.style.position = originalPosition;
+                        activeFields.style.visibility = originalVisibility;
+                        activeFields.style.opacity = originalOpacity;
+                        container.style.minHeight = (height + 60) + 'px';
+                    }
+                };
+                updateHeight();
+                window.addEventListener('resize', updateHeight);
+            }, 400);
         });
 
         // Form submission validation
