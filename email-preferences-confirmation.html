@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferences Updated - Therapair</title>
+    <meta name="description" content="Your email preferences have been updated.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Therapair Brand Colors & Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --therapair-dark-navy: #0F1E4B;
+            --therapair-mid-blue: #3D578A;
+            --therapair-light-blue: #95B1CD;
+            --therapair-black: #000000;
+            --therapair-warm-beige: #FAF8F5;
+            --therapair-dark-grey: #4A5568;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen" style="background-color: var(--therapair-warm-beige);">
+    <div class="max-w-2xl mx-auto px-4 py-12">
+        <!-- Success Message -->
+        <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+            <!-- Icon -->
+            <div class="mb-6">
+                <svg class="mx-auto h-16 w-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+            </div>
+
+            <!-- Heading -->
+            <h1 class="text-3xl font-bold text-gray-900 mb-4" id="confirmationTitle">
+                Preferences Updated
+            </h1>
+
+            <!-- Message -->
+            <p class="text-lg text-gray-600 mb-6" id="confirmationMessage">
+                Your email preferences have been updated successfully.
+            </p>
+
+            <!-- Unsubscribe Specific Message -->
+            <div id="unsubscribeMessage" class="hidden mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p class="text-red-700 font-medium mb-2">You've been unsubscribed</p>
+                <p class="text-sm text-red-600">
+                    You will no longer receive emails from Therapair. If you change your mind, you can always update your preferences again.
+                </p>
+            </div>
+
+            <!-- Email Display -->
+            <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                <p class="text-sm text-gray-600 mb-1">Email address:</p>
+                <p class="text-base font-medium text-gray-900" id="emailDisplay">-</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a 
+                    href="/email-preferences.html" 
+                    class="inline-block bg-[#0F1E4B] text-white py-3 px-6 rounded-lg hover:bg-[#2D4770] focus:ring-2 focus:ring-[#0F1E4B] focus:ring-offset-2 transition-colors font-medium text-center"
+                >
+                    Update Preferences Again
+                </a>
+                <a 
+                    href="/" 
+                    class="inline-block border border-gray-300 text-gray-700 py-3 px-6 rounded-lg hover:bg-gray-50 transition-colors font-medium text-center"
+                >
+                    Back to Therapair
+                </a>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="mt-8 text-center text-sm text-gray-500">
+            <p>You can update your preferences at any time. We respect your privacy and will never share your information.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('email');
+        const action = urlParams.get('action');
+
+        // Update page content based on action
+        if (action === 'unsubscribe') {
+            document.getElementById('confirmationTitle').textContent = 'You\'ve been unsubscribed';
+            document.getElementById('confirmationMessage').textContent = 'You have successfully unsubscribed from all Therapair communications.';
+            document.getElementById('unsubscribeMessage').classList.remove('hidden');
+        }
+
+        // Display email if provided
+        if (email) {
+            document.getElementById('emailDisplay').textContent = decodeURIComponent(email);
+        } else {
+            document.getElementById('emailDisplay').textContent = 'Not provided';
+        }
+    </script>
+    
+    <!-- Therapair Global Feedback Widget -->
+    <script src="/therapair-feedback-widget.js" defer></script>
+</body>
+</html>
+
+
+

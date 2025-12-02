@@ -70,28 +70,12 @@
                             <span class="text-gray-700">Product Updates - New features and improvements</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="preferences[]" value="Launch Announcements" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
-                            <span class="text-gray-700">Launch Announcements - When we officially go live</span>
-                        </label>
-                        <label class="flex items-center">
                             <input type="checkbox" name="preferences[]" value="Therapist Opportunities" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
                             <span class="text-gray-700">Therapist Opportunities - Join our network</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="checkbox" name="preferences[]" value="Partnership News" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
-                            <span class="text-gray-700">Partnership News - Collaboration opportunities</span>
-                        </label>
-                        <label class="flex items-center">
                             <input type="checkbox" name="preferences[]" value="Research & Feedback" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
                             <span class="text-gray-700">Research & Feedback - Help shape our service</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="preferences[]" value="Event Invitations" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
-                            <span class="text-gray-700">Event Invitations - Webinars and meetups</span>
-                        </label>
-                        <label class="flex items-center">
-                            <input type="checkbox" name="preferences[]" value="Investment Updates" checked class="mr-3 h-4 w-4 text-[#0F1E4B] focus:ring-[#0F1E4B] border-gray-300 rounded">
-                            <span class="text-gray-700">Investment Updates - For supporters and investors</span>
                         </label>
                     </div>
                 </div>
@@ -135,6 +119,18 @@
 
     <!-- JavaScript -->
     <script>
+        // Pre-fill email from URL parameter
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const emailParam = urlParams.get('email');
+            if (emailParam) {
+                const emailInput = document.getElementById('email');
+                if (emailInput) {
+                    emailInput.value = decodeURIComponent(emailParam);
+                }
+            }
+        })();
+
         // Handle unsubscribe checkbox
         document.getElementById('unsubscribe').addEventListener('change', function() {
             const checkboxes = document.querySelectorAll('input[name="preferences[]"]');
@@ -221,20 +217,21 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    if (unsubscribe) {
-                        alert('You have been unsubscribed from all Therapair communications.');
-                    } else {
-                        alert('Your email preferences have been updated successfully!');
-                    }
+                    // Redirect to confirmation page instead of popup
+                    const params = new URLSearchParams({
+                        email: email,
+                        action: unsubscribe ? 'unsubscribe' : 'update'
+                    });
+                    window.location.href = '/email-preferences-confirmation.html?' + params.toString();
                 } else {
                     alert('Error updating preferences: ' + (data.message || 'Please try again.'));
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 alert('Error updating preferences. Please try again.');
-            })
-            .finally(() => {
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
             });

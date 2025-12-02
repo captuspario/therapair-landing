@@ -72,7 +72,7 @@ function getEmailTemplate($content, $preheader = '')
                                             <strong style="color: ' . $black . ';">Therapair</strong>
                                         </p>
                                         <p style="margin: 0 0 20px 0; color: ' . $darkGrey . '; font-size: 13px; line-height: 1.5;">
-                                            Therapy matching for inclusive mental health care
+                                            Connecting you with therapists who actually get you.
                                         </p>
                                         
                                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 0 auto;">
