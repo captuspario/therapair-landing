@@ -194,10 +194,10 @@ if (!empty($survey['email'])) {
     $properties['1. Email'] = ['email' => $survey['email']];
 }
 
-set_select_property($properties, '26. Value Payment Model', $survey['value_payment_model'] ?? null);
-set_rich_text_property($properties, '27. Value Payment Notes', $survey['value_payment_notes'] ?? null);
-set_rich_text_property($properties, '28. Subscription Amount (Practitioner View)', $survey['value_subscription_amount'] ?? null);
-set_rich_text_property($properties, '29. Comments', $survey['comments'] ?? null);
+// Pricing fields - using number properties for numeric values
+set_number_property($properties, '26. Fee Per Match (Practitioner View)', $survey['value_fee_per_match'] ?? null);
+set_number_property($properties, '27. Monthly Subscription (Practitioner View)', $survey['value_monthly_subscription'] ?? null);
+set_rich_text_property($properties, '28. Comments', $survey['comments'] ?? null);
 
 set_select_property($properties, '27. Consent Status', 'Granted');
 $properties['Submitted'] = [
