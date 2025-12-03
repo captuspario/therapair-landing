@@ -154,6 +154,17 @@ if ($USE_AI_PERSONALIZATION && !empty($OPENAI_API_KEY) && $OPENAI_API_KEY !== 'Y
     $userMessage = formatUserEmail($formData, $audience);
 }
 
+// Get Notion page ID for tracking (if available)
+$notionPageId = null;
+if ($USE_NOTION_SYNC && isset($notionResult) && $notionResult['success']) {
+    $notionPageId = isset($notionResult['response']['id']) ? $notionResult['response']['id'] : null;
+}
+
+// Add tracking URLs to email message if we have a Notion page ID
+if ($notionPageId && $notionPageId !== 'unknown') {
+    $userMessage = addTrackingToEmailLinks($userMessage, $notionPageId, $audience);
+}
+
 // Send user email via Resend or fallback to mail()
 $userSent = sendEmailViaResend(
     $email,
@@ -195,6 +206,7 @@ if ($USE_NOTION_SYNC) {
     } else {
         error_log("Notion sync: Attempting to sync to EOI database ID: $targetDb, Audience: $audience, Email: " . ($formData['email'] ?? 'N/A'));
         $notionResult = syncToNotion($formData, $audience, $targetDb);
+        // Store result for use in email tracking
         if ($notionResult['success']) {
             $pageId = isset($notionResult['response']['id']) ? $notionResult['response']['id'] : 'unknown';
             error_log("Notion sync: Success! Entry created in EOI database. Page ID: $pageId");
@@ -1033,5 +1045,58 @@ function formatUserEmail($data, $audience)
     }
     
     return $html;
+}
+
+/**
+ * Add tracking URLs to email links
+ * Replaces direct links with tracking redirect URLs that include Notion page ID and UTM parameters
+ */
+function addTrackingToEmailLinks($emailHtml, $notionPageId, $audience) {
+    // Base tracking URL
+    $trackBase = 'https://therapair.com.au/track.php';
+    
+    // UTM parameters
+    $utmSource = 'email';
+    $utmMedium = 'eoi_confirmation';
+    $utmContent = $audience;
+    
+    // Track sandbox demo links
+    $sandboxUrl = 'https://therapair.com.au/sandbox/sandbox-demo.html';
+    $trackingSandboxUrl = $trackBase . '?uid=' . urlencode($notionPageId) . 
+        '&dest=sandbox' . 
+        '&utm_source=' . urlencode($utmSource) . 
+        '&utm_medium=' . urlencode($utmMedium) . 
+        '&utm_campaign=sandbox_demo' . 
+        '&utm_content=' . urlencode($utmContent);
+    $emailHtml = str_replace($sandboxUrl, $trackingSandboxUrl, $emailHtml);
+    $emailHtml = str_replace('href="' . $sandboxUrl, 'href="' . $trackingSandboxUrl, $emailHtml);
+    
+    // Track email preferences links
+    $preferencesUrl = 'https://therapair.com.au/email-preferences.html';
+    $trackingPreferencesUrl = $trackBase . '?uid=' . urlencode($notionPageId) . 
+        '&dest=preferences' . 
+        '&utm_source=' . urlencode($utmSource) . 
+        '&utm_medium=' . urlencode($utmMedium) . 
+        '&utm_campaign=email_preferences' . 
+        '&utm_content=' . urlencode($utmContent);
+    $emailHtml = str_replace($preferencesUrl, $trackingPreferencesUrl, $emailHtml);
+    $emailHtml = str_replace('href="' . $preferencesUrl, 'href="' . $trackingPreferencesUrl, $emailHtml);
+    
+    // Track website/home links
+    $homeUrl = 'https://therapair.com.au';
+    $trackingHomeUrl = $trackBase . '?uid=' . urlencode($notionPageId) . 
+        '&dest=home' . 
+        '&utm_source=' . urlencode($utmSource) . 
+        '&utm_medium=' . urlencode($utmMedium) . 
+        '&utm_campaign=website' . 
+        '&utm_content=' . urlencode($utmContent);
+    // Only replace if it's a standalone link (not part of another URL)
+    $emailHtml = preg_replace(
+        '/(href=")' . preg_quote($homeUrl, '/') . '(")/',
+        '$1' . $trackingHomeUrl . '$2',
+        $emailHtml
+    );
+    
+    return $emailHtml;
 }
 ?>
