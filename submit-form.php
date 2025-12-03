@@ -129,7 +129,13 @@ if (!$adminSent) {
 // ============================================
 // 2. SEND CONFIRMATION EMAIL TO USER (AI-POWERED)
 // ============================================
+// Set subject based on audience type
 $userSubject = 'Thank you for your interest in Therapair';
+if ($audience === 'organization') {
+    $userSubject = 'Thank you for your interest in partnering with Therapair';
+} elseif ($audience === 'other') {
+    $userSubject = 'Thank you for your interest in supporting Therapair';
+}
 
 // Generate AI-powered personalised message or fallback to template
 if ($USE_AI_PERSONALIZATION && !empty($OPENAI_API_KEY) && $OPENAI_API_KEY !== 'YOUR_OPENAI_API_KEY_HERE') {
@@ -711,138 +717,318 @@ function formatAdminEmail($data, $audience, $timestamp)
 
 function formatUserEmail($data, $audience)
 {
-    $name = '';
-    $personalisedMessage = '';
-
-    // Get name and create personalised message based on audience type
-    switch ($audience) {
-        case 'individual':
-            $greeting = "Hi there,";
-            $personalisedMessage = "Thanks so much for taking the time to share what's important to you. ";
-
-            if (!empty($data['therapy_interests']) && $data['therapy_interests'] !== 'None selected') {
-                $personalisedMessage .= "We're excited to learn what matters most to you, especially your interest in <strong>" . htmlspecialchars($data['therapy_interests']) . "</strong>. This helps us build a therapist-matching concierge experience with real humans and real care.";
-            } else {
-                $personalisedMessage .= "We're excited to learn what matters most to you. This helps us build a therapist-matching concierge experience with real humans and real care.";
-            }
-            break;
-
-        case 'therapist':
-            $name = $data['full_name'] ?? '';
-            $greeting = $name ? "Hi {$name}," : "Hi there,";
-            $title = !empty($data['professional_title']) ? htmlspecialchars($data['professional_title']) : 'mental health professional';
-
-            $personalisedMessage = "Thanks so much for taking the time to share about your practice. ";
-            $personalisedMessage .= "We'd love to learn about your work as a <strong>{$title}</strong> and how we can build a therapist-matching concierge experience together. ";
-
-            if (!empty($data['specializations'])) {
-                $personalisedMessage .= "Your expertise in <strong>" . htmlspecialchars(substr($data['specializations'], 0, 100)) . (strlen($data['specializations']) > 100 ? '...' : '') . "</strong> is exactly what we're looking for.";
-            } else {
-                $personalisedMessage .= "We're excited to learn more about your practice and explore how we can work together.";
-            }
-            break;
-
-        case 'organization':
-            $name = $data['contact_name'] ?? '';
-            $greeting = $name ? "Hi {$name}," : "Hi there,";
-            $orgName = !empty($data['organization_name']) ? htmlspecialchars($data['organization_name']) : 'your organisation';
-
-            $personalisedMessage = "Thanks so much for reaching out on behalf of <strong>{$orgName}</strong>. ";
-            $personalisedMessage .= "We'd love to stay in touch as we grow and build our therapist-matching concierge experience. ";
-
-            if (!empty($data['partnership_interest'])) {
-                $personalisedMessage .= "We're excited to explore how we can collaborate and support each other.";
-            } else {
-                $personalisedMessage .= "We'd love to learn more about your organisation and how we can work together.";
-            }
-            break;
-
-        case 'other':
-            $name = $data['name'] ?? '';
-            $greeting = $name ? "Hi {$name}," : "Hi there,";
-
-            $personalisedMessage = "Thanks so much for your interest in supporting Therapair! ";
-            $personalisedMessage .= "We'd love to stay in touch as we grow and build our therapist-matching concierge experience with real humans and real care. ";
-
-            if (!empty($data['support_interest'])) {
-                $personalisedMessage .= "We're excited to explore how we can work together and support each other.";
-            } else {
-                $personalisedMessage .= "We'd love to share more about our vision and explore how you can be part of this journey.";
-            }
-            break;
-
-        default:
-            $greeting = "Hi there,";
-            $personalisedMessage = "Thanks so much for your interest in Therapair! We're excited to connect with you and build something meaningful together.";
-    }
-
     // Design system colors
     $darkNavy = '#0F1E4B';
     $midBlue = '#3D578A';
     $darkGrey = '#4A5568';
+    $warningBg = '#FFF5E6';
+    $warningBorder = '#FFD700';
+    $warningText = '#C05621';
     
-    // Build content HTML
-    $boxStyle = getEmailBoxStyle();
-    
-    $content = '
-        <h1 style="margin: 0 0 24px 0; color: ' . $darkNavy . '; font-size: 28px; font-weight: 600; line-height: 1.3;">
-            Thank You for Your Interest
-        </h1>
-        
-        <p style="font-size: 16px; line-height: 1.8; color: ' . $darkGrey . '; margin: 0 0 20px 0;">
-            <strong>' . htmlspecialchars($greeting) . '</strong>
-        </p>
-        
-        <p style="font-size: 16px; line-height: 1.8; color: ' . $darkGrey . '; margin: 0 0 24px 0;">
-            ' . $personalisedMessage . '
-        </p>
-        
-        <div style="' . $boxStyle . '">
-            <h3 style="margin: 0 0 16px 0; color: ' . $darkNavy . '; font-size: 18px; font-weight: 600;">
-                What happens next?
-            </h3>
-            <p style="margin: 8px 0; font-size: 15px; line-height: 1.6; color: ' . $darkGrey . ';">
-                You\'re one of the very first people to explore this with us
-            </p>
-            <p style="margin: 8px 0; font-size: 15px; line-height: 1.6; color: ' . $darkGrey . ';">
-                We\'ll be in touch soon as we build our therapist-matching concierge experience
-            </p>
-            <p style="margin: 8px 0; font-size: 15px; line-height: 1.6; color: ' . $darkGrey . ';">
-                We\'ll keep you updated on our progress and let you know when we\'re ready to launch
-            </p>
-        </div>
-        
-        <div style="margin: 32px 0; padding: 24px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%); border-radius: 12px; border: 2px solid rgba(59, 130, 246, 0.2);">
-            <h3 style="margin: 0 0 12px 0; color: ' . $darkNavy . '; font-size: 18px; font-weight: 600;">
-                🎯 Explore our sandbox demo prototype
-            </h3>
-            <p style="margin: 0 0 16px 0; font-size: 15px; line-height: 1.6; color: ' . $darkGrey . ';">
-                Experience the full therapist-matching concept with 100 realistic therapist profiles. See how we\'re building a better way to connect people with therapists who truly understand them.
-            </p>
-            <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '">
-                View Sandbox Demo
-            </a>
-        </div>
-        
-        <p style="font-size: 16px; line-height: 1.8; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
-            If you have any urgent questions, please don\'t hesitate to reply to this email.
-        </p>
-        
-        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(149, 177, 205, 0.3);">
-            <p style="margin: 5px 0; font-size: 16px; line-height: 1.6; color: ' . $darkGrey . ';">
-                Warm regards,
-            </p>
-            <p style="margin: 5px 0; font-size: 16px; font-weight: 600; color: ' . $darkNavy . ';">
-                Tino
-            </p>
-            <p style="margin: 5px 0; font-size: 14px; color: ' . $darkGrey . ';">
-                Therapair Team
-            </p>
-        </div>
-    ';
-    
-    $html = getEmailTemplate($content, 'Thank you for your interest in Therapair');
+    // Build content HTML based on audience type
+    switch ($audience) {
+        case 'therapist':
+            $name = !empty($data['full_name']) ? htmlspecialchars($data['full_name']) : 'there';
+            $hasTakenSurvey = false; // TODO: Check if therapist has taken survey
+            
+            $content = '
+                <h1 style="margin: 0 0 24px 0; color: ' . $darkNavy . '; font-size: 24px; font-weight: bold; line-height: 1.4;">
+                    Thank you for your interest in Therapair
+                </h1>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Hi ' . $name . ',
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Thanks for your Expression of Interest to join Therapair as a mental health professional. We\'re excited about the possibility of working together.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>What is Therapair?</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Therapair is a privacy-first therapist-matching platform designed to help people find therapists who truly align with their needs, values, and identity. We focus on identity-aware matching—so that people from marginalised communities, LGBTQ+ individuals, neurodivergent people, and others can find therapists who understand and affirm their experiences.
+                </p>
+            ';
+            
+            if ($hasTakenSurvey) {
+                $content .= '
+                    <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                        We noticed you\'ve previously taken part in a Therapair research survey. We\'ll be in touch soon with a data consent form so you can choose how we use your previous information when setting up your profile.
+                    </p>
+                ';
+            }
+            
+            $content .= '
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>What happens next?</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    We\'re currently in a pre-MVP phase, building the platform with input from therapists like you. We\'ll email you when onboarding is ready in the coming months, and you\'ll be among the first to hear about pilot opportunities.
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>Explore our sandbox demo</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Want to see what we\'re building? Check out our sandbox demo prototype to experience the therapist-matching concept:
+                </p>
+                <div style="text-align: center; margin: 24px 0;">
+                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '">
+                        View Sandbox Demo
+                    </a>
+                </div>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    In the meantime, if you have questions or ideas, you can simply reply to this email.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
+                    Thank you for being part of building a better way to connect people with mental health support.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
+                    Best regards,<br />
+                    The Therapair Team
+                </p>
+            ';
+            
+            $html = getEmailTemplate($content, 'Thanks for your interest in Therapair');
+            break;
 
+        case 'individual':
+            $name = !empty($data['name']) ? htmlspecialchars($data['name']) : 'there';
+            
+            $content = '
+                <h1 style="margin: 0 0 24px 0; color: ' . $darkNavy . '; font-size: 24px; font-weight: bold; line-height: 1.4;">
+                    Thank you for your interest in Therapair
+                </h1>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Hi ' . $name . ',
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Thanks for your Expression of Interest. We\'re building Therapair to help people like you find therapists who truly understand your needs and values.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>What is Therapair?</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Therapair is a privacy-first therapist-matching platform designed to help people find therapists who align with their identity, values, and needs. We focus on identity-aware matching—so that people from marginalised communities, LGBTQ+ individuals, neurodivergent people, and others can find therapists who understand and affirm their experiences.
+                </p>
+                
+                <div style="background-color: ' . $warningBg . '; border: 1px solid ' . $warningBorder . '; border-radius: 6px; padding: 20px; margin: 24px 0;">
+                    <p style="font-size: 18px; font-weight: bold; color: ' . $warningText . '; margin: 0 0 12px 0;">
+                        ⚠️ Important: We\'re not an emergency service
+                    </p>
+                    <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 12px 0;">
+                        <strong>Therapair is not an emergency service.</strong> We cannot provide crisis support or immediate help.
+                    </p>
+                    <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 12px 0;">
+                        If you\'re in crisis or considering self-harm, please contact:
+                    </p>
+                    <p style="font-size: 16px; line-height: 1.75; color: ' . $darkGrey . '; margin: 0;">
+                        <strong>Emergency:</strong> <a href="tel:000" style="color: ' . $midBlue . '; text-decoration: underline;">000</a><br />
+                        <strong>Lifeline:</strong> <a href="tel:131114" style="color: ' . $midBlue . '; text-decoration: underline;">13 11 14</a> (24/7 crisis support) - <a href="https://www.lifeline.org.au" style="color: ' . $midBlue . '; text-decoration: underline;">lifeline.org.au</a><br />
+                        <strong>Beyond Blue:</strong> <a href="tel:1300224636" style="color: ' . $midBlue . '; text-decoration: underline;">1300 22 4636</a> - <a href="https://www.beyondblue.org.au" style="color: ' . $midBlue . '; text-decoration: underline;">beyondblue.org.au</a><br />
+                        <strong>Suicide Call Back Service:</strong> <a href="tel:1300659467" style="color: ' . $midBlue . '; text-decoration: underline;">1300 659 467</a> - <a href="https://www.suicidecallbackservice.org.au" style="color: ' . $midBlue . '; text-decoration: underline;">suicidecallbackservice.org.au</a>
+                    </p>
+                </div>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>What happens next?</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    We\'re currently in a pre-MVP phase. We\'ll notify you when therapist matching opens in your area and invite you to share a few preferences (if you want to) so we can suggest aligned therapists.
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>Explore our sandbox demo</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Want to see what we\'re building? Check out our sandbox demo prototype to experience the therapist-matching concept:
+                </p>
+                <div style="text-align: center; margin: 24px 0;">
+                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '">
+                        View Sandbox Demo
+                    </a>
+                </div>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    In the meantime, if you have questions, you can reply to this email. Please note we can\'t offer clinical advice or crisis support by email.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
+                    Thank you for being part of building a better way to connect people with mental health support.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
+                    Best regards,<br />
+                    The Therapair Team
+                </p>
+            ';
+            
+            $html = getEmailTemplate($content, 'Thanks for your interest in Therapair');
+            break;
+
+        case 'organization':
+            $name = !empty($data['contact_name']) ? htmlspecialchars($data['contact_name']) : 'there';
+            $orgName = !empty($data['organization_name']) ? htmlspecialchars($data['organization_name']) : 'your organisation';
+            $callBookingUrl = ''; // TODO: Add call booking URL if available
+            
+            $content = '
+                <h1 style="margin: 0 0 24px 0; color: ' . $darkNavy . '; font-size: 24px; font-weight: bold; line-height: 1.4;">
+                    Thank you for your interest in partnering with Therapair
+                </h1>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Hi ' . $name . ',
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Thanks for your Expression of Interest from ' . $orgName . '. We\'re excited about the possibility of collaborating.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>How we might work together</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 8px 0; padding-left: 8px;">
+                    • <strong>Pilot partnership</strong> – Early access to the platform for your clinicians
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 8px 0; padding-left: 8px;">
+                    • <strong>Clinic listing</strong> – Feature your organisation and clinicians on Therapair
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0; padding-left: 8px;">
+                    • <strong>Integration</strong> – Connect Therapair with your existing systems over time
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>What happens next?</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    We\'ll review your submission and be in touch within a few business days to explore the best way to work together.' . ($callBookingUrl ? ' If you\'d like to skip straight to a call, you can reply to this email or use this link to suggest a time: ' . htmlspecialchars($callBookingUrl) : ' If you\'d like to skip straight to a call, you can reply to this email.') . '
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>Explore our sandbox demo</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Want to see what we\'re building? Check out our sandbox demo prototype to experience the therapist-matching concept:
+                </p>
+                <div style="text-align: center; margin: 24px 0;">
+                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '">
+                        View Sandbox Demo
+                    </a>
+                </div>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
+                    Thank you for being part of building a better way to connect people with mental health support.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
+                    Best regards,<br />
+                    The Therapair Team
+                </p>
+            ';
+            
+            $html = getEmailTemplate($content, 'Thanks for reaching out about Therapair');
+            break;
+
+        case 'other':
+            $name = !empty($data['name']) ? htmlspecialchars($data['name']) : 'there';
+            
+            $content = '
+                <h1 style="margin: 0 0 24px 0; color: ' . $darkNavy . '; font-size: 24px; font-weight: bold; line-height: 1.4;">
+                    Thank you for your interest in supporting Therapair
+                </h1>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Hi ' . $name . ',
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Thanks for your Expression of Interest. We\'re grateful for your support in building Therapair.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>The vision</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Therapair is building a privacy-first therapist-matching platform that helps people find therapists who truly align with their needs, values, and identity. We focus on identity-aware matching—so that people from marginalised communities, LGBTQ+ individuals, neurodivergent people, and others can find therapists who understand and affirm their experiences.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>The problem</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Finding the right therapist is hard. Traditional directories offer hundreds of options with little guidance, making it overwhelming and time-consuming. For people from marginalised communities, the challenge is even greater—finding therapists who are not just "LGBTQ+ friendly" but truly affirming, who understand neurodivergence, who respect cultural identity.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>How you might be involved</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 8px 0; padding-left: 8px;">
+                    • <strong>Advisory</strong> – Share expertise and guidance as we build
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 8px 0; padding-left: 8px;">
+                    • <strong>Introductions</strong> – Connect us with therapists, clinics, or potential users
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0; padding-left: 8px;">
+                    • <strong>Future funding</strong> – We\'ll be raising pre-seed funding in the coming months
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>What happens next?</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    We\'ll review your submission and be in touch within a few business days to discuss how you might support Therapair. If you have specific questions or would like to schedule a call, you can reply to this email.
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    <strong>Explore our sandbox demo</strong>
+                </p>
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Want to see what we\'re building? Check out our sandbox demo prototype to experience the therapist-matching concept:
+                </p>
+                <div style="text-align: center; margin: 24px 0;">
+                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '">
+                        View Sandbox Demo
+                    </a>
+                </div>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
+                    Thank you for being part of building a better way to connect people with mental health support.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
+                    Best regards,<br />
+                    The Therapair Team
+                </p>
+            ';
+            
+            $html = getEmailTemplate($content, 'Thanks for your interest in Therapair');
+            break;
+
+        default:
+            $content = '
+                <h1 style="margin: 0 0 24px 0; color: ' . $darkNavy . '; font-size: 24px; font-weight: bold; line-height: 1.4;">
+                    Thank you for your interest in Therapair
+                </h1>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Hi there,
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                    Thanks for your interest in Therapair. We\'ll be in touch soon.
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
+                    Best regards,<br />
+                    The Therapair Team
+                </p>
+            ';
+            
+            $html = getEmailTemplate($content, 'Thanks for your interest in Therapair');
+    }
+    
     return $html;
 }
 ?>
