@@ -199,7 +199,7 @@ set_number_property($properties, '26. Fee Per Match (Practitioner View)', $surve
 set_number_property($properties, '27. Monthly Subscription (Practitioner View)', $survey['value_monthly_subscription'] ?? null);
 set_rich_text_property($properties, '28. Comments', $survey['comments'] ?? null);
 
-set_select_property($properties, '27. Consent Status', 'Granted');
+set_select_property($properties, '29. Consent Status', 'Granted');
 $properties['Submitted'] = [
     'date' => ['start' => $submittedAt],
 ];
