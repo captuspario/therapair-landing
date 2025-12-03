@@ -21,9 +21,10 @@ function getEmailTemplate($content, $preheader = '')
     $midBlue = '#3D578A';       // Icon Middle Layer
     $lightBlue = '#95B1CD';     // Icon Ears / Accents
     $black = '#000000';         // Wordmark / Headings
-    $warmBeige = '#FAF8F5';     // Background
+    $warmBeige = '#F9FAFD';     // Background (updated to match React Email)
     $darkGrey = '#4A5568';      // Body Text / Secondary
     $white = '#FFFFFF';         // Surface
+    $headerBg = '#F1F3F5';     // Header background (updated to match React Email)
     
     $html = '<!DOCTYPE html>
 <html lang="en">
@@ -50,8 +51,8 @@ function getEmailTemplate($content, $preheader = '')
                     
                     <!-- Header with Logo -->
                     <tr>
-                        <td style="padding: 30px 40px; text-align: left; background-color: ' . $lightBlue . '; border-radius: 12px 12px 0 0;">
-                            <img src="' . $logoUrl . '" alt="Therapair" style="height: 60px; width: auto; display: block;" />
+                        <td style="padding: 24px 40px; text-align: left; background-color: ' . $headerBg . '; border-radius: 12px 12px 0 0;">
+                            <img src="' . $logoUrl . '" alt="Therapair" style="height: 90px; width: auto; display: block; margin: 0; float: none;" />
                         </td>
                     </tr>
                     

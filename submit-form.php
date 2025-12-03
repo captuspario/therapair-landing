@@ -812,6 +812,18 @@ function formatUserEmail($data, $audience)
             </p>
         </div>
         
+        <div style="margin: 32px 0; padding: 24px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%); border-radius: 12px; border: 2px solid rgba(59, 130, 246, 0.2);">
+            <h3 style="margin: 0 0 12px 0; color: ' . $darkNavy . '; font-size: 18px; font-weight: 600;">
+                🎯 Explore our sandbox demo prototype
+            </h3>
+            <p style="margin: 0 0 16px 0; font-size: 15px; line-height: 1.6; color: ' . $darkGrey . ';">
+                Experience the full therapist-matching concept with 100 realistic therapist profiles. See how we\'re building a better way to connect people with therapists who truly understand them.
+            </p>
+            <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '">
+                View Sandbox Demo
+            </a>
+        </div>
+        
         <p style="font-size: 16px; line-height: 1.8; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
             If you have any urgent questions, please don\'t hesitate to reply to this email.
         </p>
