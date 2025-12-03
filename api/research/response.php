@@ -194,12 +194,29 @@ if (!empty($survey['email'])) {
     $properties['1. Email'] = ['email' => $survey['email']];
 }
 
-// Pricing fields - using number properties for numeric values
-set_number_property($properties, '26. Fee Per Match (Practitioner View)', $survey['value_fee_per_match'] ?? null);
-set_number_property($properties, '27. Monthly Subscription (Practitioner View)', $survey['value_monthly_subscription'] ?? null);
-set_rich_text_property($properties, '28. Comments', $survey['comments'] ?? null);
+// Pricing fields - store slider values in existing rich text property
+// so we don't depend on new Notion schema changes.
+$pricingSummaryParts = [];
+if (!empty($survey['value_fee_per_match'])) {
+    $pricingSummaryParts[] = 'Fee per match (AUD): $' . $survey['value_fee_per_match'];
+}
+if (!empty($survey['value_monthly_subscription'])) {
+    $pricingSummaryParts[] = 'Monthly subscription (AUD): $' . $survey['value_monthly_subscription'];
+}
+$pricingSummary = $pricingSummaryParts !== [] ? implode(' | ', $pricingSummaryParts) : null;
 
-set_select_property($properties, '29. Consent Status', 'Granted');
+// Legacy/value fields - keep property names stable for existing database
+set_rich_text_property($properties, '26. Value Payment Model', $survey['value_payment_model'] ?? null);
+set_rich_text_property($properties, '27. Value Payment Notes', $survey['value_payment_notes'] ?? null);
+set_rich_text_property(
+    $properties,
+    '28. Subscription Amount (Practitioner View)',
+    $pricingSummary ?? ($survey['value_subscription_amount'] ?? null)
+);
+set_rich_text_property($properties, '29. Comments', $survey['comments'] ?? null);
+
+// Consent status (existing select property in Notion)
+set_select_property($properties, '27. Consent Status', 'Granted');
 $properties['Submitted'] = [
     'date' => ['start' => $submittedAt],
 ];
