@@ -64,17 +64,24 @@ function syncToNotion($formData, $audience, $targetDatabaseId = null) {
 
     if ($httpCode === 200 || $httpCode === 201) {
         $responseData = json_decode($response, true);
-        error_log("Notion sync: Success! HTTP $httpCode, Page ID: " . ($responseData['id'] ?? 'unknown'));
-        return ['success' => true, 'response' => $responseData];
+        $pageId = $responseData['id'] ?? 'unknown';
+        error_log("Notion sync: Success! HTTP $httpCode, Page ID: $pageId");
+        return ['success' => true, 'response' => $responseData, 'page_id' => $pageId];
     } else {
         $responseData = json_decode($response, true);
         $errorMessage = isset($responseData['message']) ? $responseData['message'] : 'Unknown error';
         $errorCode = isset($responseData['code']) ? $responseData['code'] : 'unknown';
         
+        // Enhanced error logging
         error_log("Notion sync failed: HTTP $httpCode, Code: $errorCode, Message: $errorMessage");
-        error_log("Notion sync response: " . substr($response, 0, 500));
+        error_log("Notion sync response: " . substr($response, 0, 1000));
         if ($curlError) {
             error_log("Notion sync cURL error: $curlError");
+        }
+        
+        // Log the properties that were sent (for debugging property name mismatches)
+        if (isset($notionData['properties'])) {
+            error_log("Notion sync properties sent: " . json_encode(array_keys($notionData['properties'])));
         }
         
         return [
@@ -83,7 +90,8 @@ function syncToNotion($formData, $audience, $targetDatabaseId = null) {
             'http_code' => $httpCode,
             'error_code' => $errorCode,
             'error_message' => $errorMessage,
-            'response' => $response
+            'response' => $response,
+            'properties_sent' => isset($notionData['properties']) ? array_keys($notionData['properties']) : []
         ];
     }
 }
