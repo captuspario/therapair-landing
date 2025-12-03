@@ -144,6 +144,19 @@ function buildNotionProperties($data, $audience) {
         }, $defaultPreferences)
     ];
 
+    // Initialize tracking properties (will be updated by webhooks and track.php)
+    // These properties should exist in the Notion database
+    // If they don't exist, Notion will ignore them (no error)
+    $properties['Last Engagement Date'] = [
+        'date' => ['start' => date('c')]
+    ];
+    
+    // Optional tracking properties (only added if they exist in database)
+    // Email Opened Date - will be set when email is opened
+    // Sandbox Clicked Date - will be set when sandbox link is clicked
+    // Email Preferences Clicked Date - will be set when preferences link is clicked
+    // Last Clicked Link - will be set when any link is clicked
+
     // Audience-specific properties
     switch ($audience) {
         case 'individual':

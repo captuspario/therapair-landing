@@ -1,0 +1,39 @@
+# Therapair Robots.txt
+# https://therapair.com.au/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /api/
+Disallow: /scripts/
+Disallow: /docs/
+Disallow: /node_modules/
+Disallow: /build/
+Disallow: /src/
+Disallow: /prisma/
+Disallow: /tests/
+Disallow: /test-*
+Disallow: /debug-*
+Disallow: /check-*
+Disallow: /update-*
+Disallow: /notion-sync-errors.log
+Disallow: /*.log$
+Disallow: /*.md$
+Disallow: /*.json$
+Disallow: /*.php$  # Except public-facing PHP files
+
+# Allow important PHP files
+Allow: /submit-form.php
+Allow: /track.php
+Allow: /update-preferences.php
+Allow: /thank-you.html
+Allow: /email-preferences.html
+Allow: /email-preferences-confirmation.html
+
+# Sitemap
+Sitemap: https://therapair.com.au/sitemap.xml
+
+# Crawl-delay (optional, adjust if needed)
+# Crawl-delay: 1
+

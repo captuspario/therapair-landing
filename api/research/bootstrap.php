@@ -221,7 +221,15 @@ function notion_request(string $method, string $url, ?array $payload = null): ar
     $decoded = json_decode($response, true);
     if ($statusCode >= 400) {
         $message = $decoded['message'] ?? $response;
-        throw new RuntimeException('Notion API error: ' . $message, $statusCode);
+        $code = $decoded['code'] ?? null;
+        $fullError = [
+            'message' => $message,
+            'code' => $code,
+            'status' => $statusCode,
+            'full_response' => $decoded
+        ];
+        error_log('[notion-request] Notion API error: ' . json_encode($fullError, JSON_PRETTY_PRINT));
+        throw new RuntimeException('Notion API error: ' . $message . ($code ? ' (code: ' . $code . ')' : ''), $statusCode);
     }
 
     return is_array($decoded) ? $decoded : [];

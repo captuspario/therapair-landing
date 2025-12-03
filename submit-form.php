@@ -89,42 +89,13 @@ if (empty($_POST['Email_Consent']) || $_POST['Email_Consent'] !== 'yes') {
 $formData = collectFormData($_POST, $audience);
 
 // ============================================
-// 1. SEND EMAIL TO ADMIN
+// 1. ADMIN EMAIL DISABLED
 // ============================================
-$adminSubject = getAdminSubject($audience);
-$adminMessage = formatAdminEmail($formData, $audience, $timestamp);
-
-// Use verified domain email (domain is verified in Resend)
-$senderEmail = 'contact@therapair.com.au'; // Use verified domain email
-$senderName = 'Therapair Team';
-
-$adminHeaders = "From: {$FROM_NAME} <{$FROM_EMAIL}>\r\n";
-$adminHeaders .= "Reply-To: {$email}\r\n";
-$adminHeaders .= "MIME-Version: 1.0\r\n";
-$adminHeaders .= "Content-Type: text/html; charset=UTF-8\r\n";
-$adminHeaders .= "X-Mailer: Therapair Contact Form\r\n";
-$adminHeaders .= "X-Priority: 3\r\n";
-
-// Send admin email via Resend or fallback to mail()
-$adminSent = sendEmailViaResend(
-    $ADMIN_EMAIL,
-    $adminSubject,
-    $adminMessage,
-    $senderEmail,
-    $FROM_NAME,
-    $email // Reply-To
-);
-
-// If Resend failed, try fallback
-if (!$adminSent) {
-    error_log("Resend failed for admin email, trying PHP mail() fallback");
-    $adminSent = @mail($ADMIN_EMAIL, $adminSubject, $adminMessage, $adminHeaders);
-    if ($adminSent) {
-        error_log("PHP mail() fallback succeeded for admin email");
-    } else {
-        error_log("PHP mail() fallback also failed for admin email");
-    }
-}
+// EOI submissions are saved to Notion databases, so admin email notifications
+// are not needed. The contact@therapair.com.au inbox is only for direct messages.
+// 
+// Removed admin email notification to reduce inbox clutter.
+// All EOI data is tracked in Notion databases for review.
 
 // ============================================
 // 2. SEND CONFIRMATION EMAIL TO USER (AI-POWERED)
@@ -154,7 +125,10 @@ if ($USE_AI_PERSONALIZATION && !empty($OPENAI_API_KEY) && $OPENAI_API_KEY !== 'Y
     $userMessage = formatUserEmail($formData, $audience);
 }
 
-// Add tracking URLs to email links (using email hash since Notion sync happens after)
+// Add tracking URLs to email links
+// Note: We'll use the actual email address in the tracking URL
+// The webhook handler will look up the Notion page by email address
+// For click tracking via track.php, we'll pass the email so it can look up the page
 $userMessage = addTrackingToEmailLinks($userMessage, $email, $audience);
 
 // Send user email via Resend or fallback to mail()
@@ -162,7 +136,7 @@ $userSent = sendEmailViaResend(
     $email,
     $userSubject,
     $userMessage,
-    $senderEmail,
+    $FROM_EMAIL,
     $FROM_NAME,
     $ADMIN_EMAIL // Reply-To
 );
@@ -426,7 +400,10 @@ function sendEmailViaResend($to, $subject, $html, $fromEmail, $fromName, $replyT
         'from' => $fromAddress,
         'to' => $to,  // Changed from array to string
         'subject' => $subject,
-        'html' => $html
+        'html' => $html,
+        // Enable tracking for opens and clicks (best practice)
+        'track_opens' => true,
+        'track_clicks' => true
     ];
     
     if (!empty($replyTo)) {
@@ -1050,7 +1027,7 @@ function formatUserEmail($data, $audience)
  * Add tracking URLs to email links
  * Replaces direct links with tracking redirect URLs that include Notion page ID and UTM parameters
  */
-function addTrackingToEmailLinks($emailHtml, $notionPageId, $audience) {
+function addTrackingToEmailLinks($emailHtml, $email, $audience) {
     // Base tracking URL
     $trackBase = 'https://therapair.com.au/track.php';
     
@@ -1059,9 +1036,12 @@ function addTrackingToEmailLinks($emailHtml, $notionPageId, $audience) {
     $utmMedium = 'eoi_confirmation';
     $utmContent = $audience;
     
+    // Use email hash for privacy (don't expose email in URL)
+    $emailHash = md5(strtolower(trim($email)));
+    
     // Track sandbox demo links
     $sandboxUrl = 'https://therapair.com.au/sandbox/sandbox-demo.html';
-    $trackingSandboxUrl = $trackBase . '?uid=' . urlencode($notionPageId) . 
+    $trackingSandboxUrl = $trackBase . '?email=' . urlencode($emailHash) . 
         '&dest=sandbox' . 
         '&utm_source=' . urlencode($utmSource) . 
         '&utm_medium=' . urlencode($utmMedium) . 
@@ -1072,7 +1052,7 @@ function addTrackingToEmailLinks($emailHtml, $notionPageId, $audience) {
     
     // Track email preferences links
     $preferencesUrl = 'https://therapair.com.au/email-preferences.html';
-    $trackingPreferencesUrl = $trackBase . '?uid=' . urlencode($notionPageId) . 
+    $trackingPreferencesUrl = $trackBase . '?email=' . urlencode($emailHash) . 
         '&dest=preferences' . 
         '&utm_source=' . urlencode($utmSource) . 
         '&utm_medium=' . urlencode($utmMedium) . 
@@ -1083,7 +1063,7 @@ function addTrackingToEmailLinks($emailHtml, $notionPageId, $audience) {
     
     // Track website/home links
     $homeUrl = 'https://therapair.com.au';
-    $trackingHomeUrl = $trackBase . '?uid=' . urlencode($notionPageId) . 
+    $trackingHomeUrl = $trackBase . '?email=' . urlencode($emailHash) . 
         '&dest=home' . 
         '&utm_source=' . urlencode($utmSource) . 
         '&utm_medium=' . urlencode($utmMedium) . 

@@ -5,10 +5,15 @@
  * Links to therapist directory if email/tracking ID found
  */
 
+// Log all requests for debugging
+error_log('[user-feedback] Request received: ' . $_SERVER['REQUEST_METHOD'] . ' from ' . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'));
+error_log('[user-feedback] Request headers: ' . json_encode(getallheaders()));
+
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+header('Access-Control-Max-Age: 86400');
 
 // Handle OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -19,10 +24,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 // Only allow POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    error_log('[user-feedback] Invalid method: ' . $_SERVER['REQUEST_METHOD']);
     http_response_code(405);
     echo json_encode(['ok' => false, 'error' => 'Method not allowed']);
     exit;
 }
+
+error_log('[user-feedback] POST request received, processing...');
 
 // Load config
 require_once __DIR__ . '/bootstrap.php';
@@ -30,13 +38,35 @@ require_once __DIR__ . '/directory-helpers.php';
 
 // Get JSON payload
 $input = file_get_contents('php://input');
+$inputLength = strlen($input);
+error_log('[user-feedback] Raw input received (length: ' . $inputLength . '): ' . substr($input, 0, 500));
+
+if (empty($input)) {
+    error_log('[user-feedback] ERROR: Empty input received');
+    http_response_code(400);
+    echo json_encode(['ok' => false, 'error' => 'Empty request body']);
+    exit;
+}
+
 $data = json_decode($input, true);
 
 if (!$data) {
+    $jsonError = json_last_error_msg();
+    $jsonErrorCode = json_last_error();
+    error_log('[user-feedback] JSON decode error: ' . $jsonError . ' (code: ' . $jsonErrorCode . ')');
+    error_log('[user-feedback] Input that failed: ' . substr($input, 0, 200));
     http_response_code(400);
-    echo json_encode(['ok' => false, 'error' => 'Invalid JSON']);
+    echo json_encode(['ok' => false, 'error' => 'Invalid JSON: ' . $jsonError]);
     exit;
 }
+
+error_log('[user-feedback] Data received: ' . json_encode([
+    'rating' => $data['rating'] ?? null,
+    'has_comment' => !empty($data['comment']),
+    'has_tags' => !empty($data['tags']),
+    'section' => $data['section'] ?? null,
+    'page_url' => $data['page_url'] ?? null
+]));
 
 // Validate required fields
 if (!isset($data['rating']) || !is_numeric($data['rating'])) {
@@ -132,20 +162,18 @@ if (!empty($data['page_title'])) {
 
 $feedbackText = implode('', $feedbackParts);
 
-// Determine source based on page section
-$sourceName = 'Website';
-if (!empty($data['section'])) {
+// Determine source based on page section (match sandbox endpoint logic exactly)
+// Use 'source' from data if available, otherwise derive from section, default to 'Sandbox'
+$sourceName = !empty($data['source']) ? ucfirst($data['source']) : 'Sandbox';
+if (empty($data['source']) && !empty($data['section'])) {
     $section = strtolower($data['section']);
     if ($section === 'sandbox') {
         $sourceName = 'Sandbox';
     } else if ($section === 'survey') {
         $sourceName = 'Survey';
-    } else if ($section === 'documentation') {
-        $sourceName = 'Documentation';
-    } else if ($section === 'legal') {
-        $sourceName = 'Legal';
-    } else if ($section === 'home') {
-        $sourceName = 'Home';
+    } else {
+        // For homepage and other pages, default to 'Sandbox' (matches working sandbox endpoint)
+        $sourceName = 'Sandbox';
     }
 }
 
@@ -176,12 +204,13 @@ if ($userFeedbackDbId) {
             ]
         ];
         
-        // Rating
+        // Rating - Try to include, but will fail gracefully if property doesn't exist
         $properties['Rating'] = [
             'number' => $rating
         ];
         
         // Feedback (rich text) - Include all context
+        // This is the main property - should exist in most databases
         $properties['Feedback'] = [
             'rich_text' => [
                 [
@@ -189,13 +218,6 @@ if ($userFeedbackDbId) {
                         'content' => $feedbackText
                     ]
                 ]
-            ]
-        ];
-        
-        // Audience Type - Use source name
-        $properties['Audience Type'] = [
-            'select' => [
-                'name' => $sourceName
             ]
         ];
         
@@ -207,68 +229,161 @@ if ($userFeedbackDbId) {
             ]
         ];
         
-        // Submission Status
-        $properties['Submission Status'] = [
+        // Submission Status (default to "New") - Try to set, but make optional
+        // Commented out - uncomment if your database has this property
+        // $properties['Submission Status'] = [
+        //     'select' => [
+        //         'name' => 'New'
+        //     ]
+        // ];
+        
+        // Audience Type - Match sandbox endpoint exactly
+        $properties['Audience Type'] = [
             'select' => [
-                'name' => 'New'
+                'name' => $sourceName
             ]
         ];
         
-        // Page URL
-        if (!empty($data['page_url'])) {
-            $properties['Page URL'] = [
-                'url' => $data['page_url']
-            ];
+        // Page URL - Only add if property exists in Notion database
+        // Note: This property may not exist in all Notion databases
+        // Page URL is already included in the Feedback rich_text field above
+        // Uncomment below if "Page URL" property exists in your Notion database:
+        // if (!empty($data['page_url'])) {
+        //     $properties['Page URL'] = [
+        //         'url' => $data['page_url']
+        //     ];
+        // }
+        
+        // Tracking ID and Session ID - These properties don't exist in the Notion database
+        // Include tracking info in the Feedback text instead
+        // if (!empty($data['tracking_id'])) {
+        //     $properties['Tracking ID'] = [
+        //         'rich_text' => [
+        //             [
+        //                 'text' => [
+        //                     'content' => $data['tracking_id']
+        //                 ]
+        //             ]
+        //         ]
+        //     ];
+        // }
+        // 
+        // if (!empty($data['session_id'])) {
+        //     $properties['Session ID'] = [
+        //         'rich_text' => [
+        //             [
+        //                 'text' => [
+        //                     'content' => $data['session_id']
+        //                 ]
+        //             ]
+        //         ]
+        //     ];
+        // }
+        
+        // Add tracking info to Feedback text if available
+        if (!empty($data['tracking_id']) || !empty($data['session_id'])) {
+            $trackingInfo = [];
+            if (!empty($data['tracking_id'])) {
+                $trackingInfo[] = 'Tracking ID: ' . $data['tracking_id'];
+            }
+            if (!empty($data['session_id'])) {
+                $trackingInfo[] = 'Session ID: ' . $data['session_id'];
+            }
+            if (!empty($trackingInfo)) {
+                $properties['Feedback']['rich_text'][0]['text']['content'] .= "\n\n" . implode("\n", $trackingInfo);
+            }
         }
         
-        // Tracking ID (if available) - for linking multiple feedback entries from same user
-        if (!empty($data['tracking_id'])) {
-            $properties['Tracking ID'] = [
-                'rich_text' => [
-                    [
-                        'text' => [
-                            'content' => $data['tracking_id']
-                        ]
-                    ]
-                ]
-            ];
-        }
+        // Filter out empty properties before sending to Notion
+        $filteredProperties = array_filter($properties, function($value) {
+            // Remove empty properties
+            if (is_array($value)) {
+                if (isset($value['rich_text']) && empty($value['rich_text'])) return false;
+                if (isset($value['multi_select']) && empty($value['multi_select'])) return false;
+                if (isset($value['url']) && empty($value['url'])) return false;
+                if (isset($value['select']) && empty($value['select']['name'])) return false;
+            }
+            return true;
+        });
         
-        // Session ID (if available)
-        if (!empty($data['session_id'])) {
-            $properties['Session ID'] = [
-                'rich_text' => [
-                    [
-                        'text' => [
-                            'content' => $data['session_id']
-                        ]
-                    ]
-                ]
-            ];
-        }
+        error_log('[user-feedback] Attempting to save with properties: ' . json_encode(array_keys($filteredProperties)));
+        
+        // Log to file for easier debugging
+        $logFile = __DIR__ . '/../../feedback-debug.log';
+        $logEntry = date('Y-m-d H:i:s') . " - Properties: " . json_encode(array_keys($filteredProperties)) . "\n";
+        $logEntry .= date('Y-m-d H:i:s') . " - Full payload: " . json_encode([
+            'parent' => ['database_id' => $userFeedbackDbId],
+            'properties' => $filteredProperties
+        ], JSON_PRETTY_PRINT) . "\n\n";
+        @file_put_contents($logFile, $logEntry, FILE_APPEND);
         
         // Create page in User Feedback database
         $feedbackRecord = notion_request('POST', 'https://api.notion.com/v1/pages', [
             'parent' => [
                 'database_id' => $userFeedbackDbId
             ],
-            'properties' => array_filter($properties, function($value) {
-                // Remove empty properties
-                if (is_array($value)) {
-                    if (isset($value['rich_text']) && empty($value['rich_text'])) return false;
-                    if (isset($value['multi_select']) && empty($value['multi_select'])) return false;
-                    if (isset($value['url']) && empty($value['url'])) return false;
-                }
-                return true;
-            })
+            'properties' => $filteredProperties
         ]);
         
         error_log('[user-feedback] Successfully saved to User Feedback database: ' . ($feedbackRecord['id'] ?? 'no ID'));
         
     } catch (Exception $e) {
-        error_log('[user-feedback] Failed to save to User Feedback DB: ' . $e->getMessage());
-        // Continue to try saving to directory if available
+        $errorMessage = $e->getMessage();
+        $errorDetails = [
+            'message' => $errorMessage,
+            'properties_attempted' => array_keys($properties),
+            'database_id' => $userFeedbackDbId,
+            'data_received' => [
+                'rating' => $rating,
+                'section' => $data['section'] ?? null,
+                'page_url' => $data['page_url'] ?? null,
+                'page_path' => $data['page_path'] ?? null
+            ]
+        ];
+        
+        // Log to both error_log and file
+        error_log('[user-feedback] Failed to save to User Feedback DB: ' . $errorMessage);
+        error_log('[user-feedback] Error details: ' . json_encode($errorDetails, JSON_PRETTY_PRINT));
+        
+        $logFile = __DIR__ . '/../../feedback-debug.log';
+        $logEntry = date('Y-m-d H:i:s') . " - ERROR: " . $errorMessage . "\n";
+        $logEntry .= date('Y-m-d H:i:s') . " - Error details: " . json_encode($errorDetails, JSON_PRETTY_PRINT) . "\n\n";
+        @file_put_contents($logFile, $logEntry, FILE_APPEND);
+        
+        // Extract the actual Notion error message
+        $displayError = 'Failed to save feedback to database';
+        if (strpos($errorMessage, 'Notion API error') !== false) {
+            $displayError = str_replace('Notion API error: ', '', $errorMessage);
+        }
+        
+        // Return error to client with more details for debugging
+        http_response_code(500);
+        $response = [
+            'ok' => false,
+            'error' => $displayError,
+            'message' => $displayError
+        ];
+        
+        // Include full error in debug mode
+        if (strpos($errorMessage, 'Notion API error') !== false) {
+            $response['debug'] = [
+                'notion_error' => $errorMessage,
+                'properties_attempted' => array_keys($properties)
+            ];
+        }
+        
+        echo json_encode($response);
+        exit;
     }
+} else {
+    // No database ID configured
+    error_log('[user-feedback] No User Feedback database ID configured');
+    http_response_code(500);
+    echo json_encode([
+        'ok' => false,
+        'error' => 'Feedback database not configured'
+    ]);
+    exit;
 }
 
 // Also update VIC Therapists directory if we found the therapist

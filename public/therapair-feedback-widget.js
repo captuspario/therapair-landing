@@ -271,12 +271,26 @@
     e.preventDefault();
     const form = e.target;
     const submitBtn = document.getElementById('therapair-feedback-submit');
-    const rating = document.getElementById('therapair-feedback-rating').value;
-    const comment = document.getElementById('therapair-feedback-comment').value;
-    const tags = JSON.parse(document.getElementById('therapair-feedback-tags').value || '[]');
+    const ratingInput = document.getElementById('therapair-feedback-rating');
+    const rating = ratingInput ? ratingInput.value : null;
+    const comment = document.getElementById('therapair-feedback-comment')?.value || '';
+    const tagsInput = document.getElementById('therapair-feedback-tags');
+    let tags = [];
+    try {
+      tags = tagsInput ? JSON.parse(tagsInput.value || '[]') : [];
+    } catch (e) {
+      console.error('Error parsing tags:', e);
+      tags = [];
+    }
 
-    if (!rating) {
+    if (!rating || rating === '' || isNaN(parseInt(rating))) {
       alert('Please select a rating');
+      return;
+    }
+    
+    const ratingNum = parseInt(rating);
+    if (ratingNum < 1 || ratingNum > 6) {
+      alert('Please select a valid rating (1-6)');
       return;
     }
 
@@ -305,9 +319,9 @@
       }
       
       const payload = {
-        rating: parseInt(rating),
-        comment: comment,
-        tags: tags,
+        rating: ratingNum,
+        comment: comment || '',
+        tags: tags || [],
         page_url: pageContext.page_url,
         page_path: pageContext.page_path,
         page_title: pageContext.page_title,
@@ -335,17 +349,40 @@
         question_text: pageContext.question_text || null
       };
 
-      const response = await fetch(CONFIG.endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
+      console.log('[feedback-widget] Submitting payload:', payload);
+      console.log('[feedback-widget] Endpoint:', CONFIG.endpoint);
+      console.log('[feedback-widget] Full URL:', window.location.origin + CONFIG.endpoint);
+      
+      try {
+        const response = await fetch(CONFIG.endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload),
+          credentials: 'same-origin'
+        });
 
-      const result = await response.json();
+        console.log('[feedback-widget] Response status:', response.status, response.statusText);
 
-      if (result.ok) {
+        // Check if response is ok before parsing JSON
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('[feedback-widget] API error response:', response.status, errorText);
+          let errorMessage = `Server error: ${response.status}`;
+          try {
+            const errorJson = JSON.parse(errorText);
+            errorMessage = errorJson.error || errorJson.message || errorMessage;
+          } catch (e) {
+            errorMessage = errorText || errorMessage;
+          }
+          throw new Error(errorMessage);
+        }
+
+        const result = await response.json();
+        console.log('[feedback-widget] API response:', result);
+
+        if (result.ok) {
         form.style.display = 'none';
         document.getElementById('therapair-feedback-success').style.display = 'block';
         setTimeout(() => {
@@ -371,12 +408,31 @@
             }
           });
         }, 2000);
-      } else {
-        throw new Error(result.error || 'Failed to submit');
+        } else {
+          throw new Error(result.error || result.message || 'Failed to submit');
+        }
+      } catch (fetchError) {
+        console.error('[feedback-widget] Fetch error:', fetchError);
+        throw fetchError;
       }
     } catch (err) {
       console.error('Feedback submission error:', err);
-      alert('Something went wrong. Please try again.');
+      console.error('Error details:', {
+        message: err.message,
+        stack: err.stack,
+        name: err.name
+      });
+      
+      // Show more helpful error message
+      let errorMsg = 'Something went wrong. Please try again.';
+      if (err.message) {
+        errorMsg = err.message;
+        // Truncate long error messages
+        if (errorMsg.length > 100) {
+          errorMsg = errorMsg.substring(0, 100) + '...';
+        }
+      }
+      alert(errorMsg);
       submitBtn.disabled = false;
       submitBtn.textContent = 'Submit';
     }

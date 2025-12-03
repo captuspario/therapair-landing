@@ -39,8 +39,16 @@ if (!empty($utmParams)) {
 }
 
 // Look up Notion page ID by email hash if UID not provided
+// Note: We can't reverse MD5 hash, so we'll query Notion by email
+// But we don't have the email, only the hash
+// Solution: Store email hash -> page ID mapping, or query all entries (not efficient)
+// For now, we'll track via webhook which receives the actual email
+// So we'll just redirect and let the webhook handle tracking
 if (empty($uid) && !empty($emailHash)) {
-    $uid = findNotionPageIdByEmailHash($emailHash);
+    // Can't reverse hash, so we'll rely on webhook for tracking
+    // The webhook receives the actual email from Resend
+    header("Location: $redirectUrl");
+    exit;
 }
 
 // If no UID, just redirect (no tracking)
@@ -121,19 +129,13 @@ function trackClickInNotion($pageId, $destination = 'home', $utmParams = [])
 
 /**
  * Find Notion page ID by email hash
- * Searches EOI database for matching email
+ * Since we can't reverse hash, we'll need to query by email address
+ * For now, this is handled by the webhook which can look up by email
  */
 function findNotionPageIdByEmailHash($emailHash) {
-    $notionToken = defined('NOTION_TOKEN') ? NOTION_TOKEN : '';
-    $notionDbEoi = defined('NOTION_DB_EOI') ? NOTION_DB_EOI : '';
-    
-    if (empty($notionToken) || empty($notionDbEoi)) {
-        return null;
-    }
-    
-    // Note: This requires querying Notion database by email
-    // For now, return null - we'll implement this if needed
-    // Alternative: Store email hash -> page ID mapping in a simple file/cache
+    // Note: We can't reverse MD5 hash to get email
+    // The webhook handler will look up by email address directly
+    // For click tracking, we'll rely on the webhook or store email -> page ID mapping
     return null;
 }
 ?>
