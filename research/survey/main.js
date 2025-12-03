@@ -257,7 +257,7 @@ function configureProfileDetailSlider() {
 }
 
 function configurePricingSliders() {
-  // Fee per match slider ($1-$50)
+  // Fee per match slider ($10-$100 per session, step 5)
   const feeSlider = document.getElementById("feePerMatchSlider");
   const feeDisplay = document.getElementById("feePerMatchDisplay");
   if (feeSlider && feeDisplay) {
@@ -270,7 +270,7 @@ function configurePricingSliders() {
     updateFeeDisplay(); // Set initial display
   }
 
-  // Monthly subscription slider ($5-$100, step 5)
+  // Monthly subscription slider ($20-$200, step 10)
   const subSlider = document.getElementById("monthlySubscriptionSlider");
   const subDisplay = document.getElementById("monthlySubscriptionDisplay");
   if (subSlider && subDisplay) {
