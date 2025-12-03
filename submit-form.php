@@ -193,13 +193,16 @@ if ($USE_NOTION_SYNC) {
     if (empty($targetDb)) {
         error_log("Notion sync skipped: NOTION_DB_EOI not defined. Audience: $audience");
     } else {
-        error_log("Notion sync: Attempting to sync to EOI database ID: $targetDb, Audience: $audience");
+        error_log("Notion sync: Attempting to sync to EOI database ID: $targetDb, Audience: $audience, Email: " . ($formData['email'] ?? 'N/A'));
         $notionResult = syncToNotion($formData, $audience, $targetDb);
         if ($notionResult['success']) {
             $pageId = isset($notionResult['response']['id']) ? $notionResult['response']['id'] : 'unknown';
             error_log("Notion sync: Success! Entry created in EOI database. Page ID: $pageId");
         } else {
             error_log("Notion sync failed: " . print_r($notionResult, true));
+            // Also log to a file for easier debugging
+            $errorLogFile = __DIR__ . '/notion-sync-errors.log';
+            file_put_contents($errorLogFile, date('Y-m-d H:i:s') . " - Audience: $audience, Email: " . ($formData['email'] ?? 'N/A') . "\n" . print_r($notionResult, true) . "\n\n", FILE_APPEND);
             // Continue anyway - don't block user experience
         }
     }

@@ -48,6 +48,14 @@ function syncToNotion($formData, $audience, $targetDatabaseId = null) {
         'Notion-Version: 2022-06-28'
     ]);
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($notionData));
+    
+    // Log the request payload for debugging (without sensitive data)
+    error_log("Notion sync request payload: " . json_encode([
+        'database_id' => $notionDatabaseId,
+        'audience' => $audience,
+        'properties_count' => count($properties),
+        'property_names' => array_keys($properties)
+    ]));
 
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
