@@ -170,14 +170,10 @@ function buildNotionProperties($data, $audience) {
             break;
 
         case 'therapist':
-            if (!empty($data['full_name'])) {
-                $properties['Full Name'] = [
-                    'rich_text' => [
-                        ['text' => ['content' => $data['full_name']]]
-                    ]
-                ];
-            }
-
+            // Note: Full Name is already used in the "Name" (title) property via generateNameForNotion()
+            // If you need a separate "Full Name" property, add it to your Notion database first
+            
+            // Professional Title
             if (!empty($data['professional_title'])) {
                 $properties['Professional Title'] = [
                     'rich_text' => [
@@ -186,6 +182,7 @@ function buildNotionProperties($data, $audience) {
                 ];
             }
 
+            // Organisation (British spelling - check your Notion database)
             if (!empty($data['organization'])) {
                 $properties['Organisation'] = [
                     'rich_text' => [
@@ -194,6 +191,7 @@ function buildNotionProperties($data, $audience) {
                 ];
             }
 
+            // Specialisations (British spelling - check your Notion database)
             if (!empty($data['specializations'])) {
                 $properties['Specialisations'] = [
                     'rich_text' => [
@@ -202,10 +200,14 @@ function buildNotionProperties($data, $audience) {
                 ];
             }
 
+            // Verification Status - only add if property exists in your Notion database
+            // If this fails, either add the property or remove this line
             $properties['Verification Status'] = [
                 'select' => ['name' => 'Pending']
             ];
 
+            // Onboarding Stage - only add if property exists in your Notion database
+            // If this fails, either add the property or remove this line
             $properties['Onboarding Stage'] = [
                 'select' => ['name' => 'Interest']
             ];
