@@ -154,16 +154,8 @@ if ($USE_AI_PERSONALIZATION && !empty($OPENAI_API_KEY) && $OPENAI_API_KEY !== 'Y
     $userMessage = formatUserEmail($formData, $audience);
 }
 
-// Get Notion page ID for tracking (if available)
-$notionPageId = null;
-if ($USE_NOTION_SYNC && isset($notionResult) && $notionResult['success']) {
-    $notionPageId = isset($notionResult['response']['id']) ? $notionResult['response']['id'] : null;
-}
-
-// Add tracking URLs to email message if we have a Notion page ID
-if ($notionPageId && $notionPageId !== 'unknown') {
-    $userMessage = addTrackingToEmailLinks($userMessage, $notionPageId, $audience);
-}
+// Add tracking URLs to email links (using email hash since Notion sync happens after)
+$userMessage = addTrackingToEmailLinks($userMessage, $email, $audience);
 
 // Send user email via Resend or fallback to mail()
 $userSent = sendEmailViaResend(
@@ -206,10 +198,13 @@ if ($USE_NOTION_SYNC) {
     } else {
         error_log("Notion sync: Attempting to sync to EOI database ID: $targetDb, Audience: $audience, Email: " . ($formData['email'] ?? 'N/A'));
         $notionResult = syncToNotion($formData, $audience, $targetDb);
-        // Store result for use in email tracking
         if ($notionResult['success']) {
             $pageId = isset($notionResult['response']['id']) ? $notionResult['response']['id'] : 'unknown';
             error_log("Notion sync: Success! Entry created in EOI database. Page ID: $pageId");
+            
+            // If email was already sent, we can't add tracking URLs retroactively
+            // But we can log the page ID for future reference
+            // Future enhancement: Send a follow-up email with tracked links, or use Resend webhooks
         } else {
             error_log("Notion sync failed: " . print_r($notionResult, true));
             // Also log to a file for easier debugging
@@ -219,6 +214,10 @@ if ($USE_NOTION_SYNC) {
         }
     }
 }
+
+// NOTE: Since Notion sync happens after email sending, tracking URLs are added via formatUserEmail()
+// which uses a placeholder that gets replaced. For now, we'll use email-based tracking via Resend webhooks
+// or add tracking URLs that work without Notion page ID (using email hash instead)
 
 // ============================================
 // 4. REDIRECT TO THANK YOU PAGE

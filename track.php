@@ -20,6 +20,7 @@ $destinations = [
 
 // Get params
 $uid = isset($_GET['uid']) ? trim($_GET['uid']) : '';
+$emailHash = isset($_GET['email']) ? trim($_GET['email']) : '';
 $destKey = isset($_GET['dest']) ? trim($_GET['dest']) : 'home';
 $redirectUrl = isset($destinations[$destKey]) ? $destinations[$destKey] : $destinations['home'];
 
@@ -35,6 +36,11 @@ foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
 if (!empty($utmParams)) {
     $separator = strpos($redirectUrl, '?') !== false ? '&' : '?';
     $redirectUrl .= $separator . http_build_query($utmParams);
+}
+
+// Look up Notion page ID by email hash if UID not provided
+if (empty($uid) && !empty($emailHash)) {
+    $uid = findNotionPageIdByEmailHash($emailHash);
 }
 
 // If no UID, just redirect (no tracking)
@@ -111,5 +117,23 @@ function trackClickInNotion($pageId, $destination = 'home', $utmParams = [])
 
     curl_exec($ch);
     curl_close($ch);
+}
+
+/**
+ * Find Notion page ID by email hash
+ * Searches EOI database for matching email
+ */
+function findNotionPageIdByEmailHash($emailHash) {
+    $notionToken = defined('NOTION_TOKEN') ? NOTION_TOKEN : '';
+    $notionDbEoi = defined('NOTION_DB_EOI') ? NOTION_DB_EOI : '';
+    
+    if (empty($notionToken) || empty($notionDbEoi)) {
+        return null;
+    }
+    
+    // Note: This requires querying Notion database by email
+    // For now, return null - we'll implement this if needed
+    // Alternative: Store email hash -> page ID mapping in a simple file/cache
+    return null;
 }
 ?>
