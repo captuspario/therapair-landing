@@ -194,8 +194,8 @@ if (!empty($survey['email'])) {
     $properties['1. Email'] = ['email' => $survey['email']];
 }
 
-// Pricing fields - store slider values in existing rich text property
-// so we don't depend on new Notion schema changes.
+// Pricing fields - summarise slider values into existing Notes field
+// so we don't depend on adding new Notion properties.
 $pricingSummaryParts = [];
 if (!empty($survey['value_fee_per_match'])) {
     $pricingSummaryParts[] = 'Fee per match (AUD): $' . $survey['value_fee_per_match'];
@@ -205,15 +205,13 @@ if (!empty($survey['value_monthly_subscription'])) {
 }
 $pricingSummary = $pricingSummaryParts !== [] ? implode(' | ', $pricingSummaryParts) : null;
 
-// Legacy/value fields - keep property names stable for existing database
-set_rich_text_property($properties, '26. Value Payment Model', $survey['value_payment_model'] ?? null);
-set_rich_text_property($properties, '27. Value Payment Notes', $survey['value_payment_notes'] ?? null);
-set_rich_text_property(
-    $properties,
-    '28. Subscription Amount (Practitioner View)',
-    $pricingSummary ?? ($survey['value_subscription_amount'] ?? null)
-);
-set_rich_text_property($properties, '29. Comments', $survey['comments'] ?? null);
+// Map free-text and pricing into existing research database fields:
+// 26. Comments (rich_text)   -> free-text comments from survey
+// 29. Notes (rich_text)      -> pricing summary (if provided)
+set_rich_text_property($properties, '26. Comments', $survey['comments'] ?? null);
+if ($pricingSummary !== null) {
+    set_rich_text_property($properties, '29. Notes', $pricingSummary);
+}
 
 // Consent status (existing select property in Notion)
 set_select_property($properties, '27. Consent Status', 'Granted');
