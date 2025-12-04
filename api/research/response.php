@@ -149,23 +149,12 @@ $properties = [];
 $titleValue = $survey['profession'] ?? 'Unknown';
 set_title_property($properties, $titleProperty, $titleValue);
 
-// Only set optional properties if they have values and config is defined
-$therapistNameProp = (string) config_value('NOTION_RESEARCH_THERAPIST_NAME_PROPERTY', '');
-if ($therapistNameProp !== '' && !empty($tokenData['therapist_name'])) {
-    set_rich_text_property($properties, $therapistNameProp, $tokenData['therapist_name']);
-}
-$therapistIdProp = (string) config_value('NOTION_RESEARCH_THERAPIST_ID_PROPERTY', '');
-if ($therapistIdProp !== '' && !empty($tokenData['therapist_id'])) {
-    set_rich_text_property($properties, $therapistIdProp, $tokenData['therapist_id']);
-}
-$directoryIdProp = (string) config_value('NOTION_RESEARCH_DIRECTORY_ID_PROPERTY', '');
-if ($directoryIdProp !== '' && !empty($tokenData['directory_page_id'])) {
-    set_rich_text_property($properties, $directoryIdProp, $tokenData['directory_page_id']);
-}
-$therapistEmailProp = (string) config_value('NOTION_RESEARCH_THERAPIST_EMAIL_PROPERTY', '');
-if ($therapistEmailProp !== '' && !empty($tokenData['email'])) {
-    set_rich_text_property($properties, $therapistEmailProp, $tokenData['email']);
-}
+// Skip optional properties that don't exist in the Notion database
+// These properties are not in the current schema:
+// - Therapist Name
+// - Therapist ID  
+// - Therapist Email
+// - Directory Page ID
 
 set_select_property($properties, '2. Profession', $survey['profession']);
 set_rich_text_property($properties, '3. Profession Other', $survey['profession_other'] ?? null);
@@ -185,10 +174,8 @@ set_rich_text_property($properties, '12. Great Match Other', $survey['match_fact
 
 set_rich_text_property($properties, '13. Biggest Gap', $survey['biggest_gap']);
 
-$screensClientsProp = (string) config_value('NOTION_RESEARCH_SCREENS_CLIENTS_PROPERTY', '14. Screening Clients');
-if ($screensClientsProp !== '') {
-    set_select_property($properties, $screensClientsProp, $survey['screens_clients']);
-}
+// Use hardcoded property name that exists in Notion
+set_select_property($properties, '14. Screening Clients', $survey['screens_clients']);
 set_select_property($properties, '15. Open to Sharing', $survey['open_to_sharing']);
 
 set_multi_select_property($properties, '16. Which Questions Matter', $survey['questions_matter']);
@@ -204,14 +191,9 @@ set_select_property($properties, '22. Onboarding Time', $survey['onboarding_time
 
 set_select_property($properties, '24. Free Listing Interest', $survey['free_listing_interest']);
 
-$profileIntentProp = (string) config_value('NOTION_RESEARCH_PROFILE_INTENT_PROPERTY', 'Profile Intent');
-if ($profileIntentProp !== '') {
-    set_select_property($properties, $profileIntentProp, $survey['profile_intent']);
-}
-$profileReadyProp = (string) config_value('NOTION_RESEARCH_PROFILE_READY_PROPERTY', 'Profile Ready');
-if ($profileReadyProp !== '') {
-    set_select_property($properties, $profileReadyProp, map_profile_ready($survey['profile_intent']));
-}
+// Skip Profile Intent and Profile Ready - these properties don't exist in the database
+// set_select_property($properties, 'Profile Intent', $survey['profile_intent']);
+// set_select_property($properties, 'Profile Ready', map_profile_ready($survey['profile_intent']));
 
 set_select_property($properties, '25. Future Contact', $survey['future_contact']);
 if (!empty($survey['email'])) {
@@ -246,36 +228,14 @@ $properties['Submitted'] = [
     'date' => ['start' => $submittedAt],
 ];
 
-$consentVersionProp = (string) config_value('NOTION_RESEARCH_CONSENT_VERSION_PROPERTY', 'Consent Version');
-if ($consentVersionProp !== '' && !empty($consent['version'])) {
-    set_rich_text_property($properties, $consentVersionProp, $consent['version']);
-}
-$consentTimestampProperty = (string) config_value('NOTION_RESEARCH_CONSENT_TIMESTAMP_PROPERTY', 'Consent Timestamp');
-if ($consentTimestampProperty !== '' && !empty($consent['timestamp']) && is_string($consent['timestamp'])) {
-    $properties[$consentTimestampProperty] = [
-        'date' => ['start' => $consent['timestamp']],
-    ];
-}
-
-$sessionIdProperty = (string) config_value('NOTION_RESEARCH_SESSION_ID_PROPERTY', 'Survey Session ID');
-if ($sessionIdProperty !== '' && !empty($sessionId)) {
-    set_rich_text_property($properties, $sessionIdProperty, $sessionId);
-}
-
-$engagementSourceProp = (string) config_value('NOTION_RESEARCH_ENGAGEMENT_SOURCE_PROPERTY', 'Engagement Source');
-if ($engagementSourceProp !== '') {
-    set_multi_select_property($properties, $engagementSourceProp, build_engagement_tags($metadata));
-}
-
-$sourceNotesProp = (string) config_value('NOTION_RESEARCH_SOURCE_NOTES_PROPERTY', 'Source Notes');
-if ($sourceNotesProp !== '') {
-    set_rich_text_property($properties, $sourceNotesProp, summarise_source_notes($metadata));
-}
-
-$ipHashProp = (string) config_value('NOTION_RESEARCH_IP_HASH_PROPERTY', 'IP Hash');
-if ($ipHashProp !== '' && !empty($metadata['ip_hash'])) {
-    set_rich_text_property($properties, $ipHashProp, $metadata['ip_hash']);
-}
+// Skip optional tracking properties that don't exist in the Notion database:
+// - Consent Version
+// - Consent Timestamp
+// - Survey Session ID
+// - Engagement Source
+// - Source Notes
+// - IP Hash
+// These can be added later if needed, but for now we'll skip them to ensure submissions work
 
 // Filter out null values and empty arrays
 $filteredProperties = [];
