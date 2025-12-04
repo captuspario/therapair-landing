@@ -222,14 +222,34 @@ function notion_request(string $method, string $url, ?array $payload = null): ar
     if ($statusCode >= 400) {
         $message = $decoded['message'] ?? $response;
         $code = $decoded['code'] ?? null;
+        
+        // Extract property name from error message if it's a property error
+        $propertyName = null;
+        if (preg_match('/"([^"]+)" is not a property that exists/i', $message, $matches)) {
+            $propertyName = $matches[1] ?? null;
+        } elseif (preg_match('/property[^"]*"([^"]+)"/i', $message, $matches)) {
+            $propertyName = $matches[1] ?? null;
+        }
+        
         $fullError = [
             'message' => $message,
             'code' => $code,
             'status' => $statusCode,
+            'property' => $propertyName,
             'full_response' => $decoded
         ];
         error_log('[notion-request] Notion API error: ' . json_encode($fullError, JSON_PRETTY_PRINT));
-        throw new RuntimeException('Notion API error: ' . $message . ($code ? ' (code: ' . $code . ')' : ''), $statusCode);
+        
+        // Include property name in error message if found
+        $errorMessage = 'Notion API error: ' . $message;
+        if ($propertyName) {
+            $errorMessage .= ' (Property: ' . $propertyName . ')';
+        }
+        if ($code) {
+            $errorMessage .= ' (code: ' . $code . ')';
+        }
+        
+        throw new RuntimeException($errorMessage, $statusCode);
     }
 
     return is_array($decoded) ? $decoded : [];
