@@ -1721,22 +1721,29 @@
             });
         });
 
-        // Floating Header - Show/Hide on Scroll
+        // Floating Header - Show/Hide on Scroll (appears when past hero section)
         (function() {
             const floatingHeader = document.getElementById('floating-header');
             if (!floatingHeader) return;
 
+            // Find the hero section (first section)
+            const heroSection = document.querySelector('section.hero-gradient, section:first-of-type');
+            if (!heroSection) return;
+
             let lastScrollTop = 0;
-            const scrollThreshold = 300; // Show header after scrolling 300px
 
             function handleScroll() {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
                 
-                // Hide when near top
-                if (scrollTop <= scrollThreshold) {
+                // Check if we've scrolled past the hero section
+                const isPastHero = scrollTop > heroBottom;
+                
+                if (!isPastHero) {
+                    // Still in hero section - hide header
                     floatingHeader.classList.remove('visible');
                 } else {
-                    // Show/hide based on scroll direction
+                    // Past hero section - show/hide based on scroll direction
                     if (scrollTop > lastScrollTop) {
                         // Scrolling down - show header
                         floatingHeader.classList.add('visible');
@@ -1759,6 +1766,11 @@
                     });
                     ticking = true;
                 }
+            }, { passive: true });
+
+            // Also handle window resize (hero section height might change)
+            window.addEventListener('resize', function() {
+                handleScroll();
             }, { passive: true });
 
             // Initial check
