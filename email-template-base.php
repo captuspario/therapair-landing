@@ -126,13 +126,13 @@ function getEmailButtonStyle($variant = 'primary')
     
     switch ($variant) {
         case 'primary':
-            return 'display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, ' . $lightBlue . ', ' . $midBlue . '); color: ' . $white . '; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; text-align: center;';
+            return 'display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, ' . $lightBlue . ', ' . $midBlue . '); color: ' . $white . '; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; line-height: 1.5;';
         case 'secondary':
-            return 'display: inline-block; padding: 14px 32px; background-color: ' . $white . '; color: ' . $midBlue . '; text-decoration: none; border: 2px solid ' . $midBlue . '; border-radius: 8px; font-weight: 600; font-size: 16px; text-align: center;';
+            return 'display: inline-block; padding: 14px 32px; background-color: ' . $white . '; color: ' . $midBlue . '; text-decoration: none; border: 2px solid ' . $midBlue . '; border-radius: 8px; font-weight: 600; font-size: 16px; line-height: 1.5;';
         case 'text':
             return 'color: ' . $midBlue . '; text-decoration: none; font-size: 16px; font-weight: 500;';
         default:
-            return 'display: inline-block; padding: 14px 32px; background-color: ' . $midBlue . '; color: ' . $white . '; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; text-align: center;';
+            return 'display: inline-block; padding: 14px 32px; background-color: ' . $midBlue . '; color: ' . $white . '; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; line-height: 1.5;';
     }
 }
 

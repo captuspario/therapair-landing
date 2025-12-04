@@ -758,30 +758,32 @@ function formatUserEmail($data, $audience)
                 <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
                     We\'re currently in a pre-MVP phase, building the platform with input from therapists like you. We\'ll email you when onboarding is ready in the coming months, and you\'ll be among the first to hear about pilot opportunities.
                 </p>
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 24px 0;">
                     <strong>Explore Therapair</strong>
                 </p>
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 32px 0;">
                     We\'d love your input as we build Therapair. Here are two ways to get involved:
                 </p>
                 
-                <div style="text-align: center; margin: 24px 0;">
-                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '; margin-bottom: 12px; display: inline-block;">
+                <!-- First CTA: Sandbox Demo -->
+                <div style="margin: 0 0 32px 0;">
+                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '; margin-bottom: 8px; display: inline-block;">
                         View Sandbox Demo
                     </a>
+                    <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 8px 0 0 0;">
+                        Experience our therapist-matching prototype
+                    </p>
                 </div>
-                <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 24px 0; text-align: center;">
-                    Experience our therapist-matching prototype
-                </p>
                 
-                <div style="text-align: center; margin: 24px 0;">
+                <!-- Second CTA: Research Survey -->
+                <div style="margin: 0 0 24px 0;">
                     <a href="https://therapair.com.au/research/survey/index.html" style="' . getEmailButtonStyle('secondary') . '; display: inline-block;">
                         Take Research Survey
                     </a>
+                    <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 8px 0 0 0;">
+                        Help shape Therapair by completing our short user research survey
+                    </p>
                 </div>
-                <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0; text-align: center;">
-                    Help shape Therapair by completing our short user research survey
-                </p>
                 
                 <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
                     In the meantime, if you have questions or ideas, you can simply reply to this email.
