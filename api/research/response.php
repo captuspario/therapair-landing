@@ -228,6 +228,44 @@ $properties['Submitted'] = [
     'date' => ['start' => $submittedAt],
 ];
 
+// Update therapist directory with survey completion
+// Extract email and variant from token if available
+if (!empty($survey['token'])) {
+    try {
+        require_once __DIR__ . '/bootstrap.php';
+        require_once __DIR__ . '/directory-helpers.php';
+        
+        // Decode token to get email and variant
+        $tokenParts = explode('.', $survey['token']);
+        if (count($tokenParts) === 3) {
+            $payload = json_decode(base64_decode(str_replace(['-', '_'], ['+', '/'], $tokenParts[1])), true);
+            $email = $payload['email'] ?? '';
+            $variant = $payload['variant'] ?? '';
+            
+            if (!empty($email)) {
+                $pageId = find_directory_page_by_email($email);
+                if ($pageId !== null) {
+                    $updateProperties = [
+                        'Research Survey Completed' => ['checkbox' => true],
+                        'Research Survey Completed Date' => ['date' => ['start' => $submittedAt]],
+                        'Research Status' => ['select' => ['name' => 'Completed Survey']],
+                    ];
+                    
+                    // Ensure variant is set if we have it
+                    if (!empty($variant)) {
+                        $updateProperties['Research Variant'] = ['select' => ['name' => $variant]];
+                    }
+                    
+                    patch_directory_page($pageId, $updateProperties);
+                }
+            }
+        }
+    } catch (Exception $e) {
+        // Silently fail - survey submission should still succeed
+        error_log("Failed to update directory with survey completion: " . $e->getMessage());
+    }
+}
+
 // Skip optional tracking properties that don't exist in the Notion database:
 // - Consent Version
 // - Consent Timestamp

@@ -96,11 +96,19 @@ function log_email_engagement(string $email, string $eventType, array $payload):
     $params = parse_url_query($url);
     $utmEmail = $params['utm_email'] ?? $payload['metadata']['utm']['utm_email'] ?? 'unknown';
     $utmContent = $params['utm_content'] ?? $payload['metadata']['utm']['utm_content'] ?? 'unknown';
+    $utmVariant = $params['utm_variant'] ?? $payload['metadata']['utm']['utm_variant'] ?? '';
+    $utmExperiment = $params['utm_experiment'] ?? $payload['metadata']['utm']['utm_experiment'] ?? '';
 
     $label = sprintf('%s (email %s)', $eventType, $utmEmail);
     $noteParts = ['content=' . $utmContent];
     if (!empty($params['token'])) {
         $noteParts[] = 'token_present';
+    }
+    if (!empty($utmVariant)) {
+        $noteParts[] = 'variant=' . $utmVariant;
+    }
+    if (!empty($utmExperiment)) {
+        $noteParts[] = 'experiment=' . $utmExperiment;
     }
 
     $pageId = find_directory_page_by_email($email);
@@ -109,9 +117,47 @@ function log_email_engagement(string $email, string $eventType, array $payload):
     }
 
     $properties = [];
+    
+    // Update Research Status
     $statusProp = (string) config_value('NOTION_DIRECTORY_RESEARCH_STATUS_PROPERTY', 'Research Status');
     if ($statusProp !== '') {
         $properties[$statusProp] = ['select' => ['name' => $label]];
+    }
+
+    // Track email opens
+    if ($eventType === 'Opened') {
+        $properties['Research Email Opened'] = ['checkbox' => true];
+        $properties['Research Email Opened Date'] = ['date' => ['start' => date('c')]];
+        
+        // Increment opens count
+        $currentOpens = get_property_value($pageId, 'Research Email Opens Count', 'number') ?? 0;
+        $properties['Research Email Opens Count'] = ['number' => $currentOpens + 1];
+    }
+
+    // Track survey clicks
+    if ($eventType === 'Clicked' && ($utmContent === 'survey' || strpos($url, '/research/survey') !== false)) {
+        $properties['Research Survey Clicked'] = ['checkbox' => true];
+        $properties['Research Survey Clicked Date'] = ['date' => ['start' => date('c')]];
+        
+        // Increment clicks count
+        $currentClicks = get_property_value($pageId, 'Research Survey Clicks Count', 'number') ?? 0;
+        $properties['Research Survey Clicks Count'] = ['number' => $currentClicks + 1];
+        
+        // Update status to "Clicked Survey"
+        if ($statusProp !== '') {
+            $properties[$statusProp] = ['select' => ['name' => 'Clicked Survey']];
+        }
+    }
+
+    // Track sandbox clicks
+    if ($eventType === 'Clicked' && ($utmContent === 'sandbox_demo' || strpos($url, '/sandbox') !== false)) {
+        $properties['Research Sandbox Clicked'] = ['checkbox' => true];
+        $properties['Research Sandbox Clicked Date'] = ['date' => ['start' => date('c')]];
+        
+        // Update status to "Clicked Sandbox"
+        if ($statusProp !== '') {
+            $properties[$statusProp] = ['select' => ['name' => 'Clicked Sandbox']];
+        }
     }
 
     $latestProp = (string) config_value('NOTION_DIRECTORY_LATEST_SURVEY_PROPERTY', 'Latest Survey Date');
@@ -130,6 +176,43 @@ function log_email_engagement(string $email, string $eventType, array $payload):
     if ($properties !== []) {
         patch_directory_page($pageId, $properties);
     }
+}
+
+/**
+ * Get current property value from Notion page
+ */
+function get_property_value(string $pageId, string $propertyName, string $propertyType): ?int
+{
+    $url = "https://api.notion.com/v1/pages/$pageId";
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Authorization: Bearer ' . config_value('NOTION_TOKEN', ''),
+        'Notion-Version: 2022-06-28'
+    ]);
+    
+    $response = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    
+    if ($httpCode !== 200) {
+        return null;
+    }
+    
+    $data = json_decode($response, true);
+    $props = $data['properties'] ?? [];
+    
+    if (!isset($props[$propertyName])) {
+        return null;
+    }
+    
+    $prop = $props[$propertyName];
+    
+    if ($propertyType === 'number' && isset($prop['number'])) {
+        return (int) $prop['number'];
+    }
+    
+    return null;
 }
 
 function parse_url_query(string $url): array
