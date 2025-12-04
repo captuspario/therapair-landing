@@ -131,39 +131,53 @@ async function findOrCreateNotionTherapist(therapist) {
   const createUrl = 'https://api.notion.com/v1/pages';
   
   // Build properties based on actual VIC database schema
-  // Note: Property names may need adjustment based on actual schema
+  // Based on DATABASE-GUIDE.md, the VIC database uses:
+  // - "Name" (Title) - main display name
+  // - "Email Address" (Email) - not "Email"
+  // - "First Name" (Text)
+  // - "Last Name" (Text) 
+  // - "Profession/Key Qualification/s" (Text)
+  // - "Business Name" (Text)
+  // - "Region" (Text)
   const properties = {};
 
-  // Title property (usually "Name")
+  // Title property - "Fullname" (based on DATABASE-GUIDE.md)
   if (therapist.therapist_name) {
-    properties['Name'] = {
+    properties['Fullname'] = {
       title: [{ text: { content: therapist.therapist_name } }],
     };
   }
   
-  // Email property
+  // Email property - "Email Address" (not "Email")
   if (therapist.email) {
-    properties['Email'] = { email: therapist.email };
+    properties['Email Address'] = { email: therapist.email };
   }
   
-  // Profession property (if it exists as select)
+  // First Name
+  if (therapist.first_name) {
+    properties['First Name'] = { rich_text: [{ text: { content: therapist.first_name } }] };
+  }
+  
+  // Last Name
+  if (therapist.last_name) {
+    properties['Last Name'] = { rich_text: [{ text: { content: therapist.last_name } }] };
+  }
+  
+  // Profession property - "Profession/Key Qualification/s"
   if (therapist.profession) {
-    try {
-      properties['Profession'] = { select: { name: therapist.profession } };
-    } catch (e) {
-      // If select doesn't work, might be rich_text
-      properties['Profession'] = { rich_text: [{ text: { content: therapist.profession } }] };
-    }
+    properties['Profession/Key Qualification/s'] = { rich_text: [{ text: { content: therapist.profession } }] };
   }
   
-  // Location property (if it exists)
-  if (therapist.location) {
-    properties['Location'] = { rich_text: [{ text: { content: therapist.location } }] };
-  }
-  
-  // Practice Name property (if it exists)
+  // Business Name
   if (therapist.practice_name) {
-    properties['Practice Name'] = { rich_text: [{ text: { content: therapist.practice_name } }] };
+    properties['Business Name'] = { rich_text: [{ text: { content: therapist.practice_name } }] };
+  }
+  
+  // Region (extract from location)
+  if (therapist.location) {
+    // Extract region from "Melbourne, VIC" -> "Melbourne"
+    const region = therapist.location.split(',')[0].trim();
+    properties['Region'] = { rich_text: [{ text: { content: region } }] };
   }
 
   const createResponse = await fetch(createUrl, {
