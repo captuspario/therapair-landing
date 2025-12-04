@@ -184,7 +184,8 @@ function log_email_engagement(string $email, string $eventType, array $payload):
 function get_property_value(string $pageId, string $propertyName, string $propertyType): ?int
 {
     try {
-        $data = notion_request('GET', "https://api.notion.com/v1/pages/$pageId");
+        $url = "https://api.notion.com/v1/pages/$pageId";
+        $data = notion_request('GET', $url, null);
         $props = $data['properties'] ?? [];
         
         if (!isset($props[$propertyName])) {
