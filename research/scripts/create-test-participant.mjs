@@ -220,7 +220,13 @@ async function main() {
   console.log('='.repeat(60));
 
   // Step 1: Find or create Notion entry in VIC database
-  const directoryPageId = await findOrCreateNotionTherapist(therapist);
+  const notionResult = await findOrCreateNotionTherapist(therapist);
+  const directoryPageId = notionResult?.pageId || (typeof notionResult === 'string' ? notionResult : null);
+  
+  // If we got a firstName from the database, use it
+  if (notionResult?.firstName) {
+    therapist.first_name = notionResult.firstName;
+  }
   
   // Step 2: Generate token
   console.log('\n🔑 Generating secure token...');
