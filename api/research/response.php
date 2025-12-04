@@ -213,12 +213,11 @@ $pricingSummary = $pricingSummaryParts !== [] ? implode(' | ', $pricingSummaryPa
 
 // Map free-text and pricing into existing research database fields:
 // 26. Comments (rich_text)   -> free-text comments from survey
-// 29. Notes (rich_text)      -> pricing summary (if provided, legacy)
-// Pricing (rich_text)        -> dedicated pricing field (new)
+// Pricing (rich_text)        -> dedicated pricing field (pricing summary only)
+// Note: Pricing removed from Notes field to avoid duplication
 set_rich_text_property($properties, '26. Comments', $survey['comments'] ?? null);
 if ($pricingSummary !== null) {
-    set_rich_text_property($properties, '29. Notes', $pricingSummary);
-    // Also write to new dedicated 'Pricing' field for easier analysis
+    // Only write to dedicated 'Pricing' field (removed from Notes to avoid duplication)
     set_rich_text_property($properties, 'Pricing', $pricingSummary);
 }
 

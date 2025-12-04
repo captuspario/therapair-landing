@@ -39,6 +39,7 @@
 | **`value_fee_per_match`** | **`26. Fee Per Match (Practitioner View)`** | **Number** | ✅ **ADDED** |
 | **`value_monthly_subscription`** | **`27. Monthly Subscription (Practitioner View)`** | **Number** | ✅ **ADDED** |
 | `comments` | `28. Comments` | Rich Text | ✅ |
+| `consent_status` | `29. Consent Status` | Select | ✅ (auto-set to "Granted") |
 
 ---
 
@@ -52,6 +53,9 @@
 - ❌ `26. Value Payment Model` (was referencing non-existent `value_payment_model`)
 - ❌ `27. Value Payment Notes` (was referencing non-existent `value_payment_notes`)
 - ❌ `28. Subscription Amount (Practitioner View)` (was referencing non-existent `value_subscription_amount`)
+
+### **Fixed Property Numbering:**
+- ✅ `27. Consent Status` → `29. Consent Status` (to avoid conflict with pricing fields)
 
 ---
 

@@ -1,0 +1,26 @@
+[
+  {
+    "therapist": "Sarah Mitchell",
+    "email": "sarah.mitchell+test@therapair.com.au",
+    "therapist_id": "VIC-TEST-001",
+    "token_session": false,
+    "survey_submission": false,
+    "record_id": null
+  },
+  {
+    "therapist": "James Chen",
+    "email": "james.chen+test@therapair.com.au",
+    "therapist_id": "VIC-TEST-002",
+    "token_session": false,
+    "survey_submission": false,
+    "record_id": null
+  },
+  {
+    "therapist": "Emma Thompson",
+    "email": "emma.thompson+test@therapair.com.au",
+    "therapist_id": "VIC-TEST-003",
+    "token_session": false,
+    "survey_submission": false,
+    "record_id": null
+  }
+]
