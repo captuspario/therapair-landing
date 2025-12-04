@@ -19,8 +19,8 @@ fi
 echo ""
 echo "📥 Pulling latest changes on Hostinger..."
 
-# Pull latest changes on Hostinger
-ssh u549396201@45.87.81.159 -p 65002 'cd domains/therapair.com.au/public_html && git pull origin main'
+# Pull latest changes on Hostinger (stash any local changes first, then pull)
+ssh u549396201@45.87.81.159 -p 65002 'cd domains/therapair.com.au/public_html && git stash && git pull origin main && git stash pop || true'
 
 if [ $? -eq 0 ]; then
     echo ""
