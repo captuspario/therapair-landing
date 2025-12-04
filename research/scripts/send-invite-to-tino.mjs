@@ -189,66 +189,66 @@ async function main() {
     emailHtml = fs.readFileSync(emailHtmlPath, 'utf-8');
     // Replace placeholders
     emailHtml = emailHtml.replace(/TOKEN_PLACEHOLDER/g, encodeURIComponent(token));
-    emailHtml = emailHtml.replace(/VIC-TINO-001/g, therapist.therapist_id);
-    emailHtml = emailHtml.replace(/Hi Tino,/g, `Hi ${therapist.first_name},`);
+    emailHtml = emailHtml.replace(/\{THERAPIST_ID\}/g, therapist.therapist_id);
+    emailHtml = emailHtml.replace(/\{FIRST_NAME\}/g, therapist.first_name);
+    emailHtml = emailHtml.replace(/\{EMAIL\}/g, encodeURIComponent(therapist.email));
   } else {
     console.error('❌ Error: Email template not found at:', emailHtmlPath);
     process.exit(1);
   }
 
   // Step 5: Create plain text version
-  const plainText = `Help us build a better therapist-matching system
+  const plainText = `Help shape a better therapist-matching system
 
 Hi ${therapist.first_name},
 
-As practitioners, we know that the right fit between therapist and client can change everything. Therapair is a small, non-profit initiative from Unison Mental Health that's building a new way to match people with the therapists who truly fit them—by values, lived experience, and communication style.
+We found your details in the publicly available VIC therapists register and thought you might be interested in shaping a new approach to therapist–client matching.
 
-We're currently running a pilot with real practitioners and have created a basic sandbox demo with 100 realistic therapist profiles to show the concept. However, we know the current questions are just a starting point—we need to make them much more sophisticated to create truly personalised connections between therapists and clients.
+What is Therapair?
 
-We need your help to shape the future:
-• Try our sandbox demo (basic version) to see the concept in action
-• Share your insights in a short 5-7 minute research survey about what questions matter most and how many you'd be willing to answer
-• If you'd like to be included when we launch, we're offering a one-year free listing (using your existing public profile)
+Therapair is a small, not-for-profit initiative from Unison Mental Health (https://unisonmentalhealth.com). We're exploring a better way for clients to find therapists who truly fit them—by values, lived experience, and communication style, not just modality or postcode.
 
-This research is crucial—we need to understand which questions create the deepest personalisation, how many questions people will actually answer, and what options resonate most with both therapists and clients.
+We've built a basic sandbox demo with placeholder therapist profiles to show the idea, but the current questions are only a first draft. To make this genuinely useful, we need your perspective as a practitioner.
 
-Your perspective as a practitioner is invaluable in shaping a platform that truly serves both therapists and clients.
+If you have 5–7 minutes, we'd love your help:
+• Share your insights in a short research survey about which questions matter most and how many you'd realistically answer
+• Optionally opt in for a one-year free listing when we launch (using your existing public profile)
 
-JOIN THE RESEARCH SURVEY:
+This research will help us understand which questions create the most meaningful personalisation, how much people are willing to complete, and what actually resonates with both therapists and clients.
+
+JOIN THE RESEARCH SURVEY (5–7 minutes):
 ${surveyUrl}
 
-TRY THE SANDBOX DEMO:
-${sandboxUrl}
-
-LEARN MORE:
+Learn more about Therapair:
 ${landingUrl}
 
-Participation is optional and non-commercial. All information is used solely for improving therapist-client matching research. Thank you for contributing your perspective to a more inclusive future of care.
+Participation is optional and non-commercial. Your responses are used only for improving therapist–client matching research.
 
 Warm regards,
 The Therapair Team
-Unison Mental Health
 
 ---
-Therapair is a not-for-profit research initiative under Unison Mental Health.
-All information shared remains confidential and used only for product research and ethical development.
+Connecting you with therapists who actually get you.
+
+Contact: contact@therapair.com.au
+Website: https://therapair.com.au
+Email Preferences: https://therapair.com.au/email-preferences.html?email=${encodeURIComponent(therapist.email)}
 
 Privacy Policy: https://therapair.com.au/legal/privacy-policy.html
-Consent & Removal: https://therapair.com.au/legal/consent-removal.html
-Contact Us: contact@therapair.com.au`;
+Consent & Removal: https://therapair.com.au/legal/consent-removal.html`;
 
   // Step 6: Send email via Resend
   console.log('\n📧 Sending Research Invitation Email');
   console.log('='.repeat(60));
   console.log(`To: ${therapist.email}`);
-  console.log('Subject: Help us build a better therapist-matching system');
+  console.log('Subject: Help shape a better therapist-matching system');
   console.log('='.repeat(60));
 
   try {
     const result = await resend.emails.send({
       from: 'Therapair Research <user-research@therapair.com.au>',
       to: therapist.email,
-      subject: 'Help us build a better therapist-matching system',
+      subject: 'Help shape a better therapist-matching system',
       html: emailHtml,
       text: plainText,
       reply_to: 'contact@therapair.com.au',
