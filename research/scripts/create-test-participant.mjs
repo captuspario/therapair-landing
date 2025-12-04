@@ -230,16 +230,17 @@ async function findOrCreateNotionTherapist(therapist) {
   if (createResponse.ok) {
     const createData = await createResponse.json();
     directoryPageId = createData.id;
-    console.log(`  ✅ Created new therapist entry: ${directoryPageId}`);
-    console.log(`  📄 Notion URL: https://notion.so/${directoryPageId.replace(/-/g, '')}`);
-  } else {
-    const error = await createResponse.json();
-    console.error(`  ⚠️  Could not create Notion entry: ${error.message || createResponse.status}`);
-    console.error(`     Response: ${JSON.stringify(error, null, 2)}`);
-    console.error(`     This is okay - we'll proceed with token generation anyway.`);
-  }
+      console.log(`  ✅ Created new therapist entry: ${directoryPageId}`);
+      console.log(`  📄 Notion URL: https://notion.so/${directoryPageId.replace(/-/g, '')}`);
+      return { pageId: directoryPageId, firstName: therapist.first_name };
+    } else {
+      const error = await createResponse.json();
+      console.error(`  ⚠️  Could not create Notion entry: ${error.message || createResponse.status}`);
+      console.error(`     Response: ${JSON.stringify(error, null, 2)}`);
+      console.error(`     This is okay - we'll proceed with token generation anyway.`);
+    }
 
-  return directoryPageId;
+  return { pageId: directoryPageId, firstName: therapist.first_name };
 }
 
 async function main() {
