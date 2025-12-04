@@ -141,21 +141,28 @@ async function findOrCreateNotionTherapist(therapist) {
   // - "Region" (Text)
   const properties = {};
 
-  // Title property - "Fullname" (based on DATABASE-GUIDE.md)
-  if (therapist.therapist_name) {
-    properties['Fullname'] = {
-      title: [{ text: { content: therapist.therapist_name } }],
+  // Based on error messages from Notion:
+  // - "First Name" is the title property (not Fullname)
+  // - "Fullname" should be rich_text (not title)
+  // - "Region" should be select (not rich_text)
+  
+  // Title property - "First Name" (this is the title property!)
+  if (therapist.first_name) {
+    properties['First Name'] = {
+      title: [{ text: { content: therapist.first_name } }],
     };
   }
   
-  // Email property - "Email Address" (not "Email")
-  if (therapist.email) {
-    properties['Email Address'] = { email: therapist.email };
+  // Fullname as rich_text (not title)
+  if (therapist.therapist_name) {
+    properties['Fullname'] = { 
+      rich_text: [{ text: { content: therapist.therapist_name } }] 
+    };
   }
   
-  // First Name
-  if (therapist.first_name) {
-    properties['First Name'] = { rich_text: [{ text: { content: therapist.first_name } }] };
+  // Email property - "Email Address"
+  if (therapist.email) {
+    properties['Email Address'] = { email: therapist.email };
   }
   
   // Last Name
@@ -173,12 +180,8 @@ async function findOrCreateNotionTherapist(therapist) {
     properties['Business Name'] = { rich_text: [{ text: { content: therapist.practice_name } }] };
   }
   
-  // Region (extract from location)
-  if (therapist.location) {
-    // Extract region from "Melbourne, VIC" -> "Melbourne"
-    const region = therapist.location.split(',')[0].trim();
-    properties['Region'] = { rich_text: [{ text: { content: region } }] };
-  }
+  // Region - skip for now as it needs to be a select with specific options
+  // We don't know the available options, so we'll skip this to avoid errors
 
   const createResponse = await fetch(createUrl, {
     method: 'POST',
