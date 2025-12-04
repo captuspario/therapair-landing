@@ -125,6 +125,16 @@ foreach ($allTherapists as $therapist) {
     $needsFix = false;
     $fixReason = [];
     
+    // Check if first name ends with the same word as last name (e.g., "Anne Robertson" with last name "Robertson")
+    if (!empty($firstName) && !empty($lastName)) {
+        $firstNameWords = explode(' ', trim($firstName));
+        $lastWordOfFirstName = end($firstNameWords);
+        if (strtolower($lastWordOfFirstName) === strtolower($lastName)) {
+            $needsFix = true;
+            $fixReason[] = "First Name contains last name (ends with: $lastName)";
+        }
+    }
+    
     if ($likelyHasLastName) {
         // First Name contains full name (3+ words = likely includes last name)
         $needsFix = true;
@@ -322,21 +332,33 @@ foreach ($needsFixing as $entry) {
         }
     }
     
-    // If fullname is missing last name, fix it
-    if (!empty($newFirstName) && !empty($newLastName) && !empty($newFullname)) {
-        $expectedFullname = trim($newFirstName . ' ' . $newLastName);
-        if (strtolower($newFullname) !== strtolower($expectedFullname)) {
-            $newFullname = $expectedFullname;
+    // Final validation and fixes
+    
+    // Check if first name contains the last name (e.g., "Anne Robertson" with last name "Robertson")
+    if (!empty($newFirstName) && !empty($newLastName)) {
+        $firstNameWords = explode(' ', trim($newFirstName));
+        $lastWord = end($firstNameWords);
+        if (strtolower($lastWord) === strtolower($newLastName)) {
+            // First name contains last name - remove it
+            array_pop($firstNameWords);
+            $newFirstName = trim(implode(' ', $firstNameWords));
         }
-    } elseif (!empty($newFirstName) && !empty($newLastName)) {
-        // Build fullname from first + last
-        $newFullname = trim($newFirstName . ' ' . $newLastName);
-    } elseif (!empty($currentFullname) && !empty($newLastName)) {
-        // Use existing fullname but ensure it ends with last name
-        if (strtolower(substr($currentFullname, -strlen($newLastName))) !== strtolower($newLastName)) {
-            $newFullname = trim($currentFullname . ' ' . $newLastName);
-        } else {
-            $newFullname = trim($currentFullname);
+    }
+    
+    // Ensure fullname is first + last
+    if (!empty($newFirstName) && !empty($newLastName)) {
+        $expectedFullname = trim($newFirstName . ' ' . $newLastName);
+        $newFullname = $expectedFullname;
+    } elseif (!empty($newFirstName) && !empty($newFullname)) {
+        // If we have fullname but no last name, try to extract last name from fullname
+        $fullnameWords = explode(' ', trim($newFullname));
+        if (count($fullnameWords) > 1) {
+            $possibleLastName = array_pop($fullnameWords);
+            $possibleFirstName = trim(implode(' ', $fullnameWords));
+            if (strtolower($possibleFirstName) === strtolower($newFirstName)) {
+                $newLastName = $possibleLastName;
+                $newFullname = trim($newFirstName . ' ' . $newLastName);
+            }
         }
     }
     
