@@ -137,7 +137,7 @@ if ($researchDatabaseId === '') {
     ]);
 }
 
-$titleProperty = (string) config_value('NOTION_RESEARCH_TITLE_PROPERTY', 'Respondent ID');
+$titleProperty = (string) config_value('NOTION_RESEARCH_TITLE_PROPERTY', 'Profession');
 $submittedAt = null;
 if (!empty($consent['timestamp']) && is_string($consent['timestamp'])) {
     $submittedAt = $consent['timestamp'];
@@ -145,7 +145,9 @@ if (!empty($consent['timestamp']) && is_string($consent['timestamp'])) {
     $submittedAt = date('c');
 }
 $properties = [];
-set_title_property($properties, $titleProperty, build_title_value($tokenData, $sessionId, $submittedAt));
+// Title property is "Profession" - use the actual profession value from survey
+$titleValue = $survey['profession'] ?? 'Unknown';
+set_title_property($properties, $titleProperty, $titleValue);
 
 set_rich_text_property($properties, (string) config_value('NOTION_RESEARCH_THERAPIST_NAME_PROPERTY', 'Therapist Name'), $tokenData['therapist_name'] ?? null);
 set_rich_text_property($properties, (string) config_value('NOTION_RESEARCH_THERAPIST_ID_PROPERTY', 'Therapist ID'), $tokenData['therapist_id'] ?? null);
