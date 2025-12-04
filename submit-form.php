@@ -776,11 +776,11 @@ function formatUserEmail($data, $audience)
                 
                 <div style="text-align: center; margin: 24px 0;">
                     <a href="https://therapair.com.au/research/survey/index.html" style="' . getEmailButtonStyle('secondary') . '; display: inline-block;">
-                        Share Your Feedback
+                        Take Research Survey
                     </a>
                 </div>
                 <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0; text-align: center;">
-                    Help shape Therapair by completing our short research survey
+                    Help shape Therapair by completing our short user research survey
                 </p>
                 
                 <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
