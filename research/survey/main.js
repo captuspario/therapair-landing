@@ -433,12 +433,16 @@ async function submitSurvey() {
 
     if (!response.ok) {
       const errorBody = await safeJson(response);
-      throw new Error(errorBody?.error || "The server returned an unexpected error.");
+      const errorMessage = errorBody?.error || `Server error (${response.status}): ${response.statusText}`;
+      console.error('[Survey submission] HTTP error:', response.status, errorBody);
+      throw new Error(errorMessage);
     }
 
     const result = await response.json();
     if (!result.success) {
-      throw new Error(result.error || "We couldn’t store your answers. Please try again.");
+      const errorMessage = result.error || "We couldn't store your answers. Please try again.";
+      console.error('[Survey submission] API error:', result);
+      throw new Error(errorMessage);
     }
 
     state.lastSubmission = payload;
