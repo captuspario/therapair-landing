@@ -149,10 +149,23 @@ $properties = [];
 $titleValue = $survey['profession'] ?? 'Unknown';
 set_title_property($properties, $titleProperty, $titleValue);
 
-set_rich_text_property($properties, (string) config_value('NOTION_RESEARCH_THERAPIST_NAME_PROPERTY', 'Therapist Name'), $tokenData['therapist_name'] ?? null);
-set_rich_text_property($properties, (string) config_value('NOTION_RESEARCH_THERAPIST_ID_PROPERTY', 'Therapist ID'), $tokenData['therapist_id'] ?? null);
-set_rich_text_property($properties, (string) config_value('NOTION_RESEARCH_DIRECTORY_ID_PROPERTY', 'Directory Page ID'), $tokenData['directory_page_id'] ?? null);
-set_rich_text_property($properties, (string) config_value('NOTION_RESEARCH_THERAPIST_EMAIL_PROPERTY', 'Therapist Email'), $tokenData['email'] ?? null);
+// Only set optional properties if they have values and config is defined
+$therapistNameProp = (string) config_value('NOTION_RESEARCH_THERAPIST_NAME_PROPERTY', '');
+if ($therapistNameProp !== '' && !empty($tokenData['therapist_name'])) {
+    set_rich_text_property($properties, $therapistNameProp, $tokenData['therapist_name']);
+}
+$therapistIdProp = (string) config_value('NOTION_RESEARCH_THERAPIST_ID_PROPERTY', '');
+if ($therapistIdProp !== '' && !empty($tokenData['therapist_id'])) {
+    set_rich_text_property($properties, $therapistIdProp, $tokenData['therapist_id']);
+}
+$directoryIdProp = (string) config_value('NOTION_RESEARCH_DIRECTORY_ID_PROPERTY', '');
+if ($directoryIdProp !== '' && !empty($tokenData['directory_page_id'])) {
+    set_rich_text_property($properties, $directoryIdProp, $tokenData['directory_page_id']);
+}
+$therapistEmailProp = (string) config_value('NOTION_RESEARCH_THERAPIST_EMAIL_PROPERTY', '');
+if ($therapistEmailProp !== '' && !empty($tokenData['email'])) {
+    set_rich_text_property($properties, $therapistEmailProp, $tokenData['email']);
+}
 
 set_select_property($properties, '2. Profession', $survey['profession']);
 set_rich_text_property($properties, '3. Profession Other', $survey['profession_other'] ?? null);
@@ -172,7 +185,10 @@ set_rich_text_property($properties, '12. Great Match Other', $survey['match_fact
 
 set_rich_text_property($properties, '13. Biggest Gap', $survey['biggest_gap']);
 
-set_select_property($properties, (string) config_value('NOTION_RESEARCH_SCREENS_CLIENTS_PROPERTY', '14. Screening Clients'), $survey['screens_clients']);
+$screensClientsProp = (string) config_value('NOTION_RESEARCH_SCREENS_CLIENTS_PROPERTY', '14. Screening Clients');
+if ($screensClientsProp !== '') {
+    set_select_property($properties, $screensClientsProp, $survey['screens_clients']);
+}
 set_select_property($properties, '15. Open to Sharing', $survey['open_to_sharing']);
 
 set_multi_select_property($properties, '16. Which Questions Matter', $survey['questions_matter']);
@@ -188,8 +204,14 @@ set_select_property($properties, '22. Onboarding Time', $survey['onboarding_time
 
 set_select_property($properties, '24. Free Listing Interest', $survey['free_listing_interest']);
 
-set_select_property($properties, (string) config_value('NOTION_RESEARCH_PROFILE_INTENT_PROPERTY', 'Profile Intent'), $survey['profile_intent']);
-set_select_property($properties, (string) config_value('NOTION_RESEARCH_PROFILE_READY_PROPERTY', 'Profile Ready'), map_profile_ready($survey['profile_intent']));
+$profileIntentProp = (string) config_value('NOTION_RESEARCH_PROFILE_INTENT_PROPERTY', 'Profile Intent');
+if ($profileIntentProp !== '') {
+    set_select_property($properties, $profileIntentProp, $survey['profile_intent']);
+}
+$profileReadyProp = (string) config_value('NOTION_RESEARCH_PROFILE_READY_PROPERTY', 'Profile Ready');
+if ($profileReadyProp !== '') {
+    set_select_property($properties, $profileReadyProp, map_profile_ready($survey['profile_intent']));
+}
 
 set_select_property($properties, '25. Future Contact', $survey['future_contact']);
 if (!empty($survey['email'])) {
@@ -224,7 +246,10 @@ $properties['Submitted'] = [
     'date' => ['start' => $submittedAt],
 ];
 
-set_rich_text_property($properties, (string) config_value('NOTION_RESEARCH_CONSENT_VERSION_PROPERTY', 'Consent Version'), $consent['version'] ?? null);
+$consentVersionProp = (string) config_value('NOTION_RESEARCH_CONSENT_VERSION_PROPERTY', 'Consent Version');
+if ($consentVersionProp !== '' && !empty($consent['version'])) {
+    set_rich_text_property($properties, $consentVersionProp, $consent['version']);
+}
 $consentTimestampProperty = (string) config_value('NOTION_RESEARCH_CONSENT_TIMESTAMP_PROPERTY', 'Consent Timestamp');
 if ($consentTimestampProperty !== '' && !empty($consent['timestamp']) && is_string($consent['timestamp'])) {
     $properties[$consentTimestampProperty] = [
@@ -237,40 +262,65 @@ if ($sessionIdProperty !== '' && !empty($sessionId)) {
     set_rich_text_property($properties, $sessionIdProperty, $sessionId);
 }
 
-set_multi_select_property(
-    $properties,
-    (string) config_value('NOTION_RESEARCH_ENGAGEMENT_SOURCE_PROPERTY', 'Engagement Source'),
-    build_engagement_tags($metadata)
-);
+$engagementSourceProp = (string) config_value('NOTION_RESEARCH_ENGAGEMENT_SOURCE_PROPERTY', 'Engagement Source');
+if ($engagementSourceProp !== '') {
+    set_multi_select_property($properties, $engagementSourceProp, build_engagement_tags($metadata));
+}
 
-set_rich_text_property(
-    $properties,
-    (string) config_value('NOTION_RESEARCH_SOURCE_NOTES_PROPERTY', 'Source Notes'),
-    summarise_source_notes($metadata)
-);
+$sourceNotesProp = (string) config_value('NOTION_RESEARCH_SOURCE_NOTES_PROPERTY', 'Source Notes');
+if ($sourceNotesProp !== '') {
+    set_rich_text_property($properties, $sourceNotesProp, summarise_source_notes($metadata));
+}
 
-if (!empty($metadata['ip_hash'])) {
-    set_rich_text_property($properties, (string) config_value('NOTION_RESEARCH_IP_HASH_PROPERTY', 'IP Hash'), $metadata['ip_hash']);
+$ipHashProp = (string) config_value('NOTION_RESEARCH_IP_HASH_PROPERTY', 'IP Hash');
+if ($ipHashProp !== '' && !empty($metadata['ip_hash'])) {
+    set_rich_text_property($properties, $ipHashProp, $metadata['ip_hash']);
+}
+
+// Filter out null values and empty arrays
+$filteredProperties = [];
+foreach ($properties as $key => $value) {
+    if ($value === null) {
+        continue;
+    }
+    // Skip empty arrays for multi-select
+    if (is_array($value) && isset($value['multi_select']) && empty($value['multi_select'])) {
+        continue;
+    }
+    // Skip empty rich_text arrays
+    if (is_array($value) && isset($value['rich_text']) && empty($value['rich_text'])) {
+        continue;
+    }
+    $filteredProperties[$key] = $value;
 }
 
 $notionPayload = [
     'parent' => ['database_id' => $researchDatabaseId],
-    'properties' => array_filter($properties, static fn ($value) => $value !== null),
+    'properties' => $filteredProperties,
 ];
+
+// Log payload for debugging (remove sensitive data in production)
+error_log('[Therapair research] Attempting to create Notion page with ' . count($filteredProperties) . ' properties');
 
 try {
     $researchRecord = notion_request('POST', 'https://api.notion.com/v1/pages', $notionPayload);
+    error_log('[Therapair research] Successfully created Notion page: ' . ($researchRecord['id'] ?? 'unknown'));
 } catch (RuntimeException $exception) {
     // Log full error details for debugging
-    error_log('[Therapair research] Notion create failed: ' . $exception->getMessage());
-    error_log('[Therapair research] Notion payload: ' . json_encode($notionPayload, JSON_PRETTY_PRINT));
-    error_log('[Therapair research] Exception code: ' . $exception->getCode());
+    $errorDetails = [
+        'message' => $exception->getMessage(),
+        'code' => $exception->getCode(),
+        'property_count' => count($filteredProperties),
+        'property_names' => array_keys($filteredProperties),
+    ];
+    error_log('[Therapair research] Notion create failed: ' . json_encode($errorDetails, JSON_PRETTY_PRINT));
+    error_log('[Therapair research] Full payload (first 2000 chars): ' . substr(json_encode($notionPayload, JSON_PRETTY_PRINT), 0, 2000));
     
-    // Return more detailed error message for debugging (remove in production if needed)
+    // Return more detailed error message for debugging
     $errorMessage = 'Saving to research database failed. Please retry shortly.';
     if ($exception->getCode() >= 400 && $exception->getCode() < 500) {
-        // Client error - likely a property issue
-        $errorMessage = 'There was an issue with the survey data. Please contact support if this persists.';
+        // Client error - likely a property issue, include the Notion error message
+        $errorMessage = 'There was an issue saving your responses: ' . $exception->getMessage();
     }
     
     json_response(502, [
