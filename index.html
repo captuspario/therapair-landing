@@ -332,6 +332,53 @@
             margin-top: 16px;
             display: none;
         }
+
+        /* Mobile optimisations */
+        @media (max-width: 640px) {
+            /* Soften hero height and spacing on small screens */
+            .hero-gradient {
+                min-height: 80vh;
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+
+            /* Reduce heading and paragraph density for mobile */
+            .hero-heading {
+                font-size: clamp(2.1rem, 8vw, 2.6rem);
+                line-height: 1.2;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-subheading {
+                font-size: 1rem;
+                margin-bottom: 1.75rem;
+            }
+
+            .hero-cta-wrapper {
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-cta-button {
+                padding: 0.75rem 1.75rem;
+                font-size: 0.95rem;
+            }
+
+            /* Stack trust indicators vertically on mobile */
+            .hero-trust-row {
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+
+            /* Lighten feature cards and large preview cards on mobile */
+            .feature-card {
+                padding: 20px;
+                box-shadow: 0 2px 12px rgba(59, 130, 246, 0.12);
+            }
+
+            .demo-image-tall {
+                height: 320px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -370,21 +417,21 @@
             </div>
 
             <!-- Main Heading -->
-            <h1 class="mb-8 text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight">
+            <h1 class="hero-heading mb-6 text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                 Connecting you with therapists<br>
                 <span style="background: linear-gradient(135deg, var(--therapair-gradient-start), var(--therapair-gradient-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">who actually get you</span>
             </h1>
 
             <!-- Subheading -->
-            <p class="mb-12 text-xl sm:text-2xl max-w-4xl mx-auto leading-relaxed" style="color: var(--therapair-gray);">
+            <p class="hero-subheading mb-8 text-lg sm:text-2xl max-w-4xl mx-auto leading-relaxed" style="color: var(--therapair-gray);">
                 Finding the right therapist shouldn't be overwhelming. Our therapeutic match-making service focuses on finding therapists who meet you with the right qualifications and fit your personality so that you feel comfortable from the very start.
             </p>
 
             <!-- Single CTA Button -->
-            <div class="mb-8">
+            <div class="hero-cta-wrapper mb-8">
                 <a
                     href="#get-started"
-                    class="btn-primary text-lg px-12 py-4 inline-block"
+                    class="hero-cta-button btn-primary text-base sm:text-lg px-8 sm:px-12 py-3 sm:py-4 inline-block"
                     onclick="event.preventDefault(); document.querySelector('body').classList.add('scroll-allowed'); document.getElementById('get-started').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;"
                 >
                     Request Early Access
@@ -397,7 +444,7 @@
             </p>
 
             <!-- Social proof -->
-            <div class="flex items-center justify-center gap-6 text-sm" style="color: var(--therapair-gray);">
+            <div class="hero-trust-row flex items-center justify-center gap-3 sm:gap-6 text-sm" style="color: var(--therapair-gray);">
                 <span class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full" style="background-color: var(--therapair-accent);"></span>
                     Personalised matching
@@ -493,7 +540,7 @@
                         <img 
                             src="images/therapair-quiz-question.jpg" 
                             alt="Screenshot of Therapair matching quiz showing question interface"
-                            class="w-full h-auto"
+                            class="demo-image-tall w-full h-auto"
                             style="height: 500px; object-fit: cover; object-position: center;"
                             loading="lazy"
                         />
@@ -512,7 +559,7 @@
                         <img 
                             src="images/therapair-results-3-cards.jpg" 
                             alt="Screenshot of Therapair results showing 3 matched therapist profiles with specialties and Book Now buttons"
-                            class="w-full h-auto"
+                            class="demo-image-tall w-full h-auto"
                             style="height: 500px; object-fit: cover; object-position: center;"
                             loading="lazy"
                         />
