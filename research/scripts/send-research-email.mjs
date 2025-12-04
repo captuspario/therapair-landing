@@ -90,14 +90,14 @@ Contact Us: contact@therapair.com.au
 async function sendEmail() {
   console.log('\n📧 Sending Research Invitation Email');
   console.log('='.repeat(60));
-  console.log('To: tinoman@me.com');
+  console.log('To: tinokuhn@gmail.com');
   console.log('Subject: Help us build a better therapist-matching system');
   console.log('='.repeat(60));
 
   try {
     const result = await resend.emails.send({
       from: 'Therapair Research <onboarding@resend.dev>', // Change to contact@therapair.com.au once domain is verified
-      to: 'tinoman@me.com',
+      to: 'tinokuhn@gmail.com',
       subject: 'Help us build a better therapist-matching system',
       html: emailHtml,
       text: plainText,
