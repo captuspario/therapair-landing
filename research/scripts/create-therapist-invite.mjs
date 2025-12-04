@@ -44,7 +44,11 @@ function signToken(payload) {
     .createHmac('sha256', SECRET)
     .update(signedPortion)
     .digest();
-  const signatureB64 = base64urlEncode(signature.toString('binary'));
+  // Convert Buffer directly to base64url (not via binary string)
+  const signatureB64 = signature.toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=/g, '');
   return `${signedPortion}.${signatureB64}`;
 }
 
