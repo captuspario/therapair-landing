@@ -106,7 +106,7 @@ async function findOrCreateNotionTherapist(therapist) {
     },
     body: JSON.stringify({
       filter: {
-        property: 'Email',
+        property: 'Email Address',
         email: {
           equals: therapist.email,
         },
@@ -115,14 +115,45 @@ async function findOrCreateNotionTherapist(therapist) {
   });
 
   let directoryPageId = null;
+  let existingFirstName = null;
 
   if (searchResponse.ok) {
     const searchData = await searchResponse.json();
     if (searchData.results && searchData.results.length > 0) {
-      directoryPageId = searchData.results[0].id;
+      const existingEntry = searchData.results[0];
+      directoryPageId = existingEntry.id;
+      
+      // Extract first name from the entry (First Name is the title property)
+      const props = existingEntry.properties || {};
+      if (props['First Name']?.title && props['First Name'].title.length > 0) {
+        existingFirstName = props['First Name'].title[0].text.content;
+      }
+      
+      // Also get fullname and last name if available
+      let existingFullname = null;
+      let existingLastName = null;
+      
+      if (props['Fullname']?.rich_text && props['Fullname'].rich_text.length > 0) {
+        existingFullname = props['Fullname'].rich_text[0].text.content;
+      }
+      
+      if (props['Last Name']?.rich_text && props['Last Name'].rich_text.length > 0) {
+        existingLastName = props['Last Name'].rich_text[0].text.content;
+      }
+      
       console.log(`  ✅ Found existing therapist entry: ${directoryPageId}`);
       console.log(`  📄 Notion URL: https://notion.so/${directoryPageId.replace(/-/g, '')}`);
-      return directoryPageId;
+      if (existingFirstName) {
+        console.log(`  👤 First Name: ${existingFirstName}`);
+      }
+      if (existingFullname) {
+        console.log(`  📝 Fullname: ${existingFullname}`);
+      }
+      if (existingLastName) {
+        console.log(`  📝 Last Name: ${existingLastName}`);
+      }
+      
+      return { pageId: directoryPageId, firstName: existingFirstName };
     }
   }
 
