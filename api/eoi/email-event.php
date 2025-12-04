@@ -147,6 +147,11 @@ function log_eoi_email_engagement(string $email, string $eventType, array $paylo
                     'date' => ['start' => $now]
                 ];
                 break;
+            case 'survey':
+                $properties['Research Survey Clicked Date'] = [
+                    'date' => ['start' => $now]
+                ];
+                break;
             case 'preferences':
                 $properties['Email Preferences Clicked Date'] = [
                     'date' => ['start' => $now]

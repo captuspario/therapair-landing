@@ -14,7 +14,7 @@ if (file_exists(__DIR__ . '/config.php')) {
 $destinations = [
     'sandbox' => 'https://therapair.com.au/sandbox/sandbox-demo.html',
     'preferences' => 'https://therapair.com.au/email-preferences.html',
-    'survey' => 'https://therapair.com.au/research/survey',
+    'survey' => 'https://therapair.com.au/research/survey/index.html',
     'home' => 'https://therapair.com.au'
 ];
 
@@ -85,6 +85,11 @@ function trackClickInNotion($pageId, $destination = 'home', $utmParams = [])
     switch ($destination) {
         case 'sandbox':
             $properties['Sandbox Clicked Date'] = [
+                'date' => ['start' => $now]
+            ];
+            break;
+        case 'survey':
+            $properties['Research Survey Clicked Date'] = [
                 'date' => ['start' => $now]
             ];
             break;

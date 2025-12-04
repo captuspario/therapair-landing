@@ -759,17 +759,31 @@ function formatUserEmail($data, $audience)
                     We\'re currently in a pre-MVP phase, building the platform with input from therapists like you. We\'ll email you when onboarding is ready in the coming months, and you\'ll be among the first to hear about pilot opportunities.
                 </p>
                 <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
-                    <strong>Explore our sandbox demo</strong>
+                    <strong>Explore Therapair</strong>
                 </p>
                 <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
-                    Want to see what we\'re building? Check out our sandbox demo prototype to experience the therapist-matching concept:
+                    We\'d love your input as we build Therapair. Here are two ways to get involved:
                 </p>
+                
                 <div style="text-align: center; margin: 24px 0;">
-                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '">
+                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '; margin-bottom: 12px; display: inline-block;">
                         View Sandbox Demo
                     </a>
                 </div>
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
+                <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 24px 0; text-align: center;">
+                    Experience our therapist-matching prototype
+                </p>
+                
+                <div style="text-align: center; margin: 24px 0;">
+                    <a href="https://therapair.com.au/research/survey/index.html" style="' . getEmailButtonStyle('secondary') . '; display: inline-block;">
+                        Share Your Feedback
+                    </a>
+                </div>
+                <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0; text-align: center;">
+                    Help shape Therapair by completing our short research survey
+                </p>
+                
+                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
                     In the meantime, if you have questions or ideas, you can simply reply to this email.
                 </p>
                 
@@ -1049,6 +1063,17 @@ function addTrackingToEmailLinks($emailHtml, $email, $audience) {
         '&utm_content=' . urlencode($utmContent);
     $emailHtml = str_replace($sandboxUrl, $trackingSandboxUrl, $emailHtml);
     $emailHtml = str_replace('href="' . $sandboxUrl, 'href="' . $trackingSandboxUrl, $emailHtml);
+    
+    // Track research survey links
+    $surveyUrl = 'https://therapair.com.au/research/survey/index.html';
+    $trackingSurveyUrl = $trackBase . '?email=' . urlencode($emailHash) . 
+        '&dest=survey' . 
+        '&utm_source=' . urlencode($utmSource) . 
+        '&utm_medium=' . urlencode($utmMedium) . 
+        '&utm_campaign=research_survey' . 
+        '&utm_content=' . urlencode($utmContent);
+    $emailHtml = str_replace($surveyUrl, $trackingSurveyUrl, $emailHtml);
+    $emailHtml = str_replace('href="' . $surveyUrl, 'href="' . $trackingSurveyUrl, $emailHtml);
     
     // Track email preferences links
     $preferencesUrl = 'https://therapair.com.au/email-preferences.html';
