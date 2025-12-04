@@ -183,36 +183,24 @@ function log_email_engagement(string $email, string $eventType, array $payload):
  */
 function get_property_value(string $pageId, string $propertyName, string $propertyType): ?int
 {
-    $url = "https://api.notion.com/v1/pages/$pageId";
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Authorization: Bearer ' . config_value('NOTION_TOKEN', ''),
-        'Notion-Version: 2022-06-28'
-    ]);
-    
-    $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-    
-    if ($httpCode !== 200) {
+    try {
+        $data = notion_request('GET', "https://api.notion.com/v1/pages/$pageId");
+        $props = $data['properties'] ?? [];
+        
+        if (!isset($props[$propertyName])) {
+            return null;
+        }
+        
+        $prop = $props[$propertyName];
+        
+        if ($propertyType === 'number' && isset($prop['number'])) {
+            return (int) $prop['number'];
+        }
+        
+        return null;
+    } catch (Exception $e) {
         return null;
     }
-    
-    $data = json_decode($response, true);
-    $props = $data['properties'] ?? [];
-    
-    if (!isset($props[$propertyName])) {
-        return null;
-    }
-    
-    $prop = $props[$propertyName];
-    
-    if ($propertyType === 'number' && isset($prop['number'])) {
-        return (int) $prop['number'];
-    }
-    
-    return null;
 }
 
 function parse_url_query(string $url): array
