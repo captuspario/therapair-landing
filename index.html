@@ -1732,12 +1732,18 @@
             function handleScroll() {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 
-                // Show header when scrolling down past threshold
-                if (scrollTop > scrollThreshold) {
-                    floatingHeader.classList.add('visible');
-                } else {
-                    // Hide when near top
+                // Hide when near top
+                if (scrollTop <= scrollThreshold) {
                     floatingHeader.classList.remove('visible');
+                } else {
+                    // Show/hide based on scroll direction
+                    if (scrollTop > lastScrollTop) {
+                        // Scrolling down - show header
+                        floatingHeader.classList.add('visible');
+                    } else {
+                        // Scrolling up - hide header
+                        floatingHeader.classList.remove('visible');
+                    }
                 }
                 
                 lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
