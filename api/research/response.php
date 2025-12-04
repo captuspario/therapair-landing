@@ -259,10 +259,21 @@ $notionPayload = [
 try {
     $researchRecord = notion_request('POST', 'https://api.notion.com/v1/pages', $notionPayload);
 } catch (RuntimeException $exception) {
+    // Log full error details for debugging
     error_log('[Therapair research] Notion create failed: ' . $exception->getMessage());
+    error_log('[Therapair research] Notion payload: ' . json_encode($notionPayload, JSON_PRETTY_PRINT));
+    error_log('[Therapair research] Exception code: ' . $exception->getCode());
+    
+    // Return more detailed error message for debugging (remove in production if needed)
+    $errorMessage = 'Saving to research database failed. Please retry shortly.';
+    if ($exception->getCode() >= 400 && $exception->getCode() < 500) {
+        // Client error - likely a property issue
+        $errorMessage = 'There was an issue with the survey data. Please contact support if this persists.';
+    }
+    
     json_response(502, [
         'success' => false,
-        'error' => 'Saving to research database failed. Please retry shortly.',
+        'error' => $errorMessage,
     ]);
 }
 
