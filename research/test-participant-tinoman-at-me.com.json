@@ -1,0 +1,17 @@
+{
+  "therapist_id": "VIC-TEST-623664",
+  "therapist_name": "Tino Kuhn",
+  "first_name": "Tino",
+  "last_name": "Kuhn",
+  "practice_name": "Test Participant",
+  "email": "tinoman@me.com",
+  "profession": "Psychologist",
+  "location": "Melbourne, VIC",
+  "directory_page_id": null,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aGVyYXBpc3RfaWQiOiJWSUMtVEVTVC02MjM2NjQiLCJ0aGVyYXBpc3RfbmFtZSI6IlRpbm8gS3VobiIsImZpcnN0X25hbWUiOiJUaW5vIiwicHJhY3RpY2VfbmFtZSI6IlRlc3QgUGFydGljaXBhbnQiLCJlbWFpbCI6InRpbm9tYW5AbWUuY29tIiwiZGlyZWN0b3J5X3BhZ2VfaWQiOm51bGwsInRoZXJhcGlzdF9yZXNlYXJjaF9pZCI6InRlc3QtMTc2NDgwODYyMzY2NCIsImV4cCI6MTc2NzQwMDYyNn0.IIAqHX_ZgZitkXtuOhLv98LvrwLeBV9bHQxwbVE9Z0E",
+  "survey_url": "https://therapair.com.au/research/survey/index.html?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0aGVyYXBpc3RfaWQiOiJWSUMtVEVTVC02MjM2NjQiLCJ0aGVyYXBpc3RfbmFtZSI6IlRpbm8gS3VobiIsImZpcnN0X25hbWUiOiJUaW5vIiwicHJhY3RpY2VfbmFtZSI6IlRlc3QgUGFydGljaXBhbnQiLCJlbWFpbCI6InRpbm9tYW5AbWUuY29tIiwiZGlyZWN0b3J5X3BhZ2VfaWQiOm51bGwsInRoZXJhcGlzdF9yZXNlYXJjaF9pZCI6InRlc3QtMTc2NDgwODYyMzY2NCIsImV4cCI6MTc2NzQwMDYyNn0.IIAqHX_ZgZitkXtuOhLv98LvrwLeBV9bHQxwbVE9Z0E&utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=survey",
+  "sandbox_url": "https://therapair.com.au/sandbox/sandbox-demo.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=sandbox_demo&therapist_id=VIC-TEST-623664",
+  "landing_url": "https://therapair.com.au/?utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=learn_more&therapist_id=VIC-TEST-623664",
+  "created_at": "2025-12-04T00:37:07.570Z",
+  "test_participant": true
+}
