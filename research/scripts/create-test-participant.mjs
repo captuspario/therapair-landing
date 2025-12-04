@@ -41,9 +41,21 @@ if (!apiKey) {
 }
 
 // Configuration
-const NOTION_TOKEN = process.env.NOTION_TOKEN || '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';
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const DIRECTORY_DB_ID = process.env.DIRECTORY_DB_ID || '28c5c25944da80a48d85fd43119f4ec1'; // VIC Therapist DB
-const SECRET = process.env.NOTION_SECRET || process.env.RESEARCH_TOKEN_SECRET || 'I1WPkhdJs6Fw2XAa+BRH2hCiezYuP8FjT1xoG5tp/koajYB7tlleXc3lzvwVUqNv';
+const SECRET = process.env.NOTION_SECRET || process.env.RESEARCH_TOKEN_SECRET;
+
+if (!NOTION_TOKEN) {
+  console.error('❌ Error: NOTION_TOKEN environment variable required');
+  console.error('Set it in research/.env file or export it');
+  process.exit(1);
+}
+
+if (!SECRET) {
+  console.error('❌ Error: NOTION_SECRET or RESEARCH_TOKEN_SECRET environment variable required');
+  console.error('Set it in research/.env file or export it');
+  process.exit(1);
+}
 const resend = new Resend(apiKey);
 
 // Parse name into first and last
