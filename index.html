@@ -452,6 +452,26 @@
     </style>
 </head>
 <body>
+    <!-- Floating Header - Appears on Scroll -->
+    <header class="floating-header" id="floating-header" role="banner">
+        <div class="floating-header-content">
+            <a href="/" class="flex items-center" aria-label="Therapair Home">
+                <img 
+                    src="images/therapair-logo-final-notag.png" 
+                    alt="Therapair Logo" 
+                    class="floating-header-logo"
+                />
+            </a>
+            <a
+                href="#get-started"
+                class="floating-header-cta btn-primary"
+                onclick="event.preventDefault(); document.querySelector('body').classList.add('scroll-allowed'); document.getElementById('get-started').scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;"
+            >
+                Request Early Access
+            </a>
+        </div>
+    </header>
+
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 hero-gradient">
         <!-- Background Pattern -->
@@ -1700,6 +1720,44 @@
                 }
             });
         });
+
+        // Floating Header - Show/Hide on Scroll
+        (function() {
+            const floatingHeader = document.getElementById('floating-header');
+            if (!floatingHeader) return;
+
+            let lastScrollTop = 0;
+            const scrollThreshold = 300; // Show header after scrolling 300px
+
+            function handleScroll() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Show header when scrolling down past threshold
+                if (scrollTop > scrollThreshold) {
+                    floatingHeader.classList.add('visible');
+                } else {
+                    // Hide when near top
+                    floatingHeader.classList.remove('visible');
+                }
+                
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            }
+
+            // Throttle scroll events for performance
+            let ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Initial check
+            handleScroll();
+        })();
     </script>
 
     <!-- Therapair Global Feedback Widget -->
