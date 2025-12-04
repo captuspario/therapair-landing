@@ -299,9 +299,40 @@ $notionPayload = [
 // Log payload for debugging (remove sensitive data in production)
 error_log('[Therapair research] Attempting to create Notion page with ' . count($filteredProperties) . ' properties');
 
+$researchRecordId = null;
 try {
     $researchRecord = notion_request('POST', 'https://api.notion.com/v1/pages', $notionPayload);
-    error_log('[Therapair research] Successfully created Notion page: ' . ($researchRecord['id'] ?? 'unknown'));
+    $researchRecordId = $researchRecord['id'] ?? null;
+    error_log('[Therapair research] Successfully created Notion page: ' . ($researchRecordId ?? 'unknown'));
+    
+    // Set relation to VIC Therapist DB if we have the directory page ID
+    $directoryPageId = $tokenData['directory_page_id'] ?? null;
+    if ($researchRecordId && $directoryPageId) {
+        try {
+            // Update Research DB entry with relation to therapist
+            notion_request('PATCH', 'https://api.notion.com/v1/pages/' . $researchRecordId, [
+                'properties' => [
+                    'Related Therapist' => [
+                        'relation' => [
+                            ['id' => $directoryPageId],
+                        ],
+                    ],
+                ],
+            ]);
+            
+            // Update VIC Therapist DB entry with relation to survey response
+            patch_directory_page($directoryPageId, [
+                'Related Survey Response' => [
+                    'relation' => [
+                        ['id' => $researchRecordId],
+                    ],
+                ],
+            ]);
+        } catch (Exception $e) {
+            // Silently fail - relations are optional
+            error_log('[Therapair research] Failed to set relation: ' . $e->getMessage());
+        }
+    }
 } catch (RuntimeException $exception) {
     // Log full error details for debugging
     $errorDetails = [
@@ -346,7 +377,7 @@ if ($directoryPageId) {
 
 json_response(200, [
     'success' => true,
-    'record_id' => $researchRecord['id'] ?? null,
+    'record_id' => $researchRecordId,
 ]);
 
 /**

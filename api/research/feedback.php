@@ -325,7 +325,36 @@ if ($userFeedbackDbId) {
             'properties' => $filteredProperties
         ]);
         
-        error_log('[user-feedback] Successfully saved to User Feedback database: ' . ($feedbackRecord['id'] ?? 'no ID'));
+        $feedbackRecordId = $feedbackRecord['id'] ?? null;
+        error_log('[user-feedback] Successfully saved to User Feedback database: ' . ($feedbackRecordId ?? 'no ID'));
+        
+        // Set relation to VIC Therapist DB if we found the therapist (link when available)
+        if ($feedbackRecordId && $directoryPageId) {
+            try {
+                // Update Feedback DB entry with relation to therapist
+                notion_request('PATCH', 'https://api.notion.com/v1/pages/' . $feedbackRecordId, [
+                    'properties' => [
+                        'Related Therapist' => [
+                            'relation' => [
+                                ['id' => $directoryPageId],
+                            ],
+                        ],
+                    ],
+                ]);
+                
+                // Update VIC Therapist DB entry with relation to feedback
+                patch_directory_page($directoryPageId, [
+                    'Related Feedback' => [
+                        'relation' => [
+                            ['id' => $feedbackRecordId],
+                        ],
+                    ],
+                ]);
+            } catch (Exception $e) {
+                // Silently fail - relations are optional, feedback can be anonymous
+                error_log('[user-feedback] Failed to set relation: ' . $e->getMessage());
+            }
+        }
         
     } catch (Exception $e) {
         $errorMessage = $e->getMessage();

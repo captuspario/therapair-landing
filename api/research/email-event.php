@@ -172,6 +172,33 @@ function log_email_engagement(string $email, string $eventType, array $payload):
             'text' => ['content' => implode(', ', $noteParts)],
         ]]];
     }
+    
+    // Track follow-up status for email opens (best practice: count + date)
+    if ($eventType === 'Opened') {
+        // Get current follow-up count
+        $currentCount = get_property_value($pageId, 'Research Follow-up Count', 'number') ?? 0;
+        
+        // Determine if this is a follow-up email based on utm_email parameter
+        $emailNumber = (int) ($utmEmail ?? 1);
+        if ($emailNumber > 1) {
+            // This is a follow-up email
+            $newCount = max($currentCount, $emailNumber - 1); // Follow-up 1 = email 2, etc.
+            $properties['Research Follow-up Count'] = ['number' => $newCount];
+            $properties['Research Last Follow-up Date'] = ['date' => ['start' => date('c')]];
+            
+            // Update follow-up status
+            $statusMap = [
+                1 => 'Follow-up 1 Sent',
+                2 => 'Follow-up 2 Sent',
+                3 => 'Follow-up 3 Sent',
+            ];
+            if (isset($statusMap[$newCount])) {
+                $properties['Research Follow-up Status'] = ['select' => ['name' => $statusMap[$newCount]]];
+            } elseif ($newCount >= 4) {
+                $properties['Research Follow-up Status'] = ['select' => ['name' => 'Follow-up Complete']];
+            }
+        }
+    }
 
     if ($properties !== []) {
         patch_directory_page($pageId, $properties);
