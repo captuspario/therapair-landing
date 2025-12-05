@@ -1083,16 +1083,9 @@ function addTrackingToEmailLinks($emailHtml, $email, $audience) {
     $emailHtml = str_replace($sandboxUrl, $trackingSandboxUrl, $emailHtml);
     $emailHtml = str_replace('href="' . $sandboxUrl, 'href="' . $trackingSandboxUrl, $emailHtml);
     
-    // Track research survey links
-    $surveyUrl = 'https://therapair.com.au/research/survey/index.html';
-    $trackingSurveyUrl = $trackBase . '?email=' . urlencode($emailHash) . 
-        '&dest=survey' . 
-        '&utm_source=' . urlencode($utmSource) . 
-        '&utm_medium=' . urlencode($utmMedium) . 
-        '&utm_campaign=research_survey' . 
-        '&utm_content=' . urlencode($utmContent);
-    $emailHtml = str_replace($surveyUrl, $trackingSurveyUrl, $emailHtml);
-    $emailHtml = str_replace('href="' . $surveyUrl, 'href="' . $trackingSurveyUrl, $emailHtml);
+    // Note: Research survey links removed from EOI emails
+    // Survey requires tokens which are only generated for research invitations
+    // EOI submissions should only link to sandbox demo (public, no token required)
     
     // Track email preferences links
     $preferencesUrl = 'https://therapair.com.au/email-preferences.html';
