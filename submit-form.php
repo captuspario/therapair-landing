@@ -793,23 +793,37 @@ function formatUserEmail($data, $audience)
                 </p>
                 
                 <!-- First CTA: Sandbox Demo -->
-                <div style="margin: 0 0 32px 0;">
-                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '; margin-bottom: 8px; display: inline-block;">
+                <div style="margin: 0 0 24px 0;">
+                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '; display: inline-block;">
                         View Sandbox Demo
                     </a>
-                    <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 8px 0 0 0;">
-                        Experience our therapist-matching prototype
-                    </p>
                 </div>
                 
-                <!-- Second CTA: Research Survey -->
-                <div style="margin: 0 0 24px 0;">
-                    <a href="https://therapair.com.au/research/survey/index.html" style="' . getEmailButtonStyle('secondary') . '; display: inline-block;">
+                <!-- Second CTA: Research Survey - Generate token for therapist EOI submissions -->
+                <div style="margin: 0 0 24px 0;">';
+            
+            // Generate token for therapist EOI submissions
+            if ($audience === 'therapist') {
+                $tokenPayload = [
+                    'therapist_id' => 'EOI-' . strtoupper(substr(md5($email), 0, 8)),
+                    'therapist_name' => $formData['full_name'] ?? 'Therapist',
+                    'first_name' => explode(' ', $formData['full_name'] ?? 'Therapist')[0],
+                    'practice_name' => $formData['organization'] ?? '',
+                    'email' => $email,
+                    'directory_page_id' => null,
+                    'therapist_research_id' => 'eoi-' . time(),
+                    'exp' => time() + (30 * 24 * 60 * 60) // 30 days
+                ];
+                $surveyToken = generateResearchToken($tokenPayload);
+                $surveyUrl = $surveyToken ? 'https://therapair.com.au/research/survey/index.html?token=' . urlencode($surveyToken) : 'https://therapair.com.au/research/survey/index.html';
+            } else {
+                $surveyUrl = 'https://therapair.com.au/research/survey/index.html';
+            }
+            
+            $content .= '
+                    <a href="' . $surveyUrl . '" style="' . getEmailButtonStyle('secondary') . '; display: inline-block;">
                         Take Research Survey
                     </a>
-                    <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 8px 0 0 0;">
-                        Help shape Therapair by completing our short user research survey (invitation link will be sent separately)
-                    </p>
                 </div>
                 
                 <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
@@ -1093,17 +1107,41 @@ function addTrackingToEmailLinks($emailHtml, $email, $audience) {
     $emailHtml = str_replace($sandboxUrl, $trackingSandboxUrl, $emailHtml);
     $emailHtml = str_replace('href="' . $sandboxUrl, 'href="' . $trackingSandboxUrl, $emailHtml);
     
-    // Track research survey links (note: survey requires token, but we link to it anyway
-    // and will send invitation separately, or user can request one)
-    $surveyUrl = 'https://therapair.com.au/research/survey/index.html';
-    $trackingSurveyUrl = $trackBase . '?email=' . urlencode($emailHash) . 
-        '&dest=survey' . 
-        '&utm_source=' . urlencode($utmSource) . 
-        '&utm_medium=' . urlencode($utmMedium) . 
-        '&utm_campaign=research_survey' . 
-        '&utm_content=' . urlencode($utmContent);
-    $emailHtml = str_replace($surveyUrl, $trackingSurveyUrl, $emailHtml);
-    $emailHtml = str_replace('href="' . $surveyUrl, 'href="' . $trackingSurveyUrl, $emailHtml);
+    // Track research survey links - preserve token if present
+    // Use regex to match survey URL with optional token parameter
+    $emailHtml = preg_replace_callback(
+        '/href="(https:\/\/therapair\.com\.au\/research\/survey\/index\.html)(\?[^"]*)?"/',
+        function($matches) use ($trackBase, $emailHash, $utmSource, $utmMedium, $utmContent) {
+            $baseUrl = $matches[1];
+            $existingParams = isset($matches[2]) ? $matches[2] : '';
+            
+            // Build tracking parameters
+            $trackingParams = 'email=' . urlencode($emailHash) . 
+                '&dest=survey' . 
+                '&utm_source=' . urlencode($utmSource) . 
+                '&utm_medium=' . urlencode($utmMedium) . 
+                '&utm_campaign=research_survey' . 
+                '&utm_content=' . urlencode($utmContent);
+            
+            // If there are existing params (like token), append tracking params
+            if (!empty($existingParams)) {
+                $finalUrl = $baseUrl . $existingParams . '&' . $trackingParams;
+            } else {
+                $finalUrl = $baseUrl . '?' . $trackingParams;
+            }
+            
+            // Redirect through track.php while preserving token
+            $trackingUrl = $trackBase . '?dest=survey&redirect=' . urlencode($finalUrl) . 
+                '&email=' . urlencode($emailHash) . 
+                '&utm_source=' . urlencode($utmSource) . 
+                '&utm_medium=' . urlencode($utmMedium) . 
+                '&utm_campaign=research_survey' . 
+                '&utm_content=' . urlencode($utmContent);
+            
+            return 'href="' . $trackingUrl . '"';
+        },
+        $emailHtml
+    );
     
     // Track email preferences links
     $preferencesUrl = 'https://therapair.com.au/email-preferences.html';
