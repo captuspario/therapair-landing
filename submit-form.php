@@ -1106,18 +1106,17 @@ function addTrackingToEmailLinks($emailHtml, $email, $audience) {
         '&utm_campaign=sandbox_demo' . 
         '&utm_content=' . urlencode($utmContent);
     
-    // Replace sandbox URLs using regex to catch all variations
-    // Match href="..." containing the sandbox URL (with or without query params, with or without protocol)
-    // Use a more specific pattern that matches the full href attribute
+    // Replace sandbox URLs - match the exact URL pattern in email templates
+    // Pattern matches: href="https://therapair.com.au/sandbox/sandbox-demo.html" (with optional query params)
     $emailHtml = preg_replace(
-        '/href="https?:\/\/therapair\.com\.au\/sandbox\/sandbox-demo\.html[^"]*"/i',
+        '/href="https?:\/\/therapair\.com\.au\/sandbox\/sandbox-demo\.html(\?[^"]*)?"/i',
         'href="' . $trackingSandboxUrl . '"',
         $emailHtml
     );
     
-    // Also handle relative URLs
+    // Also handle relative URLs (just in case)
     $emailHtml = preg_replace(
-        '/href="sandbox\/sandbox-demo\.html[^"]*"/i',
+        '/href="sandbox\/sandbox-demo\.html(\?[^"]*)?"/i',
         'href="' . $trackingSandboxUrl . '"',
         $emailHtml
     );
