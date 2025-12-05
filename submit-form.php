@@ -1104,12 +1104,13 @@ function addTrackingToEmailLinks($emailHtml, $email, $audience) {
         '&utm_medium=' . urlencode($utmMedium) . 
         '&utm_campaign=sandbox_demo' . 
         '&utm_content=' . urlencode($utmContent);
-    // Replace sandbox URLs (handle both with and without trailing slash, with and without protocol)
-    $emailHtml = preg_replace(
-        '/href="(https?:\/\/)?(www\.)?therapair\.com\.au\/sandbox\/sandbox-demo\.html([^"]*)?"/i',
-        'href="' . $trackingSandboxUrl . '"',
-        $emailHtml
-    );
+    // Replace sandbox URLs - use simple direct replacement for reliability
+    $emailHtml = str_replace('href="' . $sandboxUrl . '"', 'href="' . $trackingSandboxUrl . '"', $emailHtml);
+    $emailHtml = str_replace('href="' . $sandboxUrl, 'href="' . $trackingSandboxUrl, $emailHtml);
+    // Also handle without protocol
+    $sandboxUrlNoProtocol = 'therapair.com.au/sandbox/sandbox-demo.html';
+    $emailHtml = str_replace('href="' . $sandboxUrlNoProtocol . '"', 'href="' . $trackingSandboxUrl . '"', $emailHtml);
+    $emailHtml = str_replace('href="' . $sandboxUrlNoProtocol, 'href="' . $trackingSandboxUrl, $emailHtml);
     
     // Track research survey links - preserve token if present
     // Use regex to match survey URL with optional token parameter

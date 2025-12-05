@@ -344,16 +344,27 @@ try {
     error_log('[Therapair research] Notion create failed: ' . json_encode($errorDetails, JSON_PRETTY_PRINT));
     error_log('[Therapair research] Full payload (first 2000 chars): ' . substr(json_encode($notionPayload, JSON_PRETTY_PRINT), 0, 2000));
     
+    // Extract property name from error if it's a property error
+    $propertyError = null;
+    if (preg_match('/"([^"]+)" is not a property that exists/i', $exception->getMessage(), $matches)) {
+        $propertyError = $matches[1] ?? null;
+        error_log('[Therapair research] Property error detected: ' . $propertyError);
+    }
+    
     // Return more detailed error message for debugging
     $errorMessage = 'Saving to research database failed. Please retry shortly.';
     if ($exception->getCode() >= 400 && $exception->getCode() < 500) {
         // Client error - likely a property issue, include the Notion error message
         $errorMessage = 'There was an issue saving your responses: ' . $exception->getMessage();
+        if ($propertyError) {
+            $errorMessage .= ' (Property: ' . $propertyError . ')';
+        }
     }
     
     json_response(502, [
         'success' => false,
         'error' => $errorMessage,
+        'debug' => $propertyError ? ['property' => $propertyError] : null,
     ]);
 }
 
