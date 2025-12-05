@@ -747,16 +747,17 @@ function formatUserEmail($data, $audience)
     switch ($audience) {
         case 'therapist':
             $name = !empty($data['full_name']) ? htmlspecialchars($data['full_name']) : 'there';
+            $email = !empty($data['email']) ? $data['email'] : '';
             $hasTakenSurvey = false; // TODO: Check if therapist has taken survey
             
             // Generate token for therapist EOI submissions
             $surveyUrl = 'https://therapair.com.au/research/survey/index.html';
-            if ($audience === 'therapist') {
+            if (!empty($email)) {
                 $tokenPayload = [
                     'therapist_id' => 'EOI-' . strtoupper(substr(md5($email), 0, 8)),
-                    'therapist_name' => $formData['full_name'] ?? 'Therapist',
-                    'first_name' => explode(' ', $formData['full_name'] ?? 'Therapist')[0],
-                    'practice_name' => $formData['organization'] ?? '',
+                    'therapist_name' => $data['full_name'] ?? 'Therapist',
+                    'first_name' => explode(' ', $data['full_name'] ?? 'Therapist')[0],
+                    'practice_name' => $data['organization'] ?? '',
                     'email' => $email,
                     'directory_page_id' => null,
                     'therapist_research_id' => 'eoi-' . time(),
