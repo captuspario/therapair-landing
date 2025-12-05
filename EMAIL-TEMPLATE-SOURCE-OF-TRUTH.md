@@ -17,10 +17,10 @@ This document defines which email templates are the **source of truth** for diff
 - ✅ Left-aligned CTAs
 - ✅ Explain text comes first, then CTA
 - ✅ No sublines below CTAs
-- ✅ Primary CTA: "JOIN THE RESEARCH SURVEY (5–7 minutes)"
-- ✅ Secondary CTA: "View Sandbox Demo"
+- ✅ **Primary CTA: "JOIN THE RESEARCH SURVEY (5–7 minutes)"** (ONLY CTA - no sandbox)
+- ❌ No sandbox CTA (research invites are focused on survey only)
 
-**Last Updated:** 2025-01-13 (Left-aligned CTAs to match EOI template)
+**Last Updated:** 2025-01-13 (Removed sandbox CTA - research invites show survey only)
 
 ---
 
@@ -34,10 +34,10 @@ This document defines which email templates are the **source of truth** for diff
 - ✅ Left-aligned CTAs
 - ✅ Explain text comes first, then CTA
 - ✅ No sublines below CTAs
-- ✅ Primary CTA: "View Sandbox Demo"
-- ✅ Secondary CTA: "Take Research Survey" (therapist audience only)
+- ✅ **Primary CTA: "View Sandbox Demo"** (ALL audiences - always shown)
+- ✅ **Secondary CTA: "JOIN THE RESEARCH SURVEY (5–7 minutes)"** (ONLY for therapist audience)
 
-**Last Updated:** 2025-01-13 (Left-aligned CTAs, removed sublines)
+**Last Updated:** 2025-01-13 (Reordered CTAs: sandbox first for all, survey second for therapists only)
 
 ---
 
