@@ -809,17 +809,17 @@ function formatUserEmail($data, $audience)
                     This research will help us understand which questions create the most meaningful personalisation, how much people are willing to complete, and what actually resonates with both therapists and clients.
                 </p>
                 
-                <!-- Primary CTA: Research Survey (Left-aligned) -->
+                <!-- Primary CTA: Sandbox Demo (Left-aligned) - Always shown for EOI -->
                 <div style="margin: 0 0 24px 0;">
-                    <a href="' . htmlspecialchars($surveyUrl) . '" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, ' . $lightBlue . ', ' . $midBlue . '); color: #FFFFFF; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; font-family: \'Inter\', sans-serif;">
-                        JOIN THE RESEARCH SURVEY (5–7 minutes)
+                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, ' . $lightBlue . ', ' . $midBlue . '); color: #FFFFFF; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; font-family: \'Inter\', sans-serif;">
+                        View Sandbox Demo
                     </a>
                 </div>
                 
-                <!-- Secondary CTA: Sandbox Demo (Left-aligned) -->
+                <!-- Secondary CTA: Research Survey (Left-aligned) - Only for therapists -->
                 <div style="margin: 0 0 24px 0;">
-                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="display: inline-block; padding: 14px 32px; background-color: #FFFFFF; color: ' . $midBlue . '; text-decoration: none; border: 2px solid ' . $midBlue . '; border-radius: 8px; font-weight: 600; font-size: 16px; font-family: \'Inter\', sans-serif;">
-                        View Sandbox Demo
+                    <a href="' . htmlspecialchars($surveyUrl) . '" style="display: inline-block; padding: 14px 32px; background-color: #FFFFFF; color: ' . $midBlue . '; text-decoration: none; border: 2px solid ' . $midBlue . '; border-radius: 8px; font-weight: 600; font-size: 16px; font-family: \'Inter\', sans-serif;">
+                        JOIN THE RESEARCH SURVEY (5–7 minutes)
                     </a>
                 </div>
                 
