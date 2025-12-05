@@ -23,7 +23,12 @@ $uid = isset($_GET['uid']) ? trim($_GET['uid']) : '';
 $emailHash = isset($_GET['email']) ? trim($_GET['email']) : '';
 $destKey = isset($_GET['dest']) ? trim($_GET['dest']) : 'home';
 $customRedirect = isset($_GET['redirect']) ? trim($_GET['redirect']) : '';
-$redirectUrl = !empty($customRedirect) ? $customRedirect : (isset($destinations[$destKey]) ? $destinations[$destKey] : $destinations['home']);
+// Handle custom redirect (for survey links with tokens)
+if (!empty($customRedirect)) {
+    $redirectUrl = urldecode($customRedirect);
+} else {
+    $redirectUrl = isset($destinations[$destKey]) ? $destinations[$destKey] : $destinations['home'];
+}
 
 // Preserve UTM parameters
 $utmParams = [];

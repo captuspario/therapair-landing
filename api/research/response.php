@@ -216,10 +216,11 @@ $pricingSummary = $pricingSummaryParts !== [] ? implode(' | ', $pricingSummaryPa
 // Pricing (rich_text)        -> dedicated pricing field (pricing summary only)
 // Note: Pricing removed from Notes field to avoid duplication
 set_rich_text_property($properties, '26. Comments', $survey['comments'] ?? null);
-if ($pricingSummary !== null) {
-    // Only write to dedicated 'Pricing' field (removed from Notes to avoid duplication)
-    set_rich_text_property($properties, 'Pricing', $pricingSummary);
-}
+// Pricing field - only set if it exists in database (may not exist)
+// Commented out to avoid errors if property doesn't exist
+// if ($pricingSummary !== null) {
+//     set_rich_text_property($properties, 'Pricing', $pricingSummary);
+// }
 
 // Consent status (existing select property in Notion)
 set_select_property($properties, '27. Consent Status', 'Granted');
