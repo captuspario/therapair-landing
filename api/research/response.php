@@ -79,9 +79,9 @@ $requiredSingles = [
     'profile_detail_level',
     'onboarding_time',
     'free_listing_interest',
-    'profile_intent',
     'future_contact',
 ];
+// Note: profile_intent removed from required - it's optional
 
 foreach ($requiredSingles as $field) {
     if (empty($survey[$field]) || !is_string($survey[$field])) {
