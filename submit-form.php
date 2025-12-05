@@ -1106,11 +1106,20 @@ function addTrackingToEmailLinks($emailHtml, $email, $audience) {
         '&utm_content=' . urlencode($utmContent);
     
     // Replace sandbox URLs using regex to catch all variations
-    // Match href="..." containing the sandbox URL (with or without query params)
+    // Match href="..." containing the sandbox URL (with or without query params, with or without protocol)
     $emailHtml = preg_replace_callback(
         '/href="([^"]*sandbox\/sandbox-demo\.html[^"]*)"/i',
         function($matches) use ($trackingSandboxUrl) {
             // Replace the matched URL with the tracking URL
+            return 'href="' . $trackingSandboxUrl . '"';
+        },
+        $emailHtml
+    );
+    
+    // Also handle sandbox URLs without protocol (relative URLs)
+    $emailHtml = preg_replace_callback(
+        '/href="(sandbox\/sandbox-demo\.html[^"]*)"/i',
+        function($matches) use ($trackingSandboxUrl) {
             return 'href="' . $trackingSandboxUrl . '"';
         },
         $emailHtml
