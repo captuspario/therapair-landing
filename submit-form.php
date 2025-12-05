@@ -1126,11 +1126,15 @@ function addTrackingToEmailLinks($emailHtml, $email, $audience) {
     );
     
     // Track research survey links - preserve token if present
-    // Use regex to match survey URL with optional token parameter
+    // Use regex to match survey URL with optional token parameter (with or without protocol)
     $emailHtml = preg_replace_callback(
-        '/href="(https:\/\/therapair\.com\.au\/research\/survey\/index\.html)(\?[^"]*)?"/',
+        '/href="(https?:\/\/therapair\.com\.au\/research\/survey\/index\.html|research\/survey\/index\.html)(\?[^"]*)?"/',
         function($matches) use ($trackBase, $emailHash, $utmSource, $utmMedium, $utmContent) {
             $baseUrl = $matches[1];
+            // If relative URL, make it absolute
+            if (strpos($baseUrl, 'http') !== 0) {
+                $baseUrl = 'https://therapair.com.au/' . ltrim($baseUrl, '/');
+            }
             $existingParams = isset($matches[2]) ? $matches[2] : '';
             
             // Build tracking parameters
