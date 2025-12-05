@@ -24,6 +24,33 @@ function sanitize($data)
     return htmlspecialchars(strip_tags(trim($data)), ENT_QUOTES, 'UTF-8');
 }
 
+/**
+ * Generate a JWT-like token for research survey access
+ * Matches the Node.js implementation in research/scripts
+ */
+function generateResearchToken($payload)
+{
+    $secret = defined('RESEARCH_TOKEN_SECRET') ? RESEARCH_TOKEN_SECRET : '';
+    if (empty($secret)) {
+        error_log('Warning: RESEARCH_TOKEN_SECRET not defined, cannot generate token');
+        return null;
+    }
+    
+    // Encode header
+    $header = ['alg' => 'HS256', 'typ' => 'JWT'];
+    $headerB64 = rtrim(strtr(base64_encode(json_encode($header)), '+/', '-_'), '=');
+    
+    // Encode payload
+    $payloadB64 = rtrim(strtr(base64_encode(json_encode($payload)), '+/', '-_'), '=');
+    
+    // Create signature
+    $signedPortion = $headerB64 . '.' . $payloadB64;
+    $signature = hash_hmac('sha256', $signedPortion, $secret, true);
+    $signatureB64 = rtrim(strtr(base64_encode($signature), '+/', '-_'), '=');
+    
+    return $signedPortion . '.' . $signatureB64;
+}
+
 // Use constants from config with fallbacks
 $ADMIN_EMAIL = defined('ADMIN_EMAIL') ? ADMIN_EMAIL : 'contact@therapair.com.au';
 $FROM_EMAIL = defined('FROM_EMAIL') ? FROM_EMAIL : 'contact@therapair.com.au';
@@ -762,26 +789,16 @@ function formatUserEmail($data, $audience)
                     <strong>Explore Therapair</strong>
                 </p>
                 <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 32px 0;">
-                    We\'d love your input as we build Therapair. Here are two ways to get involved:
+                    We\'d love your input as we build Therapair. Try our sandbox demo to see the therapist-matching prototype in action:
                 </p>
                 
-                <!-- First CTA: Sandbox Demo -->
-                <div style="margin: 0 0 32px 0;">
+                <!-- CTA: Sandbox Demo -->
+                <div style="margin: 0 0 24px 0;">
                     <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '; margin-bottom: 8px; display: inline-block;">
                         View Sandbox Demo
                     </a>
                     <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 8px 0 0 0;">
                         Experience our therapist-matching prototype
-                    </p>
-                </div>
-                
-                <!-- Second CTA: Research Survey -->
-                <div style="margin: 0 0 24px 0;">
-                    <a href="https://therapair.com.au/research/survey/index.html" style="' . getEmailButtonStyle('secondary') . '; display: inline-block;">
-                        Take Research Survey
-                    </a>
-                    <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 8px 0 0 0;">
-                        Help shape Therapair by completing our short user research survey
                     </p>
                 </div>
                 
