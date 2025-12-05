@@ -738,6 +738,7 @@ function formatUserEmail($data, $audience)
     // Design system colors
     $darkNavy = '#0F1E4B';
     $midBlue = '#3D578A';
+    $lightBlue = '#95B1CD';
     $darkGrey = '#4A5568';
     $warningBg = '#FFF5E6';
     $warningBorder = '#FFD700';
