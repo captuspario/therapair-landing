@@ -749,60 +749,8 @@ function formatUserEmail($data, $audience)
             $name = !empty($data['full_name']) ? htmlspecialchars($data['full_name']) : 'there';
             $hasTakenSurvey = false; // TODO: Check if therapist has taken survey
             
-            $content = '
-                <h1 style="margin: 0 0 24px 0; color: ' . $darkNavy . '; font-size: 24px; font-weight: bold; line-height: 1.4;">
-                    Thank you for your interest in Therapair
-                </h1>
-                
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
-                    Hi ' . $name . ',
-                </p>
-                
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
-                    Thanks for your Expression of Interest to join Therapair as a mental health professional. We\'re excited about the possibility of working together.
-                </p>
-                
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
-                    <strong>What is Therapair?</strong>
-                </p>
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
-                    Therapair is a privacy-first therapist-matching platform designed to help people find therapists who truly align with their needs, values, and identity. We focus on identity-aware matching—so that people from marginalised communities, LGBTQ+ individuals, neurodivergent people, and others can find therapists who understand and affirm their experiences.
-                </p>
-            ';
-            
-            if ($hasTakenSurvey) {
-                $content .= '
-                    <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
-                        We noticed you\'ve previously taken part in a Therapair research survey. We\'ll be in touch soon with a data consent form so you can choose how we use your previous information when setting up your profile.
-                    </p>
-                ';
-            }
-            
-            $content .= '
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
-                    <strong>What happens next?</strong>
-                </p>
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 16px 0;">
-                    We\'re currently in a pre-MVP phase, building the platform with input from therapists like you. We\'ll email you when onboarding is ready in the coming months, and you\'ll be among the first to hear about pilot opportunities.
-                </p>
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 24px 0;">
-                    <strong>Explore Therapair</strong>
-                </p>
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 32px 0;">
-                    We\'d love your input as we build Therapair. Here are two ways to get involved:
-                </p>
-                
-                <!-- First CTA: Sandbox Demo -->
-                <div style="margin: 0 0 24px 0;">
-                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '; display: inline-block;">
-                        View Sandbox Demo
-                    </a>
-                </div>
-                
-                <!-- Second CTA: Research Survey - Generate token for therapist EOI submissions -->
-                <div style="margin: 0 0 24px 0;">';
-            
             // Generate token for therapist EOI submissions
+            $surveyUrl = 'https://therapair.com.au/research/survey/index.html';
             if ($audience === 'therapist') {
                 $tokenPayload = [
                     'therapist_id' => 'EOI-' . strtoupper(substr(md5($email), 0, 8)),
@@ -815,27 +763,78 @@ function formatUserEmail($data, $audience)
                     'exp' => time() + (30 * 24 * 60 * 60) // 30 days
                 ];
                 $surveyToken = generateResearchToken($tokenPayload);
-                $surveyUrl = $surveyToken ? 'https://therapair.com.au/research/survey/index.html?token=' . urlencode($surveyToken) : 'https://therapair.com.au/research/survey/index.html';
-            } else {
-                $surveyUrl = 'https://therapair.com.au/research/survey/index.html';
+                $surveyUrl = $surveyToken ? 'https://therapair.com.au/research/survey/index.html?token=' . urlencode($surveyToken) : $surveyUrl;
             }
             
-            $content .= '
-                    <a href="' . $surveyUrl . '" style="' . getEmailButtonStyle('secondary') . '; display: inline-block;">
-                        Take Research Survey
+            $content = '
+                <h1 style="margin: 0 0 24px 0; color: #000000; font-size: 24px; font-weight: bold; line-height: 1.4;">
+                    We\'d love your input on therapist matching
+                </h1>
+                
+                <p style="margin: 0 0 16px 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6;">
+                    Hi ' . htmlspecialchars($name) . ',
+                </p>
+                
+                <p style="margin: 0 0 16px 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6;">
+                    Thanks for your Expression of Interest in Therapair. We\'re building a better way for clients to find therapists who truly fit them—by values, lived experience, and communication style, not just modality or postcode.
+                </p>
+                
+                <p style="margin: 0 0 16px 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6;">
+                    <strong style="color: #000000;">What is Therapair?</strong>
+                </p>
+                
+                <p style="margin: 0 0 16px 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6;">
+                    Therapair is a small, not-for-profit initiative from <a href="https://unisonmentalhealth.com" style="color: ' . $midBlue . '; text-decoration: underline; font-size: 16px;">Unison Mental Health</a>. We\'re exploring a better way for clients to find therapists who truly fit them—by values, lived experience, and communication style.
+                </p>
+                
+                <p style="margin: 0 0 16px 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6;">
+                    We\'ve built a basic sandbox demo with placeholder therapist profiles to show the idea, but the current questions are only a first draft. To make this genuinely useful, we need your perspective as a practitioner.
+                </p>
+                
+                <p style="margin: 0 0 16px 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6;">
+                    <strong style="color: #000000;">If you have 5–7 minutes, we\'d love your help:</strong>
+                </p>
+                
+                <p style="margin: 0 0 8px 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6; padding-left: 8px;">
+                    • Share your insights in a short research survey about which questions matter most and how many you\'d realistically answer
+                </p>
+                
+                <p style="margin: 0 0 16px 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6; padding-left: 8px;">
+                    • Optionally opt in for a one-year free listing when we launch (using your existing public profile)
+                </p>
+                
+                <p style="margin: 0 0 32px 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6;">
+                    This research will help us understand which questions create the most meaningful personalisation, how much people are willing to complete, and what actually resonates with both therapists and clients.
+                </p>
+                
+                <!-- Primary CTA: Research Survey (Left-aligned) -->
+                <div style="margin: 0 0 24px 0;">
+                    <a href="' . htmlspecialchars($surveyUrl) . '" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, ' . $lightBlue . ', ' . $midBlue . '); color: #FFFFFF; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; font-family: \'Inter\', sans-serif;">
+                        JOIN THE RESEARCH SURVEY (5–7 minutes)
                     </a>
                 </div>
                 
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
-                    In the meantime, if you have questions or ideas, you can simply reply to this email.
+                <!-- Secondary CTA: Sandbox Demo (Left-aligned) -->
+                <div style="margin: 0 0 24px 0;">
+                    <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="display: inline-block; padding: 14px 32px; background-color: #FFFFFF; color: ' . $midBlue . '; text-decoration: none; border: 2px solid ' . $midBlue . '; border-radius: 8px; font-weight: 600; font-size: 16px; font-family: \'Inter\', sans-serif;">
+                        View Sandbox Demo
+                    </a>
+                </div>
+                
+                <!-- Secondary Link -->
+                <p style="margin: 24px 0 0 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6;">
+                    <a href="https://therapair.com.au/" style="color: ' . $midBlue . '; text-decoration: underline;">
+                        Learn more about Therapair
+                    </a>
                 </p>
                 
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
-                    Thank you for being part of building a better way to connect people with mental health support.
+                <!-- Closing -->
+                <p style="margin: 24px 0 16px 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6;">
+                    Participation is optional and non-commercial. Your responses are used only for improving therapist–client matching research.
                 </p>
                 
-                <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 24px 0 0 0;">
-                    Best regards,<br />
+                <p style="margin: 0 0 0 0; color: ' . $darkGrey . '; font-size: 16px; line-height: 1.6;">
+                    Warm regards,<br>
                     The Therapair Team
                 </p>
             ';
