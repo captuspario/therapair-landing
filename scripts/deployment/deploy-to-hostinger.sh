@@ -4,6 +4,24 @@
 # Usage: ./deploy-to-hostinger.sh
 
 echo "🚀 Deploying Therapair Landing Page to Hostinger..."
+
+# Validate email template before deploying
+echo ""
+echo "🔍 Validating email template..."
+if ! php scripts/validate-email-template.php 2>/dev/null; then
+    echo ""
+    echo "❌ Email template validation failed!"
+    echo "💡 Fix the issues above before deploying."
+    echo ""
+    read -p "Continue anyway? (y/N) " -n 1 -r
+    echo ""
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        echo "Deployment cancelled."
+        exit 1
+    fi
+    echo "⚠️  Proceeding with deployment despite validation errors..."
+fi
+echo ""
 echo ""
 
 # Push local commits to GitHub first

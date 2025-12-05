@@ -789,16 +789,26 @@ function formatUserEmail($data, $audience)
                     <strong>Explore Therapair</strong>
                 </p>
                 <p style="font-size: 16px; line-height: 1.6; color: ' . $darkGrey . '; margin: 0 0 32px 0;">
-                    We\'d love your input as we build Therapair. Try our sandbox demo to see the therapist-matching prototype in action:
+                    We\'d love your input as we build Therapair. Here are two ways to get involved:
                 </p>
                 
-                <!-- CTA: Sandbox Demo -->
-                <div style="margin: 0 0 24px 0;">
+                <!-- First CTA: Sandbox Demo -->
+                <div style="margin: 0 0 32px 0;">
                     <a href="https://therapair.com.au/sandbox/sandbox-demo.html" style="' . getEmailButtonStyle('primary') . '; margin-bottom: 8px; display: inline-block;">
                         View Sandbox Demo
                     </a>
                     <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 8px 0 0 0;">
                         Experience our therapist-matching prototype
+                    </p>
+                </div>
+                
+                <!-- Second CTA: Research Survey -->
+                <div style="margin: 0 0 24px 0;">
+                    <a href="https://therapair.com.au/research/survey/index.html" style="' . getEmailButtonStyle('secondary') . '; display: inline-block;">
+                        Take Research Survey
+                    </a>
+                    <p style="font-size: 15px; line-height: 1.6; color: ' . $darkGrey . '; margin: 8px 0 0 0;">
+                        Help shape Therapair by completing our short user research survey (invitation link will be sent separately)
                     </p>
                 </div>
                 
@@ -1083,9 +1093,17 @@ function addTrackingToEmailLinks($emailHtml, $email, $audience) {
     $emailHtml = str_replace($sandboxUrl, $trackingSandboxUrl, $emailHtml);
     $emailHtml = str_replace('href="' . $sandboxUrl, 'href="' . $trackingSandboxUrl, $emailHtml);
     
-    // Note: Research survey links removed from EOI emails
-    // Survey requires tokens which are only generated for research invitations
-    // EOI submissions should only link to sandbox demo (public, no token required)
+    // Track research survey links (note: survey requires token, but we link to it anyway
+    // and will send invitation separately, or user can request one)
+    $surveyUrl = 'https://therapair.com.au/research/survey/index.html';
+    $trackingSurveyUrl = $trackBase . '?email=' . urlencode($emailHash) . 
+        '&dest=survey' . 
+        '&utm_source=' . urlencode($utmSource) . 
+        '&utm_medium=' . urlencode($utmMedium) . 
+        '&utm_campaign=research_survey' . 
+        '&utm_content=' . urlencode($utmContent);
+    $emailHtml = str_replace($surveyUrl, $trackingSurveyUrl, $emailHtml);
+    $emailHtml = str_replace('href="' . $surveyUrl, 'href="' . $trackingSurveyUrl, $emailHtml);
     
     // Track email preferences links
     $preferencesUrl = 'https://therapair.com.au/email-preferences.html';
