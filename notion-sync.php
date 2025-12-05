@@ -118,9 +118,11 @@ function buildNotionProperties($data, $audience) {
         'date' => ['start' => date('c')]
     ];
 
-    $properties['Status'] = [
-        'status' => ['name' => 'New']
-    ];
+    // Status property - only add if it exists in database (use select instead of status if needed)
+    // Commented out as it may not exist in EOI database
+    // $properties['Status'] = [
+    //     'status' => ['name' => 'New']
+    // ];
 
     // Email Preferences (default to all checked)
     $defaultPreferences = [
@@ -147,9 +149,10 @@ function buildNotionProperties($data, $audience) {
     // Initialize tracking properties (will be updated by webhooks and track.php)
     // These properties should exist in the Notion database
     // If they don't exist, Notion will ignore them (no error)
-    $properties['Last Engagement Date'] = [
-        'date' => ['start' => date('c')]
-    ];
+    // Commented out as it may not exist in EOI database
+    // $properties['Last Engagement Date'] = [
+    //     'date' => ['start' => date('c')]
+    // ];
     
     // Optional tracking properties (only added if they exist in database)
     // Email Opened Date - will be set when email is opened
@@ -213,17 +216,15 @@ function buildNotionProperties($data, $audience) {
                 ];
             }
 
-            // Verification Status - only add if property exists in your Notion database
-            // If this fails, either add the property or remove this line
-            $properties['Verification Status'] = [
-                'select' => ['name' => 'Pending']
-            ];
+            // Verification Status - commented out as it may not exist in EOI database
+            // $properties['Verification Status'] = [
+            //     'select' => ['name' => 'Pending']
+            // ];
 
-            // Onboarding Stage - only add if property exists in your Notion database
-            // If this fails, either add the property or remove this line
-            $properties['Onboarding Stage'] = [
-                'select' => ['name' => 'Interest']
-            ];
+            // Onboarding Stage - commented out as it may not exist in EOI database
+            // $properties['Onboarding Stage'] = [
+            //     'select' => ['name' => 'Interest']
+            // ];
             break;
 
         case 'organization':
